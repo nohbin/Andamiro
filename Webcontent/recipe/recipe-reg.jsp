@@ -302,7 +302,7 @@ li{
                                 </div>
                             </div>
                             <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image"/>
+                                <img class="file-upload-image" alt="your image"/>
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                                 </div>
@@ -327,7 +327,7 @@ li{
                                 </div>
                             </div>
                             <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image"/>
+                                <img class="file-upload-image" alt="your image"/>
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                                 </div>
@@ -352,7 +352,7 @@ li{
                                 </div>
                             </div>
                             <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image" />
+                                <img class="file-upload-image" alt="your image" />
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                                 </div>
@@ -377,7 +377,7 @@ li{
                                 </div>
                             </div>
                             <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image" />
+                                <img class="file-upload-image" alt="your image" />
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                                 </div>
@@ -402,7 +402,7 @@ li{
                                 </div>
                             </div>
                             <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image" />
+                                <img class="file-upload-image" alt="your image" />
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                                 </div>
@@ -424,7 +424,7 @@ li{
                             </div>
                         </div>
                         <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
+                            <img class="file-upload-image" alt="your image" />
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
@@ -438,7 +438,7 @@ li{
                             </div>
                         </div>
                         <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
+                            <img class="file-upload-image" alt="your image" />
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
@@ -452,7 +452,7 @@ li{
                             </div>
                         </div>
                         <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
+                            <img class="file-upload-image" alt="your image" />
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
@@ -466,7 +466,7 @@ li{
                             </div>
                         </div>
                         <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
+                            <img class="file-upload-image" alt="your image" />
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>

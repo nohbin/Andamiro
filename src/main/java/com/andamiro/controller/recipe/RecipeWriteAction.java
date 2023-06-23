@@ -21,7 +21,6 @@ public class RecipeWriteAction implements RecipeAction {
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("레시피 작성 액션 호출");
 		HttpSession session = request.getSession();
 		MemberVO userid = (MemberVO) session.getAttribute("loginUser");
 		RecipeVO recipeVO = new RecipeVO();
