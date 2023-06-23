@@ -27,7 +27,7 @@ label[for=name] button {
 </style>
 </head>
 <body>
-<%
+	<%
 	request.setCharacterEncoding("UTF-8");
 	%>
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -105,18 +105,16 @@ label[for=name] button {
 				</form>
 			</div>
 		</div>
-		
 		<script>
 			function validateForm() {
 				const form = document.querySelector('.validation-form');
 				if (form.checkValidity() === false) {
 					event.preventDefault();
 					event.stopPropagation();
-					}
+				}
 				form.classList.add('was-validated');
 				}
 		</script>
-		
 	</div>
 
 	<jsp:include page="/footer.jsp"></jsp:include>
