@@ -48,13 +48,15 @@ a {
 						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
 					</li>
 					<li class="nav-item">
-						<a href="recdiet.html" class="nav-link link-dark px-2">식단</a>
+						<a href='<c:url value="/diet/recdiet.jsp"/>' 
+						class="nav-link link-dark px-2">식단</a>
 					</li>
 					<li class="nav-item">
 						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
 					</li>
 					<li class="nav-item">
-						<a href="subscribe.html" class="nav-link link-dark px-2">구독</a>
+						<a href='<c:url value="/subscribe/subscribe.jsp"/>'					
+					 class="nav-link link-dark px-2">구독</a>
 					</li>
 				</ul>
 				<div class="text-end">
