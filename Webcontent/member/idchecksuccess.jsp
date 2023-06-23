@@ -10,7 +10,7 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
-	%>
+%>
 <script type="text/javascript">
 
 window.opener.parent.location.href = "MemberServlet?command=member_join_form&id=${param.id}";
