@@ -269,7 +269,7 @@ a {
 							<li class="list-group-item">AM : 7~9시 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet.html" class="card-link"><b>아침식단 보러가기</b></a>
+							<a href="diet/recdiet.jsp" class="card-link"><b>아침식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
@@ -287,7 +287,7 @@ a {
 							<li class="list-group-item">PM : 12~2시 사이권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet.html" class="card-link"><b>점심식단 보러가기</b></a>
+							<a href="diet/recdiet_lunch.jsp" class="card-link"><b>점심식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
@@ -306,7 +306,7 @@ a {
 							<li class="list-group-item">PM : 6 ~ 8시 사이 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet.html" class="card-link"><b>저녁식단 보러가기</b></a>
+							<a href="diet/recdiet_dinner.jsp" class="card-link"><b>저녁식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
