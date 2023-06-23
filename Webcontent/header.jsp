@@ -51,7 +51,7 @@ a {
 						<a href="recdiet.html" class="nav-link link-dark px-2">식단</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link link-dark px-2">이벤트</a>
+						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
 					</li>
 					<li class="nav-item">
 						<a href="subscribe.html" class="nav-link link-dark px-2">구독</a>
