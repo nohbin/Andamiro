@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.css">
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
+<style>
+li {
+	list-style: none;
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+img {
+	width: 10rem;
+	height: auto;
+}
+.img-thumbnail {
+	object-fit: fill;
+	height: 200px !important; /* 원하는 높이로 조정하세요 */
+	width: 100%; /* 너비는 부모 요소에 맞게 설정됩니다 */
+}
+</style>
+
+<body>
+
+	<jsp:include page="/header.jsp"></jsp:include>
+
+	 <div class="container border mt-3 rounded-3 w-50">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link " style=" color: black;" aria-current="page" href="mypage.html">내 레시피</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style=" color: black;" href="mypage-save.html">저장 레시피</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style=" color: black;" href="mypage-review.html">요리 후기</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style=" color: black;" href="mypage-edit.html">회원정보 수정</a>
+            </li>
+        </ul>
+    </div>
+
+	<div class="container text-center border mt-3 rounded-5">
+		<input type="hidden" name = "recipeID" value="${recipe.recipeID }">
+		<div class="row mt-3 row-cols-3">
+			<c:forEach var="recipe" items="${recipeList }">
+				<div class="col-12 col-md-4 mt-3 mb-3">
+					<a href='RecipeServlet?command=recipe_detail&recipID=${recipe.recipeID }'> 
+					<img src="resources/img/${recipe.mainPicture }" class="rounded-3 img-thumbnail">
+					</a>
+					<div class="">
+						<div class=""><h5>${recipe.recipeName }</h5></div>
+						<div class="">
+							<span>${recipe.recipetag1 } </span><div class="vr"></div><span> ${recipe.recipetag2 } </span><div class="vr"></div><span> ${recipe.recipetag3 } </span>
+						</div>
+						<div class="">
+							<b><span id="doc">작성자 : ${recipe.userId }</span></b>
+							<div class="vr"></div>
+							<b><span id="doc">조회수 : ${recipe.recipeView }</span></b>
+							<div class="vr"></div>
+							<b><span>평점 : ${recipe.recipeGrade }</span></b>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<script>
+        var navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(function (link) {
+            link.addEventListener('mouseover', function () {
+                navLinks.forEach(function (link) {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+	</div>
+	
+	<jsp:include page="/footer.jsp"></jsp:include>
+</body>
+</html>
