@@ -8,5 +8,5 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface MemberAction {
 	public void excute(HttpServletRequest request , HttpServletResponse response) throws IOException , ServletException;
-	
+	void sysout();
 }
