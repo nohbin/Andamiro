@@ -9,7 +9,7 @@ CREATE TABLE andamiromember (
   name VARCHAR2(255) NOT NULL,
   phone VARCHAR2(255) NOT NULL UNIQUE,
   email VARCHAR2(255) NOT NULL UNIQUE,
-  joinDate date      default sysdate,
+  joinDate VARCHAR2(255),
   subscribe VARCHAR2(255),
   adminCode NUMBER
 );
