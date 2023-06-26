@@ -5,7 +5,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>안다미로 홈페이지</title>
 <link rel="stylesheet" href="./resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="./resources/css/main.css?ver=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -38,9 +38,7 @@ a {
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<main>
-		<div
-			class="container mx-auto position-relative overflow-hidden my-5 text-center bg-body-tertiary"
-			style="background-image: url(./resources/img/summer.jpg); border-radius: 2rem;">
+		<div class="container mx-auto position-relative overflow-hidden my-5 text-center bg-body-tertiary" style="background-image: url(./resources/img/summer.jpg); border-radius: 2rem;">
 			<div class="col-md-6 p-lg-5 mx-auto my-5">
 				<h1 class="display-3 fw-bold">2023 3분기 공모전</h1>
 				<h3 class="fw-normal text-muted mb-3">
