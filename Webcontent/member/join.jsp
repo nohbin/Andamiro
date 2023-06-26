@@ -54,7 +54,7 @@ label[for=name] button {
 									</c:otherwise>
 								</c:choose>
 								<div class="input-group-append">
-									<input class="btn" style="background-color: #fac279;" type="button" value="중복확인" onclick="open_win('MemberServlet?command=member_Idcheck_form','회원가입')" required>
+									<input class="btn" style="background-color: #fac279;" type="button" value="중복확인" onclick="open_win('MemberServlet?command=member_Idcheck_form','join')" required>
 								</div>
 								<script type="text/javascript">
 								

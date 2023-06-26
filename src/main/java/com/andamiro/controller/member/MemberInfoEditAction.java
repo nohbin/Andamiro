@@ -1,8 +1,6 @@
 package com.andamiro.controller.member;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +11,7 @@ import com.andamiro.dao.member.MemberDAO;
 import com.andamiro.dto.member.MemberVO;
 import com.andamiro.utill.SHA256;
 
-public class MemberJoinAction implements MemberAction {
+public class MemberInfoEditAction implements MemberAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -21,31 +19,31 @@ public class MemberJoinAction implements MemberAction {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		String id = request.getParameter("id");
+		int memberNumber = Integer.parseInt(request.getParameter("membernumber"));
+		String changeId = request.getParameter("changeid");
+		String originalId = request.getParameter("originalId");
 		String rawpwd = request.getParameter("pwd");
 		String pwd = SHA256.encodeSha256(rawpwd);
-		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String joinDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-
+		
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId(id);	
+		if(!(originalId.equals(changeId))) {
+			memberVO.setId(changeId);	
+		}
 		memberVO.setPwd(pwd);
-		memberVO.setName(name);
 		memberVO.setPhone(phone);
-		memberVO.setEmail(email);
-		memberVO.setJoinDate(joinDate);
-
+		
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		memberDAO.insertMember(memberVO);
-
-//		int result = memberDAO.insertMember(memberVO);
-//		if (result != 0) {
-//			new MemberJoinForm().excute(request, response);
-//		} else {
-			new MemberLoginForm().excute(request, response);
-//		}
-
+		memberDAO.updateMemberInfoByMemberNumber(memberNumber , memberVO);
+		
+		
+		String infoChangeMessage = "회원정보 수정 완료. 다시 로그인 해주세요.";
+		request.setAttribute("infoChangeMessage", infoChangeMessage);
+		
+		MemberLogoutAction logoutAction = new MemberLogoutAction();
+        logoutAction.excute(request, response);
+        
+		
 	}
+
 }

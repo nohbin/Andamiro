@@ -29,7 +29,11 @@ public class MemberActionFactory {
 		}else if(command.equals("member_Idcheck_form")) {
 			action = new MemberIdCheckForm();
 		}else if(command.equals("member_Idcheck")) {
-			action = new MemberIdCheckAction();
+			action = new MemberIdCheckAction();	
+		}else if(command.equals("mypage_edit")) {
+			action = new MemeberMypageEditAction();
+		}else if(command.equals("member_edit")) {
+			action = new MemberInfoEditAction();
 		}
 		return action;
 	}
