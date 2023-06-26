@@ -53,17 +53,18 @@ img {
 							<span>${recipe.recipetag1 } </span><div class="vr"></div><span> ${recipe.recipetag2 } </span><div class="vr"></div><span> ${recipe.recipetag3 } </span>
 						</div>
 						<div class="">
-							<b><span id="doc">작성자 : ${recipe.userId }</span></b>
+							<b><span id="doc">댓글수 : ? </span></b>
 							<div class="vr"></div>
 							<b><span id="doc">조회수 : ${recipe.recipeView }</span></b>
 							<div class="vr"></div>
 							<b><span>평점 : ${recipe.recipeGrade }</span></b>
 						</div>
+						<input type="button" class="btn btn-warning btn_add_ingredient" value="수정" onclick="location.href='RecipeServlet?command=edit_recipe_form&recipeId=${recipe.recipeID }&memberNumber=${loginUser.memberNumber }'">
+						<input type="button" class="btn btn-danger btn_add_ingredient" value="삭제" onclick="location.href='RecipeServlet?command=delete_recipe&recipeId=${recipe.recipeID }&memberNumber=${loginUser.memberNumber }'">
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-
 	</div>
 	
 	<jsp:include page="/footer.jsp"></jsp:include>
