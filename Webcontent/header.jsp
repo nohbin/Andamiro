@@ -31,7 +31,7 @@ a {
 		<div class="px-3 py-2 mt-3 mb-3">
 			<div class="container d-flex flex-wrap justify-content-center">
 				<form class="d-flex" role="search" action="#">
-					<input class="form-control me-2 " type="text" placeholder="검색창" aria-label="Search">
+					<input class="form-control me-2 " type="text" placeholder="검색창" aria-label="Search" value="" name="search">
 					<button class="btn btn-outline-success" type="submit" style="background-color: #fac279; color: black;">
 						<i class="bi bi-search"></i>
 					</button>

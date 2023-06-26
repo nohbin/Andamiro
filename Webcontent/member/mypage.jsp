@@ -30,27 +30,14 @@ img {
 	width: 100%; /* 너비는 부모 요소에 맞게 설정됩니다 */
 }
 </style>
-
+</head>
 <body>
 
 	<jsp:include page="/header.jsp"></jsp:include>
+	
+	<jsp:include page="mypage-menu.jsp"></jsp:include>
 
-	 <div class="container border mt-3 rounded-3 w-50">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link " style=" color: black;" aria-current="page" href="mypage.html">내 레시피</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style=" color: black;" href="mypage-save.html">저장 레시피</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style=" color: black;" href="mypage-review.html">요리 후기</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style=" color: black;" href="mypage-edit.html">회원정보 수정</a>
-            </li>
-        </ul>
-    </div>
+	 
 
 	<div class="container text-center border mt-3 rounded-5">
 		<input type="hidden" name = "recipeID" value="${recipe.recipeID }">
@@ -66,27 +53,18 @@ img {
 							<span>${recipe.recipetag1 } </span><div class="vr"></div><span> ${recipe.recipetag2 } </span><div class="vr"></div><span> ${recipe.recipetag3 } </span>
 						</div>
 						<div class="">
-							<b><span id="doc">작성자 : ${recipe.userId }</span></b>
+							<b><span id="doc">댓글수 : ? </span></b>
 							<div class="vr"></div>
 							<b><span id="doc">조회수 : ${recipe.recipeView }</span></b>
 							<div class="vr"></div>
 							<b><span>평점 : ${recipe.recipeGrade }</span></b>
 						</div>
+						<input type="button" class="btn btn-warning btn_add_ingredient" value="수정" onclick="location.href='RecipeServlet?command=edit_recipe_form&recipeId=${recipe.recipeID }&memberNumber=${loginUser.memberNumber }'">
+						<input type="button" class="btn btn-danger btn_add_ingredient" value="삭제" onclick="location.href='RecipeServlet?command=delete_recipe&recipeId=${recipe.recipeID }&memberNumber=${loginUser.memberNumber }'">
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<script>
-        var navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(function (link) {
-            link.addEventListener('mouseover', function () {
-                navLinks.forEach(function (link) {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-    </script>
 	</div>
 	
 	<jsp:include page="/footer.jsp"></jsp:include>

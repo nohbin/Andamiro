@@ -27,6 +27,8 @@ a {
 
 img {
 	border-radius: var(- -bs-border-radius-2xl) !important;
+	width: 70%;
+	height: auto;
 }
 
 .align-right {
@@ -46,8 +48,8 @@ a i {
 		<div class="container border mt-3 mb-3 rounded-5 text-center recipe-show">
 			<div class="container text-center mt-3 mb-3">
 				<div class="row row-cols-12">
-					<div class="col-12 mb-3 border-bottom"
-						style="font-weight: 900; font-size: 4rem;">${recipe.recipeName }</div>
+					<div class="col-12 mb-3 border-bottom" style="font-weight: 900; font-size: 4rem;">${recipe.recipeName }</div>
+					<div class="col-12 mb-3 border-bottom"><h3>${recipe.recipeDetailVO.recipeDiscription }</h3></div>
 					<div class="col-12 col-md-6">
 						<img src="resources/img/${recipe.mainPicture }" alt="" class="rounded-5 img-thumbnail">
 					</div>
@@ -103,8 +105,7 @@ a i {
 							<c:when test="${st.index < recipePicList.size()}">
 								<c:set var="recipePic" value="${recipePicList.get(st.index)}" />
 								<div id="stepImg1">
-									<img src="resources/img/${recipePic }"
-										class="figure-img img-thumbnail">
+									<img src="resources/img/${recipePic }" class="figure-img img-thumbnail">
 								</div>
 							</c:when>
 							<c:otherwise>
@@ -163,8 +164,7 @@ a i {
 							</div>
 							<div class="modal-body">
 								<div class="form-floating w-50 mx-auto mb-2">
-									<select class="form-select" id="floatingSelect"
-										aria-label="Floating label select example">
+									<select class="form-select" id="floatingSelect" aria-label="Floating label select example">
 										<option selected>점수</option>
 										<option value="1">1</option>
 										<option value="2">2</option>

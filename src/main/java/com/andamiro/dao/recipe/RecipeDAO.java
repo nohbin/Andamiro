@@ -34,7 +34,7 @@ public class RecipeDAO {
 
 		try {
 			conn = DBManager.getConnection();
-			
+
 			String sql = "INSERT INTO ANDAMIRORECIPE (recipeId , memberNumber , recipeName , mainPicture , recipetag1 , recipetag2 , recipetag3, USERID , recipedetailid ) "
 					+ "VALUES (RECIPEID_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, RECIPEID_SEQ.currval)";
 			pstmt = conn.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class RecipeDAO {
 			if (rs.next()) {
 				recipeId = rs.getInt(1);
 			}
-			
+
 			sql = "INSERT INTO RECIPEPICTURE (RECIPEPICID,RECIPEID, PIC01, PIC02, PIC03, PIC04, PIC05) "
 					+ "VALUES (PICID_SEQ.nextval,?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -285,11 +285,11 @@ public class RecipeDAO {
 				recipeIngreVO.setIngre11(rs.getString("INGRE11"));
 				recipeIngreVO.setIngre12(rs.getString("INGRE12"));
 			}
-			
+
 			recipeDetailVO.setRecipePicId(recipePicVo);
 			recipeDetailVO.setOrderId(recipeOrderVo);
 			recipeDetailVO.setRecipeingreId(recipeIngreVO);
-			
+
 			recipeVO.setRecipeDetailVO(recipeDetailVO);
 
 		} catch (Exception e) {
@@ -455,5 +455,22 @@ public class RecipeDAO {
 		}
 		return list;
 	}
-	
+
+	public void deleteRecipeById(int recipeId) {
+		// TODO Auto-generated method stub
+		String sql = "delete from andamiroRecipe where recipeid = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeId);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
+
 }
