@@ -135,9 +135,9 @@ public class RecipeWriteAction implements RecipeAction {
 			}
 		}
 
-		recipDetailVO.setRecipePicId(recipePicVO);
-		recipDetailVO.setOrderId(recipeOrderVO);
-		recipDetailVO.setRecipeingreId(recipeIngreVO);
+		recipDetailVO.setRecipePicVO(recipePicVO);
+		recipDetailVO.setRecipeOrderVO(recipeOrderVO);
+		recipDetailVO.setRecipeingreVO(recipeIngreVO);
 
 		recipeVO.setRecipeDetailVO(recipDetailVO);
 		

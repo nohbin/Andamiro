@@ -46,8 +46,7 @@ li{
                     <div class="file-upload col-12 col-md-2">
                         <div class="image-upload-wrap">
                             <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" name="mainpic"
-                                    accept="image/*" />
+                                <input class="file-upload-input" type='file' onchange="readURL(this);" name="mainpic" accept="image/*" />
                                 메인 <br>사진 등록
                             </div>
                         </div>
@@ -59,29 +58,6 @@ li{
                         </div>
                     </div>
                     <script>
-                        let uploadIndex = 1;
-
-                        function createImageUpload() {
-                        	event.stopPropagation();
-                            let uploadElement = `
-                            <div class="file-upload">
-                            <div class="image-upload-wrap">
-                            <div class="drag-text">
-                            <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                            사진 등록
-                            </div>
-                            </div>
-                            <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
-                            <div class="image-title-wrap">
-                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                            </div>
-                            </div>
-                            `;
-                            $('#image-uploads').append(uploadElement);
-                            uploadIndex++;
-                        }
 
                         function readURL(input) {
                         	event.stopPropagation();
@@ -412,67 +388,7 @@ li{
                 </div>
                 <!-- 사진등록 끝-->
                 
-                <div class="row">
-                    <div class="col-12 border-bottom" style="font-size: 2rem; font-weight: 900;">
-                        완성 사진 등록
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);"  accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                  <div class="col-12 mt-3 mb-5">
                     <button type="submit" class="btn btn-warning btn_add_ingredient">등록하기</button>
                     <button type="reset" class="btn btn-danger btn_add_ingredient">취소하기</button>

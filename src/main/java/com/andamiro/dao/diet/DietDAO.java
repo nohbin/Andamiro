@@ -19,7 +19,7 @@ public class DietDAO {
 	}
 	
 	public List<DietVO> selectAllboards() {
-		String sql = "select * from submemberdiet order by dietNumber desc ";
+		String sql = "select * from diet order by dietNumber desc ";
 		List<DietVO> list = new ArrayList<DietVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -32,7 +32,6 @@ public class DietDAO {
 			while(rs.next()) {
 				DietVO dVo = new DietVO();
 				dVo.setDietNumber(rs.getInt("dietNumber"));
-				dVo.setSubNumber(rs.getInt("subNumber"));
 				dVo.setDiet_kind(rs.getString("diet_kind"));
 				dVo.setDiet_menu(rs.getString("diet_menu"));
 				dVo.setDiet_picture(rs.getString("diet_picture"));
@@ -48,19 +47,18 @@ public class DietDAO {
 	}
 
 	public void insertDiet(DietVO dVo) {
-		String sql = "insert into submemberdiet ("
-				+ "dietNumber, subNumber, diet_kind, diet_menu, diet_picture) "
-				+ "values (dietNum_seq.NEXTVAL, ?, ?, ?, ?)";
+		String sql = "insert into  diet ("
+				+ "dietNumber, diet_kind, diet_menu, diet_picture) "
+				+ "values (dietNum_seq.NEXTVAL, ?, ?, ?)";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dVo.getSubNumber());
-			pstmt.setString(2, dVo.getDiet_kind());
-			pstmt.setString(3, dVo.getDiet_menu());
-			pstmt.setString(4, dVo.getDiet_picture());
+			pstmt.setString(1, dVo.getDiet_kind());
+			pstmt.setString(2, dVo.getDiet_menu());
+			pstmt.setString(3, dVo.getDiet_picture());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,8 +70,13 @@ public class DietDAO {
 				
 	}
 
+<<<<<<< HEAD
 	public DietVO selectOneDietBDnum(String dietNumber) {
 		String sql = "select * from submemberdiet where dietNumber = ?";
+=======
+	public DietVO selectOneDietByDnum(String dietNumber) {
+		String sql = "select * from diet where dietNumber = ?";
+>>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
 		DietVO dVo = null; 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -100,7 +103,7 @@ public class DietDAO {
 	}
 
 	public void deleteDiet(String dietNumber) {
-		String sql = "delete submemberdiet where dietNumber=?";
+		String sql = "delete from diet where dietNumber = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -119,8 +122,8 @@ public class DietDAO {
 	}
 
 	public void updateDiet(DietVO dVo) {
-		String sql = "update submemberdiet set diet_kind=?, diet_menu=?, diet_picture=? "
-				+ " where dietNumber=?";
+		String sql = "update diet set diet_kind=?, diet_menu=?, diet_picture=? "
+				+ " where dietNumber = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {

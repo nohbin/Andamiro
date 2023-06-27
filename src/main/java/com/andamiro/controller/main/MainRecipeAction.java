@@ -1,4 +1,4 @@
-package com.andamiro.controller.review;
+package com.andamiro.controller.main;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.ReviewAction;
-import com.andamiro.dao.recipe.RecipeDAO;
 import com.andamiro.dao.review.ReviewRecipeDAO;
-import com.andamiro.dto.recipe.RecipeVO;
+import com.andamiro.dto.review.ReviewRecipeVO;
 
-public class MainAction implements ReviewAction {
+public class MainRecipeAction implements ReviewAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/main.jsp";
-		RecipeDAO recipeDao = RecipeDAO.getInstance();
-		ArrayList<RecipeVO> bsetRecipeList = ReviewRecipeDAO.listBestRecipe();
+		ReviewRecipeDAO recipeDao = ReviewRecipeDAO.getInstance();
+		ArrayList<ReviewRecipeVO> bsetRecipeList = ReviewRecipeDAO.listBestRecipe();
 		request.setAttribute("bsetRecipeList", bsetRecipeList);
 	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

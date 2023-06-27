@@ -94,8 +94,7 @@ a i {
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<c:forEach var="recipeOrder" items="${recipeOrderList }"
-						varStatus="st">
+					<c:forEach var="recipeOrder" items="${recipeOrderList }" varStatus="st">
 						<div id="stepdescr1" class="step_sub">
 							<h3>
 								<i class="bi bi-${st.count }-circle"></i><span>${recipeOrder }</span>
@@ -108,8 +107,6 @@ a i {
 									<img src="resources/img/${recipePic }" class="figure-img img-thumbnail">
 								</div>
 							</c:when>
-							<c:otherwise>
-							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 				</div>

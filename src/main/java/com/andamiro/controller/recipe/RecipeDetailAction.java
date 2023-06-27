@@ -24,7 +24,7 @@ public class RecipeDetailAction implements RecipeAction {
 		RecipeDAO recipDAO = RecipeDAO.getInstance();
 		recipDAO.updateViewCount(recipID);
 		RecipeVO recipVO = recipDAO.selectOneRecipeByID(recipID);
-		RecipeIngreVO recipeIngreVO = recipVO.getRecipeDetailVO().getRecipeingreId();
+		RecipeIngreVO recipeIngreVO = recipVO.getRecipeDetailVO().getRecipeingreVO();
 
 		List<String> recipeIngreList = new ArrayList<>();
 		if (recipeIngreVO != null) {
@@ -36,7 +36,7 @@ public class RecipeDetailAction implements RecipeAction {
 			}
 		}
 
-		RecipePicVO recipePicVO = recipVO.getRecipeDetailVO().getRecipePicId();
+		RecipePicVO recipePicVO = recipVO.getRecipeDetailVO().getRecipePicVO();
 		List<String> recipePicList = new ArrayList<>();
 		if (recipePicVO != null) {
 			for (int i = 1; i <= 5; i++) {
@@ -47,7 +47,7 @@ public class RecipeDetailAction implements RecipeAction {
 			}
 		}
 
-		RecipeOrderVO recipeOrderVO = recipVO.getRecipeDetailVO().getOrderId();
+		RecipeOrderVO recipeOrderVO = recipVO.getRecipeDetailVO().getRecipeOrderVO();
 		List<String> recipeOrderList = new ArrayList<>();
 		if (recipeOrderVO != null) {
 			for (int i = 0; i <= 5; i++) {

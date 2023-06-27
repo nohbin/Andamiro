@@ -37,7 +37,39 @@
 </li>
   </ul>
 </div>
-      <div style="height: 3rem;"></div>
+<!--       <div style="height: 3rem;"></div>
+      <div class="container">
+          <div class="row" >
+            <div class="col-12 col-md-4">
+              <div class="text-center">
+                <div>
+                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet.jsp'">아침</button>
+                </div>
+                <img src="../resources/img/diet1.png" class="img-fluid3">
+                <div class="mealment">쌀밥,고추장 달걀조림, 시금치나물, 배추김치,호두멸치볶음</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="text-center">
+                <div>
+                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet_lunch.jsp'">점심</button>
+                </div>
+                <img src="../resources/img/diet2.png" class="img-fluid3">
+                <div class="mealment">콩밥, 감자국, 꽁치구이, 호박나물, 백김치</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="text-center">
+                <div>
+                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet_dinner.jsp'">저녁</button>
+                </div>
+                <img src="../resources/img/diet3.png" class="img-fluid3">
+                <div class="mealment"> 보리밥, 시금치된장국, 쇠고기불고기, 오이부추생채, 우유</div>
+              </div>
+            </div>
+          </div> 
+        </div>  -->
+       <div style="height: 3rem;"></div>
       <div class="container">
           <div class="row" >
             <div class="col-12 col-md-4">
@@ -69,6 +101,12 @@
             </div>
           </div> 
         </div> 
+ 
+ 
+ 
+ 
+ 
+ <!-- 여기까지  -->       
       <div style="height: 7rem;"></div>
       <div class="container">
         <div class="row">

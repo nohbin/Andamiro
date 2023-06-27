@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.RecipeAction;
 import com.andamiro.dao.recipe.RecipeDAO;
+import com.andamiro.dto.recipe.RecipeHowVO;
 import com.andamiro.dto.recipe.RecipeIngreVO;
+import com.andamiro.dto.recipe.RecipeKindVO;
+import com.andamiro.dto.recipe.RecipeMainIngreVO;
 import com.andamiro.dto.recipe.RecipeOrderVO;
 import com.andamiro.dto.recipe.RecipePicVO;
 import com.andamiro.dto.recipe.RecipeVO;
@@ -23,10 +26,44 @@ public class RecipeEditForm implements RecipeAction {
 		
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		int recipeId = Integer.parseInt(request.getParameter("recipeId"));
-		RecipeVO recipVO = recipeDAO.selectOneRecipeByID(recipeId);
-		RecipeIngreVO recipeIngreVO = recipVO.getRecipeDetailVO().getRecipeingreId();
-
+		RecipeVO recipeVO = recipeDAO.selectOneRecipeByID(recipeId);
+		RecipeIngreVO recipeIngreVO = recipeVO.getRecipeDetailVO().getRecipeingreVO();
+		RecipePicVO recipePicVO = recipeVO.getRecipeDetailVO().getRecipePicVO();
+		RecipeOrderVO recipeOrderVO = recipeVO.getRecipeDetailVO().getRecipeOrderVO();
 		List<String> recipeIngreList = new ArrayList<>();
+		List<String> recipePicList = new ArrayList<>();
+		List<String> recipeOrderList = new ArrayList<>();
+		getListIfNotNull(recipeIngreVO, recipePicVO, recipeOrderVO, recipeIngreList, recipePicList, recipeOrderList);
+		
+		System.out.println("#####################레시피 수정 FORM#####################");
+		System.out.println("레시피 번호:" + recipeVO.getMemberNumber());
+		System.out.println("레시피 이름:"+ recipeVO.getRecipeName());
+		System.out.println("레시피 메인사진:"+ recipeVO.getMainPicture());
+		System.out.println("레시피 태그1:"+ recipeVO.getRecipetag1());
+		System.out.println("레시피 태그2:"+ recipeVO.getRecipetag2());
+		System.out.println("레시피 태그3:"+ recipeVO.getRecipetag3());
+		System.out.println("레시피 유저아이디:"+ recipeVO.getUserId());
+		System.out.println("#####################레시피 수정 FORM#####################");
+		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
+		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
+		List<RecipeMainIngreVO> recipeMainIngreList = recipeDAO.selectAllRecipeMainIngre();
+		
+		
+		request.setAttribute("recipeKindList", recipeKindList);
+		request.setAttribute("recipeHowList", recipeHowList);
+		request.setAttribute("recipeMainIngreList", recipeMainIngreList);
+		request.setAttribute("recipe", recipeVO);
+		request.setAttribute("recipeIngreList", recipeIngreList);
+		request.setAttribute("recipePicList", recipePicList);
+		request.setAttribute("recipeOrderList", recipeOrderList);
+		
+		String url = "/recipe/recipe-edit.jsp";
+		request.getRequestDispatcher(url).forward(request, response);
+				
+	}
+
+	private void getListIfNotNull(RecipeIngreVO recipeIngreVO, RecipePicVO recipePicVO, RecipeOrderVO recipeOrderVO,
+			List<String> recipeIngreList, List<String> recipePicList, List<String> recipeOrderList) {
 		if (recipeIngreVO != null) {
 			for (int i = 1; i <= 12; i++) {
 				String ingredient = getIngredientValue(recipeIngreVO, i);
@@ -35,9 +72,7 @@ public class RecipeEditForm implements RecipeAction {
 				}
 			}
 		}
-
-		RecipePicVO recipePicVO = recipVO.getRecipeDetailVO().getRecipePicId();
-		List<String> recipePicList = new ArrayList<>();
+		
 		if (recipePicVO != null) {
 			for (int i = 1; i <= 5; i++) {
 				String recipePicture = getPictureValue(recipePicVO, i);
@@ -46,9 +81,7 @@ public class RecipeEditForm implements RecipeAction {
 				}
 			}
 		}
-
-		RecipeOrderVO recipeOrderVO = recipVO.getRecipeDetailVO().getOrderId();
-		List<String> recipeOrderList = new ArrayList<>();
+		
 		if (recipeOrderVO != null) {
 			for (int i = 0; i <= 5; i++) {
 				String recipeOrder = getOrderValue(recipeOrderVO, i);
@@ -57,15 +90,6 @@ public class RecipeEditForm implements RecipeAction {
 				}
 			}
 		}
-
-		request.setAttribute("recipe", recipVO);
-		request.setAttribute("recipeIngreList", recipeIngreList);
-		request.setAttribute("recipePicList", recipePicList);
-		request.setAttribute("recipeOrderList", recipeOrderList);
-		
-		String url = "/recipe/recipe-edit.jsp";
-		request.getRequestDispatcher(url).forward(request, response);
-				
 	}
 	
 	private String getOrderValue(RecipeOrderVO recipeOrderVO, int i) {

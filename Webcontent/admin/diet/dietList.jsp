@@ -7,18 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/join.css">
+<link rel="stylesheet" href="../../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../../resources/css/join.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="container" align="center">
-	   <div style="height: 5rem;"></div>
-		<h1>식단 리스트</h1>
+	   <!-- <div style="height: 5rem;"></div> -->
+<!-- 		<h1>식단 목록</h1> -->
 		<table class="table align-middle">
 			<tr>
 				<td colspan="5" style="border: white; text-align: right">
@@ -26,12 +26,11 @@
 				</td>		
 			</tr>
 			<tr class="text-center">
-				<th>식단번호</th><th>구독회원번호</th><th>식단종류</th><th>식단메뉴</th><th>식단이미지</th>
+				<th>식단번호</th><th>식단종류</th><th>식단메뉴</th><th>식단이미지</th>
 			</tr>
 			<c:forEach var="diet" items="${dietList }">
 				<tr class="record text-center">
 					<td class="fs-5">${diet.dietNumber }</td>
-					<td class="fs-5">${diet.subNumber }</td>
 					<td class="fs-5">${diet.diet_kind}</td>
 					<td class="fs-5">${diet.diet_menu}</td>
 					<td>
@@ -44,6 +43,6 @@
 		</table>
 	</div>
 	<div style="height: 7rem;"></div>
-<jsp:include page="../footer.jsp"></jsp:include>	
+<jsp:include page="../../footer.jsp"></jsp:include>	
 </body>
 </html>

@@ -6,14 +6,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/join.css">
+<link rel="stylesheet" href="../../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../../resources/css/join.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<script type="text/javascript" src="script/board.js"></script>
+<script>
+	function dietWriteCheck(){
+		if (document.frm.diet_kind.value.length == 0) {
+			alert("식단 종류를 입력하세요.");
+			return false;
+		}
+		if (document.frm.diet_picture.value == 0) {
+			alert("식단 이미지를 첨부하세요.");
+			return false;
+		}
+		if (document.frm.diet_menu.value.length == 0) {
+			alert("식단 메뉴를 입력하세요.");
+			return false;
+		}
+		alert("식단이 등록되었습니다.");
+		return true;
+	}
+</script>
 </head>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="container" align="center">
 	   <div style="height: 7rem;"></div>
 		<h1 class="mb-3"> 식단 등록</h1>
@@ -21,10 +38,6 @@
 		<input type="hidden" name="command" value="diet_write"> 
 			<div style="height: 5rem;"></div>
 			<table class="table">
-				<tr>
-					<th>구독회원번호</th>
-					<td><input type="text" name="subNumber"></td>
-				</tr>
 				<tr>
 					<th>식단종류</th>
 					<td><input type="text" name="diet_kind"></td>
@@ -45,7 +58,7 @@
 		</form>
 	</div>
 	<div style="height: 7rem;"></div>
-<jsp:include page="../footer.jsp"></jsp:include>		
+<jsp:include page="../../footer.jsp"></jsp:include>		
 </body>
 </html>
 
