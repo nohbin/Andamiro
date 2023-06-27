@@ -13,7 +13,7 @@ public class dietWriteFormAction implements DietAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/dietWrite.jsp";
+		String url = "/admin/diet/dietWrite.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

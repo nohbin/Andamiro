@@ -16,10 +16,6 @@ function dietCheck() {
 }
 
 function dietWriteCheck(){
-	if (document.frm.subNumber.value.length == 0) {
-		alert("구독회원번호를 입력하세요.");
-		return false;
-	}
 	if (document.frm.diet_kind.value.length == 0) {
 		alert("식단 종류를 입력하세요.");
 		return false;
