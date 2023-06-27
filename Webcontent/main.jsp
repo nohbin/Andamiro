@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,13 +89,17 @@ a {
 		</div>
 
 		<section class="container mt-4 ">
+		<form action="MainServlet" method="pors" name="main">
 			<dl class="bestrecipe d-flex justify-content-center">
+		
 				<dt>
 					<h1>
 						<span id="headline">베스트 </span>레시피
+						<a href="MainServlet?=command=main"></a>
 					</h1>
 				</dt>
 				<dd class="bestmenu">
+						<c:forEach items="${bsetRecipeList }" var="best">
 					<ul class="bestmenu1">
 						<li class="rankingnum">
 							<p class="rankingnum-st1">
@@ -105,15 +110,16 @@ a {
 									src="./resources/img/morning.jpg" width="200" height="150"></a>
 							</div>
 							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
+								<b>${best.recipename}</b>
 							</div>
 							<div class="membericon">
-								유저ID : 비룡 <span class="me-2 badge rounded-pill text-bg-warning">더보기</span>
+								유저 ID : ${best.userid}<span class="me-2 badge rounded-pill text-bg-warning">더보기</span>
 							</div>
 							<div class="rivew">
-								<span>★★★★★★</span> <span>(31,900)</span> <span>조회수 6억만</span>
+								<span>${best.recipegrade}</span> <span>&{best.reciperegdate}</span> <span>${best.recipeView}</span>
 							</div>
 						</li>
+						</c:forEach>
 						<li class="rankingnum">
 							<p class="rankingnum-st1">
 								<b1>2</b1>
@@ -127,116 +133,6 @@ a {
 							</div>
 							<div class="membericon">
 								유저ID : 견자단<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span>★★★★★★</span> <span>(31,900)</span> <span>조회수 6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>3</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning2.png" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								유저ID : 고든<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span>★★★★★★</span> <span>(31,900)</span> <span>조회수 6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>4</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning3.jpg" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								＠＠＠<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span>★★★★★★</span> <span>(31,900)</span> <span>조회수 6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>5</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning4.jpg" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								유저ID : 쌀국수<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span style="color: gold;">★★★★★★</span> <span>(31,900)</span> <span>조회수
-									6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>6</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning5.jpg" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								유저ID : 견자단<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span style="color: gold;">★★★★★★</span> <span>(31,900)</span> <span>조회수
-									6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>7</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning6.jpg" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								유저ID : 고든<span class="badge rounded-pill text-bg-warning">더보기</span>
-							</div>
-							<div class="rivew">
-								<span>★★★★★★ </span> <span>(31,900)</span> <span>조회수 6억만</span>
-							</div>
-						</li>
-						<li class="rankingnum">
-							<p class="rankingnum-st1">
-								<b1>8</b1>
-							</p>
-							<div class="rankingimg">
-								<a href="recipe_Detail.html"><img
-									src="./resources/img/morning7.jpg" width="200" height="150"></a>
-							</div>
-							<div class="rankingtitle mt-3">
-								<b>한국인이 좋아하는 TOP1 메뉴</b>
-							</div>
-							<div class="membericon">
-								＠＠＠<span class="badge rounded-pill text-bg-warning">더보기</span>
 							</div>
 							<div class="rivew">
 								<span>★★★★★★</span> <span>(31,900)</span> <span>조회수 6억만</span>
@@ -269,7 +165,7 @@ a {
 							<li class="list-group-item">AM : 7~9시 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet/recdiet.jsp" class="card-link"><b>아침식단 보러가기</b></a>
+							<a href="diet.html" class="card-link"><b>아침식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
@@ -287,7 +183,7 @@ a {
 							<li class="list-group-item">PM : 12~2시 사이권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet/recdiet_lunch.jsp" class="card-link"><b>점심식단 보러가기</b></a>
+							<a href="diet.html" class="card-link"><b>점심식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
@@ -306,15 +202,14 @@ a {
 							<li class="list-group-item">PM : 6 ~ 8시 사이 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="diet/recdiet_dinner.jsp" class="card-link"><b>저녁식단 보러가기</b></a>
+							<a href="diet.html" class="card-link"><b>저녁식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</main>
-
+</form>
 	<jsp:include page="footer.jsp"></jsp:include>
-	
 </body>
 </html>

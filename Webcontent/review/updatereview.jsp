@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +12,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
-<script src="js/main.js"></script>
 <style>
 li {
 	list-style: none;
@@ -26,146 +22,84 @@ a {
 	color: black;
 	text-decoration: none;
 }
+	
+.box{   
+		display: block;
+		 position: relative;
+	}	
+	
+.review-wrap{
+		 display: inline-block;
+   		 text-align: center;
+   		
+	}
 
-img {
-	width: 10rem;
-	height: auto;
-}
+
+
+
 </style>
 </head>
 <body>
+
 	<jsp:include page="../header.jsp"></jsp:include>
-
-	<div class="container border mt-3 rounded-3 w-50">
-		<ul class="nav nav-pills nav-fill ">
-			<li class="nav-item"><a class="nav-link " style="color: black;"
-				aria-current="page" href="mypage.html">≥ª ∑πΩ√««</a></li>
-			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-save.html">¿˙¿Â ∑πΩ√««</a></li>
-			<li class="nav-item">
-				<div class="dropdown">
-					<a class="btn btn-secondary1 dropdown-toggle" href="#"
-						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> ø‰∏Æ »ƒ±‚ </a>
-
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="mypage-review.html">≥ª∞°
-								≥≤±‰ »ƒ±‚</a></li>
-						<li><a class="dropdown-item" href="mypage-myreview.html">≥™¿«
-								ø‰∏Æ ∑πΩ√««</a></li>
-					</ul>
-				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">ø‰∏Æ »ƒ±‚</a> -->
-			</li>
-			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-edit.html">»∏ø¯¡§∫∏ ºˆ¡§</a></li>
-		</ul>
+<div class="review-wrab">
+	<form action="ReviewServlet" method="post">
+		<input type="hidden" name="command" value="myreview_update"> <input
+			type="hidden" name="num" value="${review.num}">
+		<h1>Î¶¨Î∑∞ ÏàòÏ†ï</h1>
+		<div class="box">
+			<h1 class="modal-title fs-5" id="staticBackdropLabel">ÏïÑÏù¥Îîî</h1>
+		</div>
+		<div class="box">
+			<div class="box">
+				<select class="box" id="floatingSelect"
+					aria-label="Floating label select example" name="recipegrade">
+					<option selected></option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-floating">
+			<textarea class="box" placeholder="" id="floatingTextarea2"
+				style="height: 200px" name="review">${review.review}</textarea>
+			<label for="floatingTextarea2">ÌõÑÍ∏∞Î•º ÏûÖÎ†•</label> 
+		</div>
+		<div class="box">
+			<div class="box">
+				<div class="box">
+					<input class="box" type='file'
+						onchange="readURL(this);" accept="image/*" name="review">${review.img} <br>ÏÇ¨ÏßÑ Îì±Î°ù
+				</div>
+			</div>
+			<div class="box">
+				<img class="box" src="#" alt="your image" />
+				<div class="box">
+					<button type="button" onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'"
+						class="remove-image">ÏÇ≠Ï†ú</button>
+				</div>
+			</div>
+		</div>
+	<div class="box">
+		<button type="button" class="btn btn-secondary"
+			data-bs-dismiss="modal">Îã´Í∏∞</button>
+		<input type="submit" value="ÏàòÏ†ï" onclick="updateReview()"> 
 	</div>
 
-	<!-- ≥ª ∑πΩ√«« ∏Ò∑œ -->
-	<div class="container text-center border mt-3 rounded-5">
-		<section class="container">
-			<table class="table justify-content-center mt-5 mb-5">
-				<thead>
-					<tr class="border-2 mt-3 ">
-						<th scope="col">π¯»£</th>
-						<th>∑πΩ√«« ªÁ¡¯</th>
-						<th scope="col">∑πΩ√«« ¡¶∏Ò</th>
-						<th scope="col">≥ªøÎ</th>
-						<th scope="col">≥ª ∆Ú¡°</th>
-						<th scope="col">¿€º∫¿œ</th>
-						<th scope="col">ºˆ¡§/ªË¡¶</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="review" items="${reviewList}">
-						<tr>
-							<th scope="row"><br>
-							<br>${review.num }</th>
-							<th scope="row"><a href="recipe_Detail.html"><img
-									src="../resources/img/morning.jpg"></a></th>
-							<td class=""><br>
-							<br>
-							<b>${review.title }</b></td>
-							<td><a href="#"><br>
-								<br>«—øÏº“∞•∫Ò¬Ú</a></td>
-							<td><br>
-							<br>
-							<b>${review.recipegrade} ¡°</b></td>
-							<td><br>
-							<br>${review.joindate}</td>
-							<td><br>
-								
-								<form action="ReviewServlet" method="post">
-									<input type="hidden" name="command" value="myreview_update">
-									<input type="hidden" name="num" value="${review.num}">
-									<!-- »ƒ±‚ ¿€º∫ form -->
-									<button type="button" class="btn btn-primary"
-										data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-										ºˆ¡§</button>
-									<!--∏¥ﬁ-->
-									<div class="modal fade" id="staticBackdrop"
-										data-bs-backdrop="static" data-bs-keyboard="false"
-										tabindex="-1" aria-labelledby="staticBackdropLabel"
-										aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h1 class="modal-title fs-5" id="staticBackdropLabel">æ∆¿Ãµ</h1>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<div class="form-floating w-50 mx-auto mb-2">
-														<select class="form-select" id="floatingSelect"
-															aria-label="Floating label select example" name="score">
-															<option selected>¡°ºˆ</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-													<div class="form-floating">
-														<textarea class="form-control" placeholder=""
-															id="floatingTextarea2" style="height: 200px"></textarea>
-														<label for="floatingTextarea2"><input type="text" name="title" size="70" value="${review.title}" ></label>
-													</div>
-													<div class="file-upload col-12">
-														<div class="image-upload-wrap">
-															<div class="drag-text">
-																<input class="file-upload-input" type='file'
-																	onchange="readURL(this);" accept="image/*" /> »ƒ±‚ <br>ªÁ¡¯
-																µÓ∑œ
-															</div>
-														</div>
-														<div class="file-upload-content">
-															<img class="file-upload-image" src="#" alt="your image" />
-															<div class="image-title-wrap">
-																<button type="button" onclick="removeUpload(this)"
-																	class="remove-image">ªË¡¶</button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">¥›±‚</button>
-												<input type="submit" class="btn btn-secondary" value="ºˆ¡§«œ±‚">
-												</div>
-												<script class="jsbin"
-													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-											</div>
-										</div>
-									</div>
-									<button class="btn btn-primary" type="button" value="delete"
-										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">ªË¡¶</button>
-								</form>
-						</tr>
-					</c:forEach>
+	</form>
+</div>
 
 
-					<script>
+
+	<script>
+        function updateReview() {
+        	  window.opener.location.reload();
+              window.close();
+    </script>
+	<script>
                                     let uploadIndex = 1;
 
                                     function createImageUpload() {
@@ -174,13 +108,13 @@ img {
                                         <div class="image-upload-wrap">
                                         <div class="drag-text">
                                         <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        ªÁ¡¯ µÓ∑œ
+                                        ÏÇ¨ÏßÑ Îì±Î°ù
                                         </div>
                                         </div>
                                         <div class="file-upload-content">
                                         <img class="file-upload-image" src="#" alt="your image" />
                                         <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ªË¡¶</button>
+                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ÏÇ≠Ï†ú</button>
                                         </div>
                                         </div>
                                         </div>
@@ -210,7 +144,7 @@ img {
                                         let $uploadContent = $upload.find('.file-upload-content');
                                         let $uploadImage = $uploadContent.find('.file-upload-image');
                                         
-                                        // ¿ÃπÃ¡ˆ √ ±‚»≠
+                                        // Ïù¥ÎØ∏ÏßÄ Ï¥àÍ∏∞Ìôî
                                         $uploadImage.attr('src', '#');
                                         $uploadContent.hide();
                                     }
@@ -223,95 +157,14 @@ img {
                                             $(this).removeClass('image-dropping');
                                         });
                                     });
-                                </script>
-
-
-					<script>
-                                    let uploadIndex = 1;
-
-                                    function createImageUpload() {
-                                        let uploadElement = `
-                                        <div class="file-upload">
-                                        <div class="image-upload-wrap">
-                                        <div class="drag-text">
-                                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        ªÁ¡¯ µÓ∑œ
-                                        </div>
-                                        </div>
-                                        <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image" />
-                                        <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ªË¡¶</button>
-                                        </div>
-                                        </div>
-                                        </div>
-                                        `;
-                                        $('#image-uploads').append(uploadElement);
-                                        uploadIndex++;
-                                    }
-
-                                    function readURL(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (e) {
-                                                let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
-                                                let $uploadImage = $uploadContent.find('.file-upload-image');
-                                                $uploadContent.show();
-                                                $uploadImage.attr('src', e.target.result);
-                                            };
-                                            reader.readAsDataURL(input.files[0]);
-                                        } else {
-                                            removeUpload(input);
-                                        }
-                                    }
-
-                                    function removeUpload(button) {
                                     
-                                        let $upload = $(button).closest('.file-upload');
-                                        let $uploadContent = $upload.find('.file-upload-content');
-                                        let $uploadImage = $uploadContent.find('.file-upload-image');
-                                        
-                                        // ¿ÃπÃ¡ˆ √ ±‚»≠
-                                        $uploadImage.attr('src', '#');
-                                        $uploadContent.hide();
-                                    }
+                                    function open_win(url) {
 
-                                    $(document).ready(function () {
-                                        $('.image-upload-wrap').bind('dragover', function () {
-                                            $(this).addClass('image-dropping');
-                                        });
-                                        $('.image-upload-wrap').bind('dragleave', function () {
-                                            $(this).removeClass('image-dropping');
-                                        });
-                                    });
+                                        window.open(url, "_blank");
+                                    }
                                 </script>
 
-
-
-					<script>
-                var navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(function (link) {
-                    link.addEventListener('mouseover', function () {
-                        navLinks.forEach(function (link) {
-                            link.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                    });
-                });
-                
-                function open_win(url) {
-
-                    window.open(url, "_blank");
-                }
-                function deleteReview() {
-                    alert('ªË¡¶ øœ∑·');
-                }
-            </script>
-
-				</tbody>
-			</table>
-		</section>
-	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
+
 </body>
 </html>
