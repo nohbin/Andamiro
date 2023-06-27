@@ -72,7 +72,7 @@ public class DietDAO {
 				
 	}
 
-	public DietVO selectOneDietByDnum(String dietNumber) {
+	public DietVO selectOneDietBDnum(String dietNumber) {
 		String sql = "select * from submemberdiet where dietNumber = ?";
 		DietVO dVo = null; 
 		Connection conn = null;

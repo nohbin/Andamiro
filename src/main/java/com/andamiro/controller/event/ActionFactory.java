@@ -22,8 +22,28 @@ public class ActionFactory {
 	 }
  //일반이벤트				
  else if(command.equals("EventViewform")) {
-	 action = new EventViewForm();
+	 action = new EventNomalViewForm();
  }
+ //이벤트리스트
+ if(command.equals("event_list")) {
+	 action= new EventListAction();
+ }
+ else if(command.equals("event_write_form")) {
+	 action = new EventWriteFormAction();
+ }
+ else if(command.equals("event_view")) {
+	 action = new EventViewAction();
+ }
+ else if(command.equals("event_update_form")) {
+	 action = new EventUpdateFormAction();
+ }
+ else if(command.equals("event_update")) {
+	 action = new EventUpdateAction();
+ }
+ else if(command.equals("event_delete")) {
+	 action = new EventDeleteAction();
+ }
+	 
  return action;
  }
 }

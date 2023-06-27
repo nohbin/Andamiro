@@ -4,6 +4,10 @@ package com.andamiro.dto.event;
 
 public class EventVO {
 	int eventno;
+	String imgsum;
+	String evstart;
+	String evend;
+	String ing;
 	public int getEventno() {
 		return eventno;
 	}
@@ -16,16 +20,16 @@ public class EventVO {
 	public void setImgsum(String imgsum) {
 		this.imgsum = imgsum;
 	}
-	public int getEvstart() {
+	public String getEvstart() {
 		return evstart;
 	}
-	public void setEvstart(int evstart) {
+	public void setEvstart(String evstart) {
 		this.evstart = evstart;
 	}
-	public int getEvend() {
+	public String getEvend() {
 		return evend;
 	}
-	public void setEvend(int evend) {
+	public void setEvend(String evend) {
 		this.evend = evend;
 	}
 	public String getIng() {
@@ -52,10 +56,6 @@ public class EventVO {
 	public void setPost(String post) {
 		this.post = post;
 	}
-	String imgsum;
-	int evstart;
-	int evend;
-	String ing;
 	int contestno;
 	String conpost;
 	String post;

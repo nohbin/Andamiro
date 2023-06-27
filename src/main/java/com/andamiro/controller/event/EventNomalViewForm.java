@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.andamiro.dao.event.EventDAO;
 import com.andamiro.dto.event.EventVO;
 
-public class EventMainViewForm implements Action {
+
+public class EventNomalViewForm implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String url = "/event/Event_main.jsp";
+		String url = "/event/Event_nomal.jsp";
 		
 		EventDAO eventDAO=EventDAO.getInstance();
-		ArrayList<EventVO> main=eventDAO.getEventList();
+		ArrayList<EventVO> nomalEvent=eventDAO.event();
 		
-		request.setAttribute("main",main);
+		request.setAttribute("nomalEvent",nomalEvent);
 		
 		
 		
@@ -33,4 +34,4 @@ public class EventMainViewForm implements Action {
 		
 		
 	}
-	}
+}

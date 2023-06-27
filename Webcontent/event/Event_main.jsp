@@ -50,45 +50,38 @@ label[for=name] button {
 
 
 	<div class="container">
-
-
-		<div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3 my-3 ">
-
-			<div class="mb-5">
-
-			       <c:forEach var="main" items="${eventlist}">
-					<div class="col">
-						
-						<div class="card shadow-sm">
-							<a href="EventServlet?command=EventContestViewform">
-							 <img src="resources/img/${newEventList.sumimg}" class="bd-placeholder-img card-img-top "
-								width="100%" height="200" role="img" aria-label="베너"
-								focusable="false">
-								<title>Placeholder</title> <rect width="100%" height="%"></rect></img>
-
-								<div class="card-body">
-									<p class="card-text">
-										<font style="vertical-align: inherit;" size="4px"
-											color="black">${newEventList.ing}</font>
-									</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group"></div>
-										<small class="text-muted"> <font
-											style="vertical-align: inherit;"> <font
-												style="vertical-align: inherit;">${newEventList.evstart}~${newEventList.evend}</font>
-													
-										</font>
-										</small>
-									</div>
-								</a>
-						</div>
-							
-					</div>
-					</c:forEach>
-			</div>
-		</div>
-	</div>
-	
+    <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3 my-3">
+        <c:forEach var="main" items="${eventList}">
+            <div class="col mb-5">
+                <div class="card shadow-sm">
+                    <a href="EventServlet?command=EventContestViewform">
+                        <img src="resources/img/${main.imgsum}" class="bd-placeholder-img card-img-top"
+                            width="100%" height="200" role="img" aria-label="베너"
+                            focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="%"></rect>
+                        </img>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <font style="vertical-align: inherit;" size="4px" color="black">${main.ing}</font>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group"></div>
+                                <small class="text-muted">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            ${main.evstart}~${main.evend}
+                                        </font>
+                                    </font>
+                                </small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 
 
 
