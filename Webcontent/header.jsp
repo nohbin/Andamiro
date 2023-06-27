@@ -64,7 +64,6 @@ a {
 					    <c:when test="${loginUser.adminCode eq '999'}">
 					    <b>[${loginUser.id }]님 환영합니다. 관리자 모드 입니다.</b>
 					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
-					        
 					    </c:when>
 					    <c:when test="${not empty loginUser}">
 					        <b>[${loginUser.id }]님 환영합니다.</b>
@@ -81,5 +80,21 @@ a {
 			</div>
 		</nav>
 	</header>
+	<div style="height: 3rem;"></div>
+	<c:if test="${loginUser.adminCode eq '999'}">
+		<div class="container">
+			<ul class="nav nav-tabs list-unstyled">
+				<li class="nav-item mynav-item"><a class="nav-link " 
+					href='<c:url value="/SubscribeServlet?command=submem_list"/>'
+					style="text-decoration: none; color: inherit">구독회원관리</a></li>
+				<li class="nav-item  mynav-item"><a class="nav-link"
+					href='<c:url value="/DietServlet?command=diet_list"/>'
+					style="text-decoration: none; color: inherit">식단관리</a></li>
+				<li class="nav-item  mynav-item"><a class="nav-link"
+					href='<c:url value="/DietServlet?command=dietDetail_list"/>'
+					style="text-decoration: none; color: inherit">식단상세 관리</a></li>
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>

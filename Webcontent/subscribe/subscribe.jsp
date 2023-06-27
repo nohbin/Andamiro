@@ -120,7 +120,7 @@
       <div style="height: 7rem;"></div>
       <div class="container text-center">
         <a href="Sub_btn.jsp" class="fw-bold fs-2"  style="text-decoration: none; color:  rgb(134, 77, 2);"> 
-    	    <button type="button" class="btn btn-outline-warning btn-lg " style="width: 20rem;">
+    	    <button type="button" class="btn btn-outline-warning btn-lg fw-bold " style="width: 20rem;">
         	  구독하기
 	        </button>
         </a>

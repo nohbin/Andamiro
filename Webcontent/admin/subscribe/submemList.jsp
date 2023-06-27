@@ -10,25 +10,28 @@
 <link rel="stylesheet" type="text/css" href="css/shopping.css">
 </head>
 <body>
-	<div id="wrap" align="center">
-		<h1>안다미로 구독 회원 리스트</h1>
-		<table class="list">
+<jsp:include page="../../header.jsp"></jsp:include>
+	<div class="container" align="center">
+		 <div style="height: 1rem;"></div>
+		 <table class="table table-hover">
 			<tr>
 				<td colspan="10" style="border: white; text-align: right">
-				<a href="AndamiroServlet?command=subscribe_write_form">회원 등록</a></td>
 			</tr>
-			<tr>
-				<th>구독번호</th><th>회원번호</th><th>구독시작일</th><th>구독종료일</th>
+			<tr class="text-center">
+				<th>구독번호</th><th>회원번호</th><th>회원 아이디</th><th>구독시작일</th><th>구독종료일</th>
 			</tr>
 			<c:forEach var="subscribe" items="${submemList }">
-				<tr class="record">
+				<tr class="record text-center">
 					<td>${subscribe.subNumber }</td>
-					<td><a href="AndamiroServlet?command=subscribe_view&num=${subscribe.memberNumber}">${subscribe.memberNumber}</a></td>  
+					<td>${subscribe.memberNumber}</td>  
+					<td><a href="SubscribeServlet?command=submem_view&subNumber=${subscribe.subNumber}">${subscribe.userId }</a></td>
 					<td>${subscribe.sub_start}</td>
 					<td>${subscribe.sub_end }</td>
 				</tr>
 			</c:forEach>
-		</table>
+		 </table>
 	</div>
+	<div style="height: 7rem;"></div>
+<jsp:include page="../../footer.jsp"></jsp:include>		
 </body>
 </html>
