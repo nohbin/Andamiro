@@ -153,17 +153,45 @@ CREATE TABLE recipeOrder (
 ALTER TABLE andamiroRecipe ADD CONSTRAINT FK_memberNumber
 FOREIGN KEY (memberNumber) REFERENCES andamiromember (memberNumber);
   
-ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_RecipeID
-FOREIGN KEY (recipeID) REFERENCES andamiroRecipe (recipeID);
-  
-ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_recipeOrder_detail
-FOREIGN KEY (OrderId) REFERENCES recipeOrder (recipeOrderId);
+ALTER TABLE andamiroRecipe_detail
+DROP CONSTRAINT FK_RecipeID;
 
-ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_recipepic_detail
-FOREIGN KEY (recipePicId) REFERENCES recipePicture (recipePicid);
+ALTER TABLE andamiroRecipe_detail
+ADD CONSTRAINT FK_RecipeID
+FOREIGN KEY (recipeID) REFERENCES andamiroRecipe (recipeID)
+ON DELETE CASCADE;
 
-ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_recipeingre_detail
-FOREIGN KEY (recipeingreId) REFERENCES recipeingre (ingreid);
+ALTER TABLE andamiroRecipe_detail
+DROP CONSTRAINT FK_recipeOrder_detail;
+
+ALTER TABLE andamiroRecipe_detail
+ADD CONSTRAINT FK_recipeOrder_detail
+FOREIGN KEY (OrderId) REFERENCES recipeOrder (recipeOrderId)
+ON DELETE CASCADE;
+
+ALTER TABLE andamiroRecipe_detail
+DROP CONSTRAINT FK_recipepic_detail;
+
+ALTER TABLE andamiroRecipe_detail
+ADD CONSTRAINT FK_recipepic_detail
+FOREIGN KEY (recipePicId) REFERENCES recipePicture (recipePicid)
+ON DELETE CASCADE;
+
+ALTER TABLE andamiroRecipe_detail
+DROP CONSTRAINT FK_recipeingre_detail;
+
+ALTER TABLE andamiroRecipe_detail
+ADD CONSTRAINT FK_recipeingre_detail
+FOREIGN KEY (recipeingreId) REFERENCES recipeingre (ingreid)
+ON DELETE CASCADE;
+
+ALTER TABLE andamiroRecipe_detail
+DROP CONSTRAINT FK_recipeingre_detail;
+
+ALTER TABLE andamiroRecipe_detail
+ADD CONSTRAINT FK_recipeingre_detail
+FOREIGN KEY (recipeingreId) REFERENCES recipeingre (ingreid)
+ON DELETE CASCADE;
 
 ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_recipeKindNumber
 FOREIGN KEY (recipeKind) REFERENCES recipekind (recipeKindId);
@@ -174,21 +202,41 @@ FOREIGN KEY (recipeMainIngre) REFERENCES recipeMainIngre (recipeIngreId);
 ALTER TABLE andamiroRecipe_detail ADD CONSTRAINT FK_recipeHow
 FOREIGN KEY (recipeHow) REFERENCES recipeHow (recipeHowId);
 
-ALTER TABLE recipeingre ADD CONSTRAINT FK_recipeid_recipeingre
-FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId);
 
-ALTER TABLE recipePicture ADD CONSTRAINT FK_recipepid_recipePic
-FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId);
 
-ALTER TABLE recipeOrder ADD CONSTRAINT FK_recipepid_recipeOrder
-FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId);
+
+-- 레시피 메인 테이블 과 레시피 재료 , 레시피 사진 , 레시피 순서 연결키
+
+ALTER TABLE recipeingre
+DROP CONSTRAINT FK_recipeid_recipeingre;
+
+ALTER TABLE recipeingre
+ADD CONSTRAINT FK_recipeid_recipeingre
+FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId)
+ON DELETE CASCADE;
+
+ALTER TABLE recipePicture
+DROP CONSTRAINT FK_recipepid_recipePic;
+
+ALTER TABLE recipePicture
+ADD CONSTRAINT FK_recipepid_recipePic
+FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId)
+ON DELETE CASCADE;
+
+ALTER TABLE recipeOrder
+DROP CONSTRAINT FK_recipepid_recipeOrder;
+
+ALTER TABLE recipeOrder
+ADD CONSTRAINT FK_recipepid_recipeOrder
+FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId)
+ON DELETE CASCADE;
+
 
 CREATE SEQUENCE recipeid_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE recipedetailid_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE ingreid_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE orderid_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE picid_seq START WITH 1 INCREMENT BY 1 nocache;
-
 
 
 
