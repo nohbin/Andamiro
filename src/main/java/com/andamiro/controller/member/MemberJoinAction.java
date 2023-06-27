@@ -22,7 +22,6 @@ public class MemberJoinAction implements MemberAction {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String id = request.getParameter("id");
-		System.out.println(id);
 		String rawpwd = request.getParameter("pwd");
 		String pwd = SHA256.encodeSha256(rawpwd);
 		String name = request.getParameter("name");
@@ -31,7 +30,7 @@ public class MemberJoinAction implements MemberAction {
 		String joinDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId(id);
+		memberVO.setId(id);	
 		memberVO.setPwd(pwd);
 		memberVO.setName(name);
 		memberVO.setPhone(phone);

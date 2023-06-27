@@ -7,18 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/join.css">
+<link rel="stylesheet" href="../../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../../resources/css/join.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script type="text/javascript" src="script/board.js"></script>
 </head>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
-	<div class="container" align="center">
-	   <div style="height: 7rem;"></div>
-		<h1 class="mb-5 fw-bolder">식단 상세정보</h1>
-		 <div style="height: 3rem;"></div>
+<jsp:include page="../../header.jsp"></jsp:include>
+	<div class="container" align="left">
+	   <div style="height: 1rem;"></div>
+		<div class="fs-3 fw-bolder ms-3">식단 상세 정보</div>
+		 <div style="height: 1rem;"></div>
 		<table class="table table align-middle table-bordered border-warning border-opacity-50" style="width: 60rem; border-radius: 10px;">
 			<tr><th>음식명</th>
 				<td>${dietDetail.foodName}</td>
@@ -31,6 +31,9 @@
 				<td>${dietDetail.component}</td>
 			</tr>
 		</table>
+		</div>
+		<div style="height: 3rem;"></div>
+		<div class="container" align="center">
 		<br> <br> <input type="button" value="식단정보 수정"
 			onclick="location.href='DietServlet?command=dietDetail_update_form&dietDetailID=${dietDetail.dietDetailID}'"> 
 		<input type="button" value="식단정보 삭제"
@@ -39,8 +42,8 @@
 			onclick="location.href='DietServlet?command=dietDetail_list'"> 
 		<input type="button" value="식단정보 등록"
 			onclick="location.href='DietServlet?command=dietDetail_write_form'">
-	</div>
+		</div>
 	<div style="height: 10rem;"></div>
-<jsp:include page="../footer.jsp"></jsp:include>	
+<jsp:include page="../../footer.jsp"></jsp:include>	
 </body>
 </html>

@@ -15,7 +15,7 @@ public class dietWriteAction implements DietAction {
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DietVO dVo = new DietVO();
-		dVo.setSubNumber(Integer.parseInt(request.getParameter("subNumber")));
+//		dVo.setSubNumber(Integer.parseInt(request.getParameter("subNumber")));
 		dVo.setDiet_kind(request.getParameter("diet_kind"));
 		dVo.setDiet_menu(request.getParameter("diet_menu"));
 		dVo.setDiet_picture(request.getParameter("diet_picture"));

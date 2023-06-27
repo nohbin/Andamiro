@@ -27,7 +27,7 @@ label[for=name] button {
 </style>
 </head>
 <body>
-<%
+	<%
 	request.setCharacterEncoding("UTF-8");
 	%>
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -54,7 +54,7 @@ label[for=name] button {
 									</c:otherwise>
 								</c:choose>
 								<div class="input-group-append">
-									<input class="btn" style="background-color: #fac279;" type="button" value="중복확인" onclick="open_win('MemberServlet?command=member_Idcheck_form','회원가입')" required>
+									<input class="btn" style="background-color: #fac279;" type="button" value="중복확인" onclick="open_win('MemberServlet?command=member_Idcheck_form','join')" required>
 								</div>
 								<script type="text/javascript">
 								
@@ -105,18 +105,16 @@ label[for=name] button {
 				</form>
 			</div>
 		</div>
-		
 		<script>
 			function validateForm() {
 				const form = document.querySelector('.validation-form');
 				if (form.checkValidity() === false) {
 					event.preventDefault();
 					event.stopPropagation();
-					}
+				}
 				form.classList.add('was-validated');
 				}
 		</script>
-		
 	</div>
 
 	<jsp:include page="/footer.jsp"></jsp:include>

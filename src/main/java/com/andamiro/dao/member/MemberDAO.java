@@ -101,4 +101,36 @@ public class MemberDAO {
 		}
 		return idCheckResult;
 	}
+
+	public void updateMemberInfoByMemberNumber(int memberNumber, MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		String sql = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			if(memberVO.getId() != null) {
+				sql = "UPDATE andamiromember SET ID = ?, PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberVO.getId());
+				pstmt.setString(2, memberVO.getPwd());
+				pstmt.setString(3, memberVO.getPhone());
+				pstmt.setInt(4, memberNumber);
+				pstmt.execute();
+			}else {
+				sql = "UPDATE andamiromember SET PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberVO.getPwd());
+				pstmt.setString(2, memberVO.getPhone());
+				pstmt.setInt(3, memberNumber);
+				pstmt.execute();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		System.out.println("업데이트문 종료");
+	}
 }

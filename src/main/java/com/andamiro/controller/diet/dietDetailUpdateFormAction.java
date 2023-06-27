@@ -15,7 +15,7 @@ public class dietDetailUpdateFormAction implements DietAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/admin/dietDetailUpdate.jsp";
+		String url = "/admin/diet/dietDetailUpdate.jsp";
 		String dietDetailID = request.getParameter("dietDetailID");
 		DietDetailDAO ddDao = DietDetailDAO.getInstance();
 		dietDetailVO ddVo = ddDao.selectOneDetailById(dietDetailID);

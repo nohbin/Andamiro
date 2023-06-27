@@ -8,14 +8,32 @@ public class RecipeDetailVO {
 	private int recipeHow;
 	private int recipeKind;
 	private int recipeMainIngre;
-	private RecipePicVO recipePicId;
-	private RecipeOrderVO OrderId;
-	private RecipeIngreVO recipeingreId;
+	private RecipePicVO recipePicVO;
+	private RecipeOrderVO recipeOrderVO;
+	private RecipeIngreVO recipeingreVO;
 	private String recipeDiscription;
 	private String recipeforperson;
 	private String recipefortime;
 	private String recipeforlevel;
 	
+	public RecipePicVO getRecipePicVO() {
+		return recipePicVO;
+	}
+	public void setRecipePicVO(RecipePicVO recipePicVO) {
+		this.recipePicVO = recipePicVO;
+	}
+	public RecipeOrderVO getRecipeOrderVO() {
+		return recipeOrderVO;
+	}
+	public void setRecipeOrderVO(RecipeOrderVO recipeOrderVO) {
+		this.recipeOrderVO = recipeOrderVO;
+	}
+	public RecipeIngreVO getRecipeingreVO() {
+		return recipeingreVO;
+	}
+	public void setRecipeingreVO(RecipeIngreVO recipeingreVO) {
+		this.recipeingreVO = recipeingreVO;
+	}
 	public int getRecipeDetailID() {
 		return recipeDetailID;
 	}
@@ -46,24 +64,7 @@ public class RecipeDetailVO {
 	public void setRecipeMainIngre(int recipeMainIngre) {
 		this.recipeMainIngre = recipeMainIngre;
 	}
-	public RecipePicVO getRecipePicId() {
-		return recipePicId;
-	}
-	public void setRecipePicId(RecipePicVO recipePicId) {
-		this.recipePicId = recipePicId;
-	}
-	public RecipeOrderVO getOrderId() {
-		return OrderId;
-	}
-	public void setOrderId(RecipeOrderVO orderId) {
-		OrderId = orderId;
-	}
-	public RecipeIngreVO getRecipeingreId() {
-		return recipeingreId;
-	}
-	public void setRecipeingreId(RecipeIngreVO recipeingreId) {
-		this.recipeingreId = recipeingreId;
-	}
+
 	public String getRecipeDiscription() {
 		return recipeDiscription;
 	}

@@ -21,16 +21,18 @@ public class MemberLoginAction implements MemberAction {
 		String userid = request.getParameter("userid");
 		String rawpwd = request.getParameter("pwd");
 		String pwd = SHA256.encodeSha256(rawpwd);
-		String url="member/loginfail.jsp";
+		String url = null;
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		MemberVO memberVO = memberDAO.selectOneMemberbyID(userid);
-		if(memberVO.getId().equals(userid) && memberVO.getPwd().equals(pwd)) {
+		if (memberVO.getId().equals(userid) && memberVO.getPwd().equals(pwd)) {
 			HttpSession session = request.getSession();
 			session.removeAttribute("id");
-	        session.setAttribute("loginUser", memberVO);
-	        memberVO = (MemberVO) session.getAttribute("loginUser");
-	        url="/main.jsp";
+			session.setAttribute("loginUser", memberVO);
+			memberVO = (MemberVO) session.getAttribute("loginUser");
+			url = "/main.jsp";
+		} else {
+			url = "member/loginfail.jsp";
 		}
-		request.getRequestDispatcher(url).forward(request, response); 
+		request.getRequestDispatcher(url).forward(request, response);
 	}
 }
