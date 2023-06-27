@@ -70,8 +70,13 @@ public class DietDAO {
 				
 	}
 
+<<<<<<< HEAD
+	public DietVO selectOneDietBDnum(String dietNumber) {
+		String sql = "select * from submemberdiet where dietNumber = ?";
+=======
 	public DietVO selectOneDietByDnum(String dietNumber) {
 		String sql = "select * from diet where dietNumber = ?";
+>>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
 		DietVO dVo = null; 
 		Connection conn = null;
 		PreparedStatement pstmt = null;

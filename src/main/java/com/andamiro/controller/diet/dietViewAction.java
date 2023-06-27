@@ -18,7 +18,7 @@ public class dietViewAction implements DietAction {
 		String url = "/admin/diet/dietView.jsp";
 		String dietNumber = request.getParameter("dietNumber");
 		DietDAO dDao = DietDAO.getInstance();
-		DietVO dVo = dDao.selectOneDietByDnum(dietNumber);
+		DietVO dVo = dDao.selectOneDietBDnum(dietNumber);
 		request.setAttribute("diet", dVo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
