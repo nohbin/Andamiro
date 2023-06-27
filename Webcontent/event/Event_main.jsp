@@ -51,7 +51,7 @@ label[for=name] button {
 
 	<div class="container">
     <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3 my-3">
-        <c:forEach var="main" items="${eventList}">
+        <c:forEach var="main" items="${main}">
             <div class="col mb-5">
                 <div class="card shadow-sm">
                     <a href="EventServlet?command=EventContestViewform">

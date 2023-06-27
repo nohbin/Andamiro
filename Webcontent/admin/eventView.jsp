@@ -32,12 +32,18 @@
 				<th class="text-center" style="width: 10rem;">이벤트썸네일</th>
 				<td style="width: 40rem;"><img src="upload/${eventlist.imgsum}" style="width:15rem; height:10rem;"></td>
 			</tr>
+			<tr>	
+				<th class="text-center" style="width: 10rem;">포스터</th>
+				<td style="width: 40rem;"><img src="upload/${conposter.imgsum}" style="width:15rem; height:10rem;"></td>
+			</tr>
+			
+			
 			</tbody>
 		</table>
 		<br> <br> <input type="button" value="이벤트 수정"
-			onclick="location.href='DietServlet?command=diet_update_form&dietNumber=${eventlist.eventno}'"> 
+			onclick="location.href='EventServlet?command=event_update_form&dietNumber=${eventlist.eventno}'"> 
 		<input type="button" value="이벤트 삭제"
-			onclick="location.href='DietServlet?command=diet_delete&dietNumber=${eventlist.eventno}'"> 		
+			onclick="location.href='EventServlet?command=event_delete&dietNumber=${eventlist.eventno}'"> 		
 		<input type="button" value="이벤트 리스트"
 			onclick="location.href='EventServlet?command=event_list'"> 
 		<input type="button" value="이벤트 등록"

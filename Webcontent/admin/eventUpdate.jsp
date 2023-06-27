@@ -24,15 +24,15 @@
 			<table class="table">
 				<tr>
 					<th>기간</th>
-					<td><input type="text" name="diet_kind" value="${eno.evstart}~${eno.end}"></td>
+					<td><input type="text" name="evstart" value="${eno.evstart}~${eno.end}"></td>
 				</tr>
 				<tr>
 					<th>진행 여부</th>
-					<td><input type="text" name="diet_menu" value="${eno.ing}"></td>
+					<td><input type="text" name="evend" value="${eno.ing}"></td>
 				</tr>
 				<tr>
 					<th>이벤트 썸네일</th>
-					<td><input type="file" name="diet_picture" value="${eng.imgsum}"></td>
+					<td><input type="file" name="imgsum" value="${eng.imgsum}"></td>
 				</tr>
 			</table>
 			<br><br>

@@ -17,26 +17,27 @@
 	<div class="container" align="center">
 	   <div style="height: 7rem;"></div>
 		<h1 class="mb-3"> 이벤트 등록</h1>
-		<form name="frm" method="post" action="DietServlet" > 	
-		<input type="hidden" name="command" value="diet_write"> 
+		<form name="frm" method="post" action="EventServlet" > 	
+		<input type="hidden" name="command" value="event_write"> 
 			<div style="height: 5rem;"></div>
 			<table class="table">
 				<tr>
 					<th>이벤트 번호</th>
-					<td><input type="text" name="Eventno"></td>
+					<td><input type="text" name="eventno"></td>
 				</tr>
 				<tr>
 					<th>기간</th>
-					<td><input type="text" name="diet_kind"></td>
+					<td><input type="text" name="evstart~evend"></td>
 				</tr>
 				<tr>
 					<th>진행여부</th>
-					<td><input type="file" name="diet_picture"></td>
+					<td><input type="text" name="ing"></td>
 				</tr>
 				<tr>
 					<th>썸네일</th>
-					<td><input type="text" name="diet_menu"></td>
+					<td><input type="file" name="imgsum"></td>
 				</tr>
+				
 			</table>
 			<br>
 			<br> <input type="submit" value="등록" onclick="return eventWriteCheck()">

@@ -19,7 +19,7 @@
     <table class="table align-middle">
         <tr>
             <td colspan="5" style="border: white; text-align: right">
-                <input type="button" value="이벤트 등록" class="btn btn-outline-warning" onclick="location.href='DietServlet?command=diet_write_form'">
+                <input type="button" value="이벤트 등록" class="btn btn-outline-warning" onclick="location.href='EventServlet?command=event_write_form'">
             </td>
         </tr>
         <tr class="text-center">
@@ -29,11 +29,11 @@
         </tr>
         <c:forEach var="event" items="${eventList}">
             <tr class="record text-center">
-                <td class="fs-5">${event.eventNumber}</td>
-                <td class="fs-5">${event.evstart}~${event.evend}</td>
+                <td class="fs-5">${eventList.eventno}</td>
+                <td class="fs-5">${eventList.evstart}~${eventList.evend}</td>
                 <td class="fs-5">
-                    <a href="EventServlet?command=diet_view&dietNumber=${event.eventno}">
-                        <img src="upload/${event.imgsum}" style="width:15rem; height:10rem;">
+                    <a href="EventServlet?command=event_view&eventno=${eventList.eventno}">
+                        <img src="upload/${eventList.imgsum}" style="width:15rem; height:10rem;">
                     </a>
                 </td>
             </tr>
