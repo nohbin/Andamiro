@@ -20,7 +20,6 @@ public class ReviewUpdateFormAction implements ReviewAction {
 		String url = "/review/updatereview.jsp";
 		String num = request.getParameter("num");
 		ReviewDAO rDao = ReviewDAO.getInstance();
-//		rDao.updateReadCount(num);
 		ReviewVO rVo = rDao.selectOneBoradByNum(num);
 		request.setAttribute("review", rVo);
 		
