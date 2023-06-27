@@ -21,6 +21,10 @@ public class RecipeActionFactory {
 			action = new RecipeListAction();
 		}else if(command.equals("recipe_detail")) {
 			action = new RecipeDetailAction();
+		}else if(command.equals("delete_recipe")) {
+			action = new RecipeDeleteAction();
+		}else if(command.equals("edit_recipe_form")) {
+			action = new RecipeEditForm();
 		}
 		return action;
 	}

@@ -28,9 +28,31 @@
       window.close();
 
     }
-    function showMsg() {
-      alert("결제가 완료되었습니다. 구독 서비스를 이용하실 수 있습니다.")
-    }
+    function checkPay() {    	
+        var options = document.getElementsByName("payway");
+        var isChecked = false;   //초기 체크여부
+        for (var i = 0; i < options.length; i++) {
+          if (options[i].checked) {
+            isChecked = true;
+            break;
+          }
+        }
+
+        if (!isChecked) {
+          alert("결제수단을 선택해주세요.");
+          return;
+        }
+        
+		var checkbox = document.querySelector('input[name="termcheck"]');
+    	if (!checkbox.checked) {
+    	    alert("약관동의를 체크해주세요.");
+    	    return;
+    	}
+    	
+    	window.location.href = "../SubscribeServlet?command=sub_join&userid=${loginUser.id}";
+      }
+    
+    
   </script> 
 </head>
 <body> 
@@ -45,82 +67,77 @@
     </div>
   </div>  
   <div style="height: 3rem;"></div>
-  <div class="container">
-    <div class="container mb-2">
-      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
-        결제내용
-      </div>
-    </div>
-    <div class="container fs-5 lh-lg border border-warning rounded-3 my-3 py-2">
-      <ul>
-        <li>구매 상품명 : 안다미로 밥상 구독 서비스</li>
-        <li>이용기간 : <%= getCurrentDate() %> ~ <%= getFutureDate(30) %></li>
-        <li>결제 금액 : 3300원</li>
-      </ul>          
-    </div>
-  </div>  
-  <div style="height: 3rem;"></div>
-  <form action="#"> <!--폼 태그 시작-->
-  <div class="container">
-    <div class="container mb-2">
-      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
-        결제수단
-      </div>
-    </div>
-  </div>  
-  <div class="container text-center">
-    
-    <div class="row border border-warning rounded-3 my-3 py-2">
-      <div class="col">
-        <img src="../resources/img/페이코2.png" class="img-fluid4">
-        
-          <label>
-          <input type="radio" id="payway" name="payway" value="no">
-          </label>
-        
-      </div>
-      <div class="col">
-        <img src="../resources/img/npay.png"  class="img-fluid4">
-        
-          <label><input type="radio" id="payway" name="payway" value="no"></label>
-        
-      </div>
-      <div class="col">
-        <img src="../resources/img/토스2.png" class="img-fluid4">
-        
-          <label><input type="radio" id="payway" name="payway" value="no"></label>
-        
-      </div>
-      <div class="col">
-        <img src="../resources/img/카카오페이2.png" class="img-fluid4">
-        
-          <label><input type="radio" id="payway" name="payway" value="no"></label>
-        
-      </div>
-    </div>
-  </div>
-  <div style="height: 3rem;"></div>
-  <div class="container">
-    <div class="mb-2 fs-4">
-      약관동의
-    </div>
-    <div class="fw-bold mb-4">
-      
-        <input type="checkbox" name="termcheck" value="약관">&nbsp; 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
-      
-    </div>
-    <div>
-    </div>    
-  </div>
-  <div class="container text-center">
-    <button class=" btn btn-light fs-2 btn-lg me-2" style="width: 10rem" onclick="closePopup()">
-      취소
-    </button>
-    <button onclick="showMsg()" class=" btn btn-outline-warning btn-lg ms-2 fw-bold fs-2" style="width: 10rem; text-decoration: none; color: #000;">
-      결제
-    </button>
-  </div>
-</form>
+	  <div class="container">
+	    <div class="container mb-2">
+	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
+	        결제내용
+	      </div>
+	    </div>
+	    <div class="container fs-5 lh-lg border border-warning rounded-3 my-3 py-2">
+	      <ul>
+	        <li>구매 상품명 : 안다미로 밥상 구독 서비스</li>
+	        <li>	        
+	        이용기간 : <%= getCurrentDate() %> ~ <%= getFutureDate(30) %>
+	        </li>
+	        <li>결제 금액 : 3300원</li>
+	      </ul>          
+	    </div>
+	  </div>  
+	  <div style="height: 3rem;"></div>
+	  <div class="container">
+	    <div class="container mb-2">
+	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
+	        결제수단
+	      </div>
+	    </div>
+	  </div>  
+	  <div class="container text-center">
+	    <div class="row border border-warning rounded-3 my-3 py-2">
+	      <div class="col">
+	        <img src="../resources/img/페이코2.png" class="img-fluid4">
+	          <label>
+	          <input type="radio" id="payway" name="payway" value="pay1">
+	          </label>
+	      </div>
+	      <div class="col">
+	        <img src="../resources/img/npay.png"  class="img-fluid4">
+	          <label>
+	          <input type="radio" id="payway" name="payway" value="pay2">
+	          </label>
+	      </div>
+	      <div class="col">
+	        <img src="../resources/img/토스2.png" class="img-fluid4">
+	          <label>
+	          <input type="radio" id="payway" name="payway" value="pay3">
+	          </label>
+	      </div>
+	      <div class="col">
+	        <img src="../resources/img/카카오페이2.png" class="img-fluid4">
+	          <label>
+	          <input type="radio" id="payway" name="payway" value="pay4">
+	          </label>
+	      </div>
+	    </div>
+	  </div>
+	  <div style="height: 3rem;"></div>
+	  <div class="container">
+	    <div class="mb-2 fs-4">
+	      약관동의
+	    </div>
+	    <div class="fw-bold mb-4">
+	        <input type="checkbox" name="termcheck" value="약관">&nbsp; 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
+	    </div>
+	    <div>
+	    </div>    
+	  </div>
+	  <div class="container text-center">
+	    <button class=" btn btn-light fs-2 btn-lg me-2" style="width: 10rem" onclick="closePopup()">
+	      취소
+	    </button>
+		<button onclick="checkPay()" class=" btn btn-outline-warning btn-lg ms-2 fw-bold fs-2" style="width: 10rem; text-decoration: none; color: #000;">
+	      결제
+	    </button>
+	  </div>
   <div style="height: 3rem;"></div>
 </body>
 </html>

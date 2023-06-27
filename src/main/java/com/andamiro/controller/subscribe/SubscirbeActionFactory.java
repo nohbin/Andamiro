@@ -13,8 +13,8 @@ public class SubscirbeActionFactory {
 	public SubscribeAction getAction(String command) {
 		SubscribeAction action = null;
 		
-		if(command.equals("sub_join_")) {
-			action = new Action();
+		if(command.equals("sub_join")) {
+			action = new SubJoinAction();
 		}
 		
 		return action;

@@ -31,11 +31,11 @@
               </div>
               <div class="row">
                 <div class="col my-3">
-                  <button class="btn btn-outline-warning fw-bold" role="button">
                     <a href="Sub_btn.jsp" style="text-decoration: none; color: black;">  
+	                  <button class="btn btn-outline-warning fw-bold" role="button">
                       구독하기
-                    </a> 
-                    </button>
+                      </button>
+                    </a>
                 </div>
               </div> 
             </div>  
@@ -119,11 +119,11 @@
       </div> 
       <div style="height: 7rem;"></div>
       <div class="container text-center">
-        <button type="button" class="btn btn-outline-warning btn-lg " style="width: 20rem;">
-          <a href="Sub_btn.jsp" class="fw-bold fs-2"  style="text-decoration: none; color:  rgb(134, 77, 2);"> 
-          구독하기
-          </a>
-        </button>
+        <a href="Sub_btn.jsp" class="fw-bold fs-2"  style="text-decoration: none; color:  rgb(134, 77, 2);"> 
+    	    <button type="button" class="btn btn-outline-warning btn-lg " style="width: 20rem;">
+        	  구독하기
+	        </button>
+        </a>
       </div>    
       <div style="height: 7rem;"></div>
 <jsp:include page="../footer.jsp"></jsp:include>
