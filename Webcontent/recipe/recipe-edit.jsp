@@ -1,6 +1,8 @@
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +34,9 @@ li{
                 </div>
             </div>
             <form action="RecipeServlet" >
-            	<input type="hidden" name="command" value="recipe_write">
+            	<input type="hidden" name="command" value="recipe_edit">
             	<input type="hidden" name="userid" value="${loginUser.id }">
+            	<input type="hidden" name="recipeId" value="${recipe.recipeID }">
                 <div class="row my-3">
                     <!-- 요리 제목-->
                     <div class="col-12 col-md-4 align-self-center my-3" style="font-size: 1.5rem;">
@@ -51,37 +54,14 @@ li{
                                 메인 <br>사진 등록
                             </div>
                         </div>
-                        <div class="file-upload-content" style="display: block;">
-                            <img class="file-upload-image" src="resources/img/${recipe.mainPicture }"/>
+                        <div class="file-upload-content" >
+                            <img class="file-upload-image" name="mainpic" src="resources/img/${recipe.mainPicture }"/>
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
                         </div>
                     </div>
                     <script>
-                        let uploadIndex = 1;
-
-                        function createImageUpload() {
-                        	event.stopPropagation();
-                            let uploadElement = `
-                            <div class="file-upload">
-                            <div class="image-upload-wrap">
-                            <div class="drag-text">
-                            <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                            사진 등록
-                            </div>
-                            </div>
-                            <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
-                            <div class="image-title-wrap">
-                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                            </div>
-                            </div>
-                            `;
-                            $('#image-uploads').append(uploadElement);
-                            uploadIndex++;
-                        }
 
                         function readURL(input) {
                         	event.stopPropagation();
@@ -156,74 +136,91 @@ li{
                     <div class="col-12 col-md-4 align-self-center my-3" style="font-size: 1.5rem;">
                         카테고리
                     </div>
+                    <!-- 레시피 종류 카테고리  -->
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
                         <select class="form-select" id="floatingSelect" name="kind">
-                            <option value ="0" selected>종류</option>
-                            <option value="1">한식</option>
-                            <option value="2">일식</option>
-                            <option value="3">양식</option>
-                            <option value="4">중식</option>
-                            <option value="99">기타</option>
+                        	<option value ="0" >종류</option>
+						    <c:forEach items="${recipeKindList}" var="kind" varStatus="status">
+						        <c:choose>
+						            <c:when test="${recipe.recipeDetailVO.recipeKind == kind.recipeKindId}">
+						                <option value="${kind.recipeKindId}" selected="selected">${kind.recipeKind}</option>
+						            </c:when>
+						            <c:otherwise>
+						                <option value="${kind.recipeKindId}">${kind.recipeKind}</option>
+						            </c:otherwise>
+						        </c:choose>
+						    </c:forEach>
                         </select>
                     </div>
+                    <!-- 레시피 방법 카테고리  -->
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
                         <select class="form-select" id="floatingSelect" name = "how">
-                            <option value ="0" selected>방법</option>
-                            <option value="1">볶음</option>
-                            <option value="2">튀김</option>
-                            <option value="3">삶기</option>
-                            <option value="4">끓이기</option>
-                            <option value="5">굽기</option>
-                            <option value="6">찜</option>
-                            <option value="99">기타</option>
+                            <option value ="0" >방법</option>
+                            <c:forEach items="${recipeHowList}" var="how" varStatus="status">
+                           	 <c:choose>
+	                            <c:when test="${recipe.recipeDetailVO.recipeHow == how.recipeHowId}">
+	                            	<option value="${how.recipeHowId }" selected="selected"> ${how.recipeHow } </option>
+	                            </c:when>
+                            	<c:otherwise>
+                            		<option value="${how.recipeHowId }">${how.recipeHow }</option>
+                            	</c:otherwise>
+                            	</c:choose>
+                            </c:forEach>
                         </select>
                     </div>
+                    <!-- 레시피 주재료 카테고리 -->
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
                         <select class="form-select" id="floatingSelect" name = "mainIngre">
                             <option value ="0" selected>주 재료</option>
-                            <option value="1">돼지고기</option>
-                            <option value="2">소고기</option>
-                            <option value="3">닭고기</option>
-                            <option value="4">육류</option>
-                            <option value="5">해물</option>
-                            <option value="99">기타</option>
+                             <c:forEach items="${recipeMainIngreList}" var="mainIngre" varStatus="status">
+                             <c:choose>
+	                            <c:when test="${recipe.recipeDetailVO.recipeMainIngre == mainIngre.recipeIngreId}">
+	                            	<option value="${mainIngre.recipeIngreId }" selected="selected"> ${mainIngre.recipeIngre } </option>
+	                            </c:when>
+                            	<c:otherwise>
+                            		<option value="${mainIngre.recipeIngreId }"> ${mainIngre.recipeIngre } </option>
+                            	</c:otherwise>
+                            	</c:choose>
+                            </c:forEach>
                         </select>
                     </div>
+                    
                     <!--요리 정보-->
                     <div class="col-12 col-md-4 align-self-center my-3 " style="font-size: 1.5rem;">
                         요리정보
                     </div>
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
-                        <select class="form-select" id="floatingSelect" name = "person">
-                            <option value ="0" selected>인원</option>
-                            <option value="1인분">1인분</option>
-                            <option value="2인분">2인분</option>
-                            <option value="3인분">3인분</option>
-                            <option value="4인분">4인분</option>
-                            <option value="기타">기타</option>
-                        </select>
-                    </div>
+					    <select class="form-select" id="floatingSelect" name="person">
+					        <option value="0" ${recipe.recipeDetailVO.recipeforperson eq '0' ? 'selected' : ''}>인원</option>
+					        <option value="1인분" ${recipe.recipeDetailVO.recipeforperson eq '1인분' ? 'selected' : ''}>1인분</option>
+					        <option value="2인분" ${recipe.recipeDetailVO.recipeforperson eq '2인분' ? 'selected' : ''}>2인분</option>
+					        <option value="3인분" ${recipe.recipeDetailVO.recipeforperson eq '3인분' ? 'selected' : ''}>3인분</option>
+					        <option value="4인분" ${recipe.recipeDetailVO.recipeforperson eq '4인분' ? 'selected' : ''}>4인분</option>
+					        <option value="기타" ${recipe.recipeDetailVO.recipeforperson eq '기타' ? 'selected' : ''}>기타</option>
+					    </select>
+					</div>
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
                         <select class="form-select" id="floatingSelect" name = "time">
                             <option value ="0" selected>시간</option>
-                            <option value="10분">10분</option>
-                            <option value="20분">20분</option>
-                            <option value="30분">30분</option>
-                            <option value="40분">40분</option>
-                            <option value="50분">50분</option>
-                            <option value="60분">60분</option>
-                            <option value="기타">기타</option>
+                            <option value="10분" ${recipe.recipeDetailVO.recipefortime eq '10분' ? 'selected' : ''}>10분</option>
+                            <option value="20분" ${recipe.recipeDetailVO.recipefortime eq '20분' ? 'selected' : ''}>20분</option>
+                            <option value="30분" ${recipe.recipeDetailVO.recipefortime eq '30분' ? 'selected' : ''}>30분</option>
+                            <option value="40분" ${recipe.recipeDetailVO.recipefortime eq '40분' ? 'selected' : ''}>40분</option>
+                            <option value="50분" ${recipe.recipeDetailVO.recipefortime eq '50분' ? 'selected' : ''}>50분</option>
+                            <option value="60분" ${recipe.recipeDetailVO.recipefortime eq '60분' ? 'selected' : ''}>60분</option>
+                            <option value="기타" ${recipe.recipeDetailVO.recipefortime eq '기타' ? 'selected' : ''}>기타</option>
                         </select>
                     </div>
                     <div class="form-floating col-12 col-md-2 my-3 align-self-center">
                         <select class="form-select" id="floatingSelect" name = "level">
-                            <option selected>난이도</option>
-                            <option value="아무나">아무나</option>
-                            <option value="초급">초급</option>
-                            <option value="중급">중급</option>
-                            <option value="고급">고급</option>
-                            <option value="요리사">요리사</option>
-                            <option value="기타">기타</option>
+                        
+                            <option>난이도</option>
+                            <option value="아무나" selected =${recipe.recipeDetailVO.recipeforlevel eq '아무나' ? 'selected' : ''}>아무나</option>
+                            <option value="초급" selected =${recipe.recipeDetailVO.recipeforlevel eq '초급' ? 'selected' : ''}>초급</option>
+                            <option value="중급" selected =${recipe.recipeDetailVO.recipeforlevel eq '중급' ? 'selected' : ''}>중급</option>
+                            <option value="고급" selected =${recipe.recipeDetailVO.recipeforlevel eq '고급' ? 'selected' : ''}>고급</option>
+                            <option value="요리사" selected =${recipe.recipeDetailVO.recipeforlevel eq '요리사' ? 'selected' : ''}>요리사</option>
+                            <option value="기타" selected =${recipe.recipeDetailVO.recipeforlevel eq '기타' ? 'selected' : ''}>기타</option>
                         </select>
                     </div>
                 </div>
@@ -233,240 +230,75 @@ li{
 				    <div class="col-12 col-md-4 align-self-center my-3 title-ingredient" style="font-size: 1.5rem;">
 				        재료 등록
 				    </div>
-				    <c:forEach var="recipeingre" items="${recipeIngreList }">
-					    <div class="form-floating col-12 col-md-2 my-3 align-self-center ingre-input">
-					        <input type="text" class="form-control" id="floatingInput" name="ingre1" value="${recipeingre }">
-					        <label for="floatingInput">&nbsp;&nbsp;예) 소금 1T</label>
-					    </div>
-				    </c:forEach>
+				    <c:set var="recipeingre" value="${recipeIngreList }"/>
+				    <c:forEach var="i" begin="0" end="11">
+				    <c:choose>
+				        <c:when test="${i < recipeingre.size()}">
+				            <!-- 이미 요소가 존재하는 경우 -->
+				            <div class="form-floating col-12 col-md-2 my-3 align-self-center ingre-input">
+				                <input type="text" class="form-control" id="floatingInput" name="ingre${i + 1}" value="${recipeingre.get(i)}">
+				                <label for="floatingInput">&nbsp;&nbsp;예) 소금 1T</label>
+				            </div>
+				        </c:when>
+				        <c:otherwise>
+				            <!-- 요소가 존재하지 않는 경우 -->
+				            <div class="form-floating col-12 col-md-2 my-3 align-self-center ingre-input">
+				                <input type="text" class="form-control" id="floatingInput" name="ingre${i + 1}" value="">
+				                <label for="floatingInput">&nbsp;&nbsp;예) 소금 1T</label>
+				            </div>
+				        </c:otherwise>
+				    </c:choose>
+					</c:forEach>
 				</div>
 
-				<!-- 추가 버튼 -->
-				<div class="col-12 mt-3 mb-5">
-				    <button type="button" class="btn btn-warning btn_add_ingredient" onclick="addIngredient()">재료 추가하기 (*최대 12개)</button>
-				</div>
-				<script>
-				function addIngredient() {
-					event.stopPropagation();
-				    let ingredientCount = $('.ingre-input').length; // 초기 재료 개수
+				<c:set var="picList" value="${recipePicList}" />
+				<c:set var="orderList" value="${recipeOrderList}" />
 				
-				    if (ingredientCount >= 12) {
-				        // 최대 개수인 경우 처리할 내용
-				        return;
-				    }
+				<c:set var="maxSize" value="${orderList.size() > picList.size() ? orderList.size() : picList.size()}" />
 				
-				    const lastIngredientContainer = $('.ingredient-container:last');
-				    const newIngredientContainer = lastIngredientContainer.clone();
-				
-				    const newInputs = newIngredientContainer.find('.ingre-input input');
-				
-				    newInputs.each(function (index, input) {
-				        const newName = 'ingre' + (ingredientCount + index + 1);
-				        $(input).attr('name', newName);
-				    });
-				
-				    newIngredientContainer.insertAfter(lastIngredientContainer);
-				    newIngredientContainer.find('.title-ingredient').empty();
-				    newIngredientContainer.find('input').val('');
-				
-				    ingredientCount += newInputs.length; // 새로운 재료 개수만큼 증가
-				}
-				</script>
-				
-                <div class="row">
-                    <div class="col-12 border-bottom" style="font-size: 2rem; font-weight: 900;">
-                        <i class="bi bi-card-image"></i>
-                        조리 방법 등록
-                    </div>
-                </div>
-                <div class="row steps-container">
-                    <div class="row step-container">
-                        <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
-                            Step 1
-                        </div>
-                        <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
-                            <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order1">
-                            <label>&nbsp;&nbsp; 예) 재료를 준비합니다</label>
-                        </div>
-                        <div class="file-upload col-12 col-md-2">
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="pic1" />
-                                    요리 과정 <br>사진 등록
-                                </div>
-                            </div>
-                            <div class="file-upload-content">
-                                <img class="file-upload-image" alt="your image"/>
-                                <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row steps-container">
-                    <div class="row step-container">
-                        <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
-                            Step 2
-                        </div>
-                        <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
-                            <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order2">
-                            <label>&nbsp;&nbsp; 예) 재료를 손질합니다</label>
-                        </div>
-                        <div class="file-upload col-12 col-md-2">
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="pic2"/>
-                                    요리 과정 <br>사진 등록
-                                </div>
-                            </div>
-                            <div class="file-upload-content">
-                                <img class="file-upload-image" alt="your image"/>
-                                <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row steps-container">
-                    <div class="row step-container">
-                        <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
-                            Step 3
-                        </div>
-                        <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
-                            <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order3">
-                            <label>&nbsp;&nbsp; 예) 재료를 요리합니다</label>
-                        </div>
-                        <div class="file-upload col-12 col-md-2">
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*"/ name="pic3">
-                                    요리 과정 <br>사진 등록
-                                </div>
-                            </div>
-                            <div class="file-upload-content">
-                                <img class="file-upload-image" alt="your image" />
-                                <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row steps-container">
-                    <div class="row step-container">
-                        <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
-                            Step 4
-                        </div>
-                        <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
-                            <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order4">
-                            <label>&nbsp;&nbsp; 예) 추가 재료를 준비합니다</label>
-                        </div>
-                        <div class="file-upload col-12 col-md-2">
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="pic4"/>
-                                    요리 과정 <br>사진 등록
-                                </div>
-                            </div>
-                            <div class="file-upload-content">
-                                <img class="file-upload-image" alt="your image" />
-                                <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row steps-container">
-                    <div class="row step-container">
-                        <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
-                            Step 5
-                        </div>
-                        <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
-                            <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order5">
-                            <label>&nbsp;&nbsp; 예) 추가 재료를 준비합니다</label>
-                        </div>
-                        <div class="file-upload col-12 col-md-2">
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="pic5"/>
-                                    요리 과정 <br>사진 등록
-                                </div>
-                            </div>
-                            <div class="file-upload-content">
-                                <img class="file-upload-image" alt="your image" />
-                                <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<c:forEach var="i" begin="0" end="4">
+			    <c:set var="order" value="${i < orderList.size() ? orderList.get(i) : ''}" />
+			    <c:set var="pic" value="${i < picList.size() ? picList.get(i) : ''}" />
+			    <div class="row steps-container">
+			        <div class="row step-container">
+			            <div class="col-12 col-md-4 align-self-center my-3 order-step" style="font-size: 1.5rem;">
+			                Step ${i + 1}
+			            </div>
+			            <div class="col-12 col-md-6 form-floating my-3 col-sm align-self-center describe-order">
+			                <input type="text" class="form-control" placeholder="예) 오이를 자릅니다" name="order${i + 1}" value="${order}">
+			                <label>&nbsp;&nbsp; 예) 재료를 준비합니다</label>
+			            </div>
+			            <div class="file-upload col-12 col-md-2">
+			                <div class="image-upload-wrap">
+			                    <div class="drag-text">
+			                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" name="pic${i + 1}" value="${pic }">
+			                        요리 과정 <br>사진 등록
+			                    </div>
+			                </div>
+			                <c:choose>
+			                <c:when test="${not empty pic}">
+			                    <div class="file-upload-content" style="display: block;">
+			                        <img class="file-upload-image" alt="your image" src="resources/img/${pic}">
+			                        <div class="image-title-wrap">
+			                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
+			                        </div>
+			                    </div>
+			                </c:when>
+			                <c:otherwise>
+			                <div class="file-upload-content">
+			                        <img class="file-upload-image" alt="your image">
+			                        <div class="image-title-wrap">
+			                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
+			                        </div>
+			                    </div>
+			                </c:otherwise>
+			                </c:choose>
+			            </div>
+			        </div>
+			    </div>
+				</c:forEach>
                 <!-- 사진등록 끝-->
                 
-                <div class="row">
-                    <div class="col-12 border-bottom" style="font-size: 2rem; font-weight: 900;">
-                        완성 사진 등록
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);"  accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-upload col-12 col-md-3">
-                        <div class="image-upload-wrap">
-                            <div class="drag-text">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                요리 완성 <br>사진 등록
-                            </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                  <div class="col-12 mt-3 mb-5">
                     <button type="submit" class="btn btn-warning btn_add_ingredient">등록하기</button>
                     <button type="reset" class="btn btn-danger btn_add_ingredient">취소하기</button>
