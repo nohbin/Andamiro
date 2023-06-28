@@ -17,8 +17,8 @@ public class dietListAction implements DietAction {
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/admin/diet/dietList.jsp";
-		DietDAO dDao = DietDAO.getInstance();
-		List<DietVO> dietList = dDao.selectAllboards();
+		DietDAO dietDao = DietDAO.getInstance();
+		List<DietVO> dietList = dietDao.selectAllboards();
 		request.setAttribute("dietList", dietList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

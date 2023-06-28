@@ -50,8 +50,7 @@ a {
 						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
 					</li>
 					<li class="nav-item">
-						<a href='<c:url value="/diet/recdiet.jsp"/>' 
-						class="nav-link link-dark px-2">식단</a>
+						<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="nav-link link-dark px-2">식단</a>
 					</li>
 					<li class="nav-item">
 						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
@@ -83,22 +82,6 @@ a {
 			</div>
 		</nav>
 	</header>
-<!-- 	<div style="height: 3rem;"></div> -->
-<%-- 	<c:if test="${loginUser.adminCode eq '999'}"> --%>
-	
-<!-- 		<div class="container"> -->
-<!-- 			<ul class="nav nav-tabs list-unstyled"> -->
-<!-- 				<li class="nav-item mynav-item"><a class="nav-link "  -->
-<%-- 					href='<c:url value="/SubscribeServlet?command=submem_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">구독회원관리</a></li> -->
-<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-<%-- 					href='<c:url value="/DietServlet?command=diet_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">식단관리</a></li> -->
-<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-<%-- 					href='<c:url value="/DietServlet?command=dietDetail_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">식단상세 관리</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<%-- 	</c:if> --%>
+
 </body>
 </html>
