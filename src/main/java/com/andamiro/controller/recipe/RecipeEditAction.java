@@ -31,27 +31,15 @@ public class RecipeEditAction implements RecipeAction {
 		recipeVO.setRecipeName(request.getParameter("name"));
 		String mainPicture = recipeVO.getMainPicture();
 		
-		System.out.println("레시피 메인사진:" + recipeVO.getMainPicture());
-		System.out.println("등록된 사진(?):" + request.getParameter("mainpic"));
-		
-		if (request.getParameter("mainpic").equals(null)) {
+		if (request.getParameter("mainpic").equals(null) || request.getParameter("mainpic").equals("") ) {
 			recipeVO.setMainPicture(mainPicture);
 		} else {
 			recipeVO.setMainPicture(request.getParameter("mainpic"));
-			System.out.println("레시피 메인사진(변경 후) : " + recipeVO.getMainPicture());
 		}
 		recipeVO.setRecipetag1(request.getParameter("tag1"));
 		recipeVO.setRecipetag2(request.getParameter("tag2"));
 		recipeVO.setRecipetag3(request.getParameter("tag3"));
 
-		System.out.println("#####################레시피 수정 ACTION#####################");
-		System.out.println("레시피 번호:" + recipeVO.getMemberNumber());
-		System.out.println("레시피 메인사진:" + recipeVO.getMainPicture());
-		System.out.println("레시피 이름:" + recipeVO.getRecipeName());
-		System.out.println("레시피 태그1:" + recipeVO.getRecipetag1());
-		System.out.println("레시피 태그2:" + recipeVO.getRecipetag2());
-		System.out.println("레시피 태그3:" + recipeVO.getRecipetag3());
-		System.out.println("레시피 유저아이디:" + recipeVO.getUserId());
 
 		RecipeDetailVO recipeDetailVO = recipeVO.getRecipeDetailVO();
 		recipeDetailVO.setRecipeHow(Integer.parseInt(request.getParameter("how")));
@@ -62,19 +50,11 @@ public class RecipeEditAction implements RecipeAction {
 		recipeDetailVO.setRecipeforlevel(request.getParameter("level"));
 		recipeDetailVO.setRecipeDiscription(request.getParameter("discription"));
 
-		System.out.println("레시피 방법:" + recipeDetailVO.getRecipeHow());
-		System.out.println("레시피 종류:" + recipeDetailVO.getRecipeKind());
-		System.out.println("레시피 재료:" + recipeDetailVO.getRecipeMainIngre());
-		System.out.println("레시피 인원수:" + recipeDetailVO.getRecipeforperson());
-		System.out.println("레시피 시간:" + recipeDetailVO.getRecipefortime());
-		System.out.println("레시피 난이도:" + recipeDetailVO.getRecipeforlevel());
-		System.out.println("레시피 설명:" + recipeDetailVO.getRecipeDiscription());
 
 		RecipePicVO recipePicVO = recipeDetailVO.getRecipePicVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "pic" + i;
 			String parameterValue = request.getParameter(parameterName);
-			System.out.println("사진 순서" + i + " : " + parameterValue);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -99,7 +79,6 @@ public class RecipeEditAction implements RecipeAction {
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "order" + i;
 			String parameterValue = request.getParameter(parameterName);
-			System.out.println("순서" + i + " : " + parameterValue);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -124,7 +103,6 @@ public class RecipeEditAction implements RecipeAction {
 		for (int i = 1; i <= 12; i++) {
 			String parameterName = "ingre" + i;
 			String parameterValue = request.getParameter(parameterName);
-			System.out.println("재료순서" + i + " : " + parameterValue);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -166,7 +144,6 @@ public class RecipeEditAction implements RecipeAction {
 				}
 			}
 		}
-		System.out.println("#####################레시피 수정 ACTION#####################");
 		recipeDetailVO.setRecipePicVO(recipePicVO);
 		recipeDetailVO.setRecipeOrderVO(recipeOrderVO);
 		recipeDetailVO.setRecipeingreVO(recipeIngreVO);
