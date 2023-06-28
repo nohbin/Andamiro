@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.RecipeAction;
 import com.andamiro.dao.recipe.RecipeDAO;
+import com.andamiro.dto.recipe.RecipeHowVO;
+import com.andamiro.dto.recipe.RecipeKindVO;
+import com.andamiro.dto.recipe.RecipeMainIngreVO;
 import com.andamiro.dto.recipe.RecipeVO;
 
 public class RecipeListAction implements RecipeAction {
@@ -32,6 +35,15 @@ public class RecipeListAction implements RecipeAction {
 		}else {
 			recipeList = recipeDAO.selectAllRecipe();
 		}
+		
+		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
+		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
+		List<RecipeMainIngreVO> recipeMainIngreList = recipeDAO.selectAllRecipeMainIngre();
+		
+		
+		request.setAttribute("recipeKindList", recipeKindList);
+		request.setAttribute("recipeHowList", recipeHowList);
+		request.setAttribute("recipeMainIngreList", recipeMainIngreList);
 		String url = "/recipe/recipe-list.jsp";
 		request.setAttribute("recipeList", recipeList);
 		request.getRequestDispatcher(url).forward(request, response);
