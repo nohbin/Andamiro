@@ -14,13 +14,13 @@ public class dietUpdateAction implements DietAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DietVO dVo= new DietVO();
-		dVo.setDietNumber(Integer.parseInt(request.getParameter("dietNumber")));
-		dVo.setDiet_kind(request.getParameter("diet_kind"));
-		dVo.setDiet_menu(request.getParameter("diet_menu"));
-		dVo.setDiet_picture(request.getParameter("diet_picture"));
-		DietDAO dDao = DietDAO.getInstance();
-		dDao.updateDiet(dVo);
+		DietVO dietVo= new DietVO();
+		dietVo.setDietNumber(Integer.parseInt(request.getParameter("dietNumber")));
+		dietVo.setDiet_kind(request.getParameter("diet_kind"));
+		dietVo.setDiet_menu(request.getParameter("diet_menu"));
+		dietVo.setDiet_picture(request.getParameter("diet_picture"));
+		DietDAO dietDao = DietDAO.getInstance();
+		dietDao.updateDiet(dietVo);
 		
 		new dietListAction().excute(request, response);
 	}

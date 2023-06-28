@@ -31,13 +31,16 @@ a {
                 <a class="nav-link active" aria-current="page" href="manage_member.html" style="text-decoration: none;  color: inherit">회원관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="manage_sub.html" style="text-decoration: none;  color: inherit">구독관리</a>
+                <a href="<c:url value='/SubscribeServlet?command=submem_list'/>" class="nav-link" style="text-decoration: none; color: inherit">구독회원 관리</a>
             </li>
             <li class="nav-item  mynav-item">
                 <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">레시피관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">식단관리</a>
+                <a href='<c:url value="/DietServlet?command=diet_list"/>' class="nav-link"  style="text-decoration: none;  color: inherit">식단관리</a>
+            </li>
+            <li class="nav-item  mynav-item">
+                <a href='<c:url value="/DietServlet?command=dietDetail_list"/>' class="nav-link" style="text-decoration: none;  color: inherit">식단상세 관리</a>
             </li>
             <li class="nav-item  mynav-item">
                 <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">게시판관리</a>

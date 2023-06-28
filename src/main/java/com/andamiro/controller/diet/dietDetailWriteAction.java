@@ -14,14 +14,14 @@ public class dietDetailWriteAction implements DietAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		dietDetailVO ddVo = new dietDetailVO();
-		ddVo.setDietNumber(Integer.parseInt(request.getParameter("dietNumber")));
-		ddVo.setFoodName(request.getParameter("foodName"));
-		ddVo.setKcal(request.getParameter("kcal"));
-		ddVo.setComponent(request.getParameter("component"));
+		dietDetailVO dietDetailVo = new dietDetailVO();
+		dietDetailVo.setDietNumber(Integer.parseInt(request.getParameter("dietNumber")));
+		dietDetailVo.setFoodName(request.getParameter("foodName"));
+		dietDetailVo.setKcal(request.getParameter("kcal"));
+		dietDetailVo.setComponent(request.getParameter("component"));
 		
-		DietDetailDAO ddDao = DietDetailDAO.getInstance();
-		ddDao.insertDetail(ddVo);
+		DietDetailDAO dietDetailDao = DietDetailDAO.getInstance();
+		dietDetailDao.insertDetail(dietDetailVo);
 		
 		new dietDetailListAction().excute(request, response);
 	}
