@@ -50,12 +50,12 @@ li{
                     <div class="file-upload col-12 col-md-2">
                         <div class="image-upload-wrap">
                             <div class="drag-text">
-                                <input class="file-upload-input"  type='file' onchange="readURL(this);" name="mainpic" accept="image/*" />
+                                <input class="file-upload-input"  type='file' onchange="readURL(this);" name="mainpic" accept="image/*" value=""/>
                                 메인 <br>사진 등록
                             </div>
                         </div>
-                        <div class="file-upload-content" >
-                            <img class="file-upload-image" name="mainpic" src="resources/img/${recipe.mainPicture }"/>
+                        <div class="file-upload-content" style="display: block;">
+                            <img class="file-upload-image" src="resources/img/${recipe.mainPicture }"/>
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
