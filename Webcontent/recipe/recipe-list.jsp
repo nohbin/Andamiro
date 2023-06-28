@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피 리스트</title>
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 <script src="../resources/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -43,11 +44,9 @@ a {
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">종류</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=1"/>">한식</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=2"/>">일식</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=3"/>">양식</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=4"/>">중식</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=99"/>">기타</a></li>
+						<c:forEach items="${recipeKindList}" var="kind" varStatus="status">
+					 		<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=${kind.recipeKindId }"/>">${kind.recipeKind }</a></li>
+					 	</c:forEach>
 					</ul>
 				</div>
 			</li>
@@ -55,13 +54,9 @@ a {
 				<div class="dropdown-center">
 					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">방법</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=1"/>">볶음</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=2"/>">튀김</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=3"/>">삶기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=4"/>">끓이기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=5"/>">굽기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=6"/>">찜</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=99"/>">기타</a></li>
+					 <c:forEach items="${recipeHowList}" var="how" varStatus="status">
+					 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=${how.recipeHowId }"/>">${how.recipeHow }</a></li>
+					 </c:forEach>
 					</ul>
 				</div>
 			</li>
@@ -70,12 +65,9 @@ a {
 					<button class="btn dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">재료</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=1"/>">돼지고기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=2"/>">소고기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=3"/>">닭고기</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=4"/>">육류</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=5"/>">해물</a></li>
-						<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainingre=99"/>">기타</a></li>
+						<c:forEach items="${recipeMainIngreList}" var="mainIngre" varStatus="status">
+						 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=${mainIngre.recipeIngreId }"/>">${mainIngre.recipeIngre }</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</li>

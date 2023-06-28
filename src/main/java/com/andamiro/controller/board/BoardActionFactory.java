@@ -15,9 +15,8 @@ public class BoardActionFactory {
 	public BoardAction getAction(String command){
 		BoardAction action = null;
 		if(command.equals("board_paging")) {
-			action = new BoardPagingAction();
+			action = new BoardPagingMemberAction();
 		}
-		
 		return action;
 	}
 	

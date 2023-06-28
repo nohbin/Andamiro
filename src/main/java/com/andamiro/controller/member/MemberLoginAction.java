@@ -28,7 +28,7 @@ public class MemberLoginAction implements MemberAction {
 			HttpSession session = request.getSession();
 			session.removeAttribute("id");
 			session.setAttribute("loginUser", memberVO);
-			memberVO = (MemberVO) session.getAttribute("loginUser");
+			memberVO = (MemberVO)session.getAttribute("loginUser");
 			url = "/main.jsp";
 		} else {
 			url = "member/loginfail.jsp";

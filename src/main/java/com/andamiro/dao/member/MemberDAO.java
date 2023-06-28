@@ -73,9 +73,7 @@ public class MemberDAO {
 				memberVO.setJoinDate(rs.getString("joindate"));
 				memberVO.setSubscribe(rs.getString("subscribe"));
 				memberVO.setAdminCode(rs.getString("adminCode"));
-
 			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,41 +168,40 @@ public class MemberDAO {
 
 	public List<MemberVO> selectAllMemberFirstPage() {
 		// TODO Auto-generated method stub
-				List<MemberVO> lists = new ArrayList<>();
-				MemberVO memberVO = null;
-				String sql = "SELECT *FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM , A.* FROM andamiromember A ORDER BY memberNumber) "
-						+ "WHERE NUM BETWEEN 1 AND 5";
-				Connection conn = null;
-				PreparedStatement pstmt = null;
-				ResultSet rs = null;
-				try {
-					conn = DBManager.getConnection();
-					pstmt = conn.prepareStatement(sql);
-					rs = pstmt.executeQuery();
-					while (rs.next()) {
-						memberVO = new MemberVO();
-						memberVO.setMemberNumber(rs.getInt("memberNumber"));
-						memberVO.setId(rs.getString("id"));
-						memberVO.setPwd(rs.getString("pwd"));
-						memberVO.setName(rs.getString("name"));
-						memberVO.setPhone(rs.getString("phone"));
-						memberVO.setEmail(rs.getString("email"));
-						memberVO.setJoinDate(rs.getString("joindate"));
-						memberVO.setSubscribe(rs.getString("subscribe"));
-						lists.add(memberVO);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					DBManager.close(conn, pstmt, rs);
-				}
-				return lists;
+		List<MemberVO> lists = new ArrayList<>();
+		MemberVO memberVO = null;
+		String sql = "SELECT *FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM , A.* FROM andamiromember A ORDER BY memberNumber) "
+				+ "WHERE NUM BETWEEN 1 AND 5";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setMemberNumber(rs.getInt("memberNumber"));
+				memberVO.setId(rs.getString("id"));
+				memberVO.setPwd(rs.getString("pwd"));
+				memberVO.setName(rs.getString("name"));
+				memberVO.setPhone(rs.getString("phone"));
+				memberVO.setEmail(rs.getString("email"));
+				memberVO.setJoinDate(rs.getString("joindate"));
+				memberVO.setSubscribe(rs.getString("subscribe"));
+				lists.add(memberVO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return lists;
 	}
 
-	public List<MemberVO> selectMemberByPage(int start) {
+	public List<MemberVO> selectMemberByPage(int start, int end) {
 		// TODO Auto-generated method stub
 		List<MemberVO> lists = new ArrayList<>();
-		int end = start+4;
 		MemberVO memberVO = null;
 		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM , A.* FROM andamiromember A ORDER BY memberNumber) "
 				+ "WHERE NUM BETWEEN ? AND ?";
