@@ -40,38 +40,6 @@
 		</ul>
 	</div>
        <div style="height: 3rem;"></div>
-  <%--     <div class="container">
-          <div class="row" >
-       <c:forEach var="diet" items="${dietList}">   
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet.jsp'">${diet.diet_menu}</button>
-                </div>
-                <img src="upload/${diet.diet_picture}" class="img-fluid3">
-                <div class="mealment">쌀밥, 고추장 달걀조림, 시금치나물, 배추김치, 호두멸치볶음</div>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet_lunch.jsp'">${diet.diet_menu}</button>
-                </div>
-                <img src="upload/${diet.diet_picture}"  class="img-fluid3">
-                <div class="mealment">콩밥, 감자국, 꽁치구이, 호박나물, 백김치</div>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='recdiet_dinner.jsp'">${diet.diet_menu}</button>
-                </div>
-                <img src="upload/${diet.diet_picture}"  class="img-fluid3">
-                <div class="mealment"> 보리밥, 시금치된장국, 쇠고기불고기, 오이부추생채, 우유</div>
-              </div>
-            </div>
-		 </c:forEach> --%>
-
 		<div class="container">
 			<div class="row">
 				<c:forEach var="diet" items="${dietList}">
@@ -83,35 +51,36 @@
 								</button>
 							</div>
 							<img src="upload/${diet.diet_picture}" style="width: 15rem; height: 10rem;">
-<%-- 							<c:forEach var="dietDetail" items="${dietDetailList}">
-								<div>
-									<div class="fw-bold">${dietDetail.foodName}</div>
-								</div>
-							</c:forEach> --%>
-					</div>
+						</div>
 					</div>
 				</c:forEach>
+				<div>
 				<c:forEach var="dietDetail" items="${dietDetailList}">
 					<div style="margin-left:10rem;">
-				      <div class="fw-bold">
+				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
 						${dietDetail.foodName}
 				      </div>
 					</div>
 				</c:forEach> 
+				</div>
+				<div>
 				<c:forEach var="dietDetail" items="${dietDetailList2}">
-					<div style="margin-left:10rem;">
-				      <div class="fw-bold">
+					<div style="margin-left:10rem;" >
+				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
 						${dietDetail.foodName}
 				      </div>
 					</div>
 				</c:forEach> 
+				</div>
+				<div>
 				<c:forEach var="dietDetail" items="${dietDetailList3}">
 					<div style="margin-left:10rem;">
-				      <div class="fw-bold">
+				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
 						${dietDetail.foodName}
 				      </div>
 					</div>
 				</c:forEach> 
+			</div>
 			</div>
 		</div>	
 		<!-- 여기까지  -->
