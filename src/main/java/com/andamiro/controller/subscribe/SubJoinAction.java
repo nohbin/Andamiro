@@ -20,7 +20,8 @@ public class SubJoinAction implements SubscribeAction {
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session =request.getSession();
-		MemberVO userid = (MemberVO) session.getAttribute("loginUser");
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date currentTime = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -30,10 +31,11 @@ public class SubJoinAction implements SubscribeAction {
 		String sub_start = dateFormat.format(currentTime);
 		String sub_end = dateFormat.format(endDate);
 		SubscribeMemberVO subVO = new SubscribeMemberVO();
-		subVO.setMemberNumber(userid.getMemberNumber());
+		subVO.setMemberNumber(loginUser.getMemberNumber());
 		subVO.setSub_start(sub_start);
 		subVO.setSub_end(sub_end);
 		subVO.setUserId(request.getParameter("userid"));
+		System.out.println(request.getParameter("userid"));
 		SubscribeMemberDAO sDao = SubscribeMemberDAO.getInstance();
 		sDao.insertSubMem(subVO);
 		

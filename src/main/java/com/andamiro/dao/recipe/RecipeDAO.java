@@ -493,7 +493,6 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipetag3());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			System.out.println("레시피 메인 등록");
 			
 			sql = "UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -504,7 +503,6 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipeDetailVO().getRecipePicVO().getPic05());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			System.out.println("레시피 사진 등록");
 			
 			sql = "UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, " +
 		             "INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?";
@@ -523,7 +521,6 @@ public class RecipeDAO {
 			pstmt.setObject(12, recipeVO.getRecipeDetailVO().getRecipeingreVO().getIngre12());
 			pstmt.setInt(13, recipeId);
 			pstmt.executeUpdate();
-			System.out.println("레시피 재료 등록");
 			
 			sql = "UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -534,7 +531,6 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipeDetailVO().getRecipeOrderVO().getOrder05());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			System.out.println("레시피 순서 등록");
 			
 			sql = "UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, "
 		            + "RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? "
@@ -550,11 +546,6 @@ public class RecipeDAO {
 			pstmt.setString(7, recipeVO.getRecipeDetailVO().getRecipeDiscription());
 			pstmt.setInt(8, recipeId);
 			pstmt.executeUpdate();
-			System.out.println("레시피 디테일 등록");
-			
-			System.out.println(recipeVO.getRecipeDetailVO().getRecipeHow());
-			System.out.println(recipeVO.getRecipeDetailVO().getRecipeKind());
-			System.out.println(recipeVO.getRecipeDetailVO().getRecipeMainIngre());
 			
 		} catch (Exception e) {
 			// TODO: handle exception

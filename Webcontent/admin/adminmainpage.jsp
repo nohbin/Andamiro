@@ -56,10 +56,10 @@ a {
     </div>
     <div style="height: 3rem;"></div>
     <div class="container">
+    총 회원 : ${totalRows }
         <table class="table text-center border">
             <thead>
                 <tr>
-                    <th scope="col">구분</th>
                     <th scope="col">회원 번호</th>
                     <th scope="col">회원 아이디</th>
                     <th scope="col">회원 이름</th>
@@ -70,9 +70,8 @@ a {
                 </tr>
             </thead>
             <tbody>
-            	<c:forEach var="member" items="${memberList }" varStatus="status" begin="0" end="4">
+            	<c:forEach var="member" items="${memberList }" varStatus="status">
 	                <tr>
-	                    <th scope="row">${status.count }</th>
 	                    <td>${member.memberNumber }</td>
 	                    <td>${member.id }</td>
 	                    <td>${member.name }</td>
@@ -84,24 +83,27 @@ a {
                 </c:forEach>
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<c:forEach begin="1" end="${totalPages }" varStatus="status">
-					<li class="page-item"><a class="page-link" href="BoardServlet?command=board_paging&page=${status.count }">${status.count }</a></li>
+        <div class="d-flex justify-content-center">
+	        <nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item">
+						<a class="page-link" href="BoardServlet?command=board_paging&page=${currentPage - 1 }" aria-label="이전" tabindex="-1">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li class="page-item">
+							<a class="page-link" href="BoardServlet?command=board_paging&page=${status.count }">${status.count }</a>
+						</li>
 					</c:forEach>
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
-    
+					<li class="page-item">
+						<a class="page-link" href="BoardServlet?command=board_paging&page=${currentPage + 1 }" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+    	</div>
     </div>
     
 	

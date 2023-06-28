@@ -30,8 +30,8 @@ public class RecipeEditAction implements RecipeAction {
 		recipeVO.setRecipeID(Integer.parseInt(request.getParameter("recipeId")));
 		recipeVO.setRecipeName(request.getParameter("name"));
 		String mainPicture = recipeVO.getMainPicture();
-		
-		if (request.getParameter("mainpic").equals(null) || request.getParameter("mainpic").equals("") ) {
+
+		if (request.getParameter("mainpic").equals(null) || request.getParameter("mainpic").equals("")) {
 			recipeVO.setMainPicture(mainPicture);
 		} else {
 			recipeVO.setMainPicture(request.getParameter("mainpic"));
@@ -39,7 +39,6 @@ public class RecipeEditAction implements RecipeAction {
 		recipeVO.setRecipetag1(request.getParameter("tag1"));
 		recipeVO.setRecipetag2(request.getParameter("tag2"));
 		recipeVO.setRecipetag3(request.getParameter("tag3"));
-
 
 		RecipeDetailVO recipeDetailVO = recipeVO.getRecipeDetailVO();
 		recipeDetailVO.setRecipeHow(Integer.parseInt(request.getParameter("how")));
@@ -50,31 +49,35 @@ public class RecipeEditAction implements RecipeAction {
 		recipeDetailVO.setRecipeforlevel(request.getParameter("level"));
 		recipeDetailVO.setRecipeDiscription(request.getParameter("discription"));
 
-
 		RecipePicVO recipePicVO = recipeDetailVO.getRecipePicVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "pic" + i;
-			String parameterValue = request.getParameter(parameterName);
-			if (parameterValue != null) {
-				switch (i) {
-				case 1:
-					recipePicVO.setPic01(parameterValue);
-					break;
-				case 2:
-					recipePicVO.setPic02(parameterValue);
-					break;
-				case 3:
-					recipePicVO.setPic03(parameterValue);
-					break;
-				case 4:
-					recipePicVO.setPic04(parameterValue);
-					break;
-				case 5:
-					recipePicVO.setPic05(parameterValue);
-					break;
+			if (request.getParameter(parameterName).equals(null) || request.getParameter(parameterName).equals("")) {
+				recipePicVO = recipeDetailVO.getRecipePicVO();
+			} else {
+				String parameterValue = request.getParameter(parameterName);
+				if (parameterValue != null) {
+					switch (i) {
+					case 1:
+						recipePicVO.setPic01(parameterValue);
+						break;
+					case 2:
+						recipePicVO.setPic02(parameterValue);
+						break;
+					case 3:
+						recipePicVO.setPic03(parameterValue);
+						break;
+					case 4:
+						recipePicVO.setPic04(parameterValue);
+						break;
+					case 5:
+						recipePicVO.setPic05(parameterValue);
+						break;
+					}
 				}
 			}
 		}
+
 		RecipeOrderVO recipeOrderVO = recipeDetailVO.getRecipeOrderVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "order" + i;

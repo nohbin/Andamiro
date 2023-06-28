@@ -12,7 +12,7 @@ import com.andamiro.dao.board.BoardDAO;
 import com.andamiro.dao.member.MemberDAO;
 import com.andamiro.dto.member.MemberVO;
 
-public class BoardPagingAction implements BoardAction{
+public class BoardPagingMemberAction implements BoardAction{
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -29,6 +29,7 @@ public class BoardPagingAction implements BoardAction{
 		
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		int totalRows = boardDAO.getTotalRowsMember();
+		// 페이지에 나타낼 row 값
 		int pageLength = 5;
 		int currentBlock = currentPage % pageLength == 0 ? currentPage / pageLength : (currentPage / pageLength) + 1;
 		int startPage = (currentBlock-1) * pageLength+1;
@@ -46,9 +47,11 @@ public class BoardPagingAction implements BoardAction{
 			currentPage = 1;
 		}
 		int start = ((currentPage - 1) * pageLength) + 1;
+		int end = start + pageLength -1;
 		
-		List<MemberVO> memberList = memberDAO.selectMemberByPage(start);
+		List<MemberVO> memberList = memberDAO.selectMemberByPage(start , end);
 		
+		request.setAttribute("totalRows", totalRows);
 		request.setAttribute("memberList", memberList);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startPage", startPage);
