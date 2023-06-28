@@ -65,7 +65,7 @@ a {
 					<c:choose>
 					    <c:when test="${loginUser.adminCode eq '999'}">
 					    <b>[${loginUser.id }]님 환영합니다. 관리자 모드 입니다.</b>
-				    		<a href="<c:url value="/AdminServlet?command=admin_main_view"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">관리자 페이지</a>
+				    		<a href="<c:url value="/BoardServlet?command=board_paging&page=1"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">관리자 페이지</a>
 					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
 					    </c:when>
 					    <c:when test="${not empty loginUser}">

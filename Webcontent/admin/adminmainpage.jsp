@@ -1,10 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap.css?ver=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
+<script src="resources/js/bootstrap.bundle.min.js?ver=1"></script>
+<style>
+li {
+	list-style: none;
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -12,8 +28,7 @@
 	<div class="container my-5">
         <ul class="nav nav-tabs">
             <li class="nav-item mynav-item">
-                <a class="nav-link active" aria-current="page" href="manage_member.html"
-                    style="text-decoration: none;  color: inherit">회원관리</a>
+                <a class="nav-link active" aria-current="page" href="manage_member.html" style="text-decoration: none;  color: inherit">회원관리</a>
             </li>
             <li class="nav-item  mynav-item">
                 <a class="nav-link" href="manage_sub.html" style="text-decoration: none;  color: inherit">구독관리</a>
@@ -47,7 +62,6 @@
                     <th scope="col">구분</th>
                     <th scope="col">회원 번호</th>
                     <th scope="col">회원 아이디</th>
-                    <th scope="col">회원 비밀번호</th>
                     <th scope="col">회원 이름</th>
                     <th scope="col">회원 연락처</th>
                     <th scope="col">회원 이메일</th>
@@ -56,68 +70,43 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>0000</td>
-                    <td>id</td>
-                    <td>pw</td>
-                    <td>name</td>
-                    <td>phone</td>
-                    <td>email</td>
-                    <td>YYYY/MM/DD</td>
-                    <td>Yes / No</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>1111</td>
-                    <td>id</td>
-                    <td>pw</td>
-                    <td>name</td>
-                    <td>phone</td>
-                    <td>email</td>
-                    <td>YYYY/MM/DD</td>
-                    <td>Yes / No</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>2222</td>
-                    <td>id</td>
-                    <td>pw</td>
-                    <td>name</td>
-                    <td>phone</td>
-                    <td>email</td>
-                    <td>YYYY/MM/DD</td>
-                    <td>Yes / No</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>3333</td>
-                    <td>id</td>
-                    <td>pw</td>
-                    <td>name</td>
-                    <td>phone</td>
-                    <td>email</td>
-                    <td>YYYY/MM/DD</td>
-                    <td>Yes / No</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>4444</td>
-                    <td>id</td>
-                    <td>pw</td>
-                    <td>name</td>
-                    <td>phone</td>
-                    <td>email</td>
-                    <td>YYYY/MM/DD</td>
-                    <td>Yes / No</td>
-                </tr>
+            	<c:forEach var="member" items="${memberList }" varStatus="status" begin="0" end="4">
+	                <tr>
+	                    <th scope="row">${status.count }</th>
+	                    <td>${member.memberNumber }</td>
+	                    <td>${member.id }</td>
+	                    <td>${member.name }</td>
+	                    <td>${member.phone }</td>
+	                    <td>${member.email }</td>
+	                    <td>${member.joinDate }</td>
+	                    <td>${member.subscribe }</td>
+	                </tr>
+                </c:forEach>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+					<li class="page-item"><a class="page-link" href="BoardServlet?command=board_paging&page=${status.count }">${status.count }</a></li>
+					</c:forEach>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+    
     </div>
+    
+	
     
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
-	
-
 </body>
 </html>
