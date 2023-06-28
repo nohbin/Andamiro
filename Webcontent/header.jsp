@@ -20,6 +20,7 @@ String sessionId = (String) session.getAttribute("sessionId");
 li {
 	list-style: none;
 }
+
 a {
 	color: black;
 	text-decoration: none;
@@ -31,74 +32,95 @@ a {
 		<div class="px-3 py-2 mt-3 mb-3">
 			<div class="container d-flex flex-wrap justify-content-center">
 
-				<form class="d-flex" role="search" action=MainSearchServlet>
-					<input class="form-control me-2 " type="text" placeholder="검색창" aria-label="Search" name="query">
+				<form class="d-flex" role="search" action="RecipeServlet"
+					method="get">
 
-					<button class="btn btn-outline-success" type="submit" style="background-color: #fac279; color: black;">
-						<i class="bi bi-search"></i>	
+					<input type="hidden" name="command" value="main_search"> <input
+						class="form-control me-2" type="text" placeholder="검색창"
+						aria-label="Search" name="recipename">
+					<button class="btn btn-outline-success" type="submit"
+						style="background-color: #fac279; color: black;">
+						<i class="bi bi-search"></i>
 					</button>
 				</form>
+
+
 			</div>
 		</div>
 		<nav class="py-2  border-bottom" style="background-color: #fac279;">
 			<div class="container d-flex flex-wrap">
 				<ul class="nav me-auto">
-					<li class="nav-item">
-						<a href='<c:url value="/main.jsp"/>' class="nav-link link-dark px-2 active" aria-current="page">Home</a>
+					<li class="nav-item"><a href="BestMainServlet?command=main" class="nav-link link-dark px-2 active" aria-current="page">HOME</a>
 					</li>
-					<li class="nav-item">
-						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
-					</li>
-					<li class="nav-item">
-						<a href='<c:url value="/diet/recdiet.jsp"/>' 
-						class="nav-link link-dark px-2">식단</a>
-					</li>
-					<li class="nav-item">
-						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
-					</li>
-					<li class="nav-item">
-						<a href='<c:url value="/subscribe/subscribe.jsp"/>'					
-					 class="nav-link link-dark px-2">구독</a>
-					</li>
+					<li class="nav-item"><a
+						href="<c:url value="/RecipeServlet?command=recipe_list"/>"
+						class="nav-link link-dark px-2">레시피</a></li>
+					<li class="nav-item"><a
+						href='<c:url value="/diet/recdiet.jsp"/>'
+						class="nav-link link-dark px-2">식단</a></li>
+					<li class="nav-item"><a
+						href="<c:url value="/EventServlet?command=EventMainViewForm"/>"
+						class="nav-link link-dark px-2">이벤트</a></li>
+					<li class="nav-item"><a
+						href='<c:url value="/subscribe/subscribe.jsp"/>'
+						class="nav-link link-dark px-2">구독</a></li>
 				</ul>
 				<div class="text-end">
 					<c:choose>
-					    <c:when test="${loginUser.adminCode eq '999'}">
-					    <b>[${loginUser.id }]님 환영합니다. 관리자 모드 입니다.</b>
-				    		<a href="<c:url value="/AdminServlet?command=admin_main_view"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">관리자 페이지</a>
-					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
-					    </c:when>
-					    <c:when test="${not empty loginUser}">
-					        <b>[${loginUser.id }]님 환영합니다.</b>
-					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
-					        <a href='<c:url value="/RecipeServlet?command=recipe_write_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">레시피등록</a>
-					        <a href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">마이페이지</a>
-					    </c:when>
-					    <c:otherwise>
-					        <a href="<c:url value="/MemberServlet?command=member_login_form"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그인</a>
-					        <a href='<c:url value="/MemberServlet?command=member_join_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">회원가입</a>
-					    </c:otherwise>
+						<c:when test="${loginUser.adminCode eq '999'}">
+							<b>[${loginUser.id }]님 환영합니다. 관리자 모드 입니다.</b>
+							<a href="<c:url value="/AdminServlet?command=admin_main_view"/>"
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">관리자 페이지</a>
+							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">로그아웃</a>
+						</c:when>
+						<c:when test="${not empty loginUser}">
+							<b>[${loginUser.id }]님 환영합니다.</b>
+							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">로그아웃</a>
+							<a
+								href='<c:url value="/RecipeServlet?command=recipe_write_form"/>'
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">레시피등록</a>
+							<a
+								href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">마이페이지</a>
+						</c:when>
+						<c:otherwise>
+							<a
+								href="<c:url value="/MemberServlet?command=member_login_form"/>"
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">로그인</a>
+							<a
+								href='<c:url value="/MemberServlet?command=member_join_form"/>'
+								class="btn btn-light text-dark me-2"
+								style="background-color: #fac279;">회원가입</a>
+						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
 		</nav>
 	</header>
-<!-- 	<div style="height: 3rem;"></div> -->
-<%-- 	<c:if test="${loginUser.adminCode eq '999'}"> --%>
-	
-<!-- 		<div class="container"> -->
-<!-- 			<ul class="nav nav-tabs list-unstyled"> -->
-<!-- 				<li class="nav-item mynav-item"><a class="nav-link "  -->
-<%-- 					href='<c:url value="/SubscribeServlet?command=submem_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">구독회원관리</a></li> -->
-<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-<%-- 					href='<c:url value="/DietServlet?command=diet_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">식단관리</a></li> -->
-<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-<%-- 					href='<c:url value="/DietServlet?command=dietDetail_list"/>' --%>
-<!-- 					style="text-decoration: none; color: inherit">식단상세 관리</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<%-- 	</c:if> --%>
+	<!-- 	<div style="height: 3rem;"></div> -->
+	<%-- 	<c:if test="${loginUser.adminCode eq '999'}"> --%>
+
+	<!-- 		<div class="container"> -->
+	<!-- 			<ul class="nav nav-tabs list-unstyled"> -->
+	<!-- 				<li class="nav-item mynav-item"><a class="nav-link "  -->
+	<%-- 					href='<c:url value="/SubscribeServlet?command=submem_list"/>' --%>
+	<!-- 					style="text-decoration: none; color: inherit">구독회원관리</a></li> -->
+	<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
+	<%-- 					href='<c:url value="/DietServlet?command=diet_list"/>' --%>
+	<!-- 					style="text-decoration: none; color: inherit">식단관리</a></li> -->
+	<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
+	<%-- 					href='<c:url value="/DietServlet?command=dietDetail_list"/>' --%>
+	<!-- 					style="text-decoration: none; color: inherit">식단상세 관리</a></li> -->
+	<!-- 			</ul> -->
+	<!-- 		</div> -->
+	<%-- 	</c:if> --%>
 </body>
 </html>

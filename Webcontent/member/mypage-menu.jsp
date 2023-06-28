@@ -42,7 +42,10 @@ img {
 		<ul class="nav nav-pills nav-fill">
 			<li class="nav-item"><a class="nav-link "style="color: black;" href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'>내 레시피</a></li>
 			<li class="nav-item"><a class="nav-link" style="color: black;" href="mypage-save.html">저장 레시피</a></li>
-			<li class="nav-item"><a class="nav-link" style="color: black;" href="mypage-review.html">요리 후기</a></li>
+			<li class="nav-item"><a class="nav-link" style="color: black;" href="mypage-review.html">요리 후기</a>
+			<a href="ReviewServlet?command=review">내 레시피 후기 이동</a>
+			<a href="ReviewServlet?command=myreview">내가 올린 후기 이동</a>
+			</li>
 			<li class="nav-item"><a class="nav-link" style="color: black;" href="MemberServlet?command=mypage_edit&memberNumber=${loginUser.memberNumber }">회원정보 수정</a></li>
 		</ul>
 	</div>

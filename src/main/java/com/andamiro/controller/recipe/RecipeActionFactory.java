@@ -12,7 +12,7 @@ public class RecipeActionFactory {
 	
 	public RecipeAction getAction(String command) {
 		RecipeAction action = null;
-		
+		System.out.println("너도 일하냐?"+command);
 		if(command.equals("recipe_write_form")) {
 			action = new RecipeWriteForm();
 		}else if(command.equals("recipe_write")) {
@@ -27,6 +27,9 @@ public class RecipeActionFactory {
 			action = new RecipeEditForm();
 		}else if(command.equals("recipe_edit")) {
 			action = new RecipeEditAction();
+		}else if(command.equals("main_search")) {
+			action = new SearchRecipeAction();
+					
 		}
 		return action;
 	}

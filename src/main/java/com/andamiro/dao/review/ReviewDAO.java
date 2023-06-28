@@ -33,7 +33,6 @@ public class ReviewDAO {
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				ReviewVO rVo = new ReviewVO();
-				
 				rVo.setNum(rs.getInt("num"));
 				rVo.setImg(rs.getString("img"));
 				rVo.setTitle(rs.getString("title"));
@@ -117,28 +116,29 @@ public class ReviewDAO {
 //		
 //	}
 	public void updateReview(ReviewVO rVo) {
-		String sql = "update review set num=?, title=?, review=?, recipegrade=?, joinDate=?, img=? where= num? ";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, rVo.getNum());
-			pstmt.setString(2, rVo.getTitle());
-			pstmt.setString(3, rVo.getReview());
-			pstmt.setInt(4, rVo.getRecipegrade());
-			pstmt.setTimestamp(5, rVo.getJoindate());
-			pstmt.setString(6, rVo.getImg());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	    String sql = "update review set num=?, title=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    
+	    try {
+	        conn = DBManager.getConnection();
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        pstmt.setInt(1, rVo.getNum());
+	        pstmt.setString(2, rVo.getTitle());
+	        pstmt.setString(3, rVo.getReview());
+	        pstmt.setInt(4, rVo.getRecipegrade());
+	        pstmt.setTimestamp(5, rVo.getJoindate());
+	        pstmt.setString(6, rVo.getImg());
+	        pstmt.setInt(7, rVo.getNum()); // WHERE 절의 매개변수 설정
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    
 	}
+
 	
 }

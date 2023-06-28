@@ -9,6 +9,7 @@
 <title>Document</title>
 <link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="../resources/css/main.css?ver=1">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
@@ -79,151 +80,25 @@ img {
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br>
-							<br>${review.num }</th>
+							<th scope="row"><br> <br>${review.num }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
-									src="../resources/img/morning.jpg"></a></th>
-							<td class=""><br>
-							<br>
-							<b>${review.title }</b></td>
-							<td><a href="#"><br>
-								<br>한우소갈비찜</a></td>
+									src=${review.img }></a></th>
+							<td class=""><br> <br> <b>${review.title }</b></td>
+							<td><a href="#"><br> <br>${review.review}</a></td>
+							<td><br> <br> <b>${review.recipegrade} 점</b></td>
+							<td><br> <br>${review.joindate}</td>
 							<td><br>
-							<br>
-							<b>${review.recipegrade} 점</b></td>
-							<td><br>
-							<br>${review.joindate}</td>
-							<td><br>
-								
-								<form action="ReviewServlet" method="post">
-									<input type="hidden" name="command" value="myreview_update">
-									<input type="hidden" name="num" value="${review.num}">
-									<!-- 후기 작성 form -->
-									<button type="button" class="btn btn-primary"
-										data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-										수정</button>
-									<!--모달-->
-									<div class="modal fade" id="staticBackdrop"
-										data-bs-backdrop="static" data-bs-keyboard="false"
-										tabindex="-1" aria-labelledby="staticBackdropLabel"
-										aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h1 class="modal-title fs-5" id="staticBackdropLabel">아이디</h1>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<div class="form-floating w-50 mx-auto mb-2">
-														<select class="form-select" id="floatingSelect"
-															aria-label="Floating label select example" name="score">
-															<option selected>점수</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-													<div class="form-floating">
-														<textarea class="form-control" placeholder=""
-															id="floatingTextarea2" style="height: 200px"></textarea>
-														<label for="floatingTextarea2">후기를 작성해 주세요</label>
-													</div>
-													<div class="file-upload col-12">
-														<div class="image-upload-wrap">
-															<div class="drag-text">
-																<input class="file-upload-input" type='file'
-																	onchange="readURL(this);" accept="image/*" /> 후기 <br>사진
-																등록
-															</div>
-														</div>
-														<div class="file-upload-content">
-															<img class="file-upload-image" src="#" alt="your image" />
-															<div class="image-title-wrap">
-																<button type="button" onclick="removeUpload(this)"
-																	class="remove-image">삭제</button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">닫기</button>
-												<input type="submit" class="btn btn-secondary" value="수정하기">
-												</div>
-												<script class="jsbin"
-													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-											</div>
-										</div>
-									</div>
-									<button class="btn btn-primary" type="button" value="delete"
-										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">삭제</button>
-								</form>
+
+								<button class="btn btn-primary" type="button" value="delete" onclick="openPopupWindow('ReviewServlet?command=myreview_update_form&num=${review.num}')">수정</button>
+								<button class="btn btn-primary" type="button" value="delete"
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">삭제</button>
 						</tr>
 					</c:forEach>
 
 
 					<script>
-                                    let uploadIndex = 1;
-
-                                    function createImageUpload() {
-                                        let uploadElement = `
-                                        <div class="file-upload">
-                                        <div class="image-upload-wrap">
-                                        <div class="drag-text">
-                                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        사진 등록
-                                        </div>
-                                        </div>
-                                        <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image" />
-                                        <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                        </div>
-                                        </div>
-                                        </div>
-                                        `;
-                                        $('#image-uploads').append(uploadElement);
-                                        uploadIndex++;
-                                    }
-
-                                    function readURL(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (e) {
-                                                let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
-                                                let $uploadImage = $uploadContent.find('.file-upload-image');
-                                                $uploadContent.show();
-                                                $uploadImage.attr('src', e.target.result);
-                                            };
-                                            reader.readAsDataURL(input.files[0]);
-                                        } else {
-                                            removeUpload(input);
-                                        }
-                                    }
-
-                                    function removeUpload(button) {
-                                    
-                                        let $upload = $(button).closest('.file-upload');
-                                        let $uploadContent = $upload.find('.file-upload-content');
-                                        let $uploadImage = $uploadContent.find('.file-upload-image');
-                                        
-                                        // 이미지 초기화
-                                        $uploadImage.attr('src', '#');
-                                        $uploadContent.hide();
-                                    }
-
-                                    $(document).ready(function () {
-                                        $('.image-upload-wrap').bind('dragover', function () {
-                                            $(this).addClass('image-dropping');
-                                        });
-                                        $('.image-upload-wrap').bind('dragleave', function () {
-                                            $(this).removeClass('image-dropping');
-                                        });
-                                    });
-                                </script>
+   						
+					</script>
 
 
 					<script>
@@ -307,6 +182,17 @@ img {
                     alert('삭제 완료');
                 }
             </script>
+            <script>
+   			 function openPopupWindow(url) {
+        	window.open(url, "_blank" );
+        	
+           
+        	
+        	return false;
+  								 }
+			</script>
+            
+            
 
 				</tbody>
 			</table>

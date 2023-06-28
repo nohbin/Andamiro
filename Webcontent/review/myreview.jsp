@@ -48,8 +48,8 @@
                     </a>
                   
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item" href="mypage-review.html">내가 남긴 후기</a></li>
-                      <li><a class="dropdown-item" href="mypage-myreview.html">나의 요리 레시피</a></li>
+                      <li><a class="dropdown-item" href="ReviewServlet?command=review">내가 남긴 후기</a></li>
+                      <li><a class="dropdown-item" href="ReviewServlet?command=myreview">나의 요리 레시피</a></li>
                     </ul>
                   </div>
             </li>

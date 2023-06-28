@@ -627,5 +627,35 @@ public class RecipeDAO {
 		}
 		return list;
 	}
+	public List<RecipeVO> searchRecipe(String recipename) {
+    	String sql = "SELECT * FROM andamirorecipe WHERE recipename LIKE ?";
+    	List<RecipeVO> list = new ArrayList<RecipeVO>();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+      
+        try {
+            conn = DBManager.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "%" + recipename + "%");
+            rs = pstmt.executeQuery();
+            System.out.println("성공"+conn);
+            System.out.println("rs"+rs);
+            System.out.println("list"+list);
+            System.out.println("recipename1"+recipename);
+            while (rs.next()) {
+            	RecipeVO mainSearchVO = new RecipeVO();
+            	mainSearchVO.setRecipeName(rs.getString("recipename"));
+                list.add(mainSearchVO);
+                System.out.println("리스트는" + list);
+                System.out.println("recipename2"+recipename);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(conn, pstmt, rs);
+        }
 
+        return list;
+    }
 }

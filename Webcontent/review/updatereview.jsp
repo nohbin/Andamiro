@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
+<link rel="stylesheet" href="../resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="../resources/css/main.css?ver=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -28,10 +28,11 @@ a {
 		 position: relative;
 	}	
 	
-.review-wrap{
-		 display: inline-block;
-   		 text-align: center;
-   		
+.review-wrab{
+		  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 	}
 
 
