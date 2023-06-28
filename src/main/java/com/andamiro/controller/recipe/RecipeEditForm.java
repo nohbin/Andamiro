@@ -35,15 +35,7 @@ public class RecipeEditForm implements RecipeAction {
 		List<String> recipeOrderList = new ArrayList<>();
 		getListIfNotNull(recipeIngreVO, recipePicVO, recipeOrderVO, recipeIngreList, recipePicList, recipeOrderList);
 		
-		System.out.println("#####################레시피 수정 FORM#####################");
-		System.out.println("레시피 번호:" + recipeVO.getMemberNumber());
-		System.out.println("레시피 이름:"+ recipeVO.getRecipeName());
-		System.out.println("레시피 메인사진:"+ recipeVO.getMainPicture());
-		System.out.println("레시피 태그1:"+ recipeVO.getRecipetag1());
-		System.out.println("레시피 태그2:"+ recipeVO.getRecipetag2());
-		System.out.println("레시피 태그3:"+ recipeVO.getRecipetag3());
-		System.out.println("레시피 유저아이디:"+ recipeVO.getUserId());
-		System.out.println("#####################레시피 수정 FORM#####################");
+
 		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
 		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
 		List<RecipeMainIngreVO> recipeMainIngreList = recipeDAO.selectAllRecipeMainIngre();
