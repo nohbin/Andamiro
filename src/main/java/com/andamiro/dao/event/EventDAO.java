@@ -202,7 +202,7 @@ public class EventDAO {
 	}// 일반 이벤트
 	
 	public ArrayList<EventVO> event() {
-	    ArrayList<EventVO> eventList = new ArrayList<EventVO>();
+	    ArrayList<EventVO> eventPoster = new ArrayList<EventVO>();
 	    String sql = "SELECT poster FROM eventmain ORDER BY eventno DESC";
 
 	    Connection conn = null;
@@ -217,14 +217,14 @@ public class EventDAO {
 	            EventVO eVO = new EventVO();
 	            eVO.setEventno(rs.getString("eventno"));
 	            eVO.setPoster(rs.getString("post"));
-	            eventList.add(eVO);
+	            eventPoster.add(eVO);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
 	        DBManager.close(conn, pstmt, rs);
 	    }
-	    return eventList;
+	    return eventPoster;
 	}
 
 	

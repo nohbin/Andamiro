@@ -39,8 +39,6 @@ public class SubscribeMemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
-		
-		
 	}
 	public List<SubscribeMemberVO> selectAllmember() {
 		String sql = "select * from subscribemember order by subNumber desc";
@@ -93,7 +91,6 @@ public class SubscribeMemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}
-		
 		return sVO;
 	}
 	
@@ -114,7 +111,6 @@ public class SubscribeMemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
-				
 	}
 	
 	//구독 기간만료시 구독해지하는 메소드
@@ -133,10 +129,6 @@ public class SubscribeMemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
- 		
 	}
-	
-
-
 }
 

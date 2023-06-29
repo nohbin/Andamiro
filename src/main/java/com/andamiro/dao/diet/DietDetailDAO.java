@@ -30,13 +30,13 @@ public class DietDetailDAO {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				dietDetailVO ddVo = new dietDetailVO();
-				ddVo.setDietDetailID(rs.getInt("dietDetailID"));
-				ddVo.setDietNumber(rs.getInt("dietNumber"));
-				ddVo.setFoodName(rs.getString("foodName"));
-				ddVo.setKcal(rs.getString("kcal"));
-				ddVo.setComponent(rs.getString("component"));
-				list.add(ddVo);
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setDietDetailID(rs.getInt("dietDetailID"));
+				dietDetailVo.setDietNumber(rs.getInt("dietNumber"));
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				dietDetailVo.setKcal(rs.getString("kcal"));
+				dietDetailVo.setComponent(rs.getString("component"));
+				list.add(dietDetailVo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,7 +47,7 @@ public class DietDetailDAO {
 		return list;
 	}
 
-	public void insertDetail(dietDetailVO ddVo) {
+	public void insertDetail(dietDetailVO dietDetailVo) {
 		String sql = "insert into dietDetail ("
 				+ "dietDetailID,dietNumber, foodName, kcal, component) "
 				+ "values (dietDetailID_seq.nextval, ?, ?, ?, ?)";
@@ -56,10 +56,10 @@ public class DietDetailDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, ddVo.getDietNumber());
-			pstmt.setString(2, ddVo.getFoodName());
-			pstmt.setString(3, ddVo.getKcal());
-			pstmt.setString(4, ddVo.getComponent());
+			pstmt.setInt(1, dietDetailVo.getDietNumber());
+			pstmt.setString(2, dietDetailVo.getFoodName());
+			pstmt.setString(3, dietDetailVo.getKcal());
+			pstmt.setString(4, dietDetailVo.getComponent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class DietDetailDAO {
 
 	public dietDetailVO selectOneDetailById(String dietDetailID) {
 		String sql = "select * from dietDetail where dietDetailID = ?";
-		dietDetailVO ddVo = null;
+		dietDetailVO dietDetailVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -84,11 +84,11 @@ public class DietDetailDAO {
 			pstmt.setString(1, dietDetailID);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				ddVo = new dietDetailVO();
-				ddVo.setDietDetailID(rs.getInt("dietDetailID"));
-				ddVo.setFoodName(rs.getString("foodName"));
-				ddVo.setKcal(rs.getString("kcal"));
-				ddVo.setComponent(rs.getString("component"));
+				dietDetailVo = new dietDetailVO();
+				dietDetailVo.setDietDetailID(rs.getInt("dietDetailID"));
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				dietDetailVo.setKcal(rs.getString("kcal"));
+				dietDetailVo.setComponent(rs.getString("component"));
 				
 			}
 		} catch (SQLException e) {
@@ -96,7 +96,7 @@ public class DietDetailDAO {
 		} finally {
 			DBManager.close(conn, pstmt, rs);			
 		}
-		return ddVo;
+		return dietDetailVo;
 	}
 
 	public void deleteDetail(String dietDetailID) {
@@ -117,7 +117,7 @@ public class DietDetailDAO {
 		
 	}
 
-	public void updateDetail(dietDetailVO ddVo) {
+	public void updateDetail(dietDetailVO dietDetailVo) {
 		String sql = "update dietDetail set  foodName=?, kcal=?, component=? "
 				+ " where dietDetailID=?";
 		Connection conn = null;
@@ -125,10 +125,10 @@ public class DietDetailDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ddVo.getFoodName());
-			pstmt.setString(2, ddVo.getKcal());
-			pstmt.setString(3, ddVo.getComponent());
-			pstmt.setInt(4, ddVo.getDietDetailID());
+			pstmt.setString(1, dietDetailVo.getFoodName());
+			pstmt.setString(2, dietDetailVo.getKcal());
+			pstmt.setString(3, dietDetailVo.getComponent());
+			pstmt.setInt(4, dietDetailVo.getDietDetailID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -137,30 +137,84 @@ public class DietDetailDAO {
 		}
 	}
 
-//	public dietDetailVO selectOneDietByDnum(String dietNumber) {
-//		String sql = "select * from dietDetail where dietNumber = ?";
-//		dietDetailVO ddVo = null;
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			conn = DBManager.getConnection();
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, dietNumber);
-//			rs = pstmt.executeQuery();
-//			if(rs.next()) {
-//				ddVo = new dietDetailVO();
-//				ddVo.setDietNumber(rs.getInt("dietNumber"));
-//				ddVo.setDietDetailID(rs.getInt("dietDetailID"));
-//				ddVo.setFoodName(rs.getString("foodName"));
-//				ddVo.setKcal(rs.getString("kcal"));
-//				ddVo.setComponent(rs.getString("component"));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			DBManager.close(conn, pstmt, rs);
-//		}
-//		return ddVo;
-//	}
+	
+	
+//정상 작동 메소드 	
+	public List<dietDetailVO> selectfoodName1() {
+		String sql = "select foodName from dietDetail where dietNumber= 76 order by dietDetailID "; 
+		List<dietDetailVO> foodList1 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList1.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList1;
+	}
+
+	public List<dietDetailVO> selectfoodName2() {
+		String sql = "select foodName from dietDetail where dietNumber= 77 order by dietDetailID "; 
+		List<dietDetailVO> foodList2 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList2.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList2;
+	}
+
+
+	public List<dietDetailVO> selectfoodName3() {
+		String sql = "select foodName from dietDetail where dietNumber= 78 order by dietDetailID "; 
+		List<dietDetailVO> foodList3 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList3.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList3;  
+	}
+	
+
 }

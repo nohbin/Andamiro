@@ -32,11 +32,11 @@
 				</tr>
 				<tr>
 					<th>영양성분</th>
-					<td><input type="text" name="component" value="${dietDetail.component}"></td>
+					<td><input type="text" name="component" value="${dietDetail.component}"  size="80"></td>
 				</tr>
 			</table>
 			<br><br>
-				<input type="submit" value="등록" onclick="return boardCheck()"> 
+				<input type="submit" value="수정" onclick="return boardCheck()"> 
 				<input type="reset"	value="다시 작성"> 
 				<input type="button" value="목록" onclick="location.href='DietServlet?command=dietDetail_list'">
 			</form>

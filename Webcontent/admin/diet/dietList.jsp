@@ -16,9 +16,8 @@
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
+<jsp:include page="../adminheader.jsp"></jsp:include>
 	<div class="container" align="center">
-	   <!-- <div style="height: 5rem;"></div> -->
-<!-- 		<h1>식단 목록</h1> -->
 		<table class="table align-middle">
 			<tr>
 				<td colspan="5" style="border: white; text-align: right">
