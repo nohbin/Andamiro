@@ -176,6 +176,7 @@ public class RecipeDAO {
 				recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 				recipeVO.setUserId(rs.getString("USERID"));
 				list.add(recipeVO);
+				System.out.println(rs.getInt("RECIPEID") + " 의 평점은 : " + rs.getString("RECIPEGRADE"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -693,6 +694,24 @@ public class RecipeDAO {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return list;
+	}
+
+	public void updateRecipeGradeByRecipeId(int recipeId) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE andamirorecipe SET recipegrade = (SELECT TO_CHAR(AVG(recipegrade), 'FM999999990.00') FROM andamiroreview WHERE recipeid = ?) WHERE recipeid = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeId);
+			pstmt.setInt(2, recipeId);
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 }

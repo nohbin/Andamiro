@@ -24,7 +24,11 @@
 				<td colspan="10" style="border: white; text-align: right">
 			</tr>
 			<tr class="text-center">
-				<th>구독번호</th><th>회원번호</th><th>회원 아이디</th><th>구독시작일</th><th>구독종료일</th>
+				<th>구독번호</th>
+				<th>회원번호</th>
+				<th>회원 아이디</th>
+				<th>구독시작일</th>
+				<th>구독종료일</th>
 			</tr>
 			<c:forEach var="subscribe" items="${submemList }">
 				<tr class="record text-center">

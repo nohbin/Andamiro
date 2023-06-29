@@ -24,5 +24,4 @@ public class SubmemRecipeListViewAction implements SubscribeAction {
 		request.getRequestDispatcher("member/mypage-savedrecipe.jsp").forward(request, response);
 		
 	}
-
 }
