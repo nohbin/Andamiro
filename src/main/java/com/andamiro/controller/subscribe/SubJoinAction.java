@@ -35,7 +35,6 @@ public class SubJoinAction implements SubscribeAction {
 		subVO.setSub_start(sub_start);
 		subVO.setSub_end(sub_end);
 		subVO.setUserId(request.getParameter("userid"));
-		System.out.println(request.getParameter("userid"));
 		SubscribeMemberDAO sDao = SubscribeMemberDAO.getInstance();
 		sDao.insertSubMem(subVO);
 		

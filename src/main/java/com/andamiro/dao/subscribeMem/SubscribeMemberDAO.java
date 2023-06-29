@@ -26,6 +26,7 @@ public class SubscribeMemberDAO {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -34,11 +35,25 @@ public class SubscribeMemberDAO {
 			pstmt.setString(3, subVO.getSub_end());
 			pstmt.setString(4,subVO.getUserId());
 			pstmt.executeUpdate();
+			
+			sql = "SELECT subNum_seq.currval FROM dual";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			int subnumber = 0;
+			if (rs.next()) {
+				subnumber = rs.getInt(1);
+			}
+
+			
+			sql = "update andamiromember set subscribe = ? where membernumber = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subnumber);
+			pstmt.setInt(2, subVO.getMemberNumber());
+			pstmt.execute();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt);
-		}
+		} 
 	}
 	public List<SubscribeMemberVO> selectAllmember() {
 		String sql = "select * from subscribemember order by subNumber desc";

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.andamiro.dto.member.MemberVO;
 import com.andamiro.dto.recipe.RecipeDetailVO;
 import com.andamiro.dto.recipe.RecipeHowVO;
 import com.andamiro.dto.recipe.RecipeIngreVO;
@@ -617,6 +618,44 @@ public class RecipeDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public List<RecipeVO> selectMemberByPage(int start, int end) {
+		// TODO Auto-generated method stub
+		List<RecipeVO> lists = new ArrayList<>();
+		RecipeVO recipeVO = null;
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY recipeid) NUM , A.* FROM andamirorecipe A ORDER BY recipeid) "
+				+ "WHERE NUM BETWEEN ? AND ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				recipeVO = new RecipeVO();
+				recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+				recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+				recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+				recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+				recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+				recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+				recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+				recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+				recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+				recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+				recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+				recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+				recipeVO.setUserId(rs.getString("USERID"));
+				lists.add(recipeVO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
 	}
 
 }

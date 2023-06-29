@@ -12,7 +12,7 @@ import com.andamiro.dao.board.BoardDAO;
 import com.andamiro.dao.member.MemberDAO;
 import com.andamiro.dto.member.MemberVO;
 
-public class BoardPagingMemberAction implements BoardAction{
+public class BoardPagingRecipeAction implements BoardAction{
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -58,7 +58,6 @@ public class BoardPagingMemberAction implements BoardAction{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("totalPages", totalPages);
 		
-	
 		String url = "/admin/adminmainpage.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
