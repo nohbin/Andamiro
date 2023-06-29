@@ -171,16 +171,14 @@ a i {
 									</select> <label for="floatingSelect">점수</label>
 								</div>
 								<div class="form-floating">
-									<textarea class="form-control" placeholder=""
-										id="floatingTextarea2" style="height: 200px"></textarea>
+									<textarea class="form-control" placeholder="" id="floatingTextarea2" style="height: 200px"></textarea>
 									<label for="floatingTextarea2">레시피 후기를 입력해주세요</label>
 								</div>
 								<div class="file-upload col-12">
 									<div class="image-upload-wrap">
 										<div class="drag-text">
-											<input class="file-upload-input" type='file'
-												onchange="readURL(this);" accept="image/*" /> 후기 <br>사진
-											등록
+											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
+											후기 <br>사진 등록
 										</div>
 									</div>
 									<div class="file-upload-content">
@@ -192,11 +190,9 @@ a i {
 									</div>
 								</div>
 							</div>
-							<script class="jsbin"
-								src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+							<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">닫기</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 								<button type="submit" class="btn btn-secondary">작성하기</button>
 							</div>
 						</div>

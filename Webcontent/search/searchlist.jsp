@@ -86,7 +86,7 @@ a {
 	<div class="container text-center border mt-3 rounded-5">
 		<input type="hidden" name = "recipeID" value="${recipe.recipeID }">
 		<div class="row mt-3 row-cols-3">
-			<c:forEach var="recipe" items="${searchList }">
+			<c:forEach var="recipe" items="${searchList}">
 				<div class="col-12 col-md-4 mt-3 mb-3">
 					<a href='RecipeServlet?command=recipe_detail&recipID=${recipe.recipeID }'> 
 					<img src="resources/img/${recipe.mainPicture }" class="rounded-3 img-thumbnail">
