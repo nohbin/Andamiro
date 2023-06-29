@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.andamiro.dto.diet.DietVO;
 import com.andamiro.dto.event.EventVO;
 import com.andamiro.utill.DBManager;
 
@@ -24,21 +23,19 @@ public class EventDAO {
 	// 이벤트 메인
 	public ArrayList<EventVO> getEventList() {
 	    ArrayList<EventVO> eventList = new ArrayList<>();
-
-	    String sql = "SELECT evstart, evend, ing, imgsum FROM eventmain ORDER BY eventno DESC";
+	    String sql = "SELECT term, ing, imgsum FROM eventmain ORDER BY eventno DESC";
 
 	    try (Connection conn = DBManager.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql);
 	         ResultSet rs = pstmt.executeQuery()) {
 
-	    	while (rs.next()) {
-	    	    EventVO event = new EventVO();
-	    	    event.setEvstart(rs.getString("evstart"));
-	    	    event.setEvend(rs.getString("evend"));
-	    	    event.setIng(rs.getString("ing"));
-	    	    event.setImgsum(rs.getString("imgsum"));
-	    	    eventList.add(event);
-	    	}
+	        while (rs.next()) {
+	            EventVO event = new EventVO();
+	            event.setTerm(rs.getString("term"));
+	            event.setIng(rs.getString("ing"));
+	            event.setImgsum(rs.getString("imgsum"));
+	            eventList.add(event);
+	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -46,7 +43,7 @@ public class EventDAO {
 
 	    return eventList;
 	}
-
+       
 		public EventVO selectOneEventByEventNumber(String eventNumber ) {
 			String sql = "select * from eventmain where eventno = ?";
 			
@@ -62,10 +59,10 @@ public class EventDAO {
 			
 			if(rs.next()) {
 				eVO = new EventVO();
-				eVO.setEvstart(rs.getString("evstart"));
-				eVO.setEvend(rs.getString("evend"));
+				eVO.setTerm(rs.getString("term"));
 				eVO.setIng(rs.getString("ing"));
 				eVO.setImgsum(rs.getString("imgsum"));
+				eVO.setPoster(rs.getString("post"));
 			}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -97,7 +94,7 @@ public class EventDAO {
 	
 	public void insertEvent(EventVO eVO) {
 			
-			String sql = "INSERT INTO EVENTMAIN(EVENTNO,EVSTART,EVEND,ING,imgsum)"
+			String sql = "INSERT INTO EVENTMAIN(EVENTNO,TERM,ING,imgsum,poster)"
 						+ "VALUES(?,?,?,?,?)";
 				
 			Connection conn = null;
@@ -106,11 +103,11 @@ public class EventDAO {
 			try {
 				conn = DBManager.getConnection();
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1,eVO.getEventno());
-				pstmt.setString(2,eVO.getEvstart());
-				pstmt.setString(3,eVO.getEvend());
-				pstmt.setString(4,eVO.getIng());
-				pstmt.setString(5,eVO.getImgsum());
+				pstmt.setString(1,eVO.getEventno());
+				pstmt.setString(2,eVO.getTerm());
+				pstmt.setString(3,eVO.getIng());
+				pstmt.setString(4,eVO.getImgsum());
+				pstmt.setString(5,eVO.getPoster());
 				pstmt.executeUpdate();
 				
 			}catch (SQLException e) {
@@ -129,10 +126,9 @@ public class EventDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,eVO.getEvstart());
-			pstmt.setString(2,eVO.getEvend());
-			pstmt.setString(3,eVO.getIng());
-			pstmt.setString(4,eVO.getImgsum());
+			pstmt.setString(1,eVO.getTerm());
+			pstmt.setString(2,eVO.getIng());
+			pstmt.setString(3,eVO.getImgsum());
 			pstmt.executeUpdate();
 
 			
@@ -176,7 +172,7 @@ public class EventDAO {
 	public ArrayList<EventVO> conEvent() {
 		ArrayList<EventVO> conImg = new ArrayList<EventVO>();
 
-		String sql = "select*from eventcontestdetail";
+		String sql = "SELECT poster FROM eventmain ORDER BY eventno DESC";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -189,8 +185,8 @@ public class EventDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				EventVO eVO = new EventVO();
-				eVO.setContestno(rs.getInt("contestno"));
-				eVO.setConpost(rs.getString("conpost"));
+				eVO.setEventno(rs.getString("eventno"));
+				eVO.setPoster(rs.getString("poster"));
 				conImg.add(eVO);
 
 			}
@@ -206,8 +202,8 @@ public class EventDAO {
 	}// 일반 이벤트
 	
 	public ArrayList<EventVO> event() {
-	    ArrayList<EventVO> eventList = new ArrayList<EventVO>();
-	    String sql = "SELECT * FROM nomaleventdetail";
+	    ArrayList<EventVO> eventPoster = new ArrayList<EventVO>();
+	    String sql = "SELECT poster FROM eventmain ORDER BY eventno DESC";
 
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -219,24 +215,20 @@ public class EventDAO {
 	        rs = pstmt.executeQuery();
 	        while (rs.next()) {
 	            EventVO eVO = new EventVO();
-	            eVO.setEventno(rs.getInt("eventno"));
-	            eVO.setPost(rs.getString("post"));
-	            eventList.add(eVO);
+	            eVO.setEventno(rs.getString("eventno"));
+	            eVO.setPoster(rs.getString("post"));
+	            eventPoster.add(eVO);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
 	        DBManager.close(conn, pstmt, rs);
 	    }
-	    return eventList;
+	    return eventPoster;
 	}
 
-	public DietVO selectOneDietByDnum(String dietNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
-
 
 
 

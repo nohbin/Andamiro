@@ -14,8 +14,8 @@ public class EventDeleteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String eventno=request.getParameter("eventno");
 		
-		EventDAO eDao=EventDAO.getInstance();
-		eDao.deleteEvent(eventno);
+		EventDAO eventDAO=EventDAO.getInstance();
+		eventDAO.deleteEvent(eventno);
 		
 		new EventListAction().execute(request,response);
 		

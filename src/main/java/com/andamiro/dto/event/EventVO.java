@@ -3,15 +3,12 @@ package com.andamiro.dto.event;
 
 
 public class EventVO {
-	int eventno;
+	String eventno;
 	String imgsum;
-	String evstart;
-	String evend;
-	String ing;
-	public int getEventno() {
+	public String getEventno() {
 		return eventno;
 	}
-	public void setEventno(int eventno) {
+	public void setEventno(String eventno) {
 		this.eventno = eventno;
 	}
 	public String getImgsum() {
@@ -20,17 +17,11 @@ public class EventVO {
 	public void setImgsum(String imgsum) {
 		this.imgsum = imgsum;
 	}
-	public String getEvstart() {
-		return evstart;
+	public String getTerm() {
+		return term;
 	}
-	public void setEvstart(String evstart) {
-		this.evstart = evstart;
-	}
-	public String getEvend() {
-		return evend;
-	}
-	public void setEvend(String evend) {
-		this.evend = evend;
+	public void setTerm(String term) {
+		this.term = term;
 	}
 	public String getIng() {
 		return ing;
@@ -38,26 +29,14 @@ public class EventVO {
 	public void setIng(String ing) {
 		this.ing = ing;
 	}
-	public int getContestno() {
-		return contestno;
+	public String getPoster() {
+		return poster;
 	}
-	public void setContestno(int contestno) {
-		this.contestno = contestno;
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
-	public String getConpost() {
-		return conpost;
-	}
-	public void setConpost(String conpost) {
-		this.conpost = conpost;
-	}
-	public String getPost() {
-		return post;
-	}
-	public void setPost(String post) {
-		this.post = post;
-	}
-	int contestno;
-	String conpost;
-	String post;
-	
+	String term;
+	String ing;
+	String poster;
 }
+	

@@ -17,9 +17,9 @@ public class EventUpdateFormAction implements Action {
 		
 		String url="admin/eventUpdate.jsp";
 		String eventNo=request.getParameter("eventNo");
-		EventDAO eDao = EventDAO.getInstance();
-		EventVO eVO = eDao.selectOneEventByEventNumber(eventNo);
-		request.setAttribute("eno", eVO);
+		EventDAO eventDAO = EventDAO.getInstance();
+		EventVO eventVO = eventDAO.selectOneEventByEventNumber(eventNo);
+		request.setAttribute("eno", eventVO);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 		
