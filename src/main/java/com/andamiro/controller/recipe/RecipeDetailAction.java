@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.RecipeAction;
 import com.andamiro.dao.recipe.RecipeDAO;
+import com.andamiro.dao.review.ReviewDAO;
 import com.andamiro.dto.recipe.RecipeIngreVO;
 import com.andamiro.dto.recipe.RecipeOrderVO;
 import com.andamiro.dto.recipe.RecipePicVO;
 import com.andamiro.dto.recipe.RecipeVO;
+import com.andamiro.dto.review.ReviewVO;
 
 public class RecipeDetailAction implements RecipeAction {
 
@@ -57,7 +59,11 @@ public class RecipeDetailAction implements RecipeAction {
 				}
 			}
 		}
-
+		
+		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		List<ReviewVO> reviewList = reviewDAO.selectAllReviewsByRecipeID(recipID);
+		
+		request.setAttribute("reviewList", reviewList);
 		request.setAttribute("recipe", recipVO);
 		request.setAttribute("recipeIngreList", recipeIngreList);
 		request.setAttribute("recipePicList", recipePicList);

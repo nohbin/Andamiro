@@ -27,8 +27,6 @@ a {
 
 img {
 	border-radius: var(- -bs-border-radius-2xl) !important;
-	width: 70%;
-	height: auto;
 }
 
 .align-right {
@@ -45,7 +43,7 @@ a i {
 
 	<div class="recipe-wrap">
 		<!--조리준비 Tab-->
-		<div class="container border mt-3 mb-3 rounded-5 text-center recipe-show">
+		<div class="container border my-3 rounded-5 text-center recipe-show">
 			<div class="container text-center mt-3 mb-3">
 				<div class="row row-cols-12">
 					<div class="col-12 mb-3 border-bottom" style="font-weight: 900; font-size: 4rem;">${recipe.recipeName }</div>
@@ -110,7 +108,7 @@ a i {
 							<c:when test="${st.index < recipePicList.size()}">
 								<c:set var="recipePic" value="${recipePicList.get(st.index)}" />
 								<div id="stepImg1">
-									<img src="resources/img/${recipePic }" class="figure-img img-thumbnail">
+									<img src="resources/img/${recipePic }" class="img-fluid img-thumbnail" style=" width: 30rem;">
 								</div>
 							</c:when>
 						</c:choose>
@@ -119,11 +117,10 @@ a i {
 			</div>
 			<!--Recipe detail end-->
 			<!--후기 보기-->
-			<div
-				class="container border my-3 rounded-5 text-center recipe-review">
+			<div class="container border my-3 rounded-5 text-center recipe-review">
 				<div class="container text-center">
 					<div class="row row-cols-2">
-						<div class="col-12 border-bottom">
+						<div class="col-12">
 							<div class="p-5">
 								<b class="" style="font-size: 3rem;">요리후기</b>
 
@@ -131,28 +128,42 @@ a i {
 						</div>
 					</div>
 					<!-- 후기 리스트 -->
-					<div class="container text-center">
-						<div class="row my-3 border-bottom mx-auto" style="width: 80%;">
-							<div class="col-sm-3 align-self-center">아이디</div>
-							<div class="col-sm-9">
-								<div class="row ">
-									<div class="col-8 col-sm-9 align-self-center">맛있어요~</div>
-									<div class="col-4 col-sm-3">
-										<img src="img/a.jpg" alt="" class="img-thumbnail">
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="container">
+						 <table class="table table-hover">
+							<tr>
+								<td colspan="10" style="border: white; text-align: right">
+							</tr>
+							<tr class="text-center">
+								<th>작성자</th>
+								<th>후기</th>
+								<th>평점</th>
+								<th>사진</th>
+							</tr>
+						
+						<c:forEach var="review" items="${reviewList }">
+							<tr class="record text-center">
+								<td>${review.userId }</td>
+								<td>${review.review}</td>  
+								<td>${review.recipegrade }</td>
+								<td><img src="resources/img/${review.img}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
+							</tr>
+						</c:forEach>
+						</table>
 					</div>
 				</div>
 			</div>
 			<!-- 후기 end-->
-			<form action="#">
 				<!--후기 작성 form -->
-				<button type="button" class="btn btn-outline-success mb-3"
-					data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-					후기 작성</button>
+				<c:if test="${not empty loginUser }">
+					<button type="button" class="btn btn-outline-success mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+						후기 작성
+					</button>
+				</c:if>
 				<!-- 모달 -->
+			<form action="ReviewServlet">
+				<input type="hidden" name="command" value="review_write">
+            	<input type="hidden" name="memberId" value="${loginUser.id }">
+            	<input type="hidden" name="recipeid" value="${recipe.recipeID}">
 				<div class="modal fade" id="staticBackdrop"
 					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 					aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -167,7 +178,7 @@ a i {
 							</div>
 							<div class="modal-body">
 								<div class="form-floating w-50 mx-auto mb-2">
-									<select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+									<select class="form-select" id="floatingSelect" aria-label="Floating label select example" name = "grade">
 										<option selected>점수</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -177,21 +188,20 @@ a i {
 									</select> <label for="floatingSelect">점수</label>
 								</div>
 								<div class="form-floating">
-									<textarea class="form-control" placeholder="" id="floatingTextarea2" style="height: 200px"></textarea>
+									<textarea class="form-control" placeholder="" id="floatingTextarea2" style="height: 200px" name = "reviewtext"></textarea>
 									<label for="floatingTextarea2">레시피 후기를 입력해주세요</label>
 								</div>
 								<div class="file-upload col-12">
 									<div class="image-upload-wrap">
 										<div class="drag-text">
-											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
+											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="rewviewImage" /> 
 											후기 <br>사진 등록
 										</div>
 									</div>
 									<div class="file-upload-content">
 										<img class="file-upload-image" />
 										<div class="image-title-wrap">
-											<button type="button" onclick="removeUpload(this)"
-												class="remove-image">삭제</button>
+											<button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
 										</div>
 									</div>
 								</div>
@@ -208,28 +218,6 @@ a i {
 		</div>
 	</div>
 	<script>
-       let uploadIndex = 1;
-       function createImageUpload() {
-           let uploadElement = `
-           <div class="file-upload">
-           <div class="image-upload-wrap">
-           <div class="drag-text">
-           <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-           사진 등록
-           </div>
-           </div>
-           <div class="file-upload-content">
-           <img class="file-upload-image" />
-           <div class="image-title-wrap">
-           <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-           </div>
-           </div>
-           </div>
-           `;
-           $('#image-uploads').append(uploadElement);
-           uploadIndex++;
-       }
-
        function readURL(input) {
            if (input.files && input.files[0]) {
                var reader = new FileReader();
