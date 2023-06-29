@@ -42,3 +42,25 @@ function passCheck() {
 	}
 	return true;
 }
+
+
+
+function submitForm() {
+  // 이벤트 번호 입력 필드
+  var eventNoInput = document.getElementsByName('eventno')[0];
+  var eventNo = eventNoInput.value.trim();
+  
+  // 유효성 검사: 이벤트 번호가 비어있는지 확인
+  if (eventNo === '') {
+    alert('이벤트 번호를 입력하세요.');
+    eventNoInput.focus();
+    return;
+  }
+  
+  // 기타 유효성 검사 로직을 추가적으로 수행할 수 있습니다.
+  // 필요에 따라 다른 입력 필드도 검사할 수 있습니다.
+  
+  // 폼 제출
+  document.frm.submit();
+}
+

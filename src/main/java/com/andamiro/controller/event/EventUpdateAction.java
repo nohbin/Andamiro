@@ -14,16 +14,15 @@ public class EventUpdateAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		EventVO eVO=new EventVO();
+		EventVO eventVO=new EventVO();
 		
-		eVO.setEventno(Integer.parseInt(request.getParameter("eventno")));
-		eVO.setEvstart((request.getParameter("evstart")));
-		eVO.setEvend((request.getParameter("evend")));
-		eVO.setIng(request.getParameter("ing"));
-		eVO.setImgsum(request.getParameter("imgsum"));
+		eventVO.setEventno((request.getParameter("eventno")));
+		eventVO.setTerm(request.getParameter("term"));
+		eventVO.setIng(request.getParameter("ing"));
+		eventVO.setImgsum(request.getParameter("imgsum"));
 		
-		EventDAO eDao = EventDAO.getInstance();
-		eDao.updateEvent(eVO);
+		EventDAO eventDAO = EventDAO.getInstance();
+		eventDAO.updateEvent(eventVO);
 		
 		new EventListAction().execute(request, response);
 		

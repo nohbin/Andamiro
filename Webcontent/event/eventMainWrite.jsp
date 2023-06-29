@@ -36,9 +36,9 @@
 				</tr>
 			</table>
 			<br>
-			<br> <input type="submit" value="등록" onclick="return dietWriteCheck()">
+			<br> <input type="submit" value="등록" onclick="return eventWriteCheck()">
 			 	 <input type="reset"  value="다시 작성">
-			 	 <input type="button" value="목록" onclick="location.href='DietServlet?command=diet_list'">
+			 	 <input type="button" value="목록" onclick="location.href='EventServlet?command=event_list'">
 		</form>
 	</div>
 	<div style="height: 7rem;"></div>
