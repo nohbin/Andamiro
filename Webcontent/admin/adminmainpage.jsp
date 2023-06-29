@@ -25,7 +25,7 @@
                 <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">식단관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">게시판관리</a>
+                <a class="nav-link" href="./admin/eventList.jsp" style="text-decoration: none;  color: inherit">이벤트관리</a>
             </li>
         </ul>
     </div>

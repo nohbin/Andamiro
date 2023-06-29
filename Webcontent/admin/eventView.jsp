@@ -23,31 +23,31 @@
 		<table class="table align-middle table-bordered border-warning border-opacity-50" style="width: 50rem;" >
 			<tbody class="border-3 rounded-3">
 			<tr><th class="text-center" style="width: 10rem;" >기간 </th>
-				<td style="width: 40rem;">${eventlist.evstart}~${eventlist.evend}</td>
+				<td style="width: 40rem;">${eventview.evstart}~${eventview.evend}</td>
 			</tr>
 			<tr><th class="text-center" style="width: 10rem;">진행여부</th>
-				<td style="width: 40rem;">${eventlist.ing}</td>
+				<td style="width: 40rem;">${eventview.ing}</td>
 			</tr>
 			<tr>	
 				<th class="text-center" style="width: 10rem;">이벤트썸네일</th>
-				<td style="width: 40rem;"><img src="upload/${eventlist.imgsum}" style="width:15rem; height:10rem;"></td>
+				<td style="width: 40rem;"><img src="upload/${eventview.imgsum}" style="width:15rem; height:10rem;"></td>
 			</tr>
 			<tr>	
-				<th class="text-center" style="width: 10rem;">포스터</th>
-				<td style="width: 40rem;"><img src="upload/${conposter.imgsum}" style="width:15rem; height:10rem;"></td>
+				<th class="text-center" style="width: 10rem;">이벤트포스터</th>
+				<td style="width: 40rem;"><img src="upload/${eventview.poster}" style="width:15rem; height:10rem;"></td>
 			</tr>
 			
 			
 			</tbody>
 		</table>
 		<br> <br> <input type="button" value="이벤트 수정"
-			onclick="location.href='EventServlet?command=event_update_form&dietNumber=${eventlist.eventno}'"> 
+			onclick="location.href='EventServlet?command=event_update_form&eventno=${eventview.eventno}'"> 
 		<input type="button" value="이벤트 삭제"
-			onclick="location.href='EventServlet?command=event_delete&dietNumber=${eventlist.eventno}'"> 		
+			onclick="location.href='EventServlet?command=event_delete&eventno=${eventview.eventno}'"> 		
 		<input type="button" value="이벤트 리스트"
-			onclick="location.href='EventServlet?command=event_list'"> 
+			onclick="location.href='./eventList.jsp'"> 
 		<input type="button" value="이벤트 등록"
-			onclick="location.href='EventServlet?command=event_write_form'"  >
+			onclick="location.href='../EventServlet?command=event_write_form'">
 	</div>
 	<div style="height: 10rem;"></div>
 <jsp:include page="../footer.jsp"></jsp:include>	
