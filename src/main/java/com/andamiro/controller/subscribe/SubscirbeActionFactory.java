@@ -21,7 +21,13 @@ public class SubscirbeActionFactory {
 			action = new SubmemViewAction();
 		} else if(command.equals("submem_delete")) {
 			action = new SubmemDeleteAction();
+		} else if(command.equals("save_recipe")) {
+			action = new SubmemSaveRecipeAction();
+		} else if(command.equals("save_recipe_view")){
+			action = new SubmemRecipeListViewAction();
 		}
+				
+				
 		
 		return action;
 	}

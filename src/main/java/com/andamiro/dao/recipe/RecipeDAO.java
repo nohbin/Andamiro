@@ -472,7 +472,7 @@ public class RecipeDAO {
 			pstmt.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
 	}
@@ -484,7 +484,7 @@ public class RecipeDAO {
 		String sql = "UPDATE ANDAMIRORECIPE SET recipeName = ?, mainPicture = ?, "
 				+ "recipetag1 = ?, recipetag2 = ?, recipetag3 = ? WHERE RECIPEID = ?";
 		try {
-			
+
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, recipeVO.getRecipeName());
@@ -494,7 +494,7 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipetag3());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			
+
 			sql = "UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setObject(1, recipeVO.getRecipeDetailVO().getRecipePicVO().getPic01());
@@ -504,9 +504,9 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipeDetailVO().getRecipePicVO().getPic05());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			
-			sql = "UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, " +
-		             "INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?";
+
+			sql = "UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, "
+					+ "INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setObject(1, recipeVO.getRecipeDetailVO().getRecipeingreVO().getIngre01());
 			pstmt.setObject(2, recipeVO.getRecipeDetailVO().getRecipeingreVO().getIngre02());
@@ -522,7 +522,7 @@ public class RecipeDAO {
 			pstmt.setObject(12, recipeVO.getRecipeDetailVO().getRecipeingreVO().getIngre12());
 			pstmt.setInt(13, recipeId);
 			pstmt.executeUpdate();
-			
+
 			sql = "UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setObject(1, recipeVO.getRecipeDetailVO().getRecipeOrderVO().getOrder01());
@@ -532,11 +532,10 @@ public class RecipeDAO {
 			pstmt.setObject(5, recipeVO.getRecipeDetailVO().getRecipeOrderVO().getOrder05());
 			pstmt.setInt(6, recipeId);
 			pstmt.executeUpdate();
-			
+
 			sql = "UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, "
-		            + "RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? "
-		            + "WHERE RECIPEID = ?";
-			
+					+ "RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? " + "WHERE RECIPEID = ?";
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, recipeVO.getRecipeDetailVO().getRecipeHow());
 			pstmt.setInt(2, recipeVO.getRecipeDetailVO().getRecipeKind());
@@ -547,7 +546,7 @@ public class RecipeDAO {
 			pstmt.setString(7, recipeVO.getRecipeDetailVO().getRecipeDiscription());
 			pstmt.setInt(8, recipeId);
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -620,7 +619,7 @@ public class RecipeDAO {
 		return list;
 	}
 
-	public List<RecipeVO> selectMemberByPage(int start, int end) {
+	public List<RecipeVO> selectRecipeByPage(int start, int end) {
 		// TODO Auto-generated method stub
 		List<RecipeVO> lists = new ArrayList<>();
 		RecipeVO recipeVO = null;
@@ -656,6 +655,44 @@ public class RecipeDAO {
 			e.printStackTrace();
 		}
 		return lists;
+	}
+
+	public List<RecipeVO> selectAllRecipeBySubNumber(int subNumber) {
+		// TODO Auto-generated method stub
+
+		String sql = "SELECT * FROM andamirorecipe WHERE recipeid IN (SELECT recipeid FROM submemberrecipe WHERE subnumber = ?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<RecipeVO> list = new ArrayList<>();
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subNumber);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				RecipeVO recipeVO = new RecipeVO();
+				recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+				recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+				recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+				recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+				recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+				recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+				recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+				recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+				recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+				recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+				recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+				recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+				recipeVO.setUserId(rs.getString("USERID"));
+				list.add(recipeVO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
 	}
 
 }

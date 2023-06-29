@@ -50,7 +50,7 @@ public class AdminRecipeListViewForm implements AdminAction {
 		int start = ((currentPage - 1) * pageLength) + 1;
 		int end = start + pageLength - 1;
 
-		List<RecipeVO> recipeList = recipeDAO.selectMemberByPage(start, end);
+		List<RecipeVO> recipeList = recipeDAO.selectRecipeByPage(start, end);
 
 		request.setAttribute("totalRows", totalRows);
 		request.setAttribute("recipeList", recipeList);

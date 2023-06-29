@@ -145,5 +145,26 @@ public class SubscribeMemberDAO {
 			DBManager.close(conn, pstmt);
 		}
 	}
+
+	public void saveRecipeForSubmember(int subNumber, int recipeId) {
+		// TODO Auto-generated method stub
+		String sql = "insert into SUBMEMBERRECIPE VALUES(?,?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeId);
+			pstmt.setInt(2, subNumber);
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
+	
+	
 }
 
