@@ -6,6 +6,7 @@ public class DietVO {
 	private String diet_kind;
 	private String diet_menu;
 	private String diet_picture;
+	private dietDetailVO dietDetailVO;
 	
 	public int getDietNumber() {
 		return dietNumber;

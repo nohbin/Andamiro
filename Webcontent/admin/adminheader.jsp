@@ -23,7 +23,7 @@
                 <a href="<c:url value='/SubscribeServlet?command=submem_list'/>" class="nav-link" style="text-decoration: none; color: inherit">구독회원 관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">레시피관리</a>
+                <a class="nav-link" href='<c:url value="/AdminServlet?command=recipe_list_view&page=1"/>' style="text-decoration: none;  color: inherit">레시피관리</a>
             </li>
             <li class="nav-item  mynav-item">
                 <a href='<c:url value="/DietServlet?command=diet_list"/>' class="nav-link"  style="text-decoration: none;  color: inherit">식단관리</a>
