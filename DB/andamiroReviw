@@ -1,0 +1,19 @@
+CREATE TABLE andamiroreview (
+  reviewnum NUMBER(20) PRIMARY KEY,
+  recipeid number NOT NULL,
+  id VARCHAR2(255) NOT NULL,
+  reviewpicture VARCHAR2(255),
+  review VARCHAR2(255),
+  recipegrade VARCHAR2(255),
+  regdate DATE DEFAULT SYSDATE);
+  
+  create sequence reviewnum_seq start with 1 increment by 1;
+  
+ALTER TABLE andamiroreview
+ADD CONSTRAINT FK_member_review
+FOREIGN KEY (id) REFERENCES andamiromember (id);
+
+ALTER TABLE andamiroreview
+ADD CONSTRAINT FK_recipe_review
+FOREIGN KEY (recipeId) REFERENCES andamiroRecipe (recipeId)
+ON DELETE CASCADE;
