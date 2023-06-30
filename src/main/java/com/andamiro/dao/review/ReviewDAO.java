@@ -95,19 +95,18 @@ public class ReviewDAO {
 		
 	}
 	public void updateReview(ReviewVO rVo) {
-	    String sql = "update andamiroreview set recipeid=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
+	    String sql = "update andamiroreview set  review=?, recipegrade=?, joinDate=?, img=? where recipeid=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    
 	    try {
 	        conn = DBManager.getConnection();
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, rVo.getRecipeId());
-	        pstmt.setString(2, rVo.getReview());
-	        pstmt.setInt(3, rVo.getRecipegrade());
-	        pstmt.setTimestamp(4, rVo.getRegdate());
-	        pstmt.setString(5, rVo.getImg());
-	        pstmt.setInt(6, rVo.getRecipeId()); 
+	        pstmt.setString(1, rVo.getReview());
+	        pstmt.setInt(2, rVo.getRecipegrade());
+	        pstmt.setTimestamp(3, rVo.getRegdate());
+	        pstmt.setString(4, rVo.getImg());
+	        pstmt.setInt(5, rVo.getRecipeId()); 
 	        pstmt.executeUpdate();
 	        
 	    } catch (SQLException e) {
@@ -141,7 +140,7 @@ public class ReviewDAO {
 		}
 		
 	}
-	public List<ReviewVO> selectAllReviewsByRecipeID(int recipID) {
+	public List<ReviewVO> selectAllReviewsByRecipeID(int recipeID) {
 		// TODO Auto-generated method stub
 		String sql = "select * from andamiroreview where recipeid = ?";
 		ReviewVO reviewVO = null;
@@ -149,7 +148,7 @@ public class ReviewDAO {
 		try {
 			Connection conn = DBManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
+			pstmt.setInt(1, recipeID);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
