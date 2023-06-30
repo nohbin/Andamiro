@@ -21,215 +21,199 @@ public class MemberDAO {
 	}
 
 	public int insertMember(MemberVO mem) {
-		int result = 0;
-		String sql = "INSERT INTO andamiromember (memberNumber , id, pwd, name, phone, email, joinDate) VALUES (member_seq.NEXTVAL, ?, ?, ?, ?, ?, ?)";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mem.getId());
-			pstmt.setString(2, mem.getPwd());
-			pstmt.setString(3, mem.getName());
-			pstmt.setString(4, mem.getPhone());
-			pstmt.setString(5, mem.getEmail());
-			pstmt.setString(6, mem.getJoinDate());
-			result = pstmt.executeUpdate();
+	    int result = 0;
+	    String sql = "INSERT INTO andamiromember (memberNumber, id, pwd, name, phone, email, joinDate) VALUES (member_seq.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt);
-		}
-		return result;
-	}
-
-	public int userCheck(String userid, String pwd) {
-		// TODO Auto-generated method stub
-		return 0;
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
+	        pstmt.setString(1, mem.getId());
+	        pstmt.setString(2, mem.getPwd());
+	        pstmt.setString(3, mem.getName());
+	        pstmt.setString(4, mem.getPhone());
+	        pstmt.setString(5, mem.getEmail());
+	        pstmt.setString(6, mem.getJoinDate());
+	        result = pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return result;
 	}
 
 	public MemberVO selectOneMemberbyID(String userid) {
-		// TODO Auto-generated method stub
-		String sql = "select * from andamiromember where id = ?";
-		MemberVO memberVO = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userid);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemberNumber(rs.getInt("memberNumber"));
-				memberVO.setId(rs.getString("id"));
-				memberVO.setPwd(rs.getString("pwd"));
-				memberVO.setName(rs.getString("name"));
-				memberVO.setPhone(rs.getString("phone"));
-				memberVO.setEmail(rs.getString("email"));
-				memberVO.setJoinDate(rs.getString("joindate"));
-				memberVO.setSubscribe(rs.getString("subscribe"));
-				memberVO.setAdminCode(rs.getString("adminCode"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return memberVO;
+	    String sql = "SELECT * FROM andamiromember WHERE id = ?";
+	    MemberVO memberVO = null;
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
+	        pstmt.setString(1, userid);
+	        try (ResultSet rs = pstmt.executeQuery()) 
+	        {
+	            if (rs.next()) {
+	                memberVO = new MemberVO();
+	                memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	                memberVO.setId(rs.getString("id"));
+	                memberVO.setPwd(rs.getString("pwd"));
+	                memberVO.setName(rs.getString("name"));
+	                memberVO.setPhone(rs.getString("phone"));
+	                memberVO.setEmail(rs.getString("email"));
+	                memberVO.setJoinDate(rs.getString("joindate"));
+	                memberVO.setSubscribe(rs.getString("subscribe"));
+	                memberVO.setAdminCode(rs.getString("adminCode"));
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return memberVO;
 	}
+
 
 	public int MemberIdCheckById(String id) {
-		String sql = "select * from andamiromember where id = ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int idCheckResult = 0;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			idCheckResult = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt);
-		}
-		return idCheckResult;
+	    String sql = "SELECT COUNT(*) FROM andamiromember WHERE id = ?";
+	    int idCheckResult = 0;
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
+	        pstmt.setString(1, id);
+	        try (ResultSet rs = pstmt.executeQuery()) 
+	        {
+	            if (rs.next()) {
+	                idCheckResult = rs.getInt(1);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return idCheckResult;
 	}
+
 
 	public void updateMemberInfoByMemberNumber(int memberNumber, MemberVO memberVO) {
-		// TODO Auto-generated method stub
-		String sql = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = DBManager.getConnection();
-			if (memberVO.getId() != null) {
-				sql = "UPDATE andamiromember SET ID = ?, PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, memberVO.getId());
-				pstmt.setString(2, memberVO.getPwd());
-				pstmt.setString(3, memberVO.getPhone());
-				pstmt.setInt(4, memberNumber);
-				pstmt.execute();
-			} else {
-				sql = "UPDATE andamiromember SET PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, memberVO.getPwd());
-				pstmt.setString(2, memberVO.getPhone());
-				pstmt.setInt(3, memberNumber);
-				pstmt.execute();
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt);
-		}
+	    String sql = null;
+
+	    if (memberVO.getId() != null) {
+	        sql = "UPDATE andamiromember SET ID = ?, PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
+	    } else {
+	        sql = "UPDATE andamiromember SET PWD = ?, PHONE = ? WHERE MEMBERNUMBER = ?";
+	    }
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        if (memberVO.getId() != null) {
+	            pstmt.setString(1, memberVO.getId());
+	            pstmt.setString(2, memberVO.getPwd());
+	            pstmt.setString(3, memberVO.getPhone());
+	            pstmt.setInt(4, memberNumber);
+	        } else {
+	            pstmt.setString(1, memberVO.getPwd());
+	            pstmt.setString(2, memberVO.getPhone());
+	            pstmt.setInt(3, memberNumber);
+	        }
+
+	        pstmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 
 	public List<MemberVO> selectAllMember() {
-		// TODO Auto-generated method stub
-		List<MemberVO> lists = new ArrayList<>();
-		MemberVO memberVO = null;
-		String sql = "select * from andamiromember order by memberNumber";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemberNumber(rs.getInt("memberNumber"));
-				memberVO.setId(rs.getString("id"));
-				memberVO.setPwd(rs.getString("pwd"));
-				memberVO.setName(rs.getString("name"));
-				memberVO.setPhone(rs.getString("phone"));
-				memberVO.setEmail(rs.getString("email"));
-				memberVO.setJoinDate(rs.getString("joindate"));
-				memberVO.setSubscribe(rs.getString("subscribe"));
-				lists.add(memberVO);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return lists;
+	    List<MemberVO> memberList = new ArrayList<>();
+
+	    String sql = "SELECT * FROM andamiromember ORDER BY memberNumber";
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);
+	         ResultSet rs = pstmt.executeQuery()) 
+	    {
+	        while (rs.next()) {
+	            MemberVO memberVO = new MemberVO();
+	            memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	            memberVO.setId(rs.getString("id"));
+	            memberVO.setPwd(rs.getString("pwd"));
+	            memberVO.setName(rs.getString("name"));
+	            memberVO.setPhone(rs.getString("phone"));
+	            memberVO.setEmail(rs.getString("email"));
+	            memberVO.setJoinDate(rs.getString("joindate"));
+	            memberVO.setSubscribe(rs.getString("subscribe"));
+	            memberList.add(memberVO);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return memberList;
 	}
+
 
 	public List<MemberVO> selectAllMemberFirstPage() {
-		// TODO Auto-generated method stub
-		List<MemberVO> lists = new ArrayList<>();
-		MemberVO memberVO = null;
-		String sql = "SELECT *FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM , A.* FROM andamiromember A ORDER BY memberNumber) "
-				+ "WHERE NUM BETWEEN 1 AND 5";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemberNumber(rs.getInt("memberNumber"));
-				memberVO.setId(rs.getString("id"));
-				memberVO.setPwd(rs.getString("pwd"));
-				memberVO.setName(rs.getString("name"));
-				memberVO.setPhone(rs.getString("phone"));
-				memberVO.setEmail(rs.getString("email"));
-				memberVO.setJoinDate(rs.getString("joindate"));
-				memberVO.setSubscribe(rs.getString("subscribe"));
-				lists.add(memberVO);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return lists;
+	    List<MemberVO> memberList = new ArrayList<>();
+
+	    String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM, A.* FROM andamiromember A ORDER BY memberNumber) "
+	            + "WHERE NUM BETWEEN 1 AND 5";
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);
+	         ResultSet rs = pstmt.executeQuery()) 
+	    {
+	        while (rs.next()) {
+	            MemberVO memberVO = new MemberVO();
+	            memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	            memberVO.setId(rs.getString("id"));
+	            memberVO.setPwd(rs.getString("pwd"));
+	            memberVO.setName(rs.getString("name"));
+	            memberVO.setPhone(rs.getString("phone"));
+	            memberVO.setEmail(rs.getString("email"));
+	            memberVO.setJoinDate(rs.getString("joindate"));
+	            memberVO.setSubscribe(rs.getString("subscribe"));
+	            
+	            memberList.add(memberVO);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return memberList;
 	}
 
+
 	public List<MemberVO> selectMemberByPage(int start, int end) {
-		// TODO Auto-generated method stub
-		List<MemberVO> lists = new ArrayList<>();
-		MemberVO memberVO = null;
-		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM , A.* FROM andamiromember A ORDER BY memberNumber) "
-				+ "WHERE NUM BETWEEN ? AND ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemberNumber(rs.getInt("memberNumber"));
-				memberVO.setId(rs.getString("id"));
-				memberVO.setPwd(rs.getString("pwd"));
-				memberVO.setName(rs.getString("name"));
-				memberVO.setPhone(rs.getString("phone"));
-				memberVO.setEmail(rs.getString("email"));
-				memberVO.setJoinDate(rs.getString("joindate"));
-				memberVO.setSubscribe(rs.getString("subscribe"));
-				lists.add(memberVO);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return lists;
+	    List<MemberVO> memberList = new ArrayList<>();
+
+	    String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY memberNumber) NUM, A.* FROM andamiromember A ORDER BY memberNumber) "
+	            + "WHERE NUM BETWEEN ? AND ?";
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, start);
+	        pstmt.setInt(2, end);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                MemberVO memberVO = new MemberVO();
+	                memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	                memberVO.setId(rs.getString("id"));
+	                memberVO.setPwd(rs.getString("pwd"));
+	                memberVO.setName(rs.getString("name"));
+	                memberVO.setPhone(rs.getString("phone"));
+	                memberVO.setEmail(rs.getString("email"));
+	                memberVO.setJoinDate(rs.getString("joindate"));
+	                memberVO.setSubscribe(rs.getString("subscribe"));
+
+	                memberList.add(memberVO);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return memberList;
 	}
+
 }
