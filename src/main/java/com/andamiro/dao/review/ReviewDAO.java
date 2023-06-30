@@ -33,7 +33,7 @@ public class ReviewDAO {
 			while(rs.next()) {
 				ReviewVO rVo = new ReviewVO();
 				rVo.setRecipeId(rs.getInt("recipeid"));
-				rVo.setImg(rs.getString("img"));
+				rVo.setImg(rs.getString("reviewpicture"));
 				rVo.setRecipeName(rs.getString("recipename"));
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
@@ -84,7 +84,7 @@ public class ReviewDAO {
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
 				rVo.setRegdate(rs.getTimestamp("regdate"));
-				rVo.setImg(rs.getString("img"));
+				rVo.setImg(rs.getString("reviewpicture"));
 			}
 			
 		} catch (SQLException e) {
@@ -184,7 +184,7 @@ public class ReviewDAO {
 				ReviewVO rVo = new ReviewVO();
 				rVo.setRecipeId(rs.getInt("recipeid"));
 				rVo.setImg(rs.getString("reviewpicture"));
-				rVo.setRecipeName(rs.getString("recipeid"));
+				rVo.setRecipeName(rs.getString("recipename"));
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
 				rVo.setRegdate(rs.getTimestamp("regdate"));
