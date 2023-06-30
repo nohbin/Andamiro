@@ -20,7 +20,7 @@ public class ReviewDAO {
 		
 	}
 	public List<ReviewVO> selectAllReviews(){
-		String sql = "select * from review order by recipeid desc";
+		String sql = "select * from andamiroreview order by recipeid desc";
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -33,7 +33,7 @@ public class ReviewDAO {
 			while(rs.next()) {
 				ReviewVO rVo = new ReviewVO();
 				rVo.setRecipeId(rs.getInt("recipeid"));
-				rVo.setImg(rs.getString("img"));
+				rVo.setImg(rs.getString("reviewpicture"));
 				rVo.setRecipeName(rs.getString("recipename"));
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
@@ -43,14 +43,12 @@ public class ReviewDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			DBManager.close(conn, stmt, rs);
 		}
 		System.out.println(list);
 		return list;
 	} 
 	public void deleteMyreview(String recipeid) {
-		String sql = "delete review where recipeid=?";
+		String sql = "delete andamiroreview where recipeid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -66,7 +64,7 @@ public class ReviewDAO {
 		}
 	}
 	public  ReviewVO selectOneBoradByNum(String recipeid) {
-		String sql = "select * from review where recipeid=?";
+		String sql = "select * from andamiroreview where recipeid=?";
 		ReviewVO rVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -86,7 +84,7 @@ public class ReviewDAO {
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
 				rVo.setRegdate(rs.getTimestamp("regdate"));
-				rVo.setImg(rs.getString("img"));
+				rVo.setImg(rs.getString("reviewpicture"));
 			}
 			
 		} catch (SQLException e) {
@@ -97,7 +95,7 @@ public class ReviewDAO {
 		
 	}
 	public void updateReview(ReviewVO rVo) {
-	    String sql = "update review set recipeid=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
+	    String sql = "update andamiroreview set recipeid=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    
@@ -170,6 +168,37 @@ public class ReviewDAO {
 		}
 		return list;
 	}
+	public List<ReviewVO> selectAllReviewsByMemberId(String memberId) {
+		String sql = "select * from andamiroreview where id = ? order by recipeid desc";
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			System.out.println("성공");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReviewVO rVo = new ReviewVO();
+				rVo.setRecipeId(rs.getInt("recipeid"));
+				rVo.setImg(rs.getString("reviewpicture"));
+				rVo.setRecipeName(rs.getString("recipename"));
+				rVo.setReview(rs.getString("review"));
+				rVo.setRecipegrade(rs.getInt("recipegrade"));
+				rVo.setRegdate(rs.getTimestamp("regdate"));
+				list.add(rVo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(list);
+		return list;
+	} 
+	
+	
 	
 
 }

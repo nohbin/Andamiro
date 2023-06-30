@@ -15,12 +15,11 @@ public class SearchRecipeAction implements RecipeAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-	    String url = "/search/searchlist.jsp";
+	    String url = "/recipe/recipe-list.jsp";
 	    RecipeDAO mainSearchDao = RecipeDAO.getInstance();
         String recipename = request.getParameter("recipename");
         List<RecipeVO> searchList = mainSearchDao.searchRecipe(recipename);
-        System.out.println("searchList 뭐있냐" + searchList);
-        request.setAttribute("searchList", searchList);
+        request.setAttribute("recipeList", searchList);
         request.getRequestDispatcher(url).forward(request, response);
 
 	}
