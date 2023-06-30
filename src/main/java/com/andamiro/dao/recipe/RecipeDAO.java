@@ -187,7 +187,8 @@ public class RecipeDAO {
 
 		try (Connection conn = DBManager.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE WHERE RECIPEID = ?");
-				PreparedStatement pstmtDetail = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE_DETAIL WHERE RECIPEID = ?");
+				PreparedStatement pstmtDetail = conn
+						.prepareStatement("SELECT * FROM ANDAMIRORECIPE_DETAIL WHERE RECIPEID = ?");
 				PreparedStatement pstmtPic = conn.prepareStatement("SELECT * FROM RECIPEPICTURE WHERE RECIPEID = ?");
 				PreparedStatement pstmtOrder = conn.prepareStatement("SELECT * FROM RECIPEORDER WHERE RECIPEID = ?");
 				PreparedStatement pstmtIngre = conn.prepareStatement("SELECT * FROM RECIPEINGRE WHERE RECIPEID = ?");) {
@@ -306,9 +307,7 @@ public class RecipeDAO {
 				+ "(select recipeid from andamirorecipe_detail where recipemainingre = ?) order by RECIPEREGDATE desc";
 
 		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection(); 
-			 PreparedStatement pstmt = conn.prepareStatement(sql);) 
-		{
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, mainIngre);
 			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
@@ -340,9 +339,7 @@ public class RecipeDAO {
 				+ "(select recipeid from andamirorecipe_detail where recipehow = ?) order by RECIPEREGDATE desc";
 
 		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement(sql);) 
-		{
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, how);
 
 			try (ResultSet rs = pstmt.executeQuery();) {
@@ -375,8 +372,7 @@ public class RecipeDAO {
 				+ "(select recipeid from andamirorecipe_detail where recipekind = ? ) order by RECIPEREGDATE desc";
 
 		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement(sql);)
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);)
 
 		{
 			pstmt.setInt(1, kind);
@@ -451,11 +447,16 @@ public class RecipeDAO {
 
 	public void updateRecipeByRecipeId(int recipeId, RecipeVO recipeVO) {
 		try (Connection conn = DBManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement("UPDATE ANDAMIRORECIPE SET recipeName = ?, mainPicture = ?, recipetag1 = ?, recipetag2 = ?, recipetag3 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtPic = conn.prepareStatement("UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtIngre = conn.prepareStatement("UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtOrder = conn.prepareStatement("UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtDetail = conn.prepareStatement("UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? WHERE RECIPEID = ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(
+						"UPDATE ANDAMIRORECIPE SET recipeName = ?, mainPicture = ?, recipetag1 = ?, recipetag2 = ?, recipetag3 = ? WHERE RECIPEID = ?");
+				PreparedStatement pstmtPic = conn.prepareStatement(
+						"UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?");
+				PreparedStatement pstmtIngre = conn.prepareStatement(
+						"UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?");
+				PreparedStatement pstmtOrder = conn.prepareStatement(
+						"UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?");
+				PreparedStatement pstmtDetail = conn.prepareStatement(
+						"UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? WHERE RECIPEID = ?")) {
 			// 안다미로레시피 업데이트
 			pstmt.setString(1, recipeVO.getRecipeName());
 			pstmt.setString(2, recipeVO.getMainPicture());
@@ -502,7 +503,7 @@ public class RecipeDAO {
 			pstmtOrder.setInt(6, recipeId);
 			pstmtOrder.executeUpdate();
 
-			//상세 레시피 업데이트
+			// 상세 레시피 업데이트
 			RecipeDetailVO recipeDetailVO = recipeVO.getRecipeDetailVO();
 			pstmtDetail.setInt(1, recipeDetailVO.getRecipeHow());
 			pstmtDetail.setInt(2, recipeDetailVO.getRecipeKind());
@@ -521,8 +522,7 @@ public class RecipeDAO {
 	public List<RecipeKindVO> selectAllRecipeKind() {
 		// TODO Auto-generated method stub
 		List<RecipeKindVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection(); 
-			 Statement stmt = conn.createStatement();) {
+		try (Connection conn = DBManager.getConnection(); Statement stmt = conn.createStatement();) {
 			try (ResultSet rs = stmt.executeQuery("select * from RECIPEKIND");) {
 				while (rs.next()) {
 					RecipeKindVO recipeKindVO = new RecipeKindVO();
@@ -541,8 +541,8 @@ public class RecipeDAO {
 		List<RecipeHowVO> list = new ArrayList<>();
 
 		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM RECIPEHOW");
-			 ResultSet rs = pstmt.executeQuery()) {
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM RECIPEHOW");
+				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
 				RecipeHowVO recipeHowVO = new RecipeHowVO();
 				recipeHowVO.setRecipeHowId(rs.getInt("RECIPEHOWID"));
@@ -560,8 +560,8 @@ public class RecipeDAO {
 		List<RecipeMainIngreVO> list = new ArrayList<>();
 
 		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM RECIPEMAININGRE");
-			 ResultSet rs = pstmt.executeQuery()) {
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM RECIPEMAININGRE");
+				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
 				RecipeMainIngreVO recipeMainIngreVO = new RecipeMainIngreVO();
 				recipeMainIngreVO.setRecipeIngreId(rs.getInt("RECIPEINGREID"));
@@ -581,8 +581,7 @@ public class RecipeDAO {
 		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY recipeid) NUM, A.* FROM andamirorecipe A ORDER BY recipeid) "
 				+ "WHERE NUM BETWEEN ? AND ?";
 
-		try (Connection conn = DBManager.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -614,8 +613,7 @@ public class RecipeDAO {
 		String sql = "SELECT * FROM andamirorecipe WHERE recipeid IN (SELECT recipeid FROM submemberrecipe WHERE subnumber = ?)";
 		List<RecipeVO> list = new ArrayList<>();
 
-		try (Connection conn = DBManager.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, subNumber);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
@@ -647,8 +645,7 @@ public class RecipeDAO {
 	public void updateRecipeGradeByRecipeId(int recipeId) {
 		String sql = "UPDATE andamirorecipe SET recipegrade = (SELECT TO_CHAR(AVG(recipegrade), 'FM999999990.00') FROM andamiroreview WHERE recipeid = ?) WHERE recipeid = ?";
 
-		try (Connection conn = DBManager.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, recipeId);
 			pstmt.setInt(2, recipeId);
 			pstmt.executeUpdate();
@@ -660,8 +657,7 @@ public class RecipeDAO {
 	public void updateReviewCountByRecipeId(int recipeId) {
 		String sql = "UPDATE andamirorecipe SET reviewcount = (SELECT COUNT(recipeid) FROM andamiroreview WHERE recipeid = ?) WHERE recipeid = ?";
 
-		try (Connection conn = DBManager.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, recipeId);
 			pstmt.setInt(2, recipeId);
 			pstmt.executeUpdate();
@@ -669,34 +665,36 @@ public class RecipeDAO {
 			e.printStackTrace();
 		}
 	}
+
 	public List<RecipeVO> searchRecipe(String recipename) {
-    	String sql = "SELECT * FROM andamirorecipe WHERE recipename LIKE ?";
-    	List<RecipeVO> list = new ArrayList<RecipeVO>();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-      
-        try {
-            conn = DBManager.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "%" + recipename + "%");
-            rs = pstmt.executeQuery();
-            System.out.println("성공"+conn);
-            System.out.println("rs"+rs);
-            System.out.println("list"+list);
-            System.out.println("recipename1"+recipename);
-            while (rs.next()) {
-            	RecipeVO mainSearchVO = new RecipeVO();
-                mainSearchVO.setRecipeName(rs.getString("recipename"));
-                list.add(mainSearchVO);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBManager.close(conn, pstmt, rs);
-        }
-        return list;
-    }
-	
+		String sql = "SELECT * FROM andamirorecipe WHERE recipename LIKE ?";
+		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + recipename + "%");
+			try (ResultSet rs = pstmt.executeQuery();) {
+				while (rs.next()) {
+					RecipeVO recipeVO = new RecipeVO();
+					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+					recipeVO.setUserId(rs.getString("USERID"));
+					list.add(recipeVO);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 }

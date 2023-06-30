@@ -1,8 +1,6 @@
 package com.andamiro.controller.review;
 
 import com.andamiro.controller.action.ReviewAction;
-import com.andamiro.controller.main.MainRecipeAction;
-import com.andamiro.controller.main.MainSearchAction;
 
 
 public class ReviewActionFactory {
