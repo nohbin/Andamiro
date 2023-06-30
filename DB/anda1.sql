@@ -27,7 +27,7 @@ CREATE TABLE andamiroRecipe (
 	recipeCompetition   NUMBER		    NULL,
     recipeDetailID      NUMBER          NOT NULL,
     recipeRegDate       date            default sysdate,
-	reviewcount	NUUMBER,
+	reviewcount	NUMBER,
 	userid		VARCHAR(255)
 );
 
