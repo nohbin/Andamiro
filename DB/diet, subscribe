@@ -1,28 +1,4 @@
 --시퀀스 생성
-CREATE SEQUENCE subNum_seq
-INCREMENT BY 1 
-START WITH 1
-MINVALUE 1
-MAXVALUE 99999
-NOCYCLE
-CACHE 30 ORDER; 
-
-CREATE SEQUENCE dietNum_seq
-INCREMENT BY 1 
-START WITH 1
-MINVALUE 1
-MAXVALUE 99999
-NOCYCLE
-CACHE 30 ORDER;  
-
-CREATE SEQUENCE dietDetailID_seq
-INCREMENT BY 1 
-START WITH 1
-MINVALUE 1
-MAXVALUE 99999
-NOCYCLE
-CACHE 30 ORDER; 
-
 CREATE SEQUENCE  dietNum_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE   subNum_seq START WITH 1 INCREMENT BY 1 nocache;
 CREATE SEQUENCE   dietDetailID_seq START WITH 1 INCREMENT BY 1 nocache;
@@ -32,9 +8,9 @@ CREATE SEQUENCE   dietDetailID_seq START WITH 1 INCREMENT BY 1 nocache;
 
 CREATE TABLE subscribeMember (
     	subNumber          NUMBER(5)    PRIMARY KEY,
-    	membernumber    NUMBER(5),
-    	sub_start             DATE  DEFAULT  SYSDATE,
-   	sub_end 		DATE  DEFAULT  (SYSDATE + INTERVAL '30' DAY)
+    	membernumber   	   NUMBER(5),
+    	sub_start          DATE        DEFAULT  SYSDATE,
+   	sub_end 	   DATE  DEFAULT  (SYSDATE + INTERVAL '30' DAY)
 );
 
 CREATE TABLE subMemberDiet (
@@ -77,6 +53,9 @@ alter table subscribeMember add CONSTRAINT fk_memberNumber FOREIGN KEY (memberNu
 alter table diet add CONSTRAINT fk_subNumber FOREIGN KEY (subNumber) REFERENCES subscribeMember(subNumber);
 alter table dietDetail add CONSTRAINT fk_dietNumber FOREIGN KEY (dietNumber) REFERENCES diet(dietNumber);
 
+--userid 컬럼 추가
+ALTER TABLE subscribeMember
+ADD USERID VARCHAR2(255);
 
 
 
