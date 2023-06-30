@@ -571,8 +571,104 @@ public class RecipeDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-        return list;
-    }
+
+		return list;
+	}
+
+	public List<RecipeVO> selectRecipeByPage(int start, int end) {
+		List<RecipeVO> lists = new ArrayList<>();
+
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY recipeid) NUM, A.* FROM andamirorecipe A ORDER BY recipeid) "
+				+ "WHERE NUM BETWEEN ? AND ?";
+
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					RecipeVO recipeVO = new RecipeVO();
+					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+					recipeVO.setUserId(rs.getString("USERID"));
+					lists.add(recipeVO);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+
+	public List<RecipeVO> selectAllRecipeBySubNumber(int subNumber) {
+		String sql = "SELECT * FROM andamirorecipe WHERE recipeid IN (SELECT recipeid FROM submemberrecipe WHERE subnumber = ?)";
+		List<RecipeVO> list = new ArrayList<>();
+
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, subNumber);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					RecipeVO recipeVO = new RecipeVO();
+					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+					recipeVO.setUserId(rs.getString("USERID"));
+					recipeVO.setReviewCount(rs.getInt("REVIEWCOUNT"));
+					list.add(recipeVO);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public void updateRecipeGradeByRecipeId(int recipeId) {
+		String sql = "UPDATE andamirorecipe SET recipegrade = (SELECT TO_CHAR(AVG(recipegrade), 'FM999999990.00') FROM andamiroreview WHERE recipeid = ?) WHERE recipeid = ?";
+
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, recipeId);
+			pstmt.setInt(2, recipeId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateReviewCountByRecipeId(int recipeId) {
+		String sql = "UPDATE andamirorecipe SET reviewcount = (SELECT COUNT(recipeid) FROM andamiroreview WHERE recipeid = ?) WHERE recipeid = ?";
+
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, recipeId);
+			pstmt.setInt(2, recipeId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public List<RecipeVO> searchRecipe(String recipename) {
     	String sql = "SELECT * FROM andamirorecipe WHERE recipename LIKE ?";
     	List<RecipeVO> list = new ArrayList<RecipeVO>();
@@ -601,4 +697,6 @@ public class RecipeDAO {
         }
         return list;
     }
+	
+
 }

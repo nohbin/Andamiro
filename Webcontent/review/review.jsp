@@ -80,7 +80,7 @@ img {
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br> <br>${review.num }</th>
+							<th scope="row"><br> <br>${review.id }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
 									src= ${review.img }></a></th>
 							<td class=""><br> <br> <b>${review.title}</b></td>

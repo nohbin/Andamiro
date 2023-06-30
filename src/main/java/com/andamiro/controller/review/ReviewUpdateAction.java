@@ -31,17 +31,6 @@ public class ReviewUpdateAction implements ReviewAction {
 	        new MyreviewListAction().execute(request, response);
 		
 
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReviewVO rVo = new ReviewVO();
-		rVo.setRecipeId(Integer.parseInt(request.getParameter("num")));
-		rVo.setUserId(request.getParameter("title"));
-		rVo.setReview(request.getParameter("review"));
-		rVo.setRecipegrade(Integer.parseInt(request.getParameter("recipegrade")));
-		rVo.setRegdate(null);
-		rVo.setImg(request.getParameter("img"));
-		ReviewDAO rDao = ReviewDAO.getInstance();
-		rDao.updateReview(rVo);
-		new ReviewListAction().execute(request, response);
 	}
 
 }

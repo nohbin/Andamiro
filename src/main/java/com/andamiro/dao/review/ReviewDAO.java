@@ -143,7 +143,33 @@ public class ReviewDAO {
 		}
 		
 	}
-
+	public List<ReviewVO> selectAllReviewsByRecipeID(int recipID) {
+		// TODO Auto-generated method stub
+		String sql = "select * from andamiroreview where recipeid = ?";
+		ReviewVO reviewVO = null;
+		List<ReviewVO> list = new ArrayList<>();
+		try {
+			Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipID);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				reviewVO = new ReviewVO();
+				reviewVO.setRecipeId(rs.getInt("recipeid"));
+				reviewVO.setUserId(rs.getString("id"));
+				reviewVO.setImg(rs.getString("reviewpicture"));
+				reviewVO.setRegdate(rs.getTimestamp("regdate"));
+				reviewVO.setReview(rs.getString("review"));
+				reviewVO.setRecipegrade(rs.getInt("recipegrade"));
+				list.add(reviewVO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 
 }

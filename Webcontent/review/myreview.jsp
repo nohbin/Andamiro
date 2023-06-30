@@ -82,7 +82,7 @@
         <tbody>
         <c:forEach var="review" items="${reviewList}">
           <tr>
-            <th scope="row"> <a href="recipe_Detail.html"><br>${review.num }</a></th>
+            <th scope="row"> <a href="recipe_Detail.html"><br>${review.id }</a></th>
             <td class=""><br><b>${review.title }</b></td>
             <td><a href="#"><br><br>2,320건</a></td>
             <td ></td>
