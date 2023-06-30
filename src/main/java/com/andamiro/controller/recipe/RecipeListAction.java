@@ -23,7 +23,7 @@ public class RecipeListAction implements RecipeAction {
 		List<RecipeVO> recipeList = null;
 		
 		if(request.getParameter("mainingre") != null) {
-			int mainIngre = Integer.parseInt(request.getParameter("mainingre"));
+			int mainIngre = Integer.parseInt(request.getParameter("mainIngre"));
 			recipeList = recipeDAO.selectAllRecipeByMainIngre(mainIngre);
 			System.out.println(mainIngre);
 		}else if(request.getParameter("how")!=null) {

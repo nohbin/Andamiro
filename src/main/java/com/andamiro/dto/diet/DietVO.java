@@ -8,6 +8,14 @@ public class DietVO {
 	private String diet_picture;
 	private dietDetailVO dietDetailVO;
 	
+	
+	
+	public dietDetailVO getDietDetailVO() {
+		return dietDetailVO;
+	}
+	public void setDietDetailVO(dietDetailVO dietDetailVO) {
+		this.dietDetailVO = dietDetailVO;
+	}
 	public int getDietNumber() {
 		return dietNumber;
 	}
