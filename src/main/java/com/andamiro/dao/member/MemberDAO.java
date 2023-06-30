@@ -12,7 +12,7 @@ import com.andamiro.utill.DBManager;
 
 public class MemberDAO {
 	private static MemberDAO instance;
-
+	private MemberDAO() {}
 	public static MemberDAO getInstance() {
 		if (instance == null) {
 			instance = new MemberDAO();

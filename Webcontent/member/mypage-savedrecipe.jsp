@@ -61,7 +61,7 @@ img {
 							<span> ${recipe.recipetag3 } </span>
 						</div>
 						<div class="">
-							<b><span id="doc">댓글수 : ? </span></b>
+							<b><span id="doc">댓글수 : ${recipe.reviewCount } </span></b>
 							<div class="vr"></div>
 							<b><span id="doc">조회수 : ${recipe.recipeView }</span></b>
 							<div class="vr"></div>

@@ -33,6 +33,7 @@ public class ReviewWriteAction implements ReviewAction {
 		
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		recipeDAO.updateRecipeGradeByRecipeId(recipeId);
+		recipeDAO.updateReviewCountByRecipeId(recipeId);
 		
 		request.setAttribute("recipeId", recipeId);
 		request.getRequestDispatcher("review/reviewwirtesuccess.jsp").forward(request, response);

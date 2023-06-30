@@ -6,8 +6,7 @@
         driverClassName="oracle.jdbc.OracleDriver"
         url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
         username="scott" 
-        password="tiger"
-        maxActive = "100" 
+        password="tiger" 
         maxTotal="100" 
         maxIdle="100"
         maxWaitMillis="-1"/>
