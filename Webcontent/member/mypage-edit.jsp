@@ -109,24 +109,31 @@ img {
                         <div class="invalid-feedback">
                             개인정보 수집 및 이용 동의에 체크 해주세요.
                         </div><br>
-                        <button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="validateForm()">수정 완료</button>
+                        <button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="return validateForm()">수정 완료</button>
                     </div>
                     <div class="mb-5"></div>
                 </form>
             </div>
         </div>
         <script>
-            function validateForm() {
-                const form = document.querySelector('.validation-form');
-
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add('was-validated');
-            }
-        </script>
+		    function validateForm() {
+		        const form = document.querySelector('.validation-form');
+		        const password = document.getElementById('password').value;
+		        const passwordConfirm = document.getElementById('passwordconfirm').value;
+		
+		        if (password !== passwordConfirm) {
+		            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		            return false;
+		        }
+		
+		        if (form.checkValidity() === false) {
+		            event.preventDefault();
+		            event.stopPropagation();
+		        }
+		
+		        form.classList.add('was-validated');
+		    }
+		</script>
     </div>
 	
 

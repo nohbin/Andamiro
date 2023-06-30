@@ -16,11 +16,11 @@ public class ReviewUpdateAction implements ReviewAction {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ReviewVO rVo = new ReviewVO();
-		rVo.setNum(Integer.parseInt(request.getParameter("num")));
-		rVo.setTitle(request.getParameter("title"));
+		rVo.setRecipeId(Integer.parseInt(request.getParameter("num")));
+		rVo.setUserId(request.getParameter("title"));
 		rVo.setReview(request.getParameter("review"));
 		rVo.setRecipegrade(Integer.parseInt(request.getParameter("recipegrade")));
-		rVo.setJoindate(null);
+		rVo.setRegdate(null);
 		rVo.setImg(request.getParameter("img"));
 		ReviewDAO rDao = ReviewDAO.getInstance();
 		rDao.updateReview(rVo);

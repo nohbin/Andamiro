@@ -24,7 +24,11 @@
 				<td colspan="10" style="border: white; text-align: right">
 			</tr>
 			<tr class="text-center">
-				<th>구독번호</th><th>회원번호</th><th>회원 아이디</th><th>구독시작일</th><th>구독종료일</th>
+				<th>구독번호</th>
+				<th>회원번호</th>
+				<th>회원 아이디</th>
+				<th>구독시작일</th>
+				<th>구독종료일</th>
 			</tr>
 			<c:forEach var="subscribe" items="${submemList }">
 				<tr class="record text-center">
@@ -36,6 +40,27 @@
 				</tr>
 			</c:forEach>
 		 </table>
+		 <div class="d-flex justify-content-center">
+	        <nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${currentPage - 1 }"/>" aria-label="이전" tabindex="-1">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${status.count }"/>">${status.count }</a>
+						</li>
+					</c:forEach>
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${currentPage + 1 }"/>" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+    	</div>
 	</div>
 	<div style="height: 7rem;"></div>
 <jsp:include page="../../footer.jsp"></jsp:include>		

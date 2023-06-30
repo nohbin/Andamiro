@@ -58,6 +58,7 @@ public class BoardPagingMemberAction implements BoardAction{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("totalPages", totalPages);
 		
+	
 		String url = "/admin/adminmainpage.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}

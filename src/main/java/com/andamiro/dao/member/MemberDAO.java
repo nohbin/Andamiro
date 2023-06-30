@@ -12,7 +12,7 @@ import com.andamiro.utill.DBManager;
 
 public class MemberDAO {
 	private static MemberDAO instance;
-
+	private MemberDAO() {}
 	public static MemberDAO getInstance() {
 		if (instance == null) {
 			instance = new MemberDAO();
@@ -131,7 +131,6 @@ public class MemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
-		System.out.println("업데이트문 종료");
 	}
 
 	public List<MemberVO> selectAllMember() {

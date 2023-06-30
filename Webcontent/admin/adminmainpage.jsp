@@ -25,7 +25,9 @@ a {
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	
+
 	<jsp:include page="adminheader.jsp"></jsp:include>
+
     <div style="height: 3rem;"></div>
     <div class="container">
         <div class="container d-flex flex-wrap justify-content-center">

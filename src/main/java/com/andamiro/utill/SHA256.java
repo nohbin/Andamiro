@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class SHA256 {
 
-	private final static String mSalt = "코스";
+	private final static String mSalt = "An안da다";
 
 	public static String encodeSha256(String source) {
 		String result = "";

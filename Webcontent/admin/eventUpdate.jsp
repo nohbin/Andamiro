@@ -38,7 +38,7 @@
 			<br><br>
 				<input type="submit" value="등록" onclick="return eventWriteCheck()"> 
 				<input type="reset"	value="다시 작성"> 
-				<input type="button" value="목록" onclick="location.href='EventServlet?command=event_list'">
+				<input type="button" value="목록" onclick="location.href='../EventServlet?command=event_list'">
 			</form>
 			
 	</div>

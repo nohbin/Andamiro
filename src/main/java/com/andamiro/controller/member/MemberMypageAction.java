@@ -20,6 +20,8 @@ public class MemberMypageAction implements MemberAction {
 		int memberNumber = Integer.parseInt(request.getParameter("memberNumber"));
 		List<RecipeVO> recipeList = recipeDAO.selectAllRecipeByMemberNumber(memberNumber);
 		
+		
+		
 		String url = "/member/mypage.jsp";
 		request.setAttribute("recipeList", recipeList);
 		request.getRequestDispatcher(url).forward(request, response);

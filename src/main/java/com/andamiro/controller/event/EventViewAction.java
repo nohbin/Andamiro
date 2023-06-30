@@ -19,11 +19,11 @@ public class EventViewAction implements Action{
 		
 		String eventno=request.getParameter("eventno");
 		
-		EventDAO eDao= EventDAO.getInstance();
+		EventDAO eventDAO= EventDAO.getInstance();
 		
-		EventVO eVO = eDao.selectOneEventByEventNumber(eventno);
+		EventVO eventVO = eventDAO.selectOneEventByEventNumber(eventno);
 		
-		request.setAttribute("event",eVO);
+		request.setAttribute("eventview",eventVO);
 		
 		
 		
