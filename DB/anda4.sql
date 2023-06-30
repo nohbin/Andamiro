@@ -25,10 +25,10 @@ insert into recipemainingre values(99,'기타');
 
 --diet 데이터 추가문
 insert into diet values(dietNum_seq.NEXTVAL,'','추천식단','아침','rec1.png'); 
-insert into diet values(dietNum_seq.NEXTVAL,'','추천식단','점심','rec1.png');
-insert into diet values(dietNum_seq.NEXTVAL,'','추천식단','저녁','rec1.png');
+insert into diet values(dietNum_seq.NEXTVAL,'','추천식단','점심','rec2.png');
+insert into diet values(dietNum_seq.NEXTVAL,'','추천식단','저녁','rec3.png');
 insert into diet values(dietNum_seq.NEXTVAL,'','간단식단','양파계란덮밥','simple1.png'); 
-insert into diet values(dietNum_seq.NEXTVAL,'','간단식단','냉라면','simple2.png');
+insert into diet values(dietNum_seq.NEXTVAL,'','간단식단','냉라면','simple2.jpg');
 insert into diet values(dietNum_seq.NEXTVAL,'','간단식단','단호박에그슬럿','simple3.png');
 insert into diet values(dietNum_seq.NEXTVAL,'','저칼로리식단','양배추 오코노미야끼','low1.png'); 
 insert into diet values(dietNum_seq.NEXTVAL,'','저칼로리식단','두부유부초밥','low2.png');
