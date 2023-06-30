@@ -176,7 +176,6 @@ public class RecipeDAO {
 				recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 				recipeVO.setUserId(rs.getString("USERID"));
 				list.add(recipeVO);
-				System.out.println(rs.getInt("RECIPEID") + " 의 평점은 : " + rs.getString("RECIPEGRADE"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,125 +183,143 @@ public class RecipeDAO {
 		return list;
 	}
 
-	public RecipeVO selectOneRecipeByID(int recipID) {
-		// TODO Auto-generated method stub
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "select * from ANDAMIRORECIPE where RECIPEID = ?";
-		RecipeVO recipeVO = null;
-		RecipeDetailVO recipeDetailVO = null;
-		RecipePicVO recipePicVo = null;
-		RecipeOrderVO recipeOrderVo = null;
-		RecipeIngreVO recipeIngreVO = null;
-
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				recipeVO = new RecipeVO();
-				recipeVO.setRecipeID(rs.getInt("RECIPEID"));
-				recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
-				recipeVO.setRecipeName(rs.getString("RECIPENAME"));
-				recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
-				recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
-				recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
-				recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
-				recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
-				recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-				recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
-				recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-				recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
-				recipeVO.setUserId(rs.getString("USERID"));
-			}
-
-			// 레시피 디테일 받아오기
-			sql = "select * from ANDAMIRORECIPE_DETAIL where RECIPEID = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				recipeDetailVO = new RecipeDetailVO();
-				recipeDetailVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-				recipeDetailVO.setRecipeID(rs.getInt("RECIPEID"));
-				recipeDetailVO.setRecipeHow(rs.getInt("RECIPEHOW"));
-				recipeDetailVO.setRecipeKind(rs.getInt("RECIPEKIND"));
-				recipeDetailVO.setRecipeMainIngre(rs.getInt("RECIPEMAININGRE"));
-				recipeDetailVO.setRecipeDiscription(rs.getString("RECIPEDISCRIPTION"));
-				recipeDetailVO.setRecipeforperson(rs.getString("RECIPEFORPERSON"));
-				recipeDetailVO.setRecipefortime(rs.getString("RECIPEFORTIME"));
-				recipeDetailVO.setRecipeforlevel(rs.getString("RECIPEFORLEVEL"));
-			}
-
-			// 레시피 사진 받아오기
-			sql = "select * from RECIPEPICTURE where RECIPEID = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				recipePicVo = new RecipePicVO();
-				recipePicVo.setRecipePicid(rs.getInt("RECIPEPICID"));
-				recipePicVo.setRecipeId(rs.getInt("RECIPEID"));
-				recipePicVo.setPic01(rs.getString("PIC01"));
-				recipePicVo.setPic02(rs.getString("PIC02"));
-				recipePicVo.setPic03(rs.getString("PIC03"));
-				recipePicVo.setPic04(rs.getString("PIC04"));
-				recipePicVo.setPic05(rs.getString("PIC05"));
-			}
-
-			// 레시피 순서 받아오기
-			sql = "select * from RECIPEORDER where RECIPEID = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				recipeOrderVo = new RecipeOrderVO();
-				recipeOrderVo.setRecipeOrderId(rs.getInt("RECIPEORDERID"));
-				recipeOrderVo.setRecipeId(rs.getInt("RECIPEID"));
-				recipeOrderVo.setOrder01(rs.getString("ORDER01"));
-				recipeOrderVo.setOrder02(rs.getString("ORDER02"));
-				recipeOrderVo.setOrder03(rs.getString("ORDER03"));
-				recipeOrderVo.setOrder04(rs.getString("ORDER04"));
-				recipeOrderVo.setOrder05(rs.getString("ORDER05"));
-			}
-
-			// 레시피 재료 받아오기
-			sql = "select * from RECIPEINGRE where RECIPEID = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, recipID);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				recipeIngreVO = new RecipeIngreVO();
-				recipeIngreVO.setIngreid(rs.getInt("INGREID"));
-				recipeIngreVO.setRecipeId(rs.getInt("RECIPEID"));
-				recipeIngreVO.setIngre01(rs.getString("INGRE01"));
-				recipeIngreVO.setIngre02(rs.getString("INGRE02"));
-				recipeIngreVO.setIngre03(rs.getString("INGRE03"));
-				recipeIngreVO.setIngre04(rs.getString("INGRE04"));
-				recipeIngreVO.setIngre05(rs.getString("INGRE05"));
-				recipeIngreVO.setIngre06(rs.getString("INGRE06"));
-				recipeIngreVO.setIngre07(rs.getString("INGRE07"));
-				recipeIngreVO.setIngre08(rs.getString("INGRE08"));
-				recipeIngreVO.setIngre09(rs.getString("INGRE09"));
-				recipeIngreVO.setIngre10(rs.getString("INGRE10"));
-				recipeIngreVO.setIngre11(rs.getString("INGRE11"));
-				recipeIngreVO.setIngre12(rs.getString("INGRE12"));
-			}
-
-			recipeDetailVO.setRecipePicVO(recipePicVo);
-			recipeDetailVO.setRecipeOrderVO(recipeOrderVo);
-			recipeDetailVO.setRecipeingreVO(recipeIngreVO);
-
-			recipeVO.setRecipeDetailVO(recipeDetailVO);
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		return recipeVO;
+	public RecipeVO selectOneRecipeByID(int recipeID) {
+	    RecipeVO recipeVO = null;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        conn = DBManager.getConnection();
+	        
+	        // 레시피 정보 쿼리
+	        String recipeSql = "SELECT * FROM ANDAMIRORECIPE WHERE RECIPEID = ?";
+	        pstmt = conn.prepareStatement(recipeSql);
+	        pstmt.setInt(1, recipeID);
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            recipeVO = new RecipeVO();
+	            recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+	            recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+	            recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+	            recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+	            recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+	            recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+	            recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+	            recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+	            recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+	            recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+	            recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+	            recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+	            recipeVO.setUserId(rs.getString("USERID"));
+	        }
+	        
+	        if (recipeVO != null) {
+	            // 레시피 디테일 쿼리
+	            String recipeDetailSql = "SELECT * FROM ANDAMIRORECIPE_DETAIL WHERE RECIPEID = ?";
+	            pstmt = conn.prepareStatement(recipeDetailSql);
+	            pstmt.setInt(1, recipeID);
+	            rs = pstmt.executeQuery();
+	            
+	            if (rs.next()) {
+	                RecipeDetailVO recipeDetailVO = new RecipeDetailVO();
+	                recipeDetailVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+	                recipeDetailVO.setRecipeID(rs.getInt("RECIPEID"));
+	                recipeDetailVO.setRecipeHow(rs.getInt("RECIPEHOW"));
+	                recipeDetailVO.setRecipeKind(rs.getInt("RECIPEKIND"));
+	                recipeDetailVO.setRecipeMainIngre(rs.getInt("RECIPEMAININGRE"));
+	                recipeDetailVO.setRecipeDiscription(rs.getString("RECIPEDISCRIPTION"));
+	                recipeDetailVO.setRecipeforperson(rs.getString("RECIPEFORPERSON"));
+	                recipeDetailVO.setRecipefortime(rs.getString("RECIPEFORTIME"));
+	                recipeDetailVO.setRecipeforlevel(rs.getString("RECIPEFORLEVEL"));
+	                
+	                // 레시피 사진 쿼리
+	                String recipePicSql = "SELECT * FROM RECIPEPICTURE WHERE RECIPEID = ?";
+	                pstmt = conn.prepareStatement(recipePicSql);
+	                pstmt.setInt(1, recipeID);
+	                ResultSet picRs = pstmt.executeQuery();
+	                
+	                if (picRs.next()) {
+	                    RecipePicVO recipePicVo = new RecipePicVO();
+	                    recipePicVo.setRecipePicid(picRs.getInt("RECIPEPICID"));
+	                    recipePicVo.setRecipeId(picRs.getInt("RECIPEID"));
+	                    recipePicVo.setPic01(picRs.getString("PIC01"));
+	                    recipePicVo.setPic02(picRs.getString("PIC02"));
+	                    recipePicVo.setPic03(picRs.getString("PIC03"));
+	                    recipePicVo.setPic04(picRs.getString("PIC04"));
+	                    recipePicVo.setPic05(picRs.getString("PIC05"));
+	                    recipeDetailVO.setRecipePicVO(recipePicVo);
+	                }
+	                
+	                // 레시피 순서 쿼리
+	                String recipeOrderSql = "SELECT * FROM RECIPEORDER WHERE RECIPEID = ?";
+	                pstmt = conn.prepareStatement(recipeOrderSql);
+	                pstmt.setInt(1, recipeID);
+	                ResultSet orderRs = pstmt.executeQuery();
+	                
+	                if (orderRs.next()) {
+	                    RecipeOrderVO recipeOrderVo = new RecipeOrderVO();
+	                    recipeOrderVo.setRecipeOrderId(orderRs.getInt("RECIPEORDERID"));
+	                    recipeOrderVo.setRecipeId(orderRs.getInt("RECIPEID"));
+	                    recipeOrderVo.setOrder01(orderRs.getString("ORDER01"));
+	                    recipeOrderVo.setOrder02(orderRs.getString("ORDER02"));
+	                    recipeOrderVo.setOrder03(orderRs.getString("ORDER03"));
+	                    recipeOrderVo.setOrder04(orderRs.getString("ORDER04"));
+	                    recipeOrderVo.setOrder05(orderRs.getString("ORDER05"));
+	                    recipeDetailVO.setRecipeOrderVO(recipeOrderVo);
+	                }
+	                
+	                // 레시피 재료 쿼리
+	                String recipeIngreSql = "SELECT * FROM RECIPEINGRE WHERE RECIPEID = ?";
+	                pstmt = conn.prepareStatement(recipeIngreSql);
+	                pstmt.setInt(1, recipeID);
+	                ResultSet ingreRs = pstmt.executeQuery();
+	                
+	                if (ingreRs.next()) {
+	                    RecipeIngreVO recipeIngreVO = new RecipeIngreVO();
+	                    recipeIngreVO.setIngreid(ingreRs.getInt("INGREID"));
+	                    recipeIngreVO.setRecipeId(ingreRs.getInt("RECIPEID"));
+	                    recipeIngreVO.setIngre01(ingreRs.getString("INGRE01"));
+	                    recipeIngreVO.setIngre02(ingreRs.getString("INGRE02"));
+	                    recipeIngreVO.setIngre03(ingreRs.getString("INGRE03"));
+	                    recipeIngreVO.setIngre04(ingreRs.getString("INGRE04"));
+	                    recipeIngreVO.setIngre05(ingreRs.getString("INGRE05"));
+	                    recipeIngreVO.setIngre06(ingreRs.getString("INGRE06"));
+	                    recipeIngreVO.setIngre07(ingreRs.getString("INGRE07"));
+	                    recipeIngreVO.setIngre08(ingreRs.getString("INGRE08"));
+	                    recipeIngreVO.setIngre09(ingreRs.getString("INGRE09"));
+	                    recipeIngreVO.setIngre10(ingreRs.getString("INGRE10"));
+	                    recipeIngreVO.setIngre11(ingreRs.getString("INGRE11"));
+	                    recipeIngreVO.setIngre12(ingreRs.getString("INGRE12"));
+	                    recipeDetailVO.setRecipeingreVO(recipeIngreVO);
+	                }
+	                
+	                recipeVO.setRecipeDetailVO(recipeDetailVO);
+	            }
+	        }
+	    } catch (Exception e) {
+	        // TODO: handle exception
+	    } finally {
+	        // 리소스 정리
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (pstmt != null) {
+	                pstmt.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return recipeVO;
 	}
+
 
 	public void updateViewCount(int recipID) {
 		// TODO Auto-generated method stub
