@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +8,7 @@
 <title>Document</title>
 <link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="../resources/css/main.css?ver=1">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
@@ -39,133 +39,130 @@ img {
 	<div class="container border mt-3 rounded-3 w-50">
 		<ul class="nav nav-pills nav-fill ">
 			<li class="nav-item"><a class="nav-link " style="color: black;"
-				aria-current="page" href="mypage.html">³» ·¹½ÃÇÇ</a></li>
+				aria-current="page" href="mypage.html">ë‚´ ë ˆì‹œí”¼</a></li>
 			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-save.html">ÀúÀå ·¹½ÃÇÇ</a></li>
+				href="mypage-save.html">ì €ì¥ ë ˆì‹œí”¼</a></li>
 			<li class="nav-item">
 				<div class="dropdown">
 					<a class="btn btn-secondary1 dropdown-toggle" href="#"
 						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> ¿ä¸® ÈÄ±â </a>
+						aria-expanded="false"> ìš”ë¦¬ í›„ê¸° </a>
 
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="mypage-review.html">³»°¡
-								³²±ä ÈÄ±â</a></li>
-						<li><a class="dropdown-item" href="mypage-myreview.html">³ªÀÇ
-								¿ä¸® ·¹½ÃÇÇ</a></li>
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=review">ë‚˜ì˜ ìš”ë¦¬ ë ˆì‹œí”¼</a></li>
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=myreview">ë‚´ê°€ ë‚¨ê¸´ í›„ê¸°</a></li>
+
 					</ul>
-				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">¿ä¸® ÈÄ±â</a> -->
+				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">ìš”ë¦¬ í›„ê¸°</a> -->
 			</li>
 			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-edit.html">È¸¿øÁ¤º¸ ¼öÁ¤</a></li>
+				href="mypage-edit.html">íšŒì›ì •ë³´ ìˆ˜ì •</a></li>
 		</ul>
 	</div>
 
-	<!-- ³» ·¹½ÃÇÇ ¸ñ·Ï -->
+	<!-- ë‚´ ë ˆì‹œí”¼ ëª©ë¡ -->
 	<div class="container text-center border mt-3 rounded-5">
 		<section class="container">
 			<table class="table justify-content-center mt-5 mb-5">
 				<thead>
 					<tr class="border-2 mt-3 ">
-						<th scope="col">¹øÈ£</th>
-						<th>·¹½ÃÇÇ »çÁø</th>
-						<th scope="col">·¹½ÃÇÇ Á¦¸ñ</th>
-						<th scope="col">³»¿ë</th>
-						<th scope="col">³» ÆòÁ¡</th>
-						<th scope="col">ÀÛ¼ºÀÏ</th>
-						<th scope="col">¼öÁ¤/»èÁ¦</th>
+						<th scope="col">ë²ˆí˜¸</th>
+						<th>ë ˆì‹œí”¼ ì‚¬ì§„</th>
+						<th scope="col">ë ˆì‹œí”¼ ì œëª©</th>
+						<th scope="col">ë‚´ìš©</th>
+						<th scope="col">ë‚´ í‰ì </th>
+						<th scope="col">ì‘ì„±ì¼</th>
+						<th scope="col">ìˆ˜ì •/ì‚­ì œ</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br>
-							<br>${review.num }</th>
+							<th scope="row"><br> <br>${review.id }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
-									src="../resources/img/morning.jpg"></a></th>
-							<td class=""><br>
-							<br>
-							<b>${review.title }</b></td>
-							<td><a href="#"><br>
-								<br>ÇÑ¿ì¼Ò°¥ºñÂò</a></td>
-							<td><br>
-							<br>
-							<b>${review.recipegrade} Á¡</b></td>
-							<td><br>
-							<br>${review.joindate}</td>
+									src= ${review.img }></a></th>
+							<td class=""><br> <br> <b>${review.title}</b></td>
+							<td><a href="#"><br> <br>${review.review}</a></td>
+							<td><br> <br> <b>${review.recipegrade} ì </b></td>
+							<td><br> <br>${review.joindate}</td>
 							<td><br>
 								
-								<form action="ReviewServlet" method="post">
-									<input type="hidden" name="command" value="myreview_update">
-									<input type="hidden" name="num" value="${review.num}">
-									<!-- ÈÄ±â ÀÛ¼º form -->
-									<button type="button" class="btn btn-primary"
-										data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-										¼öÁ¤</button>
-									<!--¸ğ´Ş-->
-									<div class="modal fade" id="staticBackdrop"
-										data-bs-backdrop="static" data-bs-keyboard="false"
-										tabindex="-1" aria-labelledby="staticBackdropLabel"
-										aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h1 class="modal-title fs-5" id="staticBackdropLabel">¾ÆÀÌµğ</h1>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<div class="form-floating w-50 mx-auto mb-2">
-														<select class="form-select" id="floatingSelect"
-															aria-label="Floating label select example" name="score">
-															<option selected>Á¡¼ö</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-														</select>
-													</div>
-													<div class="form-floating">
-														<textarea class="form-control" placeholder=""
-															id="floatingTextarea2" style="height: 200px"></textarea>
-														<label for="floatingTextarea2">ÈÄ±â¸¦ ÀÛ¼ºÇØ ÁÖ¼¼¿ä</label>
-													</div>
-													<div class="file-upload col-12">
-														<div class="image-upload-wrap">
-															<div class="drag-text">
-																<input class="file-upload-input" type='file'
-																	onchange="readURL(this);" accept="image/*" /> ÈÄ±â <br>»çÁø
-																µî·Ï
-															</div>
-														</div>
-														<div class="file-upload-content">
-															<img class="file-upload-image" src="#" alt="your image" />
-															<div class="image-title-wrap">
-																<button type="button" onclick="removeUpload(this)"
-																	class="remove-image">»èÁ¦</button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">´İ±â</button>
-												<input type="submit" class="btn btn-secondary" value="¼öÁ¤ÇÏ±â">
-												</div>
-												<script class="jsbin"
-													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-											</div>
+				<form action="ReviewServlet" method="post"  >
+				<input type="hidden" name="command" value="myreview_update">
+				<input type="hidden" name="num" value="${review.num}">
+				<!--í›„ê¸° ì‘ì„± form -->
+				<button type="button" class="btn btn-primary"
+					data-bs-toggle="modal" data-bs-target="#staticBackdrop_${review.num}">
+					ìˆ˜ì •</button>
+				<!-- ëª¨ë‹¬ -->
+				<div class="modal fade" id="staticBackdrop_${review.num}"
+					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel_${review.num}" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="staticBackdropLabel_${review.num}">
+									<b>ì‘ì„±ì : [${loginUser.id }] ë‹˜</b>
+								</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="form-floating w-50 mx-auto mb-2">
+									<select class="form-select" id="floatingSelect_${review.num}" 
+									aria-label="Floating label select example" name="recipegrade">
+										<option selected></option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select> <label for="floatingSelect_${review.num}">ì ìˆ˜</label>
+								</div>
+								<div class="form-floating">
+									<textarea class="form-control" placeholder="" 
+									id="floatingTextarea2_${review.num}" style="height: 200px" name="review" >${review.review }</textarea>
+									<label for="floatingTextarea2_${review.num}">ë ˆì‹œí”¼ í›„ê¸°ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”</label>
+								</div>
+								<div class="file-upload col-12">
+									<div class="image-upload-wrap">
+										<div class="drag-text">
+											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
+											í›„ê¸° <br>ì‚¬ì§„ ë“±ë¡
 										</div>
 									</div>
-									<button class="btn btn-primary" type="button" value="delete"
-										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">»èÁ¦</button>
-								</form>
+									<div class="file-upload-content">
+										<img class="file-upload-image" />
+										<div class="image-title-wrap">
+											<button type="button" onclick="removeUpload(this)"
+												class="remove-image">ì‚­ì œ</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ë‹«ê¸°</button>
+								<button type="submit" class="btn btn-secondary">ì‘ì„±í•˜ê¸°</button>
+							</div>
+						</div>
+					</div>
+				</div>
+								<button class="btn btn-primary" type="button" value="delete"
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">ì‚­ì œ</button>
+			</form>
 						</tr>
 					</c:forEach>
 
 
 					<script>
+   						
+					</script>
+
+
+					<script>
                                     let uploadIndex = 1;
 
                                     function createImageUpload() {
@@ -174,13 +171,13 @@ img {
                                         <div class="image-upload-wrap">
                                         <div class="drag-text">
                                         <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        »çÁø µî·Ï
+                                        ì‚¬ì§„ ë“±ë¡
                                         </div>
                                         </div>
                                         <div class="file-upload-content">
                                         <img class="file-upload-image" src="#" alt="your image" />
                                         <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">»èÁ¦</button>
+                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ì‚­ì œ</button>
                                         </div>
                                         </div>
                                         </div>
@@ -210,7 +207,7 @@ img {
                                         let $uploadContent = $upload.find('.file-upload-content');
                                         let $uploadImage = $uploadContent.find('.file-upload-image');
                                         
-                                        // ÀÌ¹ÌÁö ÃÊ±âÈ­
+                                        // ì´ë¯¸ì§€ ì´ˆê¸°í™”
                                         $uploadImage.attr('src', '#');
                                         $uploadContent.hide();
                                     }
@@ -223,95 +220,13 @@ img {
                                             $(this).removeClass('image-dropping');
                                         });
                                     });
-                                </script>
-
-
-					<script>
-                                    let uploadIndex = 1;
-
-                                    function createImageUpload() {
-                                        let uploadElement = `
-                                        <div class="file-upload">
-                                        <div class="image-upload-wrap">
-                                        <div class="drag-text">
-                                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        »çÁø µî·Ï
-                                        </div>
-                                        </div>
-                                        <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image" />
-                                        <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">»èÁ¦</button>
-                                        </div>
-                                        </div>
-                                        </div>
-                                        `;
-                                        $('#image-uploads').append(uploadElement);
-                                        uploadIndex++;
-                                    }
-
-                                    function readURL(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (e) {
-                                                let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
-                                                let $uploadImage = $uploadContent.find('.file-upload-image');
-                                                $uploadContent.show();
-                                                $uploadImage.attr('src', e.target.result);
-                                            };
-                                            reader.readAsDataURL(input.files[0]);
-                                        } else {
-                                            removeUpload(input);
-                                        }
-                                    }
-
-                                    function removeUpload(button) {
-                                    
-                                        let $upload = $(button).closest('.file-upload');
-                                        let $uploadContent = $upload.find('.file-upload-content');
-                                        let $uploadImage = $uploadContent.find('.file-upload-image');
-                                        
-                                        // ÀÌ¹ÌÁö ÃÊ±âÈ­
-                                        $uploadImage.attr('src', '#');
-                                        $uploadContent.hide();
-                                    }
-
-                                    $(document).ready(function () {
-                                        $('.image-upload-wrap').bind('dragover', function () {
-                                            $(this).addClass('image-dropping');
-                                        });
-                                        $('.image-upload-wrap').bind('dragleave', function () {
-                                            $(this).removeClass('image-dropping');
-                                        });
-                                    });
-                                </script>
-
-
-
-					<script>
-                var navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(function (link) {
-                    link.addEventListener('mouseover', function () {
-                        navLinks.forEach(function (link) {
-                            link.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                    });
-                });
-                
-                function open_win(url) {
-
-                    window.open(url, "_blank");
-                }
-                function deleteReview() {
-                    alert('»èÁ¦ ¿Ï·á');
-                }
-            </script>
-
+					</script>
 				</tbody>
 			</table>
 		</section>
 	</div>
+
 	<jsp:include page="../footer.jsp"></jsp:include>
+
 </body>
 </html>

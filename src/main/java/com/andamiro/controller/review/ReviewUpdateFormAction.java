@@ -1,9 +1,7 @@
 package com.andamiro.controller.review;
 
-
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +18,10 @@ public class ReviewUpdateFormAction implements ReviewAction {
 		String url = "/review/updatereview.jsp";
 		String num = request.getParameter("num");
 		ReviewDAO rDao = ReviewDAO.getInstance();
+//		rDao.updateReadCount(num);
 		ReviewVO rVo = rDao.selectOneBoradByNum(num);
 		request.setAttribute("review", rVo);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
-		
+		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 }

@@ -1,84 +1,133 @@
 package com.andamiro.dto.review;
 
-import java.security.Timestamp;
-import java.time.zone.ZoneOffsetTransitionRule.TimeDefinition;
+import java.sql.Timestamp;
+import com.andamiro.dto.recipe.RecipeDetailVO;
 
 public class ReviewRecipeVO {
-	private int recipeId;
-	private int memberNum;
+	private int recipeID;
+	private int memberNumber;
+	private String userid;
 	private String recipeName;
 	private String mainPicture;
-	private String recipeFrade;
+	private String recipeGrade;
 	private String recipetag1;
 	private String recipetag2;
 	private String recipetag3;
 	private int recipeView;
 	private int recipeCompetition;
-	private Timestamp reciperegdate;
-	public int getRecipeId() {
-		return recipeId;
+	private int recipeDetailID;
+	private Timestamp recipeRegDate;
+	private RecipeDetailVO recipeDetailVO;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setRecipeId(int recipeId) {
-		this.recipeId = recipeId;
+
+	public void setUserId(String userId) {
+		this.userid = userId;
 	}
-	public int getMemberNum() {
-		return memberNum;
+
+	public int getRecipeID() {
+		return recipeID;
 	}
-	public void setMemberNum(int memberNum) {
-		this.memberNum = memberNum;
+
+	public void setRecipeID(int recipeID) {
+		this.recipeID = recipeID;
 	}
+
+	public int getMemberNumber() {
+		return memberNumber;
+	}
+
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
+	}
+
 	public String getRecipeName() {
 		return recipeName;
 	}
+
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
 	}
+
 	public String getMainPicture() {
 		return mainPicture;
 	}
+
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
-	public String getRecipeFrade() {
-		return recipeFrade;
+
+	public String getRecipeGrade() {
+		return recipeGrade;
 	}
-	public void setRecipeFrade(String recipeFrade) {
-		this.recipeFrade = recipeFrade;
+
+	public void setRecipeGrade(String recipeGrade) {
+		this.recipeGrade = recipeGrade;
 	}
+
 	public String getRecipetag1() {
 		return recipetag1;
 	}
+
 	public void setRecipetag1(String recipetag1) {
 		this.recipetag1 = recipetag1;
 	}
+
 	public String getRecipetag2() {
 		return recipetag2;
 	}
+
 	public void setRecipetag2(String recipetag2) {
 		this.recipetag2 = recipetag2;
 	}
+
 	public String getRecipetag3() {
 		return recipetag3;
 	}
+
 	public void setRecipetag3(String recipetag3) {
 		this.recipetag3 = recipetag3;
 	}
+
 	public int getRecipeView() {
 		return recipeView;
 	}
+
 	public void setRecipeView(int recipeView) {
 		this.recipeView = recipeView;
 	}
+
 	public int getRecipeCompetition() {
 		return recipeCompetition;
 	}
+
 	public void setRecipeCompetition(int recipeCompetition) {
 		this.recipeCompetition = recipeCompetition;
 	}
-	public Timestamp getReciperegdate() {
-		return reciperegdate;
+
+	public int getRecipeDetailID() {
+		return recipeDetailID;
 	}
-	public void setReciperegdate(Timestamp reciperegdate) {
-		this.reciperegdate = reciperegdate;
+
+	public void setRecipeDetailID(int recipeDetailID) {
+		this.recipeDetailID = recipeDetailID;
+	}
+
+	public Timestamp getRecipeRegDate() {
+		return recipeRegDate;
+	}
+
+	public void setRecipeRegDate(Timestamp recipeRegDate) {
+		this.recipeRegDate = recipeRegDate;
+	}
+
+	public RecipeDetailVO getRecipeDetailVO() {
+		return recipeDetailVO;
+	}
+
+	public void setRecipeDetailVO(RecipeDetailVO recipeDetailVO) {
+		this.recipeDetailVO = recipeDetailVO;
 	}
 }

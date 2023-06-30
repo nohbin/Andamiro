@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="../resources/css/bootstrap.css?ver=1">
+<link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="../resources/css/main.css?ver=1">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
+<script src="js/main.js"></script>
 <style>
 li {
 	list-style: none;
@@ -23,89 +28,82 @@ a {
 	text-decoration: none;
 }
 
-.box {
-	display: block;
-	position: relative;
-}
-
-.review-wrab {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+img {
+	width: 10rem;
+	height: auto;
 }
 </style>
 </head>
 <body>
-
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div class="review-wrab">
-		<form action="ReviewServlet" method="post">
-			<input type="hidden" name="command" value="myreview_update">
-			<input type="hidden" name="num" value="${review.num}">
-			<h1>Î¶¨Î∑∞ ÏàòÏ†ï</h1>
-			<div class="box">
-				<h1 class="modal-title fs-5" id="staticBackdropLabel">ÏïÑÏù¥Îîî</h1>
-			</div>
-			<div class="box">
-				<div class="box">
-					<select class="box" id="floatingSelect"
-						aria-label="Floating label select example" name="recipegrade">
-						<option selected></option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-floating">
-				<textarea class="box" placeholder="" id="floatingTextarea2"
-					style="height: 200px" name="review">${review.review}</textarea>
-				<label for="floatingTextarea2">ÌõÑÍ∏∞Î•º ÏûÖÎ†•</label>
-			</div>
-			<div class="box">
-				<div class="box">
-					<div class="box">
-						<input class="box" type='file' onchange="readURL(this);"
-							accept="image/*" name="review">${review.img} <br>ÏÇ¨ÏßÑ
-						Îì±Î°ù
-					</div>
-				</div>
-				<div class="box">
-					<img class="box" src="#" alt="your image" />
-					<div class="box">
-						<button type="button"
-							onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'"
-							class="remove-image">ÏÇ≠Ï†ú</button>
-					</div>
-				</div>
-			</div>
-			<div class="box">
-				<button type="button" class="btn btn-secondary"
-					onclick="closeWindow()">Îã´Í∏∞</button>
-				<input type="submit" value="ÏàòÏ†ï" onclick="updateReview()">
-			</div>
 
-		</form>
+	<div class="container border mt-3 rounded-3 w-50">
+		<ul class="nav nav-pills nav-fill ">
+			<li class="nav-item"><a class="nav-link " style="color: black;"
+				aria-current="page" href="mypage.html">≥ª ∑πΩ√««</a></li>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href="mypage-save.html">¿˙¿Â ∑πΩ√««</a></li>
+			<li class="nav-item">
+				<div class="dropdown">
+					<a class="btn btn-secondary1 dropdown-toggle" href="#"
+						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+						aria-expanded="false"> ø‰∏Æ »ƒ±‚ </a>
+
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=review">≥™¿« ø‰∏Æ ∑πΩ√««</a></li>
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=myreview">≥ª∞° ≥≤±‰ »ƒ±‚</a></li>
+
+					</ul>
+				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">ø‰∏Æ »ƒ±‚</a> -->
+			</li>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href="mypage-edit.html">»∏ø¯¡§∫∏ ºˆ¡§</a></li>
+		</ul>
 	</div>
 
+	<!-- ≥ª ∑πΩ√«« ∏Ò∑œ -->
+	<div class="container text-center border mt-3 rounded-5">
+		<section class="container">
+			<table class="table justify-content-center mt-5 mb-5">
+				<thead>
+					<tr class="border-2 mt-3 ">
+						<th scope="col">π¯»£</th>
+						<th>∑πΩ√«« ªÁ¡¯</th>
+						<th scope="col">∑πΩ√«« ¡¶∏Ò</th>
+						<th scope="col">≥ªøÎ</th>
+						<th scope="col">≥ª ∆Ú¡°</th>
+						<th scope="col">¿€º∫¿œ</th>
+						<th scope="col">ºˆ¡§/ªË¡¶</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="review" items="${reviewList}">
+						<tr>
+							<th scope="row"><br> <br>${review.num }</th>
+							<th scope="row"><a href="recipe_Detail.html"><img
+									src=${review.img }></a></th>
+							<td class=""><br> <br> <b>${review.title}</b></td>
+							<td><a href="#"><br> <br>${review.review}</a></td>
+							<td><br> <br> <b>${review.recipegrade} ¡°</b></td>
+							<td><br> <br>${review.joindate}</td>
+							<td><br>
+
+								<button class="btn btn-primary" type="button" value="update"
+									onclick="openPopupWindow('ReviewServlet?command=myreview_update_form&num=${review.num}')">ºˆ¡§</button>
+								<button class="btn btn-primary" type="button" value="delete"
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">ªË¡¶</button>
+						</tr>
+					</c:forEach>
 
 
-	<script>
-        function updateReview() {
-        	  window.opener.location.reload();
-              window.close();   
-    </script>
-    <script>
-    function closeWindow() {
-        window.opener.location.reload();
-        window.close();
-    }       
-    
-    </script>
-	<script>
+					<script>
+   						
+					</script>
+
+
+					<script>
                                     let uploadIndex = 1;
 
                                     function createImageUpload() {
@@ -114,13 +112,13 @@ a {
                                         <div class="image-upload-wrap">
                                         <div class="drag-text">
                                         <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        ÏÇ¨ÏßÑ Îì±Î°ù
+                                        ªÁ¡¯ µÓ∑œ
                                         </div>
                                         </div>
                                         <div class="file-upload-content">
                                         <img class="file-upload-image" src="#" alt="your image" />
                                         <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ÏÇ≠Ï†ú</button>
+                                        <button type="button" onclick="removeUpload(this)" class="remove-image">ªË¡¶</button>
                                         </div>
                                         </div>
                                         </div>
@@ -150,7 +148,7 @@ a {
                                         let $uploadContent = $upload.find('.file-upload-content');
                                         let $uploadImage = $uploadContent.find('.file-upload-image');
                                         
-                                        // Ïù¥ÎØ∏ÏßÄ Ï¥àÍ∏∞Ìôî
+                                        // ¿ÃπÃ¡ˆ √ ±‚»≠
                                         $uploadImage.attr('src', '#');
                                         $uploadContent.hide();
                                     }
@@ -163,14 +161,45 @@ a {
                                             $(this).removeClass('image-dropping');
                                         });
                                     });
-                                    
-                                    function open_win(url) {
-
-                                        window.open(url, "_blank");
-                                    }
                                 </script>
 
-	<jsp:include page="../footer.jsp"></jsp:include>
 
+
+					<script>
+                var navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(function (link) {
+                    link.addEventListener('mouseover', function () {
+                        navLinks.forEach(function (link) {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                });
+                
+                function open_win(url) {
+
+                    window.open(url, "_blank");
+                }
+                function deleteReview() {
+                    alert('ªË¡¶ øœ∑·');
+                }
+            </script>
+			<script>
+   			 function openPopupWindow(url) {
+        	window.open(url, "_blank" );
+        	
+           
+        	
+        	return false;
+  								 }
+			</script>
+
+
+
+				</tbody>
+			</table>
+		</section>
+	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

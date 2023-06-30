@@ -30,6 +30,7 @@ public class RecipeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String command = request.getParameter("command");
+		System.out.println("일하냐 너?" + command);
 		RecipeActionFactory actionFactory = RecipeActionFactory.getInstance();
 		RecipeAction action = actionFactory.getAction(command);
 		if(action!=null) {

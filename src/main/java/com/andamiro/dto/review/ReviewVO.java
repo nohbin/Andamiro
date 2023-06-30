@@ -9,6 +9,13 @@ public class ReviewVO {
 	private int recipegrade;
 	private Timestamp regdate;
 	private String img;
+	private String recipeName;
+	public String getRecipeName() {
+		return recipeName;
+	}
+	public void setRecipeName(String recipeName) {
+		this.recipeName = recipeName;
+	}
 	public int getRecipeId() {
 		return recipeId;
 	}
