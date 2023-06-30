@@ -131,7 +131,6 @@ public class MemberDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
-		System.out.println("업데이트문 종료");
 	}
 
 	public List<MemberVO> selectAllMember() {

@@ -40,6 +40,27 @@
 				</tr>
 			</c:forEach>
 		 </table>
+		 <div class="d-flex justify-content-center">
+	        <nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${currentPage - 1 }"/>" aria-label="이전" tabindex="-1">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${status.count }"/>">${status.count }</a>
+						</li>
+					</c:forEach>
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/AdminServlet?command=submem_list&page=${currentPage + 1 }"/>" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+    	</div>
 	</div>
 	<div style="height: 7rem;"></div>
 <jsp:include page="../../footer.jsp"></jsp:include>		

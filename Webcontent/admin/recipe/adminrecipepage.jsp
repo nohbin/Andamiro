@@ -66,7 +66,6 @@ a {
 					<c:forEach begin="1" end="${totalPages }" varStatus="status">
 						<li class="page-item">
 							<a class="page-link" href="<c:url value="/AdminServlet?command=recipe_list_view&page=${status.count }"/>">${status.count }</a>
-							
 						</li>
 					</c:forEach>
 					<li class="page-item">
