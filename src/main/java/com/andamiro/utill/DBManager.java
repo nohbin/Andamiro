@@ -5,7 +5,13 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.DataSource;
 
-public class DBManager {
+public class DBManager implements AutoCloseable{
+@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 public static Connection getConnection() {
 		
 		Connection conn = null;
