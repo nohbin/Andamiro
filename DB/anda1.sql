@@ -1,5 +1,5 @@
 
---È¸¿øÅ×ÀÌºí
+--íšŒì›í…Œì´ë¸”
 CREATE TABLE andamiromember (
   memberNumber NUMBER PRIMARY KEY,
   id VARCHAR2(255) NOT NULL UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE andamiromember (
   adminCode NUMBER
 );
 
---·¹½ÃÇÇ °ü·Ã Å×ÀÌºí
+--ë ˆì‹œí”¼ ê´€ë ¨ í…Œì´ë¸”
 CREATE TABLE andamiroRecipe (
 	recipeID            NUMBER	        PRIMARY KEY,
 	memberNumber        NUMBER          NOT NULL,
@@ -26,7 +26,9 @@ CREATE TABLE andamiroRecipe (
 	recipeView	        NUMBER	        default 0,
 	recipeCompetition   NUMBER		    NULL,
     recipeDetailID      NUMBER          NOT NULL,
-    recipeRegDate       date            default sysdate
+    recipeRegDate       date            default sysdate,
+	reviewcount	NUUMBER,
+	userid		VARCHAR(255)
 );
 
 create table andamiroRecipe_detail(
@@ -93,7 +95,7 @@ CREATE TABLE recipeOrder (
   order05 VARCHAR(255)
 );
 
---¸®ºä Å×ÀÌºí
+--ë¦¬ë·° í…Œì´ë¸”
 CREATE TABLE andamiroreview (
   reviewnum NUMBER(20) PRIMARY KEY,
   recipeid number NOT NULL,
@@ -104,7 +106,7 @@ CREATE TABLE andamiroreview (
   regdate DATE DEFAULT SYSDATE
 );
 
---±¸µ¶ Å×ÀÌºí
+--êµ¬ë… í…Œì´ë¸”
 CREATE TABLE subscribeMember (
     	subNumber          NUMBER(5)    PRIMARY KEY,
     	membernumber    NUMBER(5),
@@ -112,7 +114,7 @@ CREATE TABLE subscribeMember (
         sub_end 		DATE  DEFAULT  (SYSDATE + INTERVAL '30' DAY),
         userid varchar2(255)
 );
---½Ä´Ü Å×ÀÌºí
+--ì‹ë‹¨ í…Œì´ë¸”
 CREATE TABLE diet (
 	dietNumber	    number(5)		    PRIMARY KEY,
 	subNumber	    number(5)		    NULL,
