@@ -32,7 +32,7 @@ a {
 		<div class="px-3 py-2 mt-3 mb-3">
 			<div class="container d-flex flex-wrap justify-content-center">
 
-				<form class="d-flex" role="search" action=RecipeServlet method="get">
+			<form class="d-flex" role="search" action=RecipeServlet method="get">
 					<input type="hidden" name="command" value="main_search"> <input
 						class="form-control me-2 " type="text" placeholder="검색창"
 						aria-label="Search" name="recipename">
@@ -54,7 +54,7 @@ a {
 						href="<c:url value="/RecipeServlet?command=recipe_list"/>"
 						class="nav-link link-dark px-2">레시피</a></li>
 					<li class="nav-item"><a
-						href='<c:url value="/diet/recdiet.jsp"/>'
+						href='<c:url value="/SubDietServlet?command=rec_diet"/>'
 						class="nav-link link-dark px-2">식단</a></li>
 					<li class="nav-item"><a
 						href="<c:url value="/EventServlet?command=EventMainViewForm"/>"
@@ -62,6 +62,18 @@ a {
 					<li class="nav-item"><a
 						href='<c:url value="/subscribe/subscribe.jsp"/>'
 						class="nav-link link-dark px-2">구독</a></li>
+					<li class="nav-item">
+						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
+					</li>
+					<li class="nav-item">
+						<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="nav-link link-dark px-2">식단</a>
+					</li>
+					<li class="nav-item">
+						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
+					</li>
+					<li class="nav-item">
+						<a href='<c:url value="/subscribe/subscribe.jsp"/>'					
+					 class="nav-link link-dark px-2">구독</a>
 				</ul>
 				<div class="text-end">
 					<c:choose>
@@ -120,5 +132,6 @@ a {
 	<!-- 			</ul> -->
 	<!-- 		</div> -->
 	<%-- 	</c:if> --%>
+
 </body>
 </html>

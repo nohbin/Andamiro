@@ -18,6 +18,16 @@ public class RecipeVO {
 	private int recipeDetailID;
 	private Timestamp recipeRegDate;
 	private RecipeDetailVO recipeDetailVO;
+	private int reviewCount;
+	
+	
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 
 	public String getUserId() {
 		return userId;

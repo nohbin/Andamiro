@@ -31,6 +31,9 @@ public class ActionFactory {
  else if(command.equals("event_write_form")) {
 	 action = new EventWriteFormAction();
  }
+ else if(command.equals("event_write")) {
+	 action = new EventWriteAction();
+ }
  else if(command.equals("event_view")) {
 	 action = new EventViewAction();
  }

@@ -151,8 +151,8 @@ public class RecipeEditAction implements RecipeAction {
 		recipeDetailVO.setRecipeOrderVO(recipeOrderVO);
 		recipeDetailVO.setRecipeingreVO(recipeIngreVO);
 		recipeVO.setRecipeDetailVO(recipeDetailVO);
-
-		recipeDAO.updateRecipeByRecipeid(recipeId, recipeVO);
+		
+		recipeDAO.updateRecipeByRecipeId(recipeId, recipeVO);
 
 		String url = "recipe/recipeRegSuccess.jsp";
 		request.getRequestDispatcher(url).forward(request, response);

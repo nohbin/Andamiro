@@ -1,6 +1,5 @@
 package com.andamiro.dao.review;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ public class ReviewDAO {
 		
 	}
 	public List<ReviewVO> selectAllReviews(){
-		String sql = "select * from review order by num desc";
+		String sql = "select * from review order by recipeid desc";
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -33,12 +32,12 @@ public class ReviewDAO {
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				ReviewVO rVo = new ReviewVO();
-				rVo.setNum(rs.getInt("num"));
+				rVo.setRecipeId(rs.getInt("recipeid"));
 				rVo.setImg(rs.getString("img"));
-				rVo.setTitle(rs.getString("title"));
+				rVo.setRecipeName(rs.getString("recipename"));
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
-				rVo.setJoindate(rs.getTimestamp("joindate"));
+				rVo.setRegdate(rs.getTimestamp("regdate"));
 				list.add(rVo);
 			}
 		} catch (SQLException e) {
@@ -50,14 +49,14 @@ public class ReviewDAO {
 		System.out.println(list);
 		return list;
 	} 
-	public void deleteMyreview(String num) {
-		String sql = "delete review where num=?";
+	public void deleteMyreview(String recipeid) {
+		String sql = "delete review where recipeid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, num);
+			pstmt.setString(1, recipeid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,8 +65,8 @@ public class ReviewDAO {
 			
 		}
 	}
-	public  ReviewVO selectOneBoradByNum(String num) {
-		String sql = "select * from review where num=?";
+	public  ReviewVO selectOneBoradByNum(String recipeid) {
+		String sql = "select * from review where recipeid=?";
 		ReviewVO rVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -76,17 +75,17 @@ public class ReviewDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt =conn.prepareStatement(sql);
-			pstmt.setString(1, num);
+			pstmt.setString(1, recipeid);
 			rs = pstmt.executeQuery();		
 			
 			if(rs.next()) {
 				rVo = new ReviewVO();
 				
-				rVo.setNum(rs.getInt("num"));
-				rVo.setTitle(rs.getString("title"));
+				rVo.setRecipeId(rs.getInt("recipeID"));
+				rVo.setRecipeName(rs.getString("recipename"));
 				rVo.setReview(rs.getString("review"));
 				rVo.setRecipegrade(rs.getInt("recipegrade"));
-				rVo.setJoindate(rs.getTimestamp("joindate"));
+				rVo.setRegdate(rs.getTimestamp("regdate"));
 				rVo.setImg(rs.getString("img"));
 			}
 			
@@ -97,38 +96,20 @@ public class ReviewDAO {
 		return rVo;
 		
 	}
-//	public void updateReadCount(String num) {
-//		String sql = "update review set readcount=readcount+1 where num=?";
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		
-//		try {
-//			conn = DBManager.getConnection();
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, num);
-//			pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			DBManager.close(conn, pstmt);
-//		}
-//		
-//	}
 	public void updateReview(ReviewVO rVo) {
-	    String sql = "update review set num=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
+	    String sql = "update review set recipeid=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    
 	    try {
 	        conn = DBManager.getConnection();
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, rVo.getNum());
+	        pstmt.setInt(1, rVo.getRecipeId());
 	        pstmt.setString(2, rVo.getReview());
 	        pstmt.setInt(3, rVo.getRecipegrade());
-	        pstmt.setTimestamp(4, rVo.getJoindate());
+	        pstmt.setTimestamp(4, rVo.getRegdate());
 	        pstmt.setString(5, rVo.getImg());
-	        pstmt.setInt(6, rVo.getNum()); 
+	        pstmt.setInt(6, rVo.getRecipeId()); 
 	        pstmt.executeUpdate();
 	        
 	    } catch (SQLException e) {
@@ -138,5 +119,31 @@ public class ReviewDAO {
 	    
 	}
 
+
+	public void insertReview(String memberId, int recipeId, ReviewVO reviewVO) {
+		// TODO Auto-generated method stub
+		String sql = "insert into andamiroreview (reviewnum, recipeid , id, reviewpicture, review, recipegrade ) values "
+				+ "(reviewnum_seq.nextval , ? , ? , ? , ? , ?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeId);
+			pstmt.setString(2, memberId);
+			pstmt.setString(3, reviewVO.getImg());
+			pstmt.setString(4, reviewVO.getReview());
+			pstmt.setInt(5, reviewVO.getRecipegrade());
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+	}
+
 	
+
 }

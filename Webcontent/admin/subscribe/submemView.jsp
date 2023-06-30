@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
+<jsp:include page="../adminheader.jsp"></jsp:include>
 	<div class="container" align="left">
 	   <div style="height: 1rem;"></div>
 		<div class="fs-3 fw-bolder">구독회원 상세정보</div>

@@ -40,6 +40,7 @@ img {
 
 	<div class="container border mt-3 rounded-3 w-50">
 		<ul class="nav nav-pills nav-fill">
+
 			<li class="nav-item"><a class="nav-link " style="color: black;"
 				href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'>내
 					레시피</a></li>
@@ -60,6 +61,26 @@ img {
 			<li class="nav-item"><a class="nav-link" style="color: black;"
 				href="MemberServlet?command=mypage_edit&memberNumber=${loginUser.memberNumber }">회원정보
 					수정</a></li>
+			<li class="nav-item"><a class="nav-link " style="color: black;"
+				href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'>내
+					레시피</a></li>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href="mypage-review.html">요리 후기</a></li>
+			<c:if test="${not empty loginUser.subscribe }">
+				<li class="nav-item"><a class="nav-link" style="color: black;"
+					href='<c:url value="/SubscribeServlet?command=save_recipe_view&subNumber=${loginUser.subscribe }"/>'>저장
+						레시피</a></li>
+			</c:if>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href='<c:url value="/MemberServlet?command=mypage_edit&memberNumber=${loginUser.memberNumber }"/>'>회원정보
+					수정</a></li>
+
+			<li class="nav-item"><a class="nav-link "style="color: black;" href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'>내 레시피</a></li>
+			<li class="nav-item"><a class="nav-link" style="color: black;" href="mypage-review.html">요리 후기</a></li>
+			<c:if test="${not empty loginUser.subscribe }">
+			<li class="nav-item"><a class="nav-link" style="color: black;" href='<c:url value="/SubscribeServlet?command=save_recipe_view&subNumber=${loginUser.subscribe }"/>'>저장 레시피</a></li>
+			</c:if>
+			<li class="nav-item"><a class="nav-link" style="color: black;" href='<c:url value="/MemberServlet?command=mypage_edit&memberNumber=${loginUser.memberNumber }"/>'>회원정보 수정</a></li>
 		</ul>
 	</div>
 

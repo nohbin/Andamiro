@@ -1,4 +1,4 @@
-package com.andamiro.dao.main;
+//package com.andamiro.dao.main;
 //package com.andamiro.dao;
 //
 //import java.sql.Connection;
@@ -41,8 +41,6 @@ package com.andamiro.dao.main;
 //                MainSearchVO mainSearchVO = new MainSearchVO();
 //                mainSearchVO.setRecipename(rs.getString("recipename"));
 //                list.add(mainSearchVO);
-//                System.out.println("리스트는" + list);
-//                System.out.println("recipename2"+recipename);
 //            }
 //        } catch (SQLException e) {
 //            e.printStackTrace();
@@ -53,5 +51,5 @@ package com.andamiro.dao.main;
 //        return list;
 //    }
 //}
-
+//
 

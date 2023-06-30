@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.andamiro.dto.diet.DietVO;
+import com.andamiro.dto.diet.dietDetailVO;
 import com.andamiro.utill.DBManager;
 
 public class DietDAO {
@@ -30,12 +31,12 @@ public class DietDAO {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				DietVO dVo = new DietVO();
-				dVo.setDietNumber(rs.getInt("dietNumber"));
-				dVo.setDiet_kind(rs.getString("diet_kind"));
-				dVo.setDiet_menu(rs.getString("diet_menu"));
-				dVo.setDiet_picture(rs.getString("diet_picture"));
-				list.add(dVo);
+				DietVO dietVo = new DietVO();
+				dietVo.setDietNumber(rs.getInt("dietNumber"));
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
+				list.add(dietVo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,7 +47,7 @@ public class DietDAO {
 		return list;
 	}
 
-	public void insertDiet(DietVO dVo) {
+	public void insertDiet(DietVO dietVo) {
 		String sql = "insert into  diet ("
 				+ "dietNumber, diet_kind, diet_menu, diet_picture) "
 				+ "values (dietNum_seq.NEXTVAL, ?, ?, ?)";
@@ -56,9 +57,9 @@ public class DietDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dVo.getDiet_kind());
-			pstmt.setString(2, dVo.getDiet_menu());
-			pstmt.setString(3, dVo.getDiet_picture());
+			pstmt.setString(1, dietVo.getDiet_kind());
+			pstmt.setString(2, dietVo.getDiet_menu());
+			pstmt.setString(3, dietVo.getDiet_picture());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +73,7 @@ public class DietDAO {
 
 	public DietVO selectOneDietByDnum(String dietNumber) {
 		String sql = "select * from diet where dietNumber = ?";
-		DietVO dVo = null; 
+		DietVO dietVo = null; 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,11 +83,11 @@ public class DietDAO {
 			pstmt.setString(1, dietNumber);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				dVo = new DietVO();
-				dVo.setDietNumber(rs.getInt("dietNumber"));
-				dVo.setDiet_kind(rs.getString("diet_kind"));
-				dVo.setDiet_menu(rs.getString("diet_menu"));
-				dVo.setDiet_picture(rs.getString("diet_picture"));
+				dietVo = new DietVO();
+				dietVo.setDietNumber(rs.getInt("dietNumber"));
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -94,7 +95,7 @@ public class DietDAO {
 			DBManager.close(conn, pstmt, rs);
 		}
 		
-		return dVo;
+		return dietVo;
 	}
 
 	public void deleteDiet(String dietNumber) {
@@ -116,7 +117,7 @@ public class DietDAO {
 				
 	}
 
-	public void updateDiet(DietVO dVo) {
+	public void updateDiet(DietVO dietVo) {
 		String sql = "update diet set diet_kind=?, diet_menu=?, diet_picture=? "
 				+ " where dietNumber = ?";
 		Connection conn = null;
@@ -124,10 +125,10 @@ public class DietDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dVo.getDiet_kind());
-			pstmt.setString(2, dVo.getDiet_menu());
-			pstmt.setString(3, dVo.getDiet_picture());
-			pstmt.setInt(4, dVo.getDietNumber());
+			pstmt.setString(1, dietVo.getDiet_kind());
+			pstmt.setString(2, dietVo.getDiet_menu());
+			pstmt.setString(3, dietVo.getDiet_picture());
+			pstmt.setInt(4, dietVo.getDietNumber());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -137,8 +138,162 @@ public class DietDAO {
 		}
 		
 	}
+
+//	public DietVO selectRecDiet(String dietNumber) {
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		String sql = "select * from  diet where diet_kind = '추천식단' order by dietNumber";
+//		DietVO dietVo = null;
+//		dietDetailVO dietDetailVo = null;
+//		try {
+//			conn = DBManager.getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				dietVo = new DietVO();
+//				dietVo.setDietNumber(rs.getInt("dietNumber"));
+//				dietVo.setDiet_kind(rs.getString("diet_kind"));
+//				dietVo.setDiet_menu(rs.getString("diet_menu"));
+//				dietVo.setDiet_picture(rs.getString("diet_picture"));
+//			}
+//			
+//			//음식명 받아오기 
+//			sql = "select foodName from dietDetail where dietNumber = ? ";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, dietNumber);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				dietDetailVo = new dietDetailVO();
+//				dietDetailVo.setDietNumber(rs.getInt("dietNumber"));
+//				dietDetailVo.setFoodName(rs.getString("foodName"));
+//				
+//			};
+//			
+//			dietVo.setDietDetailVO(dietDetailVo);
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return dietVo;
+//	}
+
+	//추천식단 정보(종류,메뉴,사진 ) 불러옴
+ 	public List<DietVO> selectRecDiet() {
+		String sql = "select * from diet where diet_kind = '추천식단' order by dietNumber";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<DietVO> dietList = new ArrayList<>();
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				DietVO dietVo = new DietVO();
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
+				dietList.add(dietVo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+			
+		return dietList;
+	}
+
+	//저칼로리 식단 정보 불러옴 
+	public List<DietVO> selectLowDiet() {
+		String sql = "select * from diet where diet_kind = '저칼로리식단' order by dietNumber";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<DietVO> dietList = new ArrayList<>();
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				DietVO dietVo = new DietVO();
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
+				dietList.add(dietVo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+			
+		return dietList;
+	}
+
+	//간단식단 정보 불러옴
+	public List<DietVO> selectSimpleDiet() {
+		String sql = "select * from diet where diet_kind = '간단식단' order by dietNumber";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<DietVO> dietList = new ArrayList<>();
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				DietVO dietVo = new DietVO();
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
+				dietList.add(dietVo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+			
+		return dietList;
+	}
+
 	
-	
-	
-	
+	//프로틴 식단 정보 불러옴
+	public List<DietVO> selectProteinDiet() {
+		String sql = "select * from diet where diet_kind = '프로틴식단' order by dietNumber";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<DietVO> dietList = new ArrayList<>();
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				DietVO dietVo = new DietVO();
+				dietVo.setDiet_kind(rs.getString("diet_kind"));
+				dietVo.setDiet_menu(rs.getString("diet_menu"));
+				dietVo.setDiet_picture(rs.getString("diet_picture"));
+				dietList.add(dietVo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+			
+		return dietList;
+	}
+
+
 }
+
+

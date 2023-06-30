@@ -36,7 +36,7 @@
 				</tr>
 			</table>
 			<br><br>
-				<input type="submit" value="등록" onclick="return dietCheck()"> 
+				<input type="submit" value="수정" onclick="return dietCheck()"> 
 				<input type="reset"	value="다시 작성"> 
 				<input type="button" value="목록" onclick="location.href='DietServlet?command=diet_list'">
 			</form>

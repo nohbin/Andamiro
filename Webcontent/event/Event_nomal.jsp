@@ -40,7 +40,7 @@ label[for=name] button {
 
         <div class="container">
             <div style="text-align: center;">
-               <img src="../resources/img/banner1-1.jpg"  width="70%" height="auto" role="img" aria-label="베너"></img>
+               <img src="../resources/img/${event} } width="70%" height="auto" role="img" aria-label="베너"></img>
                <img src="../resources/img/banner1-2.jpg"  width="70%" height="auto" role="img" aria-label="베너"></img>
                
                 <a href="#"> <img

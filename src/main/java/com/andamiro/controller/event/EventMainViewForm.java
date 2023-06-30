@@ -1,7 +1,7 @@
 package com.andamiro.controller.event;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,18 +19,12 @@ public class EventMainViewForm implements Action {
 		
 		String url = "/event/Event_main.jsp";
 		
-		EventDAO eventDAO=EventDAO.getInstance();
-		ArrayList<EventVO> main=eventDAO.getEventList();
+		EventDAO eventDAO = EventDAO.getInstance();
+		List<EventVO> eventList = eventDAO.getEventList();
 		
-		request.setAttribute("main",main);
-		
-		
-		
-		
+		request.setAttribute("eventList", eventList);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
-		
 	}
-	}
+}

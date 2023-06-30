@@ -14,8 +14,8 @@ public class dietDeleteAction implements DietAction {
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dietNumber = request.getParameter("dietNumber");
-		DietDAO dDao = DietDAO.getInstance();
-		dDao.deleteDiet(dietNumber);
+		DietDAO dietDao = DietDAO.getInstance();
+		dietDao.deleteDiet(dietNumber);
 		new dietListAction().excute(request, response);
 		
 	}

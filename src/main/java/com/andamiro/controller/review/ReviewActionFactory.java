@@ -1,6 +1,8 @@
 package com.andamiro.controller.review;
 
 import com.andamiro.controller.action.ReviewAction;
+import com.andamiro.controller.main.MainRecipeAction;
+import com.andamiro.controller.main.MainSearchAction;
 
 
 public class ReviewActionFactory {
@@ -28,6 +30,9 @@ public class ReviewActionFactory {
 			action = new ReviewUpdateFormAction();
 		}else if(command.equals("myreview_update")) {
 			action = new ReviewUpdateAction();
+		}else if (command.equals("review_write")) {
+			action = new ReviewWriteAction();
+
 		}
 		
 		return action;

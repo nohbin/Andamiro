@@ -19,6 +19,7 @@
 		<h1 class="mb-3"> 이벤트 등록</h1>
 		<form name="frm" method="post" action="EventServlet" > 	
 		<input type="hidden" name="command" value="event_write"> 
+		
 			<div style="height: 5rem;"></div>
 			<table class="table">
 				<tr>
@@ -37,12 +38,17 @@
 					<th>썸네일</th>
 					<td><input type="file" name="imgsum"></td>
 				</tr>
+				<tr>
+					<th>포스터</th>
+					<td><input type="file" name="poster"></td>
+				</tr>
+				
 				
 			</table>
 			<br>
-			<br> <input type="submit" value="등록" onclick="return eventWriteCheck()">
+			<br> <input type="submit" value="등록" onclick="function submitForm()">
 			 	 <input type="reset"  value="다시 작성">
-			 	 <input type="button" value="목록" onclick="location.href='EventServlet?command=event_list'">
+			 	 <input type="button" value="목록" onclick="location.href='./admin/eventList.jsp'">
 		</form>
 	</div>
 	<div style="height: 7rem;"></div>

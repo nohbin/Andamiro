@@ -18,13 +18,11 @@ public class dietDetailListAction implements DietAction {
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/admin/diet/dietDetailList.jsp";
 		String dietNumber = request.getParameter("dietNumber");
-		DietDetailDAO ddDao = DietDetailDAO.getInstance();
-//		dietDetailVO ddVo = ddDao.selectOneDietByDnum(dietNumber);
+		DietDetailDAO dietDetailDao = DietDetailDAO.getInstance();
 		
-		List<dietDetailVO> dietDetailList = ddDao.selectAllboards();
+		List<dietDetailVO> dietDetailList = dietDetailDao.selectAllboards();
 		request.setAttribute("dietDetailList", dietDetailList);
 		
-//		request.setAttribute("dietDetail", ddVo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

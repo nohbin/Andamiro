@@ -38,13 +38,13 @@
 		</table>
 	</div>
 	<div class="container" align="center">
-		<br> <br> <input type="button" value="식단 수정"
+		<br> <br> <input type="button" value="수정하기"
 			onclick="location.href='DietServlet?command=diet_update_form&dietNumber=${diet.dietNumber}'"> 
-		<input type="button" value="식단 삭제"
+		<input type="button" value="삭제하기"
 			onclick="location.href='DietServlet?command=diet_delete&dietNumber=${diet.dietNumber}'"> 		
-		<input type="button" value="식단 리스트"
+		<input type="button" value="목록"
 			onclick="location.href='DietServlet?command=diet_list'"> 
-		<input type="button" value="식단 등록"
+		<input type="button" value="식단 등록하기"
 			onclick="location.href='DietServlet?command=diet_write_form'"  >
 	</div>
 	<div style="height: 10rem;"></div>

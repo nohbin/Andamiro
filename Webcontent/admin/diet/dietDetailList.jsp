@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
+<jsp:include page="../adminheader.jsp"></jsp:include>
 	<div class="container" align="right">
 	<div style="height: 1rem;"></div>
 		<input type="button" value="식단상세 등록" class="btn btn-outline-warning" onclick="location.href='DietServlet?command=dietDetail_write_form'"> 
