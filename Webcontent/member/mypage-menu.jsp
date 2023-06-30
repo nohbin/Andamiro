@@ -51,8 +51,8 @@ img {
 						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
 						aria-expanded="false"> 요리 후기 </a>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<li><a href="ReviewServlet?command=myreview">내가 남긴 후기</a></li>
 						<li><a href="ReviewServlet?command=review">나의 요리 레시피</a></li>
+						<li><a href="ReviewServlet?command=myreview">내가 남긴 후기</a></li>
 					</ul>
 				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">요리 후기</a> -->
 			</li>

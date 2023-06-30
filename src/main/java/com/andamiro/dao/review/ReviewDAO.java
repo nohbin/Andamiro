@@ -116,21 +116,19 @@ public class ReviewDAO {
 //		
 //	}
 	public void updateReview(ReviewVO rVo) {
-	    String sql = "update review set num=?, title=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
+	    String sql = "update review set num=?, review=?, recipegrade=?, joinDate=?, img=? where num=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    
 	    try {
 	        conn = DBManager.getConnection();
 	        pstmt = conn.prepareStatement(sql);
-	        
 	        pstmt.setInt(1, rVo.getNum());
-	        pstmt.setString(2, rVo.getTitle());
-	        pstmt.setString(3, rVo.getReview());
-	        pstmt.setInt(4, rVo.getRecipegrade());
-	        pstmt.setTimestamp(5, rVo.getJoindate());
-	        pstmt.setString(6, rVo.getImg());
-	        pstmt.setInt(7, rVo.getNum()); // WHERE 절의 매개변수 설정
+	        pstmt.setString(2, rVo.getReview());
+	        pstmt.setInt(3, rVo.getRecipegrade());
+	        pstmt.setTimestamp(4, rVo.getJoindate());
+	        pstmt.setString(5, rVo.getImg());
+	        pstmt.setInt(6, rVo.getNum()); 
 	        pstmt.executeUpdate();
 	        
 	    } catch (SQLException e) {

@@ -17,13 +17,11 @@ public class ReviewUpdateAction implements ReviewAction {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("excute실행" ); 
 		int num = Integer.parseInt(request.getParameter("num"));
-	        String title = request.getParameter("title");
 	        String review = request.getParameter("review");
 	        int recipegrade = Integer.parseInt(request.getParameter("recipegrade"));
 	        String img = request.getParameter("img");
 	        ReviewVO rVo = new ReviewVO();
 	        rVo.setNum(num);
-	        rVo.setTitle(title);
 	        rVo.setReview(review);
 	        rVo.setRecipegrade(recipegrade);
 	        rVo.setJoindate(new Timestamp(System.currentTimeMillis()));

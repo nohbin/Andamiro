@@ -1,21 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-String sessionId = (String) session.getAttribute("sessionId");
-%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bootstrap.css?ver=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
+<link rel="stylesheet" href="../resources/css/main.css?ver=1">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
-<script src="resources/js/bootstrap.bundle.min.js?ver=1"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/main.js"></script>
 <style>
 li {
 	list-style: none;
@@ -25,118 +27,179 @@ a {
 	color: black;
 	text-decoration: none;
 }
+
+img {
+	width: 10rem;
+	height: auto;
+}
 </style>
 </head>
 <body>
-	<header>
-		<div class="px-3 py-2 mt-3 mb-3">
-			<div class="container d-flex flex-wrap justify-content-center">
+	<jsp:include page="../header.jsp"></jsp:include>
 
-				<form class="d-flex" role="search" action="RecipeServlet"
-					method="get"><input type="hidden" name="command" value="main_search"> <input
-						class="form-control me-2" type="text" placeholder="ê²€ìƒ‰ì°½"
-						aria-label="Search" name="recipename">
-					<button class="btn btn-outline-success" type="submit"
-						style="background-color: #fac279; color: black;">
-						<i class="bi bi-search"></i>
-					</button>
-				</form>
+	<div class="container border mt-3 rounded-3 w-50">
+		<ul class="nav nav-pills nav-fill ">
+			<li class="nav-item"><a class="nav-link " style="color: black;"
+				aria-current="page" href="mypage.html">³» ·¹½ÃÇÇ</a></li>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href="mypage-save.html">ÀúÀå ·¹½ÃÇÇ</a></li>
+			<li class="nav-item">
+				<div class="dropdown">
+					<a class="btn btn-secondary1 dropdown-toggle" href="#"
+						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+						aria-expanded="false"> ¿ä¸® ÈÄ±â </a>
+
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=review">³ªÀÇ ¿ä¸® ·¹½ÃÇÇ</a></li>
+						<li><a class="dropdown-item"
+							href="ReviewServlet?command=myreview">³»°¡ ³²±ä ÈÄ±â</a></li>
+
+					</ul>
+				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">¿ä¸® ÈÄ±â</a> -->
+			</li>
+			<li class="nav-item"><a class="nav-link" style="color: black;"
+				href="mypage-edit.html">È¸¿øÁ¤º¸ ¼öÁ¤</a></li>
+		</ul>
+	</div>
+
+	<!-- ³» ·¹½ÃÇÇ ¸ñ·Ï -->
+	<div class="container text-center border mt-3 rounded-5">
+		<section class="container">
+			<table class="table justify-content-center mt-5 mb-5">
+				<thead>
+					<tr class="border-2 mt-3 ">
+						<th scope="col">¹øÈ£</th>
+						<th>·¹½ÃÇÇ »çÁø</th>
+						<th scope="col">·¹½ÃÇÇ Á¦¸ñ</th>
+						<th scope="col">³»¿ë</th>
+						<th scope="col">³» ÆòÁ¡</th>
+						<th scope="col">ÀÛ¼ºÀÏ</th>
+						<th scope="col">¼öÁ¤/»èÁ¦</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="review" items="${reviewList}">
+						<tr>
+							<th scope="row"><br> <br>${review.num }</th>
+							<th scope="row"><a href="recipe_Detail.html"><img
+									src=${review.img }></a></th>
+							<td class=""><br> <br> <b>${review.title}</b></td>
+							<td><a href="#"><br> <br>${review.review}</a></td>
+							<td><br> <br> <b>${review.recipegrade} Á¡</b></td>
+							<td><br> <br>${review.joindate}</td>
+							<td><br>
+
+								<button class="btn btn-primary" type="button" value="update"
+									onclick="openPopupWindow('ReviewServlet?command=myreview_update_form&num=${review.num}')">¼öÁ¤</button>
+								<button class="btn btn-primary" type="button" value="delete"
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">»èÁ¦</button>
+						</tr>
+					</c:forEach>
 
 
-			</div>
-		</div>
-		<nav class="py-2  border-bottom" style="background-color: #fac279;">
-			<div class="container d-flex flex-wrap">
-				<ul class="nav me-auto">
-					<li class="nav-item"><a href="BestMainServlet?command=main" class="nav-link link-dark px-2 active" aria-current="page">HOME</a>
-					</li>
-					<li class="nav-item"><a
-						href="<c:url value="/RecipeServlet?command=recipe_list"/>"
-						class="nav-link link-dark px-2">ë ˆì‹œí”¼</a></li>
-					<li class="nav-item"><a
-						href='<c:url value="/diet/recdiet.jsp"/>'
-						class="nav-link link-dark px-2">ì‹ë‹¨</a></li>
-					<li class="nav-item"><a
-						href="<c:url value="/EventServlet?command=EventMainViewForm"/>"
-						class="nav-link link-dark px-2">ì´ë²¤íŠ¸</a></li>
-					<li class="nav-item"><a
-						href='<c:url value="/subscribe/subscribe.jsp"/>'
-						class="nav-link link-dark px-2">êµ¬ë…</a></li>
-				</ul>
-				<div class="text-end">
-					<c:choose>
-<<<<<<< HEAD
-						<c:when test="${loginUser.adminCode eq '999'}">
-							<b>[${loginUser.id }]ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤. ê´€ë¦¬ì ëª¨ë“œ ì…ë‹ˆë‹¤.</b>
-							<a href="<c:url value="/AdminServlet?command=admin_main_view"/>"
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ê´€ë¦¬ì í˜ì´ì§€</a>
-							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ë¡œê·¸ì•„ì›ƒ</a>
-						</c:when>
-						<c:when test="${not empty loginUser}">
-							<b>[${loginUser.id }]ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.</b>
-							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ë¡œê·¸ì•„ì›ƒ</a>
-							<a
-								href='<c:url value="/RecipeServlet?command=recipe_write_form"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ë ˆì‹œí”¼ë“±ë¡</a>
-							<a
-								href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ë§ˆì´í˜ì´ì§€</a>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="<c:url value="/MemberServlet?command=member_login_form"/>"
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">ë¡œê·¸ì¸</a>
-							<a
-								href='<c:url value="/MemberServlet?command=member_join_form"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">íšŒì›ê°€ì…</a>
-						</c:otherwise>
-=======
-					    <c:when test="${loginUser.adminCode eq '999'}">
-					    <b>[${loginUser.id }]ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤. ê´€ë¦¬ì ëª¨ë“œ ì…ë‹ˆë‹¤.</b>
-				    		<a href="<c:url value="/BoardServlet?command=board_paging&page=1"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">ê´€ë¦¬ì í˜ì´ì§€</a>
-					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">ë¡œê·¸ì•„ì›ƒ</a>
-					    </c:when>
-					    <c:when test="${not empty loginUser}">
-					        <b>[${loginUser.id }]ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.</b>
-					        <a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">ë¡œê·¸ì•„ì›ƒ</a>
-					        <a href='<c:url value="/RecipeServlet?command=recipe_write_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">ë ˆì‹œí”¼ë“±ë¡</a>
-					        <a href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">ë§ˆì´í˜ì´ì§€</a>
-					    </c:when>
-					    <c:otherwise>
-					        <a href="<c:url value="/MemberServlet?command=member_login_form"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">ë¡œê·¸ì¸</a>
-					        <a href='<c:url value="/MemberServlet?command=member_join_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">íšŒì›ê°€ì…</a>
-					    </c:otherwise>
->>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
-					</c:choose>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<!-- 	<div style="height: 3rem;"></div> -->
-	<%-- 	<c:if test="${loginUser.adminCode eq '999'}"> --%>
+					<script>
+   						
+					</script>
 
-	<!-- 		<div class="container"> -->
-	<!-- 			<ul class="nav nav-tabs list-unstyled"> -->
-	<!-- 				<li class="nav-item mynav-item"><a class="nav-link "  -->
-	<%-- 					href='<c:url value="/SubscribeServlet?command=submem_list"/>' --%>
-	<!-- 					style="text-decoration: none; color: inherit">êµ¬ë…íšŒì›ê´€ë¦¬</a></li> -->
-	<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-	<%-- 					href='<c:url value="/DietServlet?command=diet_list"/>' --%>
-	<!-- 					style="text-decoration: none; color: inherit">ì‹ë‹¨ê´€ë¦¬</a></li> -->
-	<!-- 				<li class="nav-item  mynav-item"><a class="nav-link" -->
-	<%-- 					href='<c:url value="/DietServlet?command=dietDetail_list"/>' --%>
-	<!-- 					style="text-decoration: none; color: inherit">ì‹ë‹¨ìƒì„¸ ê´€ë¦¬</a></li> -->
-	<!-- 			</ul> -->
-	<!-- 		</div> -->
-	<%-- 	</c:if> --%>
+
+					<script>
+                                    let uploadIndex = 1;
+
+                                    function createImageUpload() {
+                                        let uploadElement = `
+                                        <div class="file-upload">
+                                        <div class="image-upload-wrap">
+                                        <div class="drag-text">
+                                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
+                                        »çÁø µî·Ï
+                                        </div>
+                                        </div>
+                                        <div class="file-upload-content">
+                                        <img class="file-upload-image" src="#" alt="your image" />
+                                        <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload(this)" class="remove-image">»èÁ¦</button>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        `;
+                                        $('#image-uploads').append(uploadElement);
+                                        uploadIndex++;
+                                    }
+
+                                    function readURL(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
+                                                let $uploadImage = $uploadContent.find('.file-upload-image');
+                                                $uploadContent.show();
+                                                $uploadImage.attr('src', e.target.result);
+                                            };
+                                            reader.readAsDataURL(input.files[0]);
+                                        } else {
+                                            removeUpload(input);
+                                        }
+                                    }
+
+                                    function removeUpload(button) {
+                                    
+                                        let $upload = $(button).closest('.file-upload');
+                                        let $uploadContent = $upload.find('.file-upload-content');
+                                        let $uploadImage = $uploadContent.find('.file-upload-image');
+                                        
+                                        // ÀÌ¹ÌÁö ÃÊ±âÈ­
+                                        $uploadImage.attr('src', '#');
+                                        $uploadContent.hide();
+                                    }
+
+                                    $(document).ready(function () {
+                                        $('.image-upload-wrap').bind('dragover', function () {
+                                            $(this).addClass('image-dropping');
+                                        });
+                                        $('.image-upload-wrap').bind('dragleave', function () {
+                                            $(this).removeClass('image-dropping');
+                                        });
+                                    });
+                                </script>
+
+
+
+					<script>
+                var navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(function (link) {
+                    link.addEventListener('mouseover', function () {
+                        navLinks.forEach(function (link) {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                });
+                
+                function open_win(url) {
+
+                    window.open(url, "_blank");
+                }
+                function deleteReview() {
+                    alert('»èÁ¦ ¿Ï·á');
+                }
+            </script>
+			<script>
+   			 function openPopupWindow(url) {
+        	window.open(url, "_blank" );
+        	
+           
+        	
+        	return false;
+  								 }
+			</script>
+
+
+
+				</tbody>
+			</table>
+		</section>
+	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

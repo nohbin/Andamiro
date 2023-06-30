@@ -16,10 +16,8 @@ public class RecipeDeleteAction implements RecipeAction {
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		int recipeId = Integer.parseInt(request.getParameter("recipeId"));
-		
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		recipeDAO.deleteRecipeById(recipeId);
-		
 		new MemberMypageAction().excute(request, response);
 				
 	}
