@@ -187,14 +187,10 @@ public class RecipeDAO {
 
 		String sql = "select * from andamirorecipe order by RECIPEREGDATE desc";
 
-		try(
-			Connection conn = DBManager.getConnection();
-			Statement stmt = conn.createStatement();
-			)
+		try(Connection conn = DBManager.getConnection();
+			Statement stmt = conn.createStatement();)
 			{
-			try(
-				ResultSet rs = stmt.executeQuery(sql);
-				)
+			try(ResultSet rs = stmt.executeQuery(sql);)
 			{
 				while (rs.next()) {
 					RecipeVO recipeVO = new RecipeVO();
