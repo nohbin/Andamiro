@@ -25,67 +25,89 @@
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="container border mt-3 rounded-3 w-50">
 		<ul class="nav nav-pills nav-fill row">
-			<li class="nav-item col-12 col-md-3"><a class="nav-link active"
-				style="color: black;" aria-current="page" href="recdiet.jsp">추천식단</a>
+			<li class="nav-item col-12 col-md-3">
+			<a class="nav-link active" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=rec_diet"/>'>
+				추천식단
+			</a>
 			</li>
-			<li class="nav-item col-12 col-md-3"><a class="nav-link"
-				style="color: black;" aria-current="page" href="simplediet.jsp">간단식단</a>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=simpleDiet"/>'>
+				간단식단
+			</a>
 			</li>
-			<li class="nav-item col-12 col-md-3"><a class="nav-link"
-				style="color: black;" aria-current="page" href="lowdiet.jsp">저칼로리식단</a>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=lowDiet"/>'>
+				저칼로리식단
+				</a>
 			</li>
-			<li class="nav-item col-12 col-md-3"><a class="nav-link"
-				style="color: black;" aria-current="page" href="proteindiet.jsp">프로틴식단</a>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link" style="color: black;" aria-current="page"href='<c:url value="SubDietServlet?command=proteinDiet"/>'>
+				프로틴식단
+			</a>
 			</li>
 		</ul>
 	</div>
-       <div style="height: 3rem;"></div>
+       <div style="height: 1rem;"></div>
 		<div class="container">
 			<div class="row">
-				<c:forEach var="diet" items="${dietList}">
+				  <div class="mb-3">
+	 			  </div>
+				 <c:forEach var="diet" items="${dietList}">
 					<div class="col-12 col-md-4">
 						<div class="text-center">
-							<div>
-								<button type="button" class="btn btn-outline-warning mb-3"
-									onclick="location.href='recdiet.jsp'">${diet.diet_menu}
-								</button>
+							<div class="fs-4 fw-bold mb-2" style="color: #e18409;">
+								${diet.diet_menu}													
 							</div>
-							<img src="upload/${diet.diet_picture}" style="width: 15rem; height: 10rem;">
+							<img src="upload/${diet.diet_picture}" style="width: 25rem; height: 20rem;">			
 						</div>
 					</div>
-				</c:forEach>
-				<div>
-				<c:forEach var="dietDetail" items="${dietDetailList}">
-					<div style="margin-left:10rem;">
-				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
-						${dietDetail.foodName}
-				      </div>
-					</div>
-				</c:forEach> 
-				</div>
-				<div>
-				<c:forEach var="dietDetail" items="${dietDetailList2}">
-					<div style="margin-left:10rem;" >
-				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
-						${dietDetail.foodName}
-				      </div>
-					</div>
-				</c:forEach> 
-				</div>
-				<div>
-				<c:forEach var="dietDetail" items="${dietDetailList3}">
-					<div style="margin-left:10rem;">
-				      <div class="fw-bold"  style="display: inline-block; margin-right: 1rem;">
-						${dietDetail.foodName}
-				      </div>
-					</div>
-				</c:forEach> 
-			</div>
+	 			  </c:forEach> 
+	 			  <table>
+	 			  	<tr>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList1}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:10rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>
+						</td>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList2}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:10rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>	 			  		
+	 			  		</td>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList3}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:10rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>	 			  		
+	 			  		</td>
+	 			  	</tr>
+	 			  </table>
 			</div>
 		</div>	
+		
 		<!-- 여기까지  -->
-		<div style="height: 4rem;"></div>
+		<div style="height: 2rem;"></div>
 		<div class="container">
+					<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=rec_diet'">아침 식단
+					</button>
+					<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=rec_lunch'">점심 식단
+					</button>
+					<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=rec_dinner'">저녁 식단
+					</button>
 			<div class="row">
 				<div class="col d-flex justify-content-between my-3">
 					<span class="h4" style="font-weight: bold;">식단별 영양정보</span> <span>*1인분
@@ -101,36 +123,13 @@
 					</tr>
 				</thead>
 				<tbody class="table-secondary">
+					<c:forEach var="dietDetail" items="${dietDetailList}">
 					<tr>
-						<td class="h5 border-end">쌀밥</td>
-						<td class="h5 border-end" id="cell2">310kcal</td>
-						<td class="h5">탄수화물(67.32g), 단백질(5.61g), 지방(0.85g), 당류(0g),
-							나트륨(4mg)</td>
+						<td class="h5 border-end">${dietDetail.foodName}</td>
+						<td class="h5 border-end">${dietDetail.kcal}</td>
+						<td class="h5">${dietDetail.component}</td>
 					</tr>
-					<tr>
-						<td class="h5 border-end">고추장 달걀조림</td>
-						<td class="h5 border-end">350kcal</td>
-						<td class="h5">탄수화물(12g), 단백질(10.32g), 지방(8.29g), 당류(5.86g),
-							나트륨(502mg)</td>
-					</tr>
-					<tr>
-						<td class="h5 border-end">시금치나물</td>
-						<td class="h5 border-end">57kcal</td>
-						<td class="h5">탄수화물(6.16g), 단백질(2.74g), 지방(3.08g),
-							당류(0.81g), 나트륨(497mg)</td>
-					</tr>
-					<tr>
-						<td class="h5 border-end">배추김치</td>
-						<td class="h5 border-end">25kcal</td>
-						<td class="h5">탄수화물(4.4g), 단백질(1.4g), 지방(0.2g), 당류(0g),
-							나트륨(232mg)</td>
-					</tr>
-					<tr>
-						<td class="h5 border-end">호두멸치볶음</td>
-						<td class="h5 border-end">127kcal</td>
-						<td class="h5">탄수화물(5.44g), 단백질(7.01g), 지방(8.96g), 당류(0.31g),
-							나트륨(695mg)</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

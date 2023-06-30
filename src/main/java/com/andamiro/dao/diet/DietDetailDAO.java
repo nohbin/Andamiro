@@ -139,9 +139,11 @@ public class DietDetailDAO {
 
 	
 	
-//정상 작동 메소드 	
-	public List<dietDetailVO> selectfoodName1() {
-		String sql = "select foodName from dietDetail where dietNumber= 76 order by dietDetailID "; 
+ 	
+	
+	//추천식단(아침) 음식명 불러옴
+ 	public List<dietDetailVO> selectfoodName1() {
+		String sql = "select foodName from dietDetail where dietNumber= 1 order by dietDetailID "; 
 		List<dietDetailVO> foodList1 = new ArrayList<dietDetailVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -165,8 +167,9 @@ public class DietDetailDAO {
 		return foodList1;
 	}
 
+ 	//추천식단(점심) 음식명 불러옴
 	public List<dietDetailVO> selectfoodName2() {
-		String sql = "select foodName from dietDetail where dietNumber= 77 order by dietDetailID "; 
+		String sql = "select foodName from dietDetail where dietNumber= 2 order by dietDetailID "; 
 		List<dietDetailVO> foodList2 = new ArrayList<dietDetailVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -190,9 +193,9 @@ public class DietDetailDAO {
 		return foodList2;
 	}
 
-
+	//추천식단(저녁) 음식명 불러옴
 	public List<dietDetailVO> selectfoodName3() {
-		String sql = "select foodName from dietDetail where dietNumber= 78 order by dietDetailID "; 
+		String sql = "select foodName from dietDetail where dietNumber= 3 order by dietDetailID "; 
 		List<dietDetailVO> foodList3 = new ArrayList<dietDetailVO>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -214,6 +217,559 @@ public class DietDetailDAO {
 		}
 		
 		return foodList3;  
+	}
+
+	
+	//추천식단(아침) 상세정보 불러옴 
+	public List<dietDetailVO> selectDietDetail1() {
+		String sql = "select * from dietDetail where dietNumber = 1 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//추천식단(점심) 상세정보 불러옴 
+	public List<dietDetailVO> selectDietDetail2() {
+		String sql = "select * from dietDetail where dietNumber = 2 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//추천식단(저녁)의 상세정보 불러옴 
+	public List<dietDetailVO> selectDietDetail3() {
+		String sql = "select * from dietDetail where dietNumber = 3 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//간단 식단(아침) 음식명 출력 
+	public List<dietDetailVO> selectSimpleFood1() {
+		String sql = "select foodName from dietDetail where dietNumber= 4 order by dietDetailID "; 
+		List<dietDetailVO> foodList1 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList1.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList1;
+	}
+
+	//간단식단(점심) 음식명 출력 
+	public List<dietDetailVO> selectSimpleFood2() {
+		String sql = "select foodName from dietDetail where dietNumber= 5 order by dietDetailID "; 
+		List<dietDetailVO> foodList2 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList2.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList2;
+	}
+
+	//간단식단(저녁) 음식명 출력 
+	public List<dietDetailVO> selectSimpleFood3() {
+		String sql = "select foodName from dietDetail where dietNumber= 6 order by dietDetailID "; 
+		List<dietDetailVO> foodList3 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList3.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList3;
+	}
+
+	//간단식단(아침)영양정보 불러옴 
+	public List<dietDetailVO> selectDietDetail() {
+		String sql = "select * from dietDetail where dietNumber = 4 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//간단식단(점심) 영양정보 불러옴
+	public List<dietDetailVO> selectSimpleDetail() {
+		String sql = "select * from dietDetail where dietNumber = 5 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//간단식단(저녁) 영양정보 불러옴
+	public List<dietDetailVO> selectSimpleDinnerDetail() {
+		String sql = "select * from dietDetail where dietNumber = 6 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+	
+	
+	//저칼로리식단(아침)의 음식명 출력
+	public List<dietDetailVO> selectlowFood1() {
+			String sql = "select foodName from dietDetail where dietNumber= 7 order by dietDetailID "; 
+			List<dietDetailVO> foodList1 = new ArrayList<dietDetailVO>();
+			Connection conn = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			
+			try {
+				conn = DBManager.getConnection();
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					dietDetailVO dietDetailVo = new dietDetailVO();
+					dietDetailVo.setFoodName(rs.getString("foodName"));
+					foodList1.add(dietDetailVo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally{
+				DBManager.close(conn, stmt, rs);
+			}
+			
+			return foodList1;
+	
+			}
+
+	//저칼로리식단(점심)의 음식명 출력
+	public List<dietDetailVO> selectlowFood2() {
+		String sql = "select foodName from dietDetail where dietNumber= 8 order by dietDetailID "; 
+		List<dietDetailVO> foodList2 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList2.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList2;
+
+		}
+
+	//저칼로리식단(저녁)의 음식명 출력 
+	public List<dietDetailVO> selectlowFood3() {
+		String sql = "select foodName from dietDetail where dietNumber= 9 order by dietDetailID "; 
+		List<dietDetailVO> foodList3 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList3.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList3;
+	}
+
+	//저칼로리식단(아침) 영양정보 불러옴 
+	public List<dietDetailVO> selectDietDetail4() {
+		String sql = "select * from dietDetail where dietNumber = 7 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	//저칼로리식단(점심) 영양정보 불러옴 
+	public List<dietDetailVO> selectDietDetail5() {
+		String sql = "select * from dietDetail where dietNumber = 8 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+	
+	//저칼로리식단(저녁) 영양정보 불러옴 
+	public List<dietDetailVO> selectDietDetail6() {
+		String sql = "select * from dietDetail where dietNumber = 9 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+
+
+	//프로틴식단(아침) 음식명 출력
+	public List<dietDetailVO> selectProteinFood1() {
+		String sql = "select foodName from dietDetail where dietNumber= 10 order by dietDetailID "; 
+		List<dietDetailVO> foodList1 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList1.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList1;
+	}
+
+	//프로틴식단(점심) 음식명 출력
+	public List<dietDetailVO> selectProteinFood2() {
+		String sql = "select foodName from dietDetail where dietNumber= 11 order by dietDetailID "; 
+		List<dietDetailVO> foodList2 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList2.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList2;
+	}
+
+	//프로틴식단(저녁) 음식명 출력
+	public List<dietDetailVO> selectProteinFood3() {
+		String sql = "select foodName from dietDetail where dietNumber= 12 order by dietDetailID "; 
+		List<dietDetailVO> foodList3 = new ArrayList<dietDetailVO>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietDetailVo = new dietDetailVO();
+				dietDetailVo.setFoodName(rs.getString("foodName"));
+				foodList3.add(dietDetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(conn, stmt, rs);
+		}
+		
+		return foodList3;
+	}
+
+	//프로틴식단(아침) 영양정보 불러옴 
+	public List<dietDetailVO> selectProteinDetail() {
+		String sql = "select * from dietDetail where dietNumber = 10 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	
+	//프로틴식단(점심) 영양정보 불러옴 
+	public List<dietDetailVO> selectProteinLunchDetail() {
+		String sql = "select * from dietDetail where dietNumber = 11 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
+	}
+
+	////프로틴식단(저녁) 영양정보 불러옴
+	public List<dietDetailVO> selectProteinDinnerDetail() {
+		String sql = "select * from dietDetail where dietNumber = 12 order by dietDetailID";
+		List<dietDetailVO> dietdetailList = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				dietDetailVO dietdetailVo = new dietDetailVO();
+				dietdetailVo.setFoodName(rs.getString("foodName"));;
+				dietdetailVo.setKcal(rs.getString("kcal"));
+				dietdetailVo.setComponent(rs.getString("component"));
+				dietdetailList.add(dietdetailVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return dietdetailList;
 	}
 	
 
