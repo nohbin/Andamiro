@@ -99,7 +99,7 @@ CREATE TABLE recipeOrder (
 CREATE TABLE andamiroreview (
   reviewnum NUMBER(20) PRIMARY KEY,
   recipeid number NOT NULL,
-  id VARCHAR2(255) NOT NULL,
+  recipename VARCHAR2(255) NOT NULL,
   reviewpicture VARCHAR2(255),
   review VARCHAR2(255),
   recipegrade VARCHAR2(255),
