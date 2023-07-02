@@ -26,7 +26,7 @@ public class ReviewWriteAction implements ReviewAction {
 		reviewVO.setRecipeId(recipeId);
 		reviewVO.setReview(request.getParameter("reviewtext"));
 		reviewVO.setRecipegrade(Integer.parseInt(request.getParameter("grade")));
-		reviewVO.setImg(request.getParameter("rewviewImage"));
+		reviewVO.setImg(request.getParameter("reviewImage"));
 		
 		
 		reviewDAO.insertReview(memberId , recipeId , reviewVO);

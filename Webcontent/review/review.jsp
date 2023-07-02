@@ -9,15 +9,13 @@
 <title>Document</title>
 <link rel="stylesheet" href="/resources/css/bootstrap.css?ver=1">
 <link rel="stylesheet" href="../resources/css/main.css?ver=1">
-
+<script src="resources/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
-<script src="js/main.js"></script>
 <style>
 li {
 	list-style: none;
@@ -36,32 +34,8 @@ img {
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../member/mypage-menu.jsp"></jsp:include>
 
-	<div class="container border mt-3 rounded-3 w-50">
-		<ul class="nav nav-pills nav-fill ">
-			<li class="nav-item"><a class="nav-link " style="color: black;"
-				aria-current="page" href="mypage.html">내 레시피</a></li>
-			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-save.html">저장 레시피</a></li>
-			<li class="nav-item">
-				<div class="dropdown">
-					<a class="btn btn-secondary1 dropdown-toggle" href="#"
-						role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> 요리 후기 </a>
-
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item"
-							href="ReviewServlet?command=review">나의 요리 레시피</a></li>
-						<li><a class="dropdown-item"
-							href="ReviewServlet?command=myreview">내가 남긴 후기</a></li>
-
-					</ul>
-				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">요리 후기</a> -->
-			</li>
-			<li class="nav-item"><a class="nav-link" style="color: black;"
-				href="mypage-edit.html">회원정보 수정</a></li>
-		</ul>
-	</div>
 
 	<!-- 내 레시피 목록 -->
 	<div class="container text-center border mt-3 rounded-5">
@@ -169,81 +143,51 @@ img {
 						</tr>
 					</c:forEach>
 
-
-					<script>
-   						
-					</script>
-
-
-					<script>
-                                    let uploadIndex = 1;
-
-                                    function createImageUpload() {
-                                        let uploadElement = `
-                                        <div class="file-upload">
-                                        <div class="image-upload-wrap">
-                                        <div class="drag-text">
-                                        <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                                        사진 등록
-                                        </div>
-                                        </div>
-                                        <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image" />
-                                        <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-                                        </div>
-                                        </div>
-                                        </div>
-                                        `;
-                                        $('#image-uploads').append(uploadElement);
-                                        uploadIndex++;
-                                    }
-
-                                    function readURL(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (e) {
-                                                let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
-                                                let $uploadImage = $uploadContent.find('.file-upload-image');
-                                                $uploadContent.show();
-                                                $uploadImage.attr('src', e.target.result);
-                                            };
-                                            reader.readAsDataURL(input.files[0]);
-                                        } else {
-                                            removeUpload(input);
-                                        }
-                                    }
-
-                                    function removeUpload(button) {
-                                    
-                                        let $upload = $(button).closest('.file-upload');
-                                        let $uploadContent = $upload.find('.file-upload-content');
-                                        let $uploadImage = $uploadContent.find('.file-upload-image');
-                                        
-                                        // 이미지 초기화
-                                        $uploadImage.attr('src', '#');
-                                        $uploadContent.hide();
-                                    }
-
-                                    $(document).ready(function () {
-                                        $('.image-upload-wrap').bind('dragover', function () {
-                                            $(this).addClass('image-dropping');
-                                        });
-                                        $('.image-upload-wrap').bind('dragleave', function () {
-                                            $(this).removeClass('image-dropping');
-                                        });
-                                    });
-					</script>
-					<script>
-					function handleButtonClick(recipeId) {
-   
-   					 console.log("Clicked button with recipeId:", recipeId);
- 
-							}
-					</script>
 				</tbody>
 			</table>
 		</section>
+				<script>
+                           function readURL(input) {
+                               if (input.files && input.files[0]) {
+                                   var reader = new FileReader();
+                                   reader.onload = function (e) {
+                                       let $uploadContent = $(input).closest('.file-upload').find('.file-upload-content');
+                                       let $uploadImage = $uploadContent.find('.file-upload-image');
+                                       $uploadContent.show();
+                                       $uploadImage.attr('src', e.target.result);
+                                   };
+                                   reader.readAsDataURL(input.files[0]);
+                               } else {
+                                   removeUpload(input);
+                               }
+                           }
+
+                           function removeUpload(button) {
+                           
+                               let $upload = $(button).closest('.file-upload');
+                               let $uploadContent = $upload.find('.file-upload-content');
+                               let $uploadImage = $uploadContent.find('.file-upload-image');
+                               
+                               // 이미지 초기화
+                               $uploadImage.attr('src', '#');
+                               $uploadContent.hide();
+                           }
+
+                           $(document).ready(function () {
+                               $('.image-upload-wrap').bind('dragover', function () {
+                                   $(this).addClass('image-dropping');
+                               });
+                               $('.image-upload-wrap').bind('dragleave', function () {
+                                   $(this).removeClass('image-dropping');
+                               });
+                           });
+                                    
+							function handleButtonClick(recipeId) {
+	   
+	   					 	console.log("Clicked button with recipeId:", recipeId);
+	 
+							}
+					</script>
 	</div>
 
 	<jsp:include page="../footer.jsp"></jsp:include>

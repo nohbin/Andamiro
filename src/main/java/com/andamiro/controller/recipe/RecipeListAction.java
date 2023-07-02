@@ -21,17 +21,13 @@ public class RecipeListAction implements RecipeAction {
 		// TODO Auto-generated method stub
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		List<RecipeVO> recipeList = null;
+		String category = ""; 
+		int categoryNum = 0;
 		
-		if(request.getParameter("mainingre") != null) {
-			int mainIngre = Integer.parseInt(request.getParameter("mainIngre"));
-			recipeList = recipeDAO.selectAllRecipeByMainIngre(mainIngre);
-			System.out.println(mainIngre);
-		}else if(request.getParameter("how")!=null) {
-			int how = Integer.parseInt(request.getParameter("how"));
-			recipeList = recipeDAO.selectAllRecipeByHow(how);
-		}else if(request.getParameter("kind")!=null) {
-			int kind = Integer.parseInt(request.getParameter("kind"));
-			recipeList = recipeDAO.selectAllRecipeByKind(kind);
+		if(request.getParameter("category") != null) {
+			category = request.getParameter("category");
+			categoryNum = Integer.parseInt(request.getParameter("categoryNum"));
+			recipeList = recipeDAO.selectAllRecipeByCategory(category , categoryNum );
 		}else {
 			recipeList = recipeDAO.selectAllRecipe();
 		}
@@ -47,6 +43,6 @@ public class RecipeListAction implements RecipeAction {
 		String url = "/recipe/recipe-list.jsp";
 		request.setAttribute("recipeList", recipeList);
 		request.getRequestDispatcher(url).forward(request, response);
-		
+
 	}
 }

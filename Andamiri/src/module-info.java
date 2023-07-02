@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author oh
- *
- */
-module Andamiri {
-}

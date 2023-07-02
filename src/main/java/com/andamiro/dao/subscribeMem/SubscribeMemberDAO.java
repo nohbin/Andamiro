@@ -28,8 +28,8 @@ public class SubscribeMemberDAO {
 	    try (Connection conn = DBManager.getConnection();
 	         PreparedStatement pstmtInsert = conn.prepareStatement(insertSql);
 	         PreparedStatement pstmtSelect = conn.prepareStatement(selectSql);
-	         PreparedStatement pstmtUpdate = conn.prepareStatement(updateSql)) {
-	        
+	         PreparedStatement pstmtUpdate = conn.prepareStatement(updateSql)) 
+	    {
 	        pstmtInsert.setInt(1, subVO.getMemberNumber());
 	        pstmtInsert.setString(2, subVO.getSub_start());
 	        pstmtInsert.setString(3, subVO.getSub_end());
@@ -50,8 +50,6 @@ public class SubscribeMemberDAO {
 	        e.printStackTrace();
 	    }
 	}
-
-	
 	
 	public List<SubscribeMemberVO> selectAllmember() {
 	    String sql = "SELECT * FROM subscribemember ORDER BY subNumber DESC";
@@ -59,8 +57,8 @@ public class SubscribeMemberDAO {
 	    
 	    try (Connection conn = DBManager.getConnection();
 	         Statement stmt = conn.createStatement();
-	         ResultSet rs = stmt.executeQuery(sql)) {
-	        
+	         ResultSet rs = stmt.executeQuery(sql)) 
+	    {
 	        while (rs.next()) {
 	            SubscribeMemberVO sVO = new SubscribeMemberVO();
 	            sVO.setSubNumber(rs.getInt("subNumber"));
@@ -87,21 +85,20 @@ public class SubscribeMemberDAO {
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        
 	        pstmt.setString(1, subNumber);
-	        ResultSet rs = pstmt.executeQuery();
-	        
-	        if (rs.next()) {
-	            sVO = new SubscribeMemberVO();
-	            sVO.setSubNumber(rs.getInt("subNumber"));
-	            sVO.setMemberNumber(rs.getInt("memberNumber"));
-	            sVO.setUserId(rs.getString("userId"));
-	            sVO.setSub_start(rs.getString("sub_start"));
-	            sVO.setSub_end(rs.getString("sub_end"));
+	        try( ResultSet rs = pstmt.executeQuery();)
+	        {
+	        	if (rs.next()) {
+		            sVO = new SubscribeMemberVO();
+		            sVO.setSubNumber(rs.getInt("subNumber"));
+		            sVO.setMemberNumber(rs.getInt("memberNumber"));
+		            sVO.setUserId(rs.getString("userId"));
+		            sVO.setSub_start(rs.getString("sub_start"));
+		            sVO.setSub_end(rs.getString("sub_end"));
+		        }
 	        }
-	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    
 	    return sVO;
 	}
 
@@ -142,12 +139,11 @@ public class SubscribeMemberDAO {
 	    String sql = "INSERT INTO SUBMEMBERRECIPE (recipeId, subNumber) VALUES (?, ?)";
 
 	    try (Connection conn = DBManager.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
 	        pstmt.setInt(1, recipeId);
 	        pstmt.setInt(2, subNumber);
 	        pstmt.execute();
-
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -162,12 +158,12 @@ public class SubscribeMemberDAO {
 	            + "WHERE NUM BETWEEN ? AND ?";
 
 	    try (Connection conn = DBManager.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
 	        pstmt.setInt(1, start);
 	        pstmt.setInt(2, end);
-
-	        try (ResultSet rs = pstmt.executeQuery()) {
+	        try (ResultSet rs = pstmt.executeQuery()) 
+	        {
 	            while (rs.next()) {
 	                SubscribeMemberVO subscribeMemberVO = new SubscribeMemberVO();
 	                subscribeMemberVO.setSubNumber(rs.getInt("subNumber"));
@@ -179,7 +175,6 @@ public class SubscribeMemberDAO {
 	                memberList.add(subscribeMemberVO);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

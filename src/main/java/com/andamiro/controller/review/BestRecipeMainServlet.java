@@ -15,7 +15,6 @@ public class BestRecipeMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String command = request.getParameter("command");
-		System.out.println("command: " + command);
 		
 		ReviewActionFactory af = ReviewActionFactory.getInstance();
 		ReviewAction action = af.getAction(command);

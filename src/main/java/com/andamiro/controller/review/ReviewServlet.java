@@ -15,7 +15,6 @@ public class ReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String command = request.getParameter("command");
-		System.out.println("서블릿으로 부터 받음" + command);
 		
 		ReviewActionFactory af = ReviewActionFactory.getInstance();
 		ReviewAction action = af.getAction(command);

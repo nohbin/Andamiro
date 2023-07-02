@@ -45,7 +45,7 @@ a {
 						data-bs-toggle="dropdown" aria-expanded="false">종류</button>
 					<ul class="dropdown-menu">
 						<c:forEach items="${recipeKindList}" var="kind" varStatus="status">
-					 		<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&kind=${kind.recipeKindId }"/>">${kind.recipeKind }</a></li>
+					 		<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&categoryNum=${kind.recipeKindId }&cateogry=kind"/>">${kind.recipeKind }</a></li>
 					 	</c:forEach>
 					</ul>
 				</div>
@@ -55,7 +55,7 @@ a {
 					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">방법</button>
 					<ul class="dropdown-menu">
 					 <c:forEach items="${recipeHowList}" var="how" varStatus="status">
-					 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&how=${how.recipeHowId }"/>">${how.recipeHow }</a></li>
+					 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&categoryNum=${how.recipeHowId }&category=how"/>">${how.recipeHow }</a></li>
 					 </c:forEach>
 					</ul>
 				</div>
@@ -66,7 +66,7 @@ a {
 						data-bs-toggle="dropdown" aria-expanded="false">재료</button>
 					<ul class="dropdown-menu">
 						<c:forEach items="${recipeMainIngreList}" var="mainIngre" varStatus="status">
-						 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&mainIngre=${mainIngre.recipeIngreId }"/>">${mainIngre.recipeIngre }</a></li>
+						 	<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&categoryNum=${mainIngre.recipeIngreId }&category=mainIngre"/>">${mainIngre.recipeIngre }</a></li>
 						</c:forEach>
 					</ul>
 				</div>

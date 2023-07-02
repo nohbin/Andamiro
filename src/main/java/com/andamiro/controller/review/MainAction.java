@@ -17,10 +17,9 @@ public class MainAction implements ReviewAction {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/main.jsp";
-		ReviewRecipeDAO rDao = new ReviewRecipeDAO();
-		ArrayList<ReviewRecipeVO> bestRecipeList = ReviewRecipeDAO.listBestRecipe();
+		ReviewRecipeDAO rDao = ReviewRecipeDAO.getInstance();
+		ArrayList<ReviewRecipeVO> bestRecipeList = rDao.listBestRecipe();
 		request.setAttribute("bestRecipeList", bestRecipeList);
-		System.out.println(bestRecipeList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

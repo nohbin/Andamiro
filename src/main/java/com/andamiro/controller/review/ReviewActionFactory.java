@@ -14,7 +14,6 @@ public class ReviewActionFactory {
 	
 	public ReviewAction getAction(String command) {
 		ReviewAction action = null;
-		System.out.println("ActionFactory :" + command);
 		
 		if(command.equals("main")) {
 			action = new MainAction();

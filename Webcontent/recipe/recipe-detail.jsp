@@ -194,7 +194,7 @@ a i {
 								<div class="file-upload col-12">
 									<div class="image-upload-wrap">
 										<div class="drag-text">
-											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="rewviewImage" /> 
+											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="reviewImage" /> 
 											후기 <br>사진 등록
 										</div>
 									</div>

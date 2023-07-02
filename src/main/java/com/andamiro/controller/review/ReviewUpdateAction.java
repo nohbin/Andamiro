@@ -29,7 +29,6 @@ public class ReviewUpdateAction implements ReviewAction {
 	        ReviewDAO rDao = ReviewDAO.getInstance();
 	        rDao.updateReview(rVo);
 	    ;
-	        System.out.println("recipe updated: " + recipeId);
 	        new MyreviewListAction().execute(request, response);
 		
 

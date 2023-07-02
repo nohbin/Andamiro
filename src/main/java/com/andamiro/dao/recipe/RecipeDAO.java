@@ -302,104 +302,58 @@ public class RecipeDAO {
 		}
 	}
 
-	public List<RecipeVO> selectAllRecipeByMainIngre(int mainIngre) {
-		String sql = "select * from andamirorecipe where recipeid in "
-				+ "(select recipeid from andamirorecipe_detail where recipemainingre = ?) order by RECIPEREGDATE desc";
+	
+	
+	public List<RecipeVO> selectAllRecipeByCategory(String category, int CategoryNum) {
+	    String sql = "SELECT * FROM andamirorecipe " +
+	                 "where recipeid in (select recipeid from andamirorecipe_detail WHERE ";
+	    switch (category) {
+	        case "mainIngre":
+	            sql += "recipemainingre = ?)";
+	            break;
+	        case "how":
+	            sql += "recipehow = ?)";
+	            break;
+	        case "kind":
+	            sql += "recipekind = ?)";
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Invalid category: " + category);
+	    }
+	    
+	    sql += " ORDER BY RECIPEREGDATE DESC";
+	    
+	    List<RecipeVO> list = new ArrayList<>();
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);) 
+	    {	 pstmt.setInt(1, CategoryNum);
 
-		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, mainIngre);
-			try (ResultSet rs = pstmt.executeQuery();) {
-				while (rs.next()) {
-					RecipeVO recipeVO = new RecipeVO();
-					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
-					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
-					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
-					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
-					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
-					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
-					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
-					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
-					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
-					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
-					recipeVO.setUserId(rs.getString("USERID"));
-					list.add(recipeVO);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
+	        try (ResultSet rs = pstmt.executeQuery();) {
+	            while (rs.next()) {
+	                RecipeVO recipeVO = new RecipeVO();
+	                recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+	                recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+	                recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+	                recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+	                recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+	                recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+	                recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+	                recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+	                recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+	                recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+	                recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+	                recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+	                recipeVO.setUserId(rs.getString("USERID"));
+	                list.add(recipeVO);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
 	}
 
-	public List<RecipeVO> selectAllRecipeByHow(int how) {
-		String sql = "select * from andamirorecipe where recipeid in "
-				+ "(select recipeid from andamirorecipe_detail where recipehow = ?) order by RECIPEREGDATE desc";
-
-		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, how);
-
-			try (ResultSet rs = pstmt.executeQuery();) {
-				while (rs.next()) {
-					RecipeVO recipeVO = new RecipeVO();
-					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
-					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
-					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
-					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
-					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
-					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
-					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
-					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
-					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
-					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
-					recipeVO.setUserId(rs.getString("USERID"));
-					list.add(recipeVO);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	public List<RecipeVO> selectAllRecipeByKind(int kind) {
-		String sql = "select * from andamirorecipe where recipeid in "
-				+ "(select recipeid from andamirorecipe_detail where recipekind = ? ) order by RECIPEREGDATE desc";
-
-		List<RecipeVO> list = new ArrayList<>();
-		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);)
-
-		{
-			pstmt.setInt(1, kind);
-			try (ResultSet rs = pstmt.executeQuery();) {
-				while (rs.next()) {
-					RecipeVO recipeVO = new RecipeVO();
-					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
-					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
-					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
-					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
-					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
-					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
-					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
-					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
-					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
-					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
-					recipeVO.setUserId(rs.getString("USERID"));
-					list.add(recipeVO);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+	
 
 	public List<RecipeVO> selectAllRecipeByMemberNumber(int memberNumber) {
 		List<RecipeVO> list = new ArrayList<>();
@@ -669,8 +623,7 @@ public class RecipeDAO {
 	public List<RecipeVO> searchRecipe(String recipename) {
 		String sql = "SELECT * FROM andamirorecipe WHERE recipename LIKE ?";
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
-		try (Connection conn = DBManager.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(sql);) {
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, "%" + recipename + "%");
 			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
