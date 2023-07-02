@@ -95,7 +95,7 @@ public class ReviewDAO {
 		
 	}
 	public void updateReview(ReviewVO rVo) {
-	    String sql = "update andamiroreview set  review=?, recipegrade=?, joinDate=?, img=? where recipeid=?";
+	    String sql = "update andamiroreview set  review=?, recipegrade=?, regDate=?, reviewpicture=? where recipeid=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    

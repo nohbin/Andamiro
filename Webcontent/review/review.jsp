@@ -81,10 +81,10 @@ img {
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br> <br>${review.recipeid }</th>
+							<th scope="row"><br> <br>${review.recipeId }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
-									src="resources/img/${review.reviewpicture }"></a></th>
-							<td class=""><br> <br> <b>${review.recipename}</b></td>
+									src="resources/img/${review.img }"></a></th>
+							<td class=""><br> <br> <b>${review.recipeName}</b></td>
 							<td><a href="#"><br> <br>${review.review}</a></td>
 							<td><br> <br> <b>${review.recipegrade} 점</b></td>
 							<td><br> <br>${review.regdate}</td>
@@ -92,23 +92,24 @@ img {
 
 								<form action="ReviewServlet" method="post">
 									<input type="hidden" name="command" value="myreview_update">
-									<input type="hidden" name="num" value="${review.recipeid}">
+									<input type="hidden" name="memberId" value="${loginUser.id }">
+									<input type="hidden" name="recipeid" value="${review.recipeId}">
 									<!--후기 작성 form -->
 									<button type="button" class="btn btn-primary"
 										data-bs-toggle="modal"
-										data-bs-target="#staticBackdrop_${review.recipeid}">
-										수정</button>
+										data-bs-target="#staticBackdrop_${review.recipeId}"
+										onclick="handleButtonClick(${review.recipeId})">수정</button>
 									<!-- 모달 -->
-									<div class="modal fade" id="staticBackdrop_${review.recipeid}"
+									<div class="modal fade" id="staticBackdrop_${review.recipeId}"
 										data-bs-backdrop="static" data-bs-keyboard="false"
 										tabindex="-1"
-										aria-labelledby="staticBackdropLabel_${review.recipeid}"
+										aria-labelledby="staticBackdropLabel_${review.recipeId}"
 										aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
 													<h1 class="modal-title fs-5"
-														id="staticBackdropLabel_${review.recipeid}">
+														id="staticBackdropLabel_${review.recipeId}">
 														<b>작성자 : [${loginUser.id }] 님</b>
 													</h1>
 													<button type="button" class="btn-close"
@@ -117,7 +118,7 @@ img {
 												<div class="modal-body">
 													<div class="form-floating w-50 mx-auto mb-2">
 														<select class="form-select"
-															id="floatingSelect_${review.recipeid}"
+															id="floatingSelect_${review.recipeId}"
 															aria-label="Floating label select example"
 															name="recipegrade">
 															<option selected></option>
@@ -126,13 +127,13 @@ img {
 															<option value="3">3</option>
 															<option value="4">4</option>
 															<option value="5">5</option>
-														</select> <label for="floatingSelect_${review.recipeid}">점수</label>
+														</select> <label for="floatingSelect_${review.recipeId}">점수</label>
 													</div>
 													<div class="form-floating">
 														<textarea class="form-control" placeholder=""
-															id="floatingTextarea2_${review.recipeid}"
+															id="floatingTextarea2_${review.recipeId}"
 															style="height: 200px" name="review">${review.review }</textarea>
-														<label for="floatingTextarea2_${review.recipeid}">레시피
+														<label for="floatingTextarea2_${review.recipeId}">레시피
 															후기를 입력해주세요</label>
 													</div>
 													<div class="file-upload col-12">
@@ -163,7 +164,7 @@ img {
 										</div>
 									</div>
 									<button class="btn btn-primary" type="button" value="delete"
-										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.recipeid}'">삭제</button>
+										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.recipeId}'">삭제</button>
 								</form>
 						</tr>
 					</c:forEach>
@@ -232,6 +233,13 @@ img {
                                             $(this).removeClass('image-dropping');
                                         });
                                     });
+					</script>
+					<script>
+					function handleButtonClick(recipeId) {
+   
+   					 console.log("Clicked button with recipeId:", recipeId);
+ 
+							}
 					</script>
 				</tbody>
 			</table>

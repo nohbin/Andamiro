@@ -16,7 +16,7 @@ public class ReviewUpdateAction implements ReviewAction {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("excute실행" ); 
-		int recipeId = Integer.parseInt(request.getParameter("recipeid"));
+			int recipeId = Integer.parseInt(request.getParameter("recipeid"));
 	        String review = request.getParameter("review");
 	        int recipegrade = Integer.parseInt(request.getParameter("recipegrade"));
 	        String img = request.getParameter("img");
@@ -28,6 +28,8 @@ public class ReviewUpdateAction implements ReviewAction {
 	        rVo.setImg(img);
 	        ReviewDAO rDao = ReviewDAO.getInstance();
 	        rDao.updateReview(rVo);
+	    ;
+	        System.out.println("recipe updated: " + recipeId);
 	        new MyreviewListAction().execute(request, response);
 		
 
