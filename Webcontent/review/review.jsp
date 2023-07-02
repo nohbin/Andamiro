@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,79 +81,91 @@ img {
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br> <br>${review.id }</th>
+							<th scope="row"><br> <br>${review.recipeId }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
-									src= ${review.img }></a></th>
-							<td class=""><br> <br> <b>${review.title}</b></td>
+									src="resources/img/${review.img }"></a></th>
+							<td class=""><br> <br> <b>${review.recipeName}</b></td>
 							<td><a href="#"><br> <br>${review.review}</a></td>
 							<td><br> <br> <b>${review.recipegrade} 점</b></td>
-							<td><br> <br>${review.joindate}</td>
+							<td><br> <br>${review.regdate}</td>
 							<td><br>
-								
-				<form action="ReviewServlet" method="post"  >
-				<input type="hidden" name="command" value="myreview_update">
-				<input type="hidden" name="num" value="${review.num}">
-				<!--후기 작성 form -->
-				<button type="button" class="btn btn-primary"
-					data-bs-toggle="modal" data-bs-target="#staticBackdrop_${review.num}">
-					수정</button>
-				<!-- 모달 -->
-				<div class="modal fade" id="staticBackdrop_${review.num}"
-					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel_${review.num}" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="staticBackdropLabel_${review.num}">
-									<b>작성자 : [${loginUser.id }] 님</b>
-								</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<div class="form-floating w-50 mx-auto mb-2">
-									<select class="form-select" id="floatingSelect_${review.num}" 
-									aria-label="Floating label select example" name="recipegrade">
-										<option selected></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select> <label for="floatingSelect_${review.num}">점수</label>
-								</div>
-								<div class="form-floating">
-									<textarea class="form-control" placeholder="" 
-									id="floatingTextarea2_${review.num}" style="height: 200px" name="review" >${review.review }</textarea>
-									<label for="floatingTextarea2_${review.num}">레시피 후기를 입력해주세요</label>
-								</div>
-								<div class="file-upload col-12">
-									<div class="image-upload-wrap">
-										<div class="drag-text">
-											<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
-											후기 <br>사진 등록
+
+								<form action="ReviewServlet" method="post">
+									<input type="hidden" name="command" value="myreview_update">
+									<input type="hidden" name="memberId" value="${loginUser.id }">
+									<input type="hidden" name="recipeid" value="${review.recipeId}">
+									<!--후기 작성 form -->
+									<button type="button" class="btn btn-primary"
+										data-bs-toggle="modal"
+										data-bs-target="#staticBackdrop_${review.recipeId}"
+										onclick="handleButtonClick(${review.recipeId})">수정</button>
+									<!-- 모달 -->
+									<div class="modal fade" id="staticBackdrop_${review.recipeId}"
+										data-bs-backdrop="static" data-bs-keyboard="false"
+										tabindex="-1"
+										aria-labelledby="staticBackdropLabel_${review.recipeId}"
+										aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5"
+														id="staticBackdropLabel_${review.recipeId}">
+														<b>작성자 : [${loginUser.id }] 님</b>
+													</h1>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<div class="form-floating w-50 mx-auto mb-2">
+														<select class="form-select"
+															id="floatingSelect_${review.recipeId}"
+															aria-label="Floating label select example"
+															name="recipegrade">
+															<option selected></option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+														</select> <label for="floatingSelect_${review.recipeId}">점수</label>
+													</div>
+													<div class="form-floating">
+														<textarea class="form-control" placeholder=""
+															id="floatingTextarea2_${review.recipeId}"
+															style="height: 200px" name="review">${review.review }</textarea>
+														<label for="floatingTextarea2_${review.recipeId}">레시피
+															후기를 입력해주세요</label>
+													</div>
+													<div class="file-upload col-12">
+														<div class="image-upload-wrap">
+															<div class="drag-text">
+																<input class="file-upload-input" type='file'
+																	onchange="readURL(this);" accept="image/*" /> 후기 <br>사진
+																등록
+															</div>
+														</div>
+														<div class="file-upload-content">
+															<img class="file-upload-image" />
+															<div class="image-title-wrap">
+																<button type="button" onclick="removeUpload(this)"
+																	class="remove-image">삭제</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<script class="jsbin"
+													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">닫기</button>
+													<button type="submit" class="btn btn-secondary">작성하기</button>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="file-upload-content">
-										<img class="file-upload-image" />
-										<div class="image-title-wrap">
-											<button type="button" onclick="removeUpload(this)"
-												class="remove-image">삭제</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-								<button type="submit" class="btn btn-secondary">작성하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-								<button class="btn btn-primary" type="button" value="delete"
-									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">삭제</button>
-			</form>
+									<button class="btn btn-primary" type="button" value="delete"
+										onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.recipeId}'">삭제</button>
+								</form>
 						</tr>
 					</c:forEach>
 
@@ -220,6 +233,13 @@ img {
                                             $(this).removeClass('image-dropping');
                                         });
                                     });
+					</script>
+					<script>
+					function handleButtonClick(recipeId) {
+   
+   					 console.log("Clicked button with recipeId:", recipeId);
+ 
+							}
 					</script>
 				</tbody>
 			</table>

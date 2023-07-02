@@ -33,11 +33,9 @@ a {
 			<div class="container d-flex flex-wrap justify-content-center">
 
 			<form class="d-flex" role="search" action=RecipeServlet method="get">
-					<input type="hidden" name="command" value="main_search"> <input
-						class="form-control me-2 " type="text" placeholder="검색창"
-						aria-label="Search" name="recipename">
-					<button class="btn btn-outline-success" type="submit"
-						style="background-color: #fac279; color: black;">
+					<input type="hidden" name="command" value="main_search"> 
+					<input class="form-control me-2 " type="text" placeholder="검색창"aria-label="Search" name="recipename">
+					<button class="btn btn-outline-success" type="submit" style="background-color: #fac279; color: black;">
 						<i class="bi bi-search"></i>
 					</button>
 				</form>
@@ -50,18 +48,6 @@ a {
 					<li class="nav-item"><a href="BestMainServlet?command=main"
 						class="nav-link link-dark px-2 active" aria-current="page">Home</a>
 					</li>
-					<li class="nav-item"><a
-						href="<c:url value="/RecipeServlet?command=recipe_list"/>"
-						class="nav-link link-dark px-2">레시피</a></li>
-					<li class="nav-item"><a
-						href='<c:url value="/SubDietServlet?command=rec_diet"/>'
-						class="nav-link link-dark px-2">식단</a></li>
-					<li class="nav-item"><a
-						href="<c:url value="/EventServlet?command=EventMainViewForm"/>"
-						class="nav-link link-dark px-2">이벤트</a></li>
-					<li class="nav-item"><a
-						href='<c:url value="/subscribe/subscribe.jsp"/>'
-						class="nav-link link-dark px-2">구독</a></li>
 					<li class="nav-item">
 						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
 					</li>
