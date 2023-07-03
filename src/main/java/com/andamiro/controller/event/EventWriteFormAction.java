@@ -15,7 +15,6 @@ public class EventWriteFormAction implements Action{
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		System.out.println("해치웠냐?");
 	}
 
 }

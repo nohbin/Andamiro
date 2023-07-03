@@ -182,7 +182,6 @@ public class ReviewDAO {
 
 		try (Connection conn = DBManager.getConnection(); 
 			PreparedStatement pstmt = conn.prepareStatement(sql);) 
-		
 		{
 			pstmt.setString(1, rVo.getReview());
 			pstmt.setInt(2, rVo.getRecipegrade());
@@ -194,7 +193,6 @@ public class ReviewDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }
