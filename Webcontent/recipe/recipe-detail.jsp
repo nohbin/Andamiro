@@ -82,14 +82,6 @@ a i {
 				<div class="col-sm-12 border-bottom"style="font-weight: 900; font-size: 4rem;">조리 순서</div>
 			</div>
 				<div class="d-flex justify-content-end">
-					<a href="#"> 
-						<i class="bi bi-card-image"></i>
-					</a> 
-					&nbsp;&nbsp;&nbsp;
-					<a href="#">
-						<i class="bi bi-card-text"></i>
-					</a> 
-					&nbsp;&nbsp;&nbsp;
 					<c:if test="${not empty loginUser.subscribe }">
 						<a href="SubscribeServlet?command=save_recipe&subNumber=${loginUser.subscribe }&recipeid=${recipe.recipeID}"> 
 							<i class="bi bi-folder-plus"></i>
