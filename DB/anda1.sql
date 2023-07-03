@@ -103,7 +103,8 @@ CREATE TABLE andamiroreview (
   reviewpicture VARCHAR2(255),
   review VARCHAR2(255),
   recipegrade VARCHAR2(255),
-  regdate DATE DEFAULT SYSDATE
+  regdate DATE DEFAULT SYSDATE,
+  id VARCHAR2(255)
 );
 
 --구독 테이블
