@@ -48,6 +48,7 @@ img {
 						<th scope="col">후기</th>
 						<th scope="col">받은 평점</th>
 						<th scope="col">작성일</th>
+						<th scope="col">수정</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,9 +59,88 @@ img {
 							<td>${review.review }</td>
 							<td><b> ${review.recipegrade }점</b></td>
 							<td>${review.regdate}</td>
+							<td><button class="btn btn-primary" type="button"
+									value="delete"
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.reviewNum}'">삭제</button>
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop_${review.recipeId}"
+									onclick="handleButtonClick(${review.recipeId})">수정</button>
+								<form action="ReviewServlet" method="post">
+									<input type="hidden" name="command" value="myreview_update">
+									<input type="hidden" name="memberId" value="${loginUser.id }">
+									<input type="hidden" name="recipeid" value="${review.recipeId}">
+									<input type="hidden" name = "reviewnum" value="${review.reviewNum }">
+
+									<!--후기 작성 form -->
+
+									<!-- 모달 -->
+									<div class="modal fade" id="staticBackdrop_${review.recipeId}"
+										data-bs-backdrop="static" data-bs-keyboard="false"
+										tabindex="-1"
+										aria-labelledby="staticBackdropLabel_${review.recipeId}"
+										aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5"
+														id="staticBackdropLabel_${review.recipeId}">
+														<b>작성자 : [${loginUser.id }] 님</b>
+													</h1>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<div class="form-floating w-50 mx-auto mb-2">
+														<select class="form-select"
+															id="floatingSelect_${review.recipeId}"
+															aria-label="Floating label select example"
+															name="recipegrade">
+															<option selected></option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+														</select> <label for="floatingSelect_${review.recipeId}">점수</label>
+													</div>
+													<div class="form-floating">
+														<textarea class="form-control" placeholder=""
+															id="floatingTextarea2_${review.recipeId}"
+															style="height: 200px" name="review">${review.review }</textarea>
+														<label for="floatingTextarea2_${review.recipeId}">레시피
+															후기를 입력해주세요</label>
+													</div>
+													<div class="file-upload col-12">
+														<div class="image-upload-wrap">
+															<div class="drag-text">
+																<input class="file-upload-input" type='file'
+																	onchange="readURL(this);" accept="image/*" /> 후기 <br>사진
+																등록
+															</div>
+														</div>
+														<div class="file-upload-content">
+															<img class="file-upload-image" />
+															<div class="image-title-wrap">
+																<button type="button" onclick="removeUpload(this)"
+																	class="remove-image">삭제</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<script class="jsbin"
+													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">닫기</button>
+													<button type="submit" class="btn btn-secondary">작성하기</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form></td>
 						</tr>
 					</c:forEach>
-					
 				</tbody>
 			</table>
 		</section>
@@ -75,6 +155,49 @@ img {
 					this.classList.add('active');
 				});
 			});
+			
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						let $uploadContent = $(input).closest('.file-upload')
+								.find('.file-upload-content');
+						let $uploadImage = $uploadContent
+								.find('.file-upload-image');
+						$uploadContent.show();
+						$uploadImage.attr('src', e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					removeUpload(input);
+				}
+			}
+
+			function removeUpload(button) {
+
+				let $upload = $(button).closest('.file-upload');
+				let $uploadContent = $upload.find('.file-upload-content');
+				let $uploadImage = $uploadContent.find('.file-upload-image');
+
+				// 이미지 초기화
+				$uploadImage.attr('src', '#');
+				$uploadContent.hide();
+			}
+
+			$(document).ready(function() {
+				$('.image-upload-wrap').bind('dragover', function() {
+					$(this).addClass('image-dropping');
+				});
+				$('.image-upload-wrap').bind('dragleave', function() {
+					$(this).removeClass('image-dropping');
+				});
+			});
+
+			function handleButtonClick(recipeId) {
+
+				console.log("Clicked button with recipeId:", recipeId);
+
+			}
 		</script>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>

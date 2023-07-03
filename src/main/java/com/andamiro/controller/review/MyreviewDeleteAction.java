@@ -16,7 +16,8 @@ public class MyreviewDeleteAction implements ReviewAction {
 		String num = request.getParameter("num");
 		ReviewDAO rDao = ReviewDAO.getInstance();
 		rDao.deleteMyreview(num);
-		new MyreviewListAction().execute(request, response);
+		String url = "/ReviewServlet?command=myreview";
+		request.getRequestDispatcher(url).forward(request, response);
 	
 	}
 }
