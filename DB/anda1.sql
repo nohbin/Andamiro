@@ -28,7 +28,7 @@ CREATE TABLE andamiroRecipe (
     recipeDetailID      NUMBER          NOT NULL,
     recipeRegDate       date            default sysdate,
 	reviewcount	NUMBER,
-	userid		VARCHAR(255)
+
 );
 
 create table andamiroRecipe_detail(
