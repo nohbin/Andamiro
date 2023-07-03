@@ -41,11 +41,10 @@ a {
 			</li>
 			<li class="nav-item col-12 col-md-3">
 				<div class="dropdown-center">
-					<button class="btn dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">종류</button>
+					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">종류</button>
 					<ul class="dropdown-menu">
 						<c:forEach items="${recipeKindList}" var="kind" varStatus="status">
-					 		<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&categoryNum=${kind.recipeKindId }&cateogry=kind"/>">${kind.recipeKind }</a></li>
+					 		<li><a class="dropdown-item" href="<c:url value="/RecipeServlet?command=recipe_list&categoryNum=${kind.recipeKindId }&category=kind"/>">${kind.recipeKind }</a></li>
 					 	</c:forEach>
 					</ul>
 				</div>
