@@ -25,6 +25,7 @@ public class ReviewListAction implements ReviewAction {
 		MemberVO memberVO =  (MemberVO) session.getAttribute("loginUser");
 		String memberId = memberVO.getId();
 		
+		
 		List<ReviewVO> reviewList = rDao.selectAllReviewsByMemberId(memberId);
 		
 		request.setAttribute("reviewList", reviewList);
