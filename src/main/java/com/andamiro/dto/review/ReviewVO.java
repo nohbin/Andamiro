@@ -10,7 +10,14 @@ public class ReviewVO {
 	private Timestamp regdate;
 	private String img;
 	private String recipeName;
+	private int reviewNum;
 	
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
 	public String getRecipeName() {
 		return recipeName;
 	}
