@@ -46,7 +46,6 @@ img {
 						<th scope="col">레시피</th>
 						<th scope="col">레시피 제목</th>
 						<th scope="col">후기</th>
-						<th></th>
 						<th scope="col">받은 평점</th>
 						<th scope="col">작성일</th>
 					</tr>
@@ -55,15 +54,10 @@ img {
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
 							<th scope="row"><a href="recipe_Detail.html"><br>${review.recipeId }</a></th>
-							<td class=""><br>
-							<b>${review.recipeName }</b></td>
-							<td><a href="#"><br>
-								<br>2,320건</a></td>
-							<td></td>
-							<td><br>
-							<b> ${review.recipegrade }점</b></td>
-							<td><br>
-							<br>${review.regdate}</td>
+							<td class=""><b>${review.recipeName }</b></td>
+							<td>${review.review }</td>
+							<td><b> ${review.recipegrade }점</b></td>
+							<td>${review.regdate}</td>
 						</tr>
 					</c:forEach>
 					

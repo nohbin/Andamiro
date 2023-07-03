@@ -112,19 +112,20 @@ public class ReviewDAO {
 
 	}
 
-	public void insertReview(String memberId, int recipeId, ReviewVO reviewVO) {
+	public void insertReview(String memberId, int recipeId, ReviewVO reviewVO, String recipename) {
 		// TODO Auto-generated method stub
-		String sql = "insert into andamiroreview (reviewnum, recipeid , recipename, reviewpicture, review, recipegrade ) values "
-				+ "(reviewnum_seq.nextval , ? , ? , ? , ? , ?)";
+		String sql = "insert into andamiroreview (REVIEWNUM, RECIPEID ,ID,  RECIPENAME, REVIEWPICTURE, REVIEW, RECIPEGRADE ) values "
+				+ "(reviewnum_seq.nextval , ? ,? , ? , ? , ? , ?)";
 		
 		try(Connection conn = DBManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);) 
 		{
 			pstmt.setInt(1, recipeId);
 			pstmt.setString(2, memberId);
-			pstmt.setString(3, reviewVO.getImg());
-			pstmt.setString(4, reviewVO.getReview());
-			pstmt.setInt(5, reviewVO.getRecipegrade());
+			pstmt.setString(3, recipename);
+			pstmt.setString(4, reviewVO.getImg());
+			pstmt.setString(5, reviewVO.getReview());
+			pstmt.setInt(6, reviewVO.getRecipegrade());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -162,7 +163,7 @@ public class ReviewDAO {
 	}
 
 	public List<ReviewVO> selectAllReviewsByMemberId(String memberId) {
-		String sql = "select * from andamiroreview where recipename = ? order by recipeid desc";
+		String sql = "select * from andamiroreview where id = ? order by recipeid desc";
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
 		
 		

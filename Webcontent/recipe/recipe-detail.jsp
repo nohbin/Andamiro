@@ -164,6 +164,7 @@ a i {
 				<input type="hidden" name="command" value="review_write">
             	<input type="hidden" name="memberId" value="${loginUser.id }">
             	<input type="hidden" name="recipeid" value="${recipe.recipeID}">
+            	<input type="hidden" name="recipename" value="${recipe.recipeName }">
 				<div class="modal fade" id="staticBackdrop"
 					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 					aria-labelledby="staticBackdropLabel" aria-hidden="true">
