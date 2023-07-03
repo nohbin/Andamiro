@@ -17,7 +17,6 @@
 li {
 	list-style: none;
 }
-
 a {
 	color: black;
 	text-decoration: none;
@@ -43,7 +42,7 @@ a {
 			<div class="container d-flex flex-wrap">
 				<ul class="nav me-auto">
 					<li class="nav-item">
-						<a href="BestMainServlet?command=main" class="nav-link link-dark px-2 active" aria-current="page">Home</a>
+						<a href="<c:url value="/BestMainServlet?command=main"/>" class="nav-link link-dark px-2 active" aria-current="page">Home</a>
 					</li>
 					<li class="nav-item">
 						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
