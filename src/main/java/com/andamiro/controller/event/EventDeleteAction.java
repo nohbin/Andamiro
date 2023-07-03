@@ -12,7 +12,7 @@ public class EventDeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventno=request.getParameter("eventno");
+		int eventno = Integer.parseInt(request.getParameter("eventno"));
 		
 		EventDAO eventDAO=EventDAO.getInstance();
 		eventDAO.deleteEvent(eventno);

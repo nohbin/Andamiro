@@ -3,12 +3,10 @@ package com.andamiro.dto.event;
 
 
 public class EventVO {
-	String eventno;
-	String imgsum;
-	public String getEventno() {
+    public int getEventno() {
 		return eventno;
 	}
-	public void setEventno(String eventno) {
+	public void setEventno(int eventno) {
 		this.eventno = eventno;
 	}
 	public String getImgsum() {
@@ -35,8 +33,16 @@ public class EventVO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	String term;
-	String ing;
-	String poster;
+	public String getEventkind() {
+		return eventkind;
+	}
+	public void setEventkind(String eventkind) {
+		this.eventkind = eventkind;
+	}
+	private int eventno;
+    private String imgsum;
+    private String term;
+    private String ing;
+    private String poster;
+    private String eventkind;
 }
-	

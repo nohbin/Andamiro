@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,45 +30,27 @@ label[for=name] button {
 </style>
 </head>
 <body>
-	
+
 	<jsp:include page="../header.jsp"></jsp:include>
+
+
+
+
+
+	<div class="container">
+		<div style="text-align: center;">
+
+
+			<img src="resources/img/${eventvo.poster}" width="60%" height="auto"
+				role="img" aria-label="베너" />
+			<hr />
+
+
+			<button type="button" class="btn btn-warning btn-lg-3">참여하기</button>
+			<button type="button" class="btn btn-warning btn-lg-3">공유하기</button>
+		</div>
+	</div>
 	
-
-
-
-
-
-
-
-        <div class="container">
-            <div style="text-align: center;">
-               <img src="../resources/img/${event} } width="70%" height="auto" role="img" aria-label="베너"></img>
-               <img src="../resources/img/banner1-2.jpg"  width="70%" height="auto" role="img" aria-label="베너"></img>
-               
-                <a href="#"> <img
-                        src="../resources/img/banner_eve.jpg" width="70%" height="auto" role="img"
-                        aria-label="베너"></img></a>
-                <hr>
-                <button type="button" class="btn btn-warning btn-lg"> 공유하기</button>
-
-
-            </div>
-
-
-        </div>
-
-        </div>
-        </div>
-        </div>
-
-    </main>
-
-
-
-
-
-    </div>
-   
 
 
 
