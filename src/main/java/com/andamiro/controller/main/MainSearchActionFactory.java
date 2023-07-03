@@ -1,3 +1,4 @@
+package com.andamiro.controller.main;
 //package com.andamiro.controller.main;
 //
 //import com.andamiro.controller.action.MainSearchAction;
