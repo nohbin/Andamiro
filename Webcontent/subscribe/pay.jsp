@@ -43,6 +43,13 @@
           return;
         }
         
+        var subscrbie = '<%=(String)session.getAttribute("loginUser.subscribe")%>';
+        
+        if(subscrbie != null){
+        	alert("이미 구독중인 회원입니다.");
+        	return;
+        }
+        
 		var checkbox = document.querySelector('input[name="termcheck"]');
     	if (!checkbox.checked) {
     	    alert("약관동의를 체크해주세요.");

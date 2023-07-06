@@ -13,20 +13,29 @@ public class EventWriteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	int eventno = Integer.parseInt(request.getParameter("eventno"));
+        String eventkind = request.getParameter("eventkind");
+        String term = request.getParameter("term");
+        String ing = request.getParameter("ing");
+        String imgsum = request.getParameter("imgsum");
+        String poster = request.getParameter("poster");
+
         EventVO eventVO = new EventVO();
-        eventVO.setEventno(request.getParameter("eventno"));
-        eventVO.setTerm(request.getParameter("term"));
-        eventVO.setIng(request.getParameter("ing"));
-        eventVO.setImgsum(request.getParameter("imgsum"));
-        eventVO.setPoster(request.getParameter("poster"));
+        eventVO.setEventno(eventno);
+        eventVO.setEventkind(eventkind);
+        eventVO.setTerm(term);
+        eventVO.setIng(ing);
+        eventVO.setImgsum(imgsum);
+        eventVO.setPoster(poster);
 
         EventDAO eventDAO = EventDAO.getInstance();
         eventDAO.insertEvent(eventVO);
 
+        // Perform any additional actions after inserting event information here
+        // For example, you can redirect to the event list page
+
         // 이벤트 정보를 추가한 후에 수행할 다른 동작을 여기에 추가할 수 있습니다.
-
-        // 예시: 이벤트 목록 페이지로 리다이렉트
-        response.sendRedirect("./admin/eventList.jsp");
+        new EventListAction().execute(request, response);
     }
-
 }
+

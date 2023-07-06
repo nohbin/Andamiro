@@ -80,30 +80,30 @@ img {
 				<tbody>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<th scope="row"><br> <br>${review.id }</th>
+							<th scope="row"><br> <br>${review.recipeId }</th>
 							<th scope="row"><a href="recipe_Detail.html"><img
 									src= ${review.img }></a></th>
-							<td class=""><br> <br> <b>${review.title}</b></td>
+							<td class=""><br> <br> <b>${review.recipeName}</b></td>
 							<td><a href="#"><br> <br>${review.review}</a></td>
 							<td><br> <br> <b>${review.recipegrade} 점</b></td>
-							<td><br> <br>${review.joindate}</td>
+							<td><br> <br>${review.regdate}</td>
 							<td><br>
 								
 				<form action="ReviewServlet" method="post"  >
 				<input type="hidden" name="command" value="myreview_update">
-				<input type="hidden" name="num" value="${review.num}">
+				<input type="hidden" name="num" value="${review.recipeId}">
 				<!--후기 작성 form -->
 				<button type="button" class="btn btn-primary"
-					data-bs-toggle="modal" data-bs-target="#staticBackdrop_${review.num}">
+					data-bs-toggle="modal" data-bs-target="#staticBackdrop_${review.recipeId}">
 					수정</button>
 				<!-- 모달 -->
-				<div class="modal fade" id="staticBackdrop_${review.num}"
+				<div class="modal fade" id="staticBackdrop_${review.recipeId}"
 					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel_${review.num}" aria-hidden="true">
+					aria-labelledby="staticBackdropLabel_${review.recipeId}" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="staticBackdropLabel_${review.num}">
+								<h1 class="modal-title fs-5" id="staticBackdropLabel_${review.recipeId}">
 									<b>작성자 : [${loginUser.id }] 님</b>
 								</h1>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -111,7 +111,7 @@ img {
 							</div>
 							<div class="modal-body">
 								<div class="form-floating w-50 mx-auto mb-2">
-									<select class="form-select" id="floatingSelect_${review.num}" 
+									<select class="form-select" id="floatingSelect_${review.recipeId}" 
 									aria-label="Floating label select example" name="recipegrade">
 										<option selected></option>
 										<option value="1">1</option>
@@ -119,12 +119,12 @@ img {
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
-									</select> <label for="floatingSelect_${review.num}">점수</label>
+									</select> <label for="floatingSelect_${review.recipeId}">점수</label>
 								</div>
 								<div class="form-floating">
 									<textarea class="form-control" placeholder="" 
-									id="floatingTextarea2_${review.num}" style="height: 200px" name="review" >${review.review }</textarea>
-									<label for="floatingTextarea2_${review.num}">레시피 후기를 입력해주세요</label>
+									id="floatingTextarea2_${review.recipeId}" style="height: 200px" name="review" >${review.review }</textarea>
+									<label for="floatingTextarea2_${review.recipeId}">레시피 후기를 입력해주세요</label>
 								</div>
 								<div class="file-upload col-12">
 									<div class="image-upload-wrap">
@@ -151,15 +151,11 @@ img {
 					</div>
 				</div>
 								<button class="btn btn-primary" type="button" value="delete"
-									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.num}'">삭제</button>
+									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.recipeId}'">삭제</button>
 			</form>
 						</tr>
 					</c:forEach>
 
-
-					<script>
-   						
-					</script>
 
 
 					<script>

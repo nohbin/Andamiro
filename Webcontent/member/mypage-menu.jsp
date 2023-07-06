@@ -50,7 +50,7 @@ img {
 						<li><a href="ReviewServlet?command=review">나의 요리 레시피</a></li>
 						<li><a href="ReviewServlet?command=myreview">내가 남긴 후기</a></li>
 					</ul>
-				</div> <!-- <a class="nav-link" style=" color: black;" href="mypage-review.html">요리 후기</a> -->
+				</div>
 			</li>
 			<c:if test="${not empty loginUser.subscribe }">
 				<li class="nav-item"><a class="nav-link" style="color: black;"

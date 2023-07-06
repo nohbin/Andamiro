@@ -15,22 +15,23 @@ public class ReviewUpdateAction implements ReviewAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("excute실행" ); 
+		System.out.println("excute실행");
 		int recipeId = Integer.parseInt(request.getParameter("recipeid"));
-	        String review = request.getParameter("review");
-	        int recipegrade = Integer.parseInt(request.getParameter("recipegrade"));
-	        String img = request.getParameter("img");
-	        ReviewVO rVo = new ReviewVO();
-	        rVo.setRecipeId(recipeId);
-	        rVo.setReview(review);
-	        rVo.setRecipegrade(recipegrade);
-	        rVo.setRegdate(new Timestamp(System.currentTimeMillis()));
-	        rVo.setImg(img);
-	        ReviewDAO rDao = ReviewDAO.getInstance();
-	        rDao.updateReview(rVo);
-	        new MyreviewListAction().execute(request, response);
-		
+		String review = request.getParameter("review");
+		int recipegrade = Integer.parseInt(request.getParameter("recipegrade"));
+		String img = request.getParameter("img");
+		int reviewNum = Integer.parseInt(request.getParameter("reviewnum"));
+		ReviewVO rVo = new ReviewVO();
+		rVo.setReviewNum(reviewNum);
+		rVo.setRecipeId(recipeId);
+		rVo.setReview(review);
+		rVo.setRecipegrade(recipegrade);
+		rVo.setRegdate(new Timestamp(System.currentTimeMillis()));
+		rVo.setImg(img);
+		ReviewDAO rDao = ReviewDAO.getInstance();
+		rDao.updateReviewByReviewNum(rVo , reviewNum);
 
+		String url = "/ReviewServlet?command=myreview";
+		request.getRequestDispatcher(url).forward(request, response);
 	}
-
 }

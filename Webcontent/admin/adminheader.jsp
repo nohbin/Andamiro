@@ -32,7 +32,7 @@
                 <a href='<c:url value="/DietServlet?command=dietDetail_list"/>' class="nav-link" style="text-decoration: none;  color: inherit">식단상세 관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="./admin/eventList.jsp" style="text-decoration: none;  color: inherit">이벤트관리</a>
+                <a class="nav-link" href="EventServlet?command=event_list" style="text-decoration: none;  color: inherit">이벤트관리</a>
             </li>
 
         </ul>

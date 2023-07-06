@@ -14,7 +14,6 @@ public class ReviewUpdateFormAction implements ReviewAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 System.out.println("execute() 실행!");
 		String url = "/review/updatereview.jsp";
 		String num = request.getParameter("num");
 		ReviewDAO rDao = ReviewDAO.getInstance();

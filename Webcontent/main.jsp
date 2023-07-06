@@ -242,7 +242,7 @@ a {
 								varStatus="status">
 								<li class="rankingnum">
 									<p class="rankingnum-st1">
-										<b1>${status.index + 1}</b1>
+										<b>${status.index + 1}</b>
 									</p>
 									<div class="rankingimg">
 										<input type="hidden" name="recipeID" value="${best.recipeID}">
@@ -275,60 +275,51 @@ a {
 				</h1>
 			</div>
 			<div class="row d-flex justify-content-center">
-				<div></div>
 				<div class="col-lg-3 mb-2 mt-2 d-flex">
-
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/morning.jpg" class="card-img-top"
-							alt="...">
+						<img src="./resources/img/morning.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 아침식단</h5>
 						</div>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">고구마,계란,요거트,바나나</li>
-							<li class="list-group-item" style="color: red;"><b>190
-									칼로리</b></li>
 							<li class="list-group-item">AM : 7~9시 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="./subscribe/subscribe.jsp" class="card-link"><b>아침식단 보러가기</b></a>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link">
+								<b>아침식단 보러가기</b>
+							</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 mb-2 mt-2 d-flex ">
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/lunch.jpg" class="card-img-top"
-							alt="...">
+						<img src="./resources/img/lunch.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 점심식단</h5>
 						</div>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item" style="color: red;"><b>315
-									칼로리</b></li>
 							<li class="list-group-item">현미밥,목살150g,브로콜리,소고기100g</li>
 							<li class="list-group-item">PM : 12~2시 사이권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="./subscribe/subscribe.jsp" class="card-link"><b>점심식단 보러가기</b></a>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link"><b>점심식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 mb-2 mt-2 d-flex justify-content-center">
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/diner.jpg" class="card-img-top"
-							alt="...">
+						<img src="./resources/img/diner.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 저녁식단</h5>
 							<p class="card-text"></p>
 						</div>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">양배추, 닭가슴살, 계란, 땅콩</li>
-							<li class="list-group-item" style="color: red;"><b>230
-									칼로리</b></li>
 							<li class="list-group-item">PM : 6 ~ 8시 사이 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href="./subscribe/subscribe.jsp" class="card-link"><b>저녁식단 보러가기</b></a>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link"><b>저녁식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>

@@ -14,13 +14,12 @@ public class ReviewActionFactory {
 	
 	public ReviewAction getAction(String command) {
 		ReviewAction action = null;
-		System.out.println("ActionFactory :" + command);
 		
 		if(command.equals("main")) {
 			action = new MainAction();
-		}else if(command.equals("review")) {
-			action = new ReviewListAction();
 		}else if(command.equals("myreview")) {
+			action = new ReviewListAction();
+		}else if(command.equals("review")) {
 			action = new MyreviewListAction();			
 		}else if(command.equals("myreview_delete")) {
 			action = new MyreviewDeleteAction();

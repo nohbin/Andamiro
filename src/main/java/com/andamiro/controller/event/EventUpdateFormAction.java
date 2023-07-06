@@ -12,19 +12,14 @@ import com.andamiro.dto.event.EventVO;
 
 public class EventUpdateFormAction implements Action {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String url="admin/eventUpdate.jsp";
-		String eventNo=request.getParameter("eventNo");
-		EventDAO eventDAO = EventDAO.getInstance();
-		EventVO eventVO = eventDAO.selectOneEventByEventNumber(eventNo);
-		request.setAttribute("eno", eventVO);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
-		
-		
-		
-	}
-
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String url = "/admin/eventUpdate.jsp";
+        int eventno = Integer.parseInt(request.getParameter("eventno"));
+        EventDAO eventdao = EventDAO.getInstance();
+        EventVO eventvo = eventdao.selectOneEventByEventNumber(eventno);
+        request.setAttribute("eno", eventvo);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+        dispatcher.forward(request, response);
+    }
 }
