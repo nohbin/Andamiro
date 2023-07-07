@@ -33,8 +33,7 @@ li{
                     요리 등록
                 </div>
             </div>
-            <form action="RecipeServlet" >
-            	<input type="hidden" name="command" value="recipe_write">
+            <form action="RecipeServlet?command=recipe_write" method="post" enctype="multipart/form-data">
             	<input type="hidden" name="userid" value="${loginUser.id }">
                 <div class="row my-3">
                     <!-- 요리 제목-->
