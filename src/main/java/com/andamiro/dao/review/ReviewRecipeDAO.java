@@ -18,16 +18,14 @@ public class ReviewRecipeDAO {
 		return instance;
 	}
 	
-	public static ArrayList<ReviewRecipeVO> listBestRecipe(){
+	public ArrayList<ReviewRecipeVO> listBestRecipe(){
 		ArrayList<ReviewRecipeVO> recipeList = new ArrayList<ReviewRecipeVO>();
-		String sql = "SELECT mainpicture, recipename, membernum, recipeCompetition, recipeview FROM (SELECT * FROM recipe ORDER BY recipeview DESC) WHERE ROWNUM <= 8";
+		String sql = "SELECT mainpicture, recipename, userid, recipeRegDate, recipeview FROM (SELECT * FROM andamirorecipe ORDER BY recipeview DESC) WHERE ROWNUM <= 8";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(recipeList);
 		try {
 			conn = DBManager.getConnection();
-			System.out.println("conn 성공" + conn);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -35,8 +33,8 @@ public class ReviewRecipeDAO {
 				ReviewRecipeVO recipe = new ReviewRecipeVO();
 				recipe.setMainPicture(rs.getString("mainpicture"));
 				recipe.setRecipeName(rs.getString("recipename"));
-				recipe.setMemberNum(rs.getInt("membernum"));
-				recipe.setRecipeCompetition(rs.getInt("recipecompetition"));
+				recipe.setUserId(rs.getString("userid"));
+				recipe.setRecipeRegDate(rs.getTimestamp("recipeRegDate"));
 				recipe.setRecipeView(rs.getInt("recipeview"));
 				recipeList.add(recipe);
 			}

@@ -1,6 +1,5 @@
 package com.andamiro.controller.review;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -15,10 +14,10 @@ public class MyreviewDeleteAction implements ReviewAction {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("num");
-		System.out.println("excute실행");
 		ReviewDAO rDao = ReviewDAO.getInstance();
 		rDao.deleteMyreview(num);
-		new MyreviewListAction().execute(request, response);
+		String url = "/ReviewServlet?command=myreview";
+		request.getRequestDispatcher(url).forward(request, response);
 	
 	}
 }

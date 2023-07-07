@@ -86,6 +86,9 @@ a{ text-decoration: none;
     position: relative;
 }
 
+
+
+
 .catecori{
     width: 60%;
     height: 250px;
@@ -260,3 +263,32 @@ a{ text-decoration: none;
 .inner img{
     width: 100%;
 }
+
+.slider-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .arrow-button {
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow-button svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+
+  .arrow-button:hover {
+    background-color: black;
+  }

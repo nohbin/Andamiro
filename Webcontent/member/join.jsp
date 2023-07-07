@@ -99,21 +99,31 @@ label[for=name] button {
 						<input type="checkbox" class="custom-control-input" id="aggrement"
 							required> <label class="custom-control-label"
 							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label><br>
-						<button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="validateForm()">가입 완료</button>
+						<button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="return validateForm()">가입 완료</button>
 					</div>
 					<div class="mb-5"></div>
 				</form>
 			</div>
 		</div>
+
 		<script>
-			function validateForm() {
-				const form = document.querySelector('.validation-form');
-				if (form.checkValidity() === false) {
-					event.preventDefault();
-					event.stopPropagation();
-				}
-				form.classList.add('was-validated');
-				}
+		    function validateForm() {
+		        const form = document.querySelector('.validation-form');
+		        const password = document.getElementById('password').value;
+		        const passwordConfirm = document.getElementById('passwordconfirm').value;
+		
+		        if (password !== passwordConfirm) {
+		            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		            return false;
+		        }
+		
+		        if (form.checkValidity() === false) {
+		            event.preventDefault();
+		            event.stopPropagation();
+		        }
+		
+		        form.classList.add('was-validated');
+		    }
 		</script>
 	</div>
 

@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../resources/css/bootstrap.css">
 <link rel="stylesheet" href="../../resources/css/join.css">
@@ -36,7 +37,7 @@
 				</tr>
 			</table>
 			<br><br>
-				<input type="submit" value="등록" onclick="return dietCheck()"> 
+				<input type="submit" value="수정" onclick="return dietCheck()"> 
 				<input type="reset"	value="다시 작성"> 
 				<input type="button" value="목록" onclick="location.href='DietServlet?command=diet_list'">
 			</form>

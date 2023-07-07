@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
   <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../resources/css/my.css">
@@ -22,98 +25,116 @@
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="container border mt-3 rounded-3 w-50">
-  <ul class="nav nav-pills nav-fill row">
-      <li class="nav-item col-12 col-md-3">
-          <a class="nav-link" style=" color: black;" aria-current="page" href="recdiet.jsp">추천식단</a>
-      </li>
-      <li class="nav-item col-12 col-md-3">
-        <a class="nav-link active" style=" color: black;" aria-current="page" href="simplediet.jsp">간단식단</a>
-    </li>
-    <li class="nav-item col-12 col-md-3">
-      <a class="nav-link" style=" color: black;" aria-current="page" href="lowdiet.jsp">저칼로리식단</a>
-  </li>
-  <li class="nav-item col-12 col-md-3">
-    <a class="nav-link" style=" color: black;" aria-current="page" href="proteindiet.jsp">프로틴식단</a>
-</li>
-  </ul>  
-</div>
-      <div style="height: 3rem;"></div>
-      <div class="container">
-          <div class="row" >
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='simplediet.jsp'">아침</button>
-                </div>
-                <img src="../resources/img/simple.png" class="img-fluid3">
-                <div class="mealment">조리시간이 30분 이하인 레시피로 이루어진 식단</div>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='simplediet_lunch.jsp'">점심</button>
-                </div>
-                <img src="../resources/img/simple.png" class="img-fluid3">
-                <div class="mealment">조리시간이 30분 이하인 레시피로 이루어진 식단</div>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="text-center">
-                <div>
-                  <button type="button" class="btn btn-outline-warning mb-3" onclick="location.href='simplediet_dinner.jsp'">저녁</button>
-                </div>
-                <img src="../resources/img/simple.png" class="img-fluid3">
-                <div class="mealment"> 조리시간이 30분 이하인 레시피로 이루어진 식단</div>
-              </div>
-            </div>
-          </div> 
-        </div> 
-      <div style="height: 7rem;"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col d-flex justify-content-between my-3">
-            <span class="h4" style="font-weight: bold;">식단별 영양정보</span>
-            <span>*1인분 기준 영양정보 입니다.</span>
-          </div>
-        </div> 
-        <table class="table table-hover" style="height: 300px;">
-          <thead class="table-primary text-center head">
-            <tr>
-              <td>음식명</td>
-              <td>칼로리</td>
-              <td>영양성분</td>
-            </tr>
-          </thead>
-          <tbody class="table-secondary">
-            <tr>
-              <td class="h5 border-end">점심</td>
-              <td class="h5 border-end">칼로리1</td>
-              <td class="h5">영양성분1</td>
-            </tr>
-            <tr>
-              <td class="h5 border-end">점심</td>
-              <td class="h5 border-end">칼로리2</td>
-              <td class="h5">영양성분2</td>
-            </tr>
-            <tr>
-              <td class="h5 border-end">점심</td>
-              <td class="h5 border-end">칼로리3</td>
-              <td class="h5">영양성분3</td>
-            </tr>
-            <tr>
-              <td class="h5 border-end">점심</td>
-              <td class="h5 border-end">칼로리4</td>
-              <td class="h5">영양성분4</td>
-            </tr>
-            <tr>
-              <td class="h5 border-end">점심</td>
-              <td class="h5 border-end">칼로리5</td>
-              <td class="h5">영양성분5</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-<jsp:include page="../footer.jsp"></jsp:include>
+		<ul class="nav nav-pills nav-fill row">
+			<li class="nav-item col-12 col-md-3">
+			<a class="nav-link" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=rec_diet"/>'>
+				추천식단
+			</a>
+			</li>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link  active" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=simpleDiet"/>'>
+				간단식단
+			</a>
+			</li>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link" style="color: black;" aria-current="page" href='<c:url value="SubDietServlet?command=lowDiet"/>'>
+				저칼로리식단
+				</a>
+			</li>
+			<li class="nav-item col-12 col-md-3"><a class="nav-link" style="color: black;" aria-current="page"href='<c:url value="SubDietServlet?command=proteinDiet"/>'>
+				프로틴식단
+			</a>
+			</li>
+		</ul>
+	</div>
+       <div style="height: 1rem;"></div>
+		<div class="container">
+			<div class="row">
+				<div class="mb-3">
+	 			  </div>
+				 <c:forEach var="diet" items="${dietList}">
+					<div class="col-12 col-md-4">
+						<div class="text-center">
+							<div class="fs-4 fw-bold mb-2" style="color: #e18409;">
+								${diet.diet_menu}														
+							</div>
+							<img src="upload/${diet.diet_picture}" style="width: 25rem; height: 20rem;">
+							
+						</div>
+					</div>
+	 			  </c:forEach> 
+	 			  <table>
+	 			  	<tr>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList1}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:13rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>
+						</td>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList2}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:13rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>	 			  		
+	 			  		</td>
+	 			  		<td>
+	 			  		<c:forEach var="dietDetailfood" items="${dietDetailList3}">
+							<div>
+								<div>
+									<div class="fw-bold lh-base" style="margin-left:13rem;">
+										${dietDetailfood.foodName}</div>
+								</div>
+							</div>
+						</c:forEach>	 			  		
+	 			  		</td>
+	 			  	</tr>
+	 			  </table>
+			</div>
+		</div>	
+		<!-- 여기까지  -->
+		<div style="height: 2rem;"></div>
+		<div class="container">
+	 			  	<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=simpleDiet'">아침 식단
+					</button>
+					<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=simpleDietLunch'">점심 식단
+					</button>
+					<button type="button" class="btn btn-outline-success btn-sm"
+					onclick="location.href='SubDietServlet?command=simpleDietDinner'">저녁 식단
+					</button>		
+			<div class="row">
+				<div class="col d-flex justify-content-between my-3">
+					<span class="h4" style="font-weight: bold;">식단별 영양정보</span> <span>*1인분
+						기준 영양정보 입니다.
+					</span>
+				</div>
+			</div>
+			<table class="table table-hover" style="height: 300px;">
+				<thead class="table-primary text-center head">
+					<tr>
+						<td>음식명</td>
+						<td>칼로리</td>
+						<td>영양성분</td>
+					</tr>
+				</thead>
+				<tbody class="table-secondary">
+					<c:forEach var="dietDetail" items="${dietDetailList}">
+					<tr>
+						<td class="h5 border-end">${dietDetail.foodName}</td>
+						<td class="h5 border-end">${dietDetail.kcal}</td>
+						<td class="h5">${dietDetail.component}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

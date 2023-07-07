@@ -17,8 +17,8 @@ public class EventListAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/admin/eventList.jsp";
 		EventDAO eventDAO=EventDAO.getInstance();
-		List<EventVO> eventList = eventDAO.getEventList();
-		request.setAttribute("eventList", eventList);
+		List<EventVO> allList = eventDAO.allList();
+		request.setAttribute("allList", allList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 

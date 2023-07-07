@@ -20,10 +20,10 @@
                 <a class="nav-link" aria-current="page" href="<c:url value="/BoardServlet?command=board_paging&page=1"/>" style="text-decoration: none;  color: inherit">회원관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a href="<c:url value='/SubscribeServlet?command=submem_list'/>" class="nav-link" style="text-decoration: none; color: inherit">구독회원 관리</a>
+                <a class="nav-link" href="<c:url value="/AdminServlet?command=submem_list&page=1"/>" style="text-decoration: none; color: inherit">구독회원 관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="#" style="text-decoration: none;  color: inherit">레시피관리</a>
+                <a class="nav-link" href='<c:url value="/AdminServlet?command=recipe_list_view&page=1"/>' style="text-decoration: none;  color: inherit">레시피관리</a>
             </li>
             <li class="nav-item  mynav-item">
                 <a href='<c:url value="/DietServlet?command=diet_list"/>' class="nav-link"  style="text-decoration: none;  color: inherit">식단관리</a>
@@ -32,7 +32,7 @@
                 <a href='<c:url value="/DietServlet?command=dietDetail_list"/>' class="nav-link" style="text-decoration: none;  color: inherit">식단상세 관리</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="./admin/eventList.jsp" style="text-decoration: none;  color: inherit">이벤트관리</a>
+                <a class="nav-link" href="EventServlet?command=event_list" style="text-decoration: none;  color: inherit">이벤트관리</a>
             </li>
 
         </ul>

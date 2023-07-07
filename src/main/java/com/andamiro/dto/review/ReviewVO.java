@@ -3,29 +3,38 @@ package com.andamiro.dto.review;
 import java.sql.Timestamp;
 
 public class ReviewVO {
-	private int num;
-	private String title;
+	private int recipeId;
+	private String userId;
 	private String review;
 	private int recipegrade;
-	private Timestamp joindate;
+	private Timestamp regdate;
 	private String img;
-	public String getImg() {
-		return img;
+	private String recipeName;
+	private int reviewNum;
+	
+	public int getReviewNum() {
+		return reviewNum;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
 	}
-	public int getNum() {
-		return num;
+	public String getRecipeName() {
+		return recipeName;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setRecipeName(String recipeName) {
+		this.recipeName = recipeName;
 	}
-	public String getTitle() {
-		return title;
+	public int getRecipeId() {
+		return recipeId;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setRecipeId(int recipeId) {
+		this.recipeId = recipeId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getReview() {
 		return review;
@@ -39,10 +48,19 @@ public class ReviewVO {
 	public void setRecipegrade(int recipegrade) {
 		this.recipegrade = recipegrade;
 	}
-	public Timestamp getJoindate() {
-		return joindate;
+	public Timestamp getRegdate() {
+		return regdate;
 	}
-	public void setJoindate(Timestamp joindate) {
-		this.joindate = joindate;
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = regdate;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	
+	
 }
