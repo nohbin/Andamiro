@@ -85,7 +85,11 @@ a {
 								href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'
 								class="btn btn-light text-dark me-2"
 								style="background-color: #fac279;">마이페이지</a>
+
 						</c:when>
+						
+					 						
+						
 						<c:otherwise>
 							<a
 								href="<c:url value="/MemberServlet?command=member_login_form"/>"

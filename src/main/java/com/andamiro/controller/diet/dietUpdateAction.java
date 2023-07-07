@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.DietAction;
+import com.andamiro.controller.admin.dietListAction;
 import com.andamiro.dao.diet.DietDAO;
 import com.andamiro.dto.diet.DietVO;
 

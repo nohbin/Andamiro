@@ -44,7 +44,7 @@
 		<input type="button" value="구독 해지하기"
 			onclick="location.href='SubscribeServlet?command=submem_delete&subNumber=${subscribe.subNumber}'"> 		
 		<input type="button" value="구독회원 목록"
-			onclick="location.href='SubscribeServlet?command=submem_list'"> 
+			onclick="location.href='AdminServlet?command=submem_list&page=1'">
 		</div>
 	<div style="height: 10rem;"></div>
 <jsp:include page="../../footer.jsp"></jsp:include>	

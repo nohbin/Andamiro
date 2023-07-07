@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.SubscribeAction;
-import com.andamiro.controller.diet.dietListAction;
+import com.andamiro.controller.admin.dietListAction;
 import com.andamiro.dao.diet.DietDAO;
 import com.andamiro.dao.subscribeMem.SubscribeMemberDAO;
 

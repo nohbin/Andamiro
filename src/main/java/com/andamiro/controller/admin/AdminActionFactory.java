@@ -18,6 +18,10 @@ public class AdminActionFactory {
 			action = new AdminRecipeListViewForm();
 		}else if(command.equals("submem_list")) {
 			action = new SubmemListAction();
+		}else if(command.equals("diet_list")) {
+			action = new dietListAction(); 
+		}else if(command.equals("dietDetail_list")) {
+			action = new dietDetailListAction();
 		}
 		
 		return action;

@@ -71,3 +71,16 @@
   transition: max-height 0.2s ease-out;
   border-bottom: 1px solid #eeeeee;
 }
+
+/* .dietImg {
+  overflow: hidden;
+}
+
+.dietImg img {
+  transition: transform 0.3s ease; 
+}
+
+.dietImg:hover img {
+  transform: scale(1.2); 호버 시 이미지 크기를 확대
+}
+ */

@@ -8,6 +8,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.andamiro.controller.action.SubDietAction;
 import com.andamiro.dao.diet.DietDAO;
@@ -22,7 +24,7 @@ public class rec_dietAction implements SubDietAction {
 		String url = "/diet/recdiet.jsp";
 		DietDAO dietDao = DietDAO.getInstance();
 		DietDetailDAO dietDetailDao = DietDetailDAO.getInstance();
-
+		
 		
 		//식단 출력 (메뉴, 사진)
 		List<DietVO> dietList = dietDao.selectRecDiet();

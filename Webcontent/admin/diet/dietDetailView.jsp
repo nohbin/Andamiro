@@ -39,7 +39,7 @@
 		<input type="button" value="삭제하기"
 			onclick="location.href='DietServlet?command=dietDetail_delete&dietDetailID=${dietDetail.dietDetailID}'"> 		
 		<input type="button" value="목록"
-			onclick="location.href='DietServlet?command=dietDetail_list'"> 
+			onclick="location.href='AdminServlet?command=dietDetail_list&page=1'"> 
 		<input type="button" value="식단정보 등록하기"
 			onclick="location.href='DietServlet?command=dietDetail_write_form'">
 		</div>

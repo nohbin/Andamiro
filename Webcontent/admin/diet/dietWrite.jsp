@@ -54,7 +54,7 @@
 			<br>
 			<br> <input type="submit" value="등록" onclick="function submitForm()">
 			 	 <input type="reset"  value="다시 작성">
-			 	 <input type="button" value="목록" onclick="location.href='DietServlet?command=diet_list'">
+			 	 <input type="button" value="목록" onclick="location.href='AdminServlet?command=diet_list&page=1'">
 		</form>
 	</div>
 	<div style="height: 7rem;"></div>
