@@ -19,28 +19,28 @@ public class DietDAO {
 		return instance;
 	}
 	
-	public List<DietVO> selectAllboards() {
-	    String sql = "select * from diet order by dietNumber desc ";
-	    List<DietVO> list = new ArrayList<DietVO>();
-
-	    try (Connection conn = DBManager.getConnection();
-	         Statement stmt = conn.createStatement();
-	         ResultSet rs = stmt.executeQuery(sql)) 
-	    {
-	        while (rs.next()) {
-	            DietVO dietVo = new DietVO();
-	            dietVo.setDietNumber(rs.getInt("dietNumber"));
-	            dietVo.setDiet_kind(rs.getString("diet_kind"));
-	            dietVo.setDiet_menu(rs.getString("diet_menu"));
-	            dietVo.setDiet_picture(rs.getString("diet_picture"));
-	            list.add(dietVo);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-
-	    return list;
-	}
+//	public List<DietVO> selectAllboards() {
+//	    String sql = "select * from diet order by dietNumber desc ";
+//	    List<DietVO> list = new ArrayList<DietVO>();
+//
+//	    try (Connection conn = DBManager.getConnection();
+//	         Statement stmt = conn.createStatement();
+//	         ResultSet rs = stmt.executeQuery(sql)) 
+//	    {
+//	        while (rs.next()) {
+//	            DietVO dietVo = new DietVO();
+//	            dietVo.setDietNumber(rs.getInt("dietNumber"));
+//	            dietVo.setDiet_kind(rs.getString("diet_kind"));
+//	            dietVo.setDiet_menu(rs.getString("diet_menu"));
+//	            dietVo.setDiet_picture(rs.getString("diet_picture"));
+//	            list.add(dietVo);
+//	        }
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//
+//	    return list;
+//	}
 
 	public void insertDiet(DietVO dietVo) {
 	    String sql = "insert into  diet (dietNumber, diet_kind, diet_menu, diet_picture) values (dietNum_seq.NEXTVAL, ?, ?, ?)";
@@ -246,8 +246,35 @@ public class DietDAO {
 	    return dietList;
 	}
 
-
-
+	public List<DietVO> selectDietBypage(int start, int end) {
+		List<DietVO> dietList = new ArrayList<>();
+		String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY dietNumber) NUM, A.* FROM diet A ORDER BY dietNumber)"
+				+ "where NUM BETWEEN? AND? ";
+		
+		try(Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql))
+		{
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			try(ResultSet rs = pstmt.executeQuery())
+			{
+				while (rs.next()) {
+					DietVO dietVo = new DietVO();
+					dietVo.setDietNumber(rs.getInt("dietNumber"));
+		            dietVo.setDiet_kind(rs.getString("diet_kind"));
+		            dietVo.setDiet_menu(rs.getString("diet_menu"));
+		            dietVo.setDiet_picture(rs.getString("diet_picture"));
+		            
+		            dietList.add(dietVo);
+				}
+			} 
+		}   catch (SQLException e) {
+				e.printStackTrace();
+		}
+		
+		return dietList;
+	
+	}
 }
 
 
