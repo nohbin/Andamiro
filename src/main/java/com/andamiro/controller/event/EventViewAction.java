@@ -10,26 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.andamiro.dao.event.EventDAO;
 import com.andamiro.dto.event.EventVO;
 
-public class EventViewAction implements Action{
+public class EventViewAction implements Action {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String url= "admin/eventView.jsp";
-		
-		String eventno=request.getParameter("eventno");
-		
-		EventDAO eventDAO= EventDAO.getInstance();
-		
-		EventVO eventVO = eventDAO.selectOneEventByEventNumber(eventno);
-		
-		request.setAttribute("eventview",eventVO);
-		
-		
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
-	}
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String url = "/admin/eventView.jsp";
+
+         int eventno = Integer.parseInt(request.getParameter("eventno"));
+
+        EventDAO eventDAO = EventDAO.getInstance();
+
+        EventVO eventVO = eventDAO.selectOneEventByEventNumber(eventno);
+
+        request.setAttribute("eventview", eventVO);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+        dispatcher.forward(request, response);
+    }
 
 }

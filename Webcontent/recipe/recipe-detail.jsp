@@ -46,10 +46,10 @@ a i {
 		<div class="container border my-3 rounded-5 text-center recipe-show">
 			<div class="container text-center mt-3 mb-3">
 				<div class="row row-cols-12">
-					<div class="col-12 mb-3 border-bottom" style="font-weight: 900; font-size: 4rem;">${recipe.recipeName }</div>
-					<div class="col-12 mb-3 border-bottom"><h3>${recipe.recipeDetailVO.recipeDiscription }</h3></div>
+					<div class="col-12 mb-3 border-bottom h1 display-2">${recipe.recipeName }</div>
+					<div class="col-12 mb-3 border-bottom h3 display-5">${recipe.recipeDetailVO.recipeDiscription }</div>
 					<div class="col-12 col-md-6">
-						<img src="resources/img/${recipe.mainPicture }" alt="" class="rounded-5 img-thumbnail">
+						<img src="/img/${recipe.mainPicture }" alt="" class="rounded-5 img-thumbnail">
 					</div>
 					<div class="col-12 col-md-6 align-self-center">
 						<div class="row" style="font-weight: 700; font-size: 2rem;">
@@ -79,42 +79,36 @@ a i {
 		</div>
 		<div class="container border my-3 rounded-5 text-center recipe-detail">
 			<div class="row justify-content-center">
-				<div class="col-sm-12 border-bottom"style="font-weight: 900; font-size: 4rem;">조리 순서</div>
+				<div class="col-sm-12 border-bottom h1 display-3 " style="color: orange">조리 순서</div>
 			</div>
 				<div class="d-flex justify-content-end">
-					<a href="#"> 
-						<i class="bi bi-card-image"></i>
-					</a> 
-					&nbsp;&nbsp;&nbsp;
-					<a href="#">
-						<i class="bi bi-card-text"></i>
-					</a> 
-					&nbsp;&nbsp;&nbsp;
 					<c:if test="${not empty loginUser.subscribe }">
 						<a href="SubscribeServlet?command=save_recipe&subNumber=${loginUser.subscribe }&recipeid=${recipe.recipeID}"> 
 							<i class="bi bi-folder-plus"></i>
 						</a>
 					</c:if>
 				</div>
-			<div class="row">
-				<div class="col-12">
-					<c:forEach var="recipeOrder" items="${recipeOrderList }" varStatus="st">
-						<div id="stepdescr1" class="step_sub">
-							<h3>
-								<i class="bi bi-${st.count }-circle"></i><span>${recipeOrder }</span>
-							</h3>
-						</div>
-						<c:choose>
-							<c:when test="${st.index < recipePicList.size()}">
-								<c:set var="recipePic" value="${recipePicList.get(st.index)}" />
-								<div id="stepImg1">
-									<img src="resources/img/${recipePic }" class="img-fluid img-thumbnail" style=" width: 30rem;">
+				<div class="row">
+					<div class="col-12">
+						<c:forEach var="recipeOrder" items="${recipeOrderList}" varStatus="st">
+							<div class="row align-items-center">
+								<div class="col-12 col-md-6">
+									<div id="stepdescr${st.index + 1}" class="step_sub">
+										<i class="bi bi-${st.count}-circle h1" style="color: orange"></i>&nbsp;&nbsp;&nbsp;<span class="h2">${recipeOrder}</span>
+									</div>
 								</div>
-							</c:when>
-						</c:choose>
-					</c:forEach>
+								<div class="col-12 col-md-6 my-5">
+								  	<c:if test="${st.index < recipePicList.size()}">
+										<c:set var="recipePic" value="${recipePicList.get(st.index)}" />
+										<div id="stepImg${st.index + 1}">
+											<i class="bi bi-${st.count}-square display-4 mb-5" style="color: orange"></i><br><img src="/img/${recipePic}" class="img-fluid img-thumbnail mt-3" style="width: 30rem;">
+										</div>
+									</c:if>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-			</div>
 			<!--Recipe detail end-->
 			<!--후기 보기-->
 			<div class="container border my-3 rounded-5 text-center recipe-review">
@@ -122,8 +116,7 @@ a i {
 					<div class="row row-cols-2">
 						<div class="col-12">
 							<div class="p-5">
-								<b class="" style="font-size: 3rem;">요리후기</b>
-
+								<b class="h1 display-3" style="color: orange">요리후기</b>
 							</div>
 						</div>
 					</div>
@@ -146,6 +139,7 @@ a i {
 								<td>${review.review}</td>  
 								<td>${review.recipegrade }</td>
 								<td><img src="resources/img/${review.img}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
+								
 							</tr>
 						</c:forEach>
 						</table>

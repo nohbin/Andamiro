@@ -1,0 +1,10 @@
+CREATE TABLE andamiroreview (
+  reviewnum NUMBER(20) PRIMARY KEY,
+  recipename VARCHAR2(255) NOT NULL,
+  id VARCHAR2(255) NOT NULL,
+  reviewpicture VARCHAR2(255),
+  review VARCHAR2(255),
+  recipegrade VARCHAR2(255),
+  joindate DATE DEFAULT SYSDATE);
+
+create sequence reviewnum_seq start with 1 increment by 1;

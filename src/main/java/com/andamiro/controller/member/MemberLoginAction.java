@@ -21,20 +21,20 @@ public class MemberLoginAction implements MemberAction {
 		String userid = request.getParameter("userid");
 		String rawpwd = request.getParameter("pwd");
 		String pwd = SHA256.encodeSha256(rawpwd);
-		String url = null;
+		String url = "";
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		MemberVO memberVO = memberDAO.selectOneMemberbyID(userid);
-		if (memberVO == null) {
-			url = "member/loginfail.jsp";
-		}else if(memberVO.getId().equals(null) || memberVO.getId().equals("") || memberVO.getPwd().equals(null) || memberVO.getPwd().equals("")) {
-			url = "member/loginfail.jsp";
-		}else if(memberVO.getId().equals(userid) && memberVO.getPwd().equals(pwd)) {
-			HttpSession session = request.getSession();
-			session.removeAttribute("id");
-			session.setAttribute("loginUser", memberVO);
-			memberVO = (MemberVO)session.getAttribute("loginUser");
-			url = "/main.jsp";
+		if (memberVO == null || memberVO.getId().isEmpty() || memberVO.getPwd().isEmpty()) {
+		    url = "member/loginfail.jsp";
+		} else if (memberVO.getId().equals(userid) && memberVO.getPwd().equals(pwd)) {
+		    HttpSession session = request.getSession();
+		    session.removeAttribute("id");
+		    session.setAttribute("loginUser", memberVO);
+		    url = "/main.jsp";
+		} else {
+		    url = "member/loginfail.jsp";
 		}
+		System.out.println("??");
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

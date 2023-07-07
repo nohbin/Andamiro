@@ -1,0 +1,33 @@
+CREATE TABLE eventcontestDetail (
+	contestNO	number	NOT NULL,
+	eventNo	NUMBER	NOT NULL,
+	recipeID	number	NOT NULL,	
+	conPoster	VARCHAR(255)	NULL
+);
+
+
+CREATE TABLE eventDetail (
+	eventNomal	number	NOT NULL,
+	eventNo	NUMBER	NOT NULL,
+	Poster	VARCHAR(255)NULL
+);
+
+
+CREATE TABLE eventMain (
+	eventNo	NUMBER	NOT NULL,
+	EVstart	VARCHAR(255)	NOT NULL,
+	EVend	VARCHAR(255)	NOT NULL,
+	ing	VARCHAR(255)	NOT NULL,
+	imgsum	VARCHAR(255)	NOT NULL
+);
+
+ALTER TABLE eventMain ADD CONSTRAINT PK_EVENTTERM PRIMARY KEY (
+	eventNo
+);
+ALTER TABLE eventcontestDetail ADD CONSTRAINT PK_EVENTCONTESTDETAIL PRIMARY KEY (
+	contestNO
+);
+
+ALTER TABLE eventDetail ADD CONSTRAINT PK_EVENTDETAIL PRIMARY KEY (
+	eventNomal
+);

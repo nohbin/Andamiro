@@ -47,7 +47,7 @@ a {
 				<c:forEach var="recipe" items="${recipeList }" varStatus="status">
 					<tr>
 						<td>${recipe.recipeID }</td>
-						<td>${recipe.recipeName }</td>
+						<td><a href='<c:url value="/AdminServlet?command=recipe_detail_edit_view&recipeid=${recipe.recipeID }"/>'>${recipe.recipeName }</a></td>
 						<td>${recipe.userId }</td>
 						<td>${recipe.recipeView }</td>
 						<td>${recipe.recipeGrade }</td>

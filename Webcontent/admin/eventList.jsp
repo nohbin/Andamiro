@@ -20,23 +20,26 @@
     <table class="table align-middle">
         <tr>
             <td colspan="5" style="border: white; text-align: right">
-                <input type="button" value="이벤트 등록" class="btn btn-outline-warning" onclick="location.href='../EventServlet?command=event_write_form'">
+                <input type="button" value="이벤트 등록" class="btn btn-outline-warning" onclick="location.href='EventServlet?command=event_write_form'">
             </td>
         </tr>
         <tr class="text-center">
             <th>이벤트 번호</th>
             <th>기간</th>
+            <th>진행여부</th>
             <th>이벤트 썸네일</th>
-            <th>포스터</th>
+            
         </tr>
-        <c:forEach var="event" items="${eventList}">
+        <c:forEach var="allList" items="${allList}">
             <tr class="record text-center">
-                <td class="fs-5">${eventList.eventno}</td>
-                <td class="fs-5">${eventList.evstart}~${eventList.evend}</td>
+                <td class="fs-5">${allList.eventno}</td>
+                <td class="fs-5">${allList.ing}</td>
+                <td class="fs-5">${allList.term}</td>
                 <td class="fs-5">
-                    <a href="../EventServlet?command=event_view&eventno=${eventList.eventno}">
-                        <img src="upload/${eventList.imgsum}" style="width:15rem; height:10rem;">
-                    </a>
+                   <a href="./EventServlet?command=event_view&eventno=${allList.eventno}">
+    <img src="./resources/img/${allList.imgsum}" style="width:15rem; height:10rem;">
+</a>
+
                 </td>
                 
                 

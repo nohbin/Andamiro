@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-String sessionId = (String) session.getAttribute("sessionId");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +17,6 @@ String sessionId = (String) session.getAttribute("sessionId");
 li {
 	list-style: none;
 }
-
 a {
 	color: black;
 	text-decoration: none;
@@ -45,8 +41,8 @@ a {
 		<nav class="py-2  border-bottom" style="background-color: #fac279;">
 			<div class="container d-flex flex-wrap">
 				<ul class="nav me-auto">
-					<li class="nav-item"><a href="BestMainServlet?command=main"
-						class="nav-link link-dark px-2 active" aria-current="page">Home</a>
+					<li class="nav-item">
+						<a href="<c:url value="/BestMainServlet?command=main"/>" class="nav-link link-dark px-2 active" aria-current="page">Home</a>
 					</li>
 					<li class="nav-item">
 						<a href="<c:url value="/RecipeServlet?command=recipe_list"/>" class="nav-link link-dark px-2">레시피</a>
@@ -65,40 +61,22 @@ a {
 					<c:choose>
 						<c:when test="${loginUser.adminCode eq '999'}">
 							<b>[${loginUser.id }]님 환영합니다. 관리자 모드 입니다.</b>
-							<a href="<c:url value="/BoardServlet?command=board_paging&page=1"/>"
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">관리자 페이지</a>
-							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">로그아웃</a>
+							<a href="<c:url value="/BoardServlet?command=board_paging&page=1"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">관리자 페이지</a>
+							<a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
 						</c:when>
 						<c:when test="${not empty loginUser}">
 							<b>[${loginUser.id }]님 환영합니다.</b>
-							<a href='<c:url value="/MemberServlet?command=member_logout"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">로그아웃</a>
-							<a
-								href='<c:url value="/RecipeServlet?command=recipe_write_form"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">레시피등록</a>
-							<a
-								href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">마이페이지</a>
+							<a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
+							<a href='<c:url value="/RecipeServlet?command=recipe_write_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">레시피등록</a>
+							<a href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">마이페이지</a>
 
 						</c:when>
 						
 					 						
 						
 						<c:otherwise>
-							<a
-								href="<c:url value="/MemberServlet?command=member_login_form"/>"
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">로그인</a>
-							<a
-								href='<c:url value="/MemberServlet?command=member_join_form"/>'
-								class="btn btn-light text-dark me-2"
-								style="background-color: #fac279;">회원가입</a>
+							<a href="<c:url value="/MemberServlet?command=member_login_form"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그인</a>
+							<a href='<c:url value="/MemberServlet?command=member_join_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">회원가입</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
