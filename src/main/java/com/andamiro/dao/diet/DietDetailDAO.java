@@ -18,34 +18,73 @@ public class DietDetailDAO {
 		return instance;
 	}
 	
-	public List<dietDetailVO> selectAllboards() {
-		String sql = "select * from dietDetail order by dietDetailID desc ";
-		List<dietDetailVO> list = new ArrayList<dietDetailVO>();
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+	//dietDetail 데이터 모두 조회하는 메소드(not 페이징처리)
+//	public List<dietDetailVO> selectAllboards() {
+//		String sql = "select * from dietDetail order by dietDetailID desc ";
+//		List<dietDetailVO> list = new ArrayList<dietDetailVO>();
+//		Connection conn = null;
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			conn = DBManager.getConnection();
+//			stmt = conn.createStatement();
+//			rs = stmt.executeQuery(sql);
+//			while(rs.next()) {
+//				dietDetailVO dietDetailVo = new dietDetailVO();
+//				dietDetailVo.setDietDetailID(rs.getInt("dietDetailID"));
+//				dietDetailVo.setDietNumber(rs.getInt("dietNumber"));
+//				dietDetailVo.setFoodName(rs.getString("foodName"));
+//				dietDetailVo.setKcal(rs.getString("kcal"));
+//				dietDetailVo.setComponent(rs.getString("component"));
+//				list.add(dietDetailVo);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			DBManager.close(conn, stmt, rs);
+//		}
+//		
+//		return list;
+//	}
+	
+	//dietDetail 데이터 모두 조회 (페이징 처리)
+	public List<dietDetailVO> selectDetailByPage(int start, int end) {
+		List<dietDetailVO> dietDetailList = new ArrayList<>();
 		
-		try {
-			conn = DBManager.getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				dietDetailVO dietDetailVo = new dietDetailVO();
-				dietDetailVo.setDietDetailID(rs.getInt("dietDetailID"));
-				dietDetailVo.setDietNumber(rs.getInt("dietNumber"));
-				dietDetailVo.setFoodName(rs.getString("foodName"));
-				dietDetailVo.setKcal(rs.getString("kcal"));
-				dietDetailVo.setComponent(rs.getString("component"));
-				list.add(dietDetailVo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, stmt, rs);
-		}
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY dietDetailID) NUM, A.* FROM dietDetail A ORDER BY dietDetailID) "
+	            + "WHERE NUM BETWEEN ? AND ? ";
 		
-		return list;
+	    try (Connection conn = DBManager.getConnection();
+	    	 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	    	
+	    	pstmt.setInt(1, start);
+	    	pstmt.setInt(2, end);
+			
+	    	try(ResultSet rs = pstmt.executeQuery()) 
+	    	{
+	    		while(rs.next()) {
+	    			dietDetailVO dietDetailVo = new dietDetailVO();
+	    			dietDetailVo.setDietDetailID(rs.getInt("dietDetailID"));
+					dietDetailVo.setDietNumber(rs.getInt("dietNumber"));
+					dietDetailVo.setFoodName(rs.getString("foodName"));
+					dietDetailVo.setKcal(rs.getString("kcal"));
+					dietDetailVo.setComponent(rs.getString("component"));
+	    			dietDetailList.add(dietDetailVo);
+	    		}
+	    	}
+	    	
+	    }catch(SQLException e) {
+	    	e.printStackTrace();
+	    }
+	    	
+	    return dietDetailList;
+		
 	}
+	
+	
+	
+	
 
 	public void insertDetail(dietDetailVO dietDetailVo) {
 		String sql = "insert into dietDetail ("
@@ -771,6 +810,8 @@ public class DietDetailDAO {
 		}
 		return dietdetailList;
 	}
+
+
 	
 
 }

@@ -18,8 +18,15 @@ public class AdminActionFactory {
 			action = new AdminRecipeListViewForm();
 		}else if(command.equals("submem_list")) {
 			action = new SubmemListAction();
+<<<<<<< HEAD
+		}else if(command.equals("diet_list")) {
+			action = new dietListAction(); 
+		}else if(command.equals("dietDetail_list")) {
+			action = new dietDetailListAction();
+=======
 		}else if(command.equals("recipe_detail_edit_view")) {
 			action = new AdminRecipeDetailEditForm();
+>>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
 		}
 		
 		return action;

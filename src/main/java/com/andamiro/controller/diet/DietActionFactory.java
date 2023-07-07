@@ -14,11 +14,7 @@ public class DietActionFactory {
 	public DietAction getAction(String command) {
 		DietAction action = null;
 		
-		if(command.equals("diet_list")) {
-			action = new dietListAction(); 
-		} else if(command.equals("dietDetail_list")) {
-			action = new dietDetailListAction();
-		} else if(command.equals("diet_write_form")) {
+		if(command.equals("diet_write_form")) {
 			action = new dietWriteFormAction();
 		} else if(command.equals("diet_write")) {
 			action = new dietWriteAction();

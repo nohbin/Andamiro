@@ -9,7 +9,7 @@
 <body>
 <script type="text/javascript">
 	alert("구독 해지가 완료되었습니다.");
-	location.href = 'SubscribeServlet?command=submem_list';
+	location.href = 'AdminServlet?command=submem_list&page=1';
 </script>
 </body>
 </html>

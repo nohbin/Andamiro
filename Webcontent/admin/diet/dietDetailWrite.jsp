@@ -42,7 +42,7 @@
 			<br>
 			<br> <input type="submit" value="등록" onclick="return dietCheck()">
 			 	 <input type="reset"  value="다시 작성">
-			 	 <input type="button" value="목록" onclick="location.href='DietServlet?command=dietDetail_list'">
+			 	 <input type="button" value="목록" onclick="location.href='AdminServlet?command=dietDetail_list&page=1'">
 		</form>
 	</div>
 	<div style="height: 7rem;"></div>

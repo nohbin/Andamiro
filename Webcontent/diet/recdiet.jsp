@@ -9,18 +9,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
   <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/my.css">
+ <!--  <link rel="stylesheet" type="text/css" href="../resources/css/my.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
   <style>
-    li{
-      list-style: none;
-    }
-    a {
-            color: black;
-            text-decoration: none;
-        }
-  </style>
+	li {
+		list-style: none;
+	}
+	
+	a {
+		color: black;
+		text-decoration: none;
+	}
+	
+	.dietImg {
+		overflow: hidden;
+	}
+	
+	.dietImg img {
+		width: 25rem; height: 20rem;	
+		transition: transform 0.3s ease;
+	}
+	
+	.dietImg:hover img {   //hover시 이미지 확대 
+		transform: scale(1.2);
+	}
+</style>
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -56,7 +70,9 @@
 							<div class="fs-4 fw-bold mb-2" style="color: #e18409;">
 								${diet.diet_menu}													
 							</div>
-							<img src="upload/${diet.diet_picture}" style="width: 25rem; height: 20rem;">			
+							<div class="dietImg">
+								<img src="upload/${diet.diet_picture}">			
+							</div>
 						</div>
 					</div>
 	 			  </c:forEach> 

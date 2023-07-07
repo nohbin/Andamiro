@@ -23,21 +23,24 @@
 	}
   </style>
   <title>결제창</title>
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <script>
     function closePopup(){
       window.close();
 
     }
+    
+    
+    function pay(){    
+    	if(checkPay()) {
+	      requestPay();
+    	}
+    }
+    
     function checkPay() {    	
-        var options = document.getElementsByName("payway");
-        var isChecked = false;   //초기 체크여부
-        for (var i = 0; i < options.length; i++) {
-          if (options[i].checked) {
-            isChecked = true;
-            break;
-          }
-        }
 
+<<<<<<< HEAD
+=======
         if (!isChecked) {
           alert("결제수단을 선택해주세요.");
           return;
@@ -50,20 +53,43 @@
         	return;
         }
         
+>>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
 		var checkbox = document.querySelector('input[name="termcheck"]');
     	if (!checkbox.checked) {
     	    alert("약관동의를 체크해주세요.");
-    	    return;
-    	}
+    	    return false;
+    	} 
+    	return true;
     	
-    	window.location.href = "../SubscribeServlet?command=sub_join&userid=${loginUser.id}";
+    	
       }
     
+    function requestPay(){
+    	IMP.init('imp17333063');
+    	var memberNumber = ${loginUser.memberNumber};
+    	IMP.request_pay({
+    		pg : "html5_inicis", 
+    	    pay_method : "card",
+    	    merchant_uid: "order_no"+memberNumber,
+    	    name : '안다미로 구독 서비스',
+    	    amount : 10,
+    	}, function(rsp) { // callback 로직
+			if(rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				alert(msg);
+				window.location.href = "../SubscribeServlet?command=sub_join&userid=${loginUser.id}";
+			}else {
+				var msg = '결제에 실패하였습니다.'
+				msg += '오류 : ' + rsp.error_msg;
+				alert(msg);
+			}			  
+    	});
+    }
     
   </script> 
 </head>
 <body> 
-  <div class="container border border-warning rounded-3 my-3 p-3" style="width: 40rem;">
+  <div class="container border border-warning rounded-3 my-3 p-3" style="width: 20rem;">
     <div class="container text-center mb-2" style="width: 14rem;">
       <div class="fs-4 rounded-2 fw-bold" style="background-color: #f7dd4ae1;">
         구매상품명
@@ -75,12 +101,12 @@
   </div>  
   <div style="height: 3rem;"></div>
 	  <div class="container">
-	    <div class="container mb-2">
-	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
+	    <div class="container">
+	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem; margin-left:17rem">
 	        결제내용
 	      </div>
 	    </div>
-	    <div class="container fs-5 lh-lg border border-warning rounded-3 my-3 py-2">
+	    <div class="container fs-5 lh-lg border border-warning rounded-3 my-3 py-2" style="width: 30rem;">
 	      <ul>
 	        <li>구매 상품명 : 안다미로 밥상 구독 서비스</li>
 	        <li>	        
@@ -91,7 +117,7 @@
 	    </div>
 	  </div>  
 	  <div style="height: 3rem;"></div>
-	  <div class="container">
+	  <!-- <div class="container">
 	    <div class="container mb-2">
 	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
 	        결제수단
@@ -125,8 +151,7 @@
 	          </label>
 	      </div>
 	    </div>
-	  </div>
-	  <div style="height: 3rem;"></div>
+	  </div> -->
 	  <div class="container">
 	    <div class="mb-2 fs-4">
 	      약관동의
@@ -141,7 +166,7 @@
 	    <button class=" btn btn-light fs-2 btn-lg me-2" style="width: 10rem" onclick="closePopup()">
 	      취소
 	    </button>
-		<button onclick="checkPay()" class=" btn btn-outline-warning btn-lg ms-2 fw-bold fs-2" style="width: 10rem; text-decoration: none; color: #000;">
+		<button onclick="pay()" class=" btn btn-outline-warning btn-lg ms-2 fw-bold fs-2" style="width: 10rem; text-decoration: none; color: #000;">
 	      결제
 	    </button>
 	  </div>

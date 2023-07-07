@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
   <script>
     function showPopup() { window.open("pay.jsp","pop",
-     "width=600, height=800, left=100, top=200");
+     "width=850, height=700, left=100, top=200");
     }
   </script> 
   <style>
