@@ -37,6 +37,11 @@ a {
 				</form>
 
 			</div>
+			<c:if test="${not empty loginUser.subscribe }">
+			<div class="text-end container h5">
+				<a href='<c:url value ="/SubscribeServlet?command=save_recipe_view&subNumber=${loginUser.subscribe }"/>'>저장레시피</a>
+			</div>
+			</c:if>
 		</div>
 		<nav class="py-2  border-bottom" style="background-color: #fac279;">
 			<div class="container d-flex flex-wrap">
