@@ -33,8 +33,7 @@ li{
                     요리 등록
                 </div>
             </div>
-            <form action="RecipeServlet" >
-            	<input type="hidden" name="command" value="recipe_edit">
+            <form action="RecipeServlet?command=recipe_edit" method="post" enctype="multipart/form-data">
             	<input type="hidden" name="userid" value="${loginUser.id }">
             	<input type="hidden" name="recipeId" value="${recipe.recipeID }">
                 <div class="row my-3">
@@ -55,7 +54,7 @@ li{
                             </div>
                         </div>
                         <div class="file-upload-content" style="display: block;">
-                            <img class="file-upload-image" src="resources/img/${recipe.mainPicture }"/>
+                            <img class="file-upload-image" src="/img/${recipe.mainPicture }"/>
                             <div class="image-title-wrap">
                                 <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
                             </div>
@@ -278,7 +277,7 @@ li{
 			                <c:choose>
 			                <c:when test="${not empty pic}">
 			                    <div class="file-upload-content" style="display: block;">
-			                        <img class="file-upload-image" alt="your image" src="resources/img/${pic}">
+			                        <img class="file-upload-image" alt="your image" src="/img/${pic}">
 			                        <div class="image-title-wrap">
 			                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
 			                        </div>

@@ -15,6 +15,8 @@ import com.andamiro.dto.recipe.RecipeIngreVO;
 import com.andamiro.dto.recipe.RecipeOrderVO;
 import com.andamiro.dto.recipe.RecipePicVO;
 import com.andamiro.dto.recipe.RecipeVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class RecipeWriteAction implements RecipeAction {
 
@@ -22,29 +24,37 @@ public class RecipeWriteAction implements RecipeAction {
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
+
+		String realFolder = "C:\\upload\\img\\andamiro";
+		String encType = "UTF-8";
+		int maxSize = 5 * 1024 * 1024;
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+		
 		MemberVO userid = (MemberVO) session.getAttribute("loginUser");
 		RecipeVO recipeVO = new RecipeVO();
 		recipeVO.setMemberNumber(userid.getMemberNumber());
-		recipeVO.setRecipeName(request.getParameter("name"));
-		recipeVO.setMainPicture(request.getParameter("mainpic"));
-		recipeVO.setRecipetag1(request.getParameter("tag1"));
-		recipeVO.setRecipetag2(request.getParameter("tag2"));
-		recipeVO.setRecipetag3(request.getParameter("tag3"));
-		recipeVO.setUserId(request.getParameter("userid"));
+		recipeVO.setRecipeName(multi.getParameter("name"));
+		recipeVO.setMainPicture(multi.getFilesystemName("mainpic"));
+		recipeVO.setRecipetag1(multi.getParameter("tag1"));
+		recipeVO.setRecipetag2(multi.getParameter("tag2"));
+		recipeVO.setRecipetag3(multi.getParameter("tag3"));
+		recipeVO.setUserId(multi.getParameter("userid"));
 
 		RecipeDetailVO recipDetailVO = new RecipeDetailVO();
-		recipDetailVO.setRecipeHow(Integer.parseInt(request.getParameter("how")));
-		recipDetailVO.setRecipeKind(Integer.parseInt(request.getParameter("kind")));
-		recipDetailVO.setRecipeMainIngre(Integer.parseInt(request.getParameter("mainIngre")));
-		recipDetailVO.setRecipeforperson(request.getParameter("person"));
-		recipDetailVO.setRecipefortime(request.getParameter("time"));
-		recipDetailVO.setRecipeforlevel(request.getParameter("level"));
-		recipDetailVO.setRecipeDiscription(request.getParameter("discription"));
-
+		recipDetailVO.setRecipeHow(Integer.parseInt(multi.getParameter("how")));
+		recipDetailVO.setRecipeKind(Integer.parseInt(multi.getParameter("kind")));
+		recipDetailVO.setRecipeMainIngre(Integer.parseInt(multi.getParameter("mainIngre")));
+		recipDetailVO.setRecipeforperson(multi.getParameter("person"));
+		recipDetailVO.setRecipefortime(multi.getParameter("time"));
+		recipDetailVO.setRecipeforlevel(multi.getParameter("level"));
+		recipDetailVO.setRecipeDiscription(multi.getParameter("discription"));
+		
+		//사진 업로드 관련
 		RecipePicVO recipePicVO = new RecipePicVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "pic" + i;
-			String parameterValue = request.getParameter(parameterName);
+			String parameterValue = multi.getFilesystemName(parameterName);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -68,7 +78,7 @@ public class RecipeWriteAction implements RecipeAction {
 		RecipeOrderVO recipeOrderVO = new RecipeOrderVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "order" + i;
-			String parameterValue = request.getParameter(parameterName);
+			String parameterValue = multi.getParameter(parameterName);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -92,7 +102,7 @@ public class RecipeWriteAction implements RecipeAction {
 		RecipeIngreVO recipeIngreVO = new RecipeIngreVO();
 		for (int i = 1; i <= 12; i++) {
 			String parameterName = "ingre" + i;
-			String parameterValue = request.getParameter(parameterName);
+			String parameterValue = multi.getParameter(parameterName);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -140,12 +150,12 @@ public class RecipeWriteAction implements RecipeAction {
 		recipDetailVO.setRecipeingreVO(recipeIngreVO);
 
 		recipeVO.setRecipeDetailVO(recipDetailVO);
-		
+
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		recipeDAO.registRecipe(recipeVO);
-		
-		String url="recipe/recipeRegSuccess.jsp";
-		request.getRequestDispatcher(url).forward(request, response); 
-		
+
+		String url = "recipe/recipeRegSuccess.jsp";
+		request.getRequestDispatcher(url).forward(request, response);
+
 	}
 }

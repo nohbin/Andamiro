@@ -15,73 +15,78 @@ import com.andamiro.dto.recipe.RecipeIngreVO;
 import com.andamiro.dto.recipe.RecipeOrderVO;
 import com.andamiro.dto.recipe.RecipePicVO;
 import com.andamiro.dto.recipe.RecipeVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class RecipeEditAction implements RecipeAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
+		String realFolder = "C:\\upload\\img\\andamiro";
+		String encType = "UTF-8";
+		int maxSize = 5 * 1024 * 1024;
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 		HttpSession session = request.getSession();
 		MemberVO userid = (MemberVO) session.getAttribute("loginUser");
-		int recipeId = Integer.parseInt(request.getParameter("recipeId"));
+		int recipeId = Integer.parseInt(multi.getParameter("recipeId"));
+		
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		RecipeVO recipeVO = recipeDAO.selectOneRecipeByID(recipeId);
 		recipeVO.setMemberNumber(userid.getMemberNumber());
-		recipeVO.setRecipeID(Integer.parseInt(request.getParameter("recipeId")));
-		recipeVO.setRecipeName(request.getParameter("name"));
+		recipeVO.setRecipeID(Integer.parseInt(multi.getParameter("recipeId")));
+		recipeVO.setRecipeName(multi.getParameter("name"));
 		String mainPicture = recipeVO.getMainPicture();
 
-		if (request.getParameter("mainpic").equals(null) || request.getParameter("mainpic").equals("")) {
-			recipeVO.setMainPicture(mainPicture);
+		String mainpicFilename = multi.getFilesystemName("mainpic");
+		if (mainpicFilename == null || mainpicFilename.isEmpty()) {
+		    recipeVO.setMainPicture(mainPicture);
 		} else {
-			recipeVO.setMainPicture(request.getParameter("mainpic"));
+		    recipeVO.setMainPicture(mainpicFilename);
 		}
-		recipeVO.setRecipetag1(request.getParameter("tag1"));
-		recipeVO.setRecipetag2(request.getParameter("tag2"));
-		recipeVO.setRecipetag3(request.getParameter("tag3"));
+		recipeVO.setRecipetag1(multi.getParameter("tag1"));
+		recipeVO.setRecipetag2(multi.getParameter("tag2"));
+		recipeVO.setRecipetag3(multi.getParameter("tag3"));
 
 		RecipeDetailVO recipeDetailVO = recipeVO.getRecipeDetailVO();
-		recipeDetailVO.setRecipeHow(Integer.parseInt(request.getParameter("how")));
-		recipeDetailVO.setRecipeKind(Integer.parseInt(request.getParameter("kind")));
-		recipeDetailVO.setRecipeMainIngre(Integer.parseInt(request.getParameter("mainIngre")));
-		recipeDetailVO.setRecipeforperson(request.getParameter("person"));
-		recipeDetailVO.setRecipefortime(request.getParameter("time"));
-		recipeDetailVO.setRecipeforlevel(request.getParameter("level"));
-		recipeDetailVO.setRecipeDiscription(request.getParameter("discription"));
+		recipeDetailVO.setRecipeHow(Integer.parseInt(multi.getParameter("how")));
+		recipeDetailVO.setRecipeKind(Integer.parseInt(multi.getParameter("kind")));
+		recipeDetailVO.setRecipeMainIngre(Integer.parseInt(multi.getParameter("mainIngre")));
+		recipeDetailVO.setRecipeforperson(multi.getParameter("person"));
+		recipeDetailVO.setRecipefortime(multi.getParameter("time"));
+		recipeDetailVO.setRecipeforlevel(multi.getParameter("level"));
+		recipeDetailVO.setRecipeDiscription(multi.getParameter("discription"));
 
 		RecipePicVO recipePicVO = recipeDetailVO.getRecipePicVO();
 		for (int i = 1; i <= 5; i++) {
-			String parameterName = "pic" + i;
-			if (request.getParameter(parameterName).equals(null) || request.getParameter(parameterName).equals("")) {
-				recipePicVO = recipeDetailVO.getRecipePicVO();
-			} else {
-				String parameterValue = request.getParameter(parameterName);
-				if (parameterValue != null) {
-					switch (i) {
-					case 1:
-						recipePicVO.setPic01(parameterValue);
-						break;
-					case 2:
-						recipePicVO.setPic02(parameterValue);
-						break;
-					case 3:
-						recipePicVO.setPic03(parameterValue);
-						break;
-					case 4:
-						recipePicVO.setPic04(parameterValue);
-						break;
-					case 5:
-						recipePicVO.setPic05(parameterValue);
-						break;
-					}
-				}
-			}
+		    String parameterName = "pic" + i;
+		    String filesystemName = multi.getFilesystemName(parameterName);
+		    if (filesystemName == null || filesystemName.isEmpty()) {
+		        continue;
+		    }
+		    switch (i) {
+		        case 1:
+		            recipePicVO.setPic01(filesystemName);
+		            break;
+		        case 2:
+		            recipePicVO.setPic02(filesystemName);
+		            break;
+		        case 3:
+		            recipePicVO.setPic03(filesystemName);
+		            break;
+		        case 4:
+		            recipePicVO.setPic04(filesystemName);
+		            break;
+		        case 5:
+		            recipePicVO.setPic05(filesystemName);
+		            break;
+		    }
 		}
 
 		RecipeOrderVO recipeOrderVO = recipeDetailVO.getRecipeOrderVO();
 		for (int i = 1; i <= 5; i++) {
 			String parameterName = "order" + i;
-			String parameterValue = request.getParameter(parameterName);
+			String parameterValue = multi.getParameter(parameterName);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:
@@ -105,7 +110,7 @@ public class RecipeEditAction implements RecipeAction {
 		RecipeIngreVO recipeIngreVO = recipeDetailVO.getRecipeingreVO();
 		for (int i = 1; i <= 12; i++) {
 			String parameterName = "ingre" + i;
-			String parameterValue = request.getParameter(parameterName);
+			String parameterValue = multi.getParameter(parameterName);
 			if (parameterValue != null) {
 				switch (i) {
 				case 1:

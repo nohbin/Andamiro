@@ -46,7 +46,8 @@ public class RecipeDAO {
 			int recipeId = 0;
 			String selectRecipeId = "SELECT recipeid_seq.currval FROM dual";
 			try (PreparedStatement pstmt = conn.prepareStatement(selectRecipeId);
-					ResultSet rs = pstmt.executeQuery();) {
+					ResultSet rs = pstmt.executeQuery();) 
+			{
 				if (rs.next()) {
 					recipeId = rs.getInt(1);
 				}
@@ -196,11 +197,11 @@ public class RecipeDAO {
 		RecipeVO recipeVO = null;
 
 		try (Connection conn = DBManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE WHERE RECIPEID = ?");
-				PreparedStatement pstmtDetail = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE_DETAIL WHERE RECIPEID = ?");
-				PreparedStatement pstmtPic = conn.prepareStatement("SELECT * FROM RECIPEPICTURE WHERE RECIPEID = ?");
-				PreparedStatement pstmtOrder = conn.prepareStatement("SELECT * FROM RECIPEORDER WHERE RECIPEID = ?");
-				PreparedStatement pstmtIngre = conn.prepareStatement("SELECT * FROM RECIPEINGRE WHERE RECIPEID = ?");) 
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE WHERE RECIPEID = ?");
+			PreparedStatement pstmtDetail = conn.prepareStatement("SELECT * FROM ANDAMIRORECIPE_DETAIL WHERE RECIPEID = ?");
+			PreparedStatement pstmtPic = conn.prepareStatement("SELECT * FROM RECIPEPICTURE WHERE RECIPEID = ?");
+			PreparedStatement pstmtOrder = conn.prepareStatement("SELECT * FROM RECIPEORDER WHERE RECIPEID = ?");
+			PreparedStatement pstmtIngre = conn.prepareStatement("SELECT * FROM RECIPEINGRE WHERE RECIPEID = ?");) 
 		{
 			pstmt.setInt(1, recipeID);
 			pstmtDetail.setInt(1, recipeID);
@@ -333,8 +334,6 @@ public class RecipeDAO {
 	        case "kind":
 	            sql += "recipekind = ?)";
 	            break;
-	        default:
-	            throw new IllegalArgumentException("Invalid category: " + category);
 	    }
 	    
 	    sql += " ORDER BY RECIPEREGDATE DESC";
@@ -418,11 +417,11 @@ public class RecipeDAO {
 
 	public void updateRecipeByRecipeId(int recipeId, RecipeVO recipeVO) {
 		try (Connection conn = DBManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement("UPDATE ANDAMIRORECIPE SET recipeName = ?, mainPicture = ?, recipetag1 = ?, recipetag2 = ?, recipetag3 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtPic = conn.prepareStatement("UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtIngre = conn.prepareStatement("UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtOrder = conn.prepareStatement("UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?");
-				PreparedStatement pstmtDetail = conn.prepareStatement("UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? WHERE RECIPEID = ?")) {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE ANDAMIRORECIPE SET recipeName = ?, mainPicture = ?, recipetag1 = ?, recipetag2 = ?, recipetag3 = ? WHERE RECIPEID = ?");
+			PreparedStatement pstmtPic = conn.prepareStatement("UPDATE RECIPEPICTURE SET PIC01 = ?, PIC02 = ?, PIC03 = ?, PIC04 = ?, PIC05 = ? WHERE RECIPEID = ?");
+			PreparedStatement pstmtIngre = conn.prepareStatement("UPDATE RECIPEINGRE SET INGRE01 = ?, INGRE02 = ?, INGRE03 = ?, INGRE04 = ?, INGRE05 = ?, INGRE06 = ?, INGRE07 = ?, INGRE08 = ?, INGRE09 = ?, INGRE10 = ?, INGRE11 = ?, INGRE12 = ? WHERE RECIPEID = ?");
+			PreparedStatement pstmtOrder = conn.prepareStatement("UPDATE RECIPEORDER SET ORDER01 = ?, ORDER02 = ?, ORDER03 = ?, ORDER04 = ?, ORDER05 = ? WHERE RECIPEID = ?");
+			PreparedStatement pstmtDetail = conn.prepareStatement("UPDATE ANDAMIRORECIPE_DETAIL SET RECIPEHOW = ?, RECIPEKIND = ?, RECIPEMAININGRE = ?, RECIPEFORPERSON = ?, RECIPEFORTIME = ?, RECIPEFORLEVEL = ?, RECIPEDISCRIPTION = ? WHERE RECIPEID = ?")) {
 			// 안다미로레시피 업데이트
 			pstmt.setString(1, recipeVO.getRecipeName());
 			pstmt.setString(2, recipeVO.getMainPicture());
