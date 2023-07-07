@@ -1,3 +1,4 @@
+
 package com.andamiro.dao.recipe;
 
 import java.sql.*;
@@ -669,5 +670,6 @@ public class RecipeDAO {
 		}
 		return list;
 	}
+
 
 }

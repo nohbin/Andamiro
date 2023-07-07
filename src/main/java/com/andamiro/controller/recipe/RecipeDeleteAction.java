@@ -1,3 +1,4 @@
+
 package com.andamiro.controller.recipe;
 
 import java.io.IOException;
@@ -33,3 +34,4 @@ public class RecipeDeleteAction implements RecipeAction {
 	}
 
 }
+

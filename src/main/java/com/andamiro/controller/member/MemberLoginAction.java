@@ -33,8 +33,9 @@ public class MemberLoginAction implements MemberAction {
 			session.removeAttribute("id");
 			session.setAttribute("loginUser", memberVO);
 			memberVO = (MemberVO)session.getAttribute("loginUser");
-			url = "/main.jsp";
+			url = "BestMainServlet?command=main";
 		}
+		System.out.println("url " + url);
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

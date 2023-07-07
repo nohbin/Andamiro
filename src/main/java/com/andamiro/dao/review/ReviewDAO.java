@@ -26,7 +26,8 @@ public class ReviewDAO {
 		String sql = "select * from andamiroreview order by recipeid desc";
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
 
-		try (Connection conn = DBManager.getConnection(); Statement stmt = conn.createStatement();)
+		try (Connection conn = DBManager.getConnection(); 
+				Statement stmt = conn.createStatement();)
 
 		{
 			try (ResultSet rs = stmt.executeQuery(sql);) {

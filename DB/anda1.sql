@@ -7,7 +7,7 @@ CREATE TABLE andamiromember (
   name VARCHAR2(255) NOT NULL,
   phone VARCHAR2(255) NOT NULL UNIQUE,
   email VARCHAR2(255) NOT NULL UNIQUE,
-  joinDate date      default sysdate,
+  joinDate VARCHAR(255),
   subscribe VARCHAR2(255),
   adminCode NUMBER
 );
@@ -27,8 +27,8 @@ CREATE TABLE andamiroRecipe (
 	recipeCompetition   NUMBER		    NULL,
     recipeDetailID      NUMBER          NOT NULL,
     recipeRegDate       date            default sysdate,
-	reviewcount	NUMBER,
-	userid		VARCHAR(255)
+	reviewcount	NUMBER
+
 );
 
 create table andamiroRecipe_detail(
@@ -99,11 +99,12 @@ CREATE TABLE recipeOrder (
 CREATE TABLE andamiroreview (
   reviewnum NUMBER(20) PRIMARY KEY,
   recipeid number NOT NULL,
-  id VARCHAR2(255) NOT NULL,
+  recipename VARCHAR2(255) NOT NULL,
   reviewpicture VARCHAR2(255),
   review VARCHAR2(255),
   recipegrade VARCHAR2(255),
-  regdate DATE DEFAULT SYSDATE
+  regdate DATE DEFAULT SYSDATE,
+  id VARCHAR2(255)
 );
 
 --구독 테이블
