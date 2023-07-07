@@ -133,6 +133,6 @@ CREATE TABLE dietDetail (
 ); 
 
 CREATE TABLE subMemberRecipe (
-	recipeID	number		NOT NULL unique,
-	subNumber	number		NOT NULL unique
+	recipeID	number		NOT NULL ,
+	subNumber	number		NOT NULL 
 );
