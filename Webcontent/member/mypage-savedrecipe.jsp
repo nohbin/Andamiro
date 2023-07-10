@@ -47,7 +47,7 @@ img {
 			<c:forEach var="recipe" items="${recipeList }">
 				<div class="col-12 col-md-4 mt-3 mb-3">
 					<a href='RecipeServlet?command=recipe_detail&recipID=${recipe.recipeID }'>
-						<img src="resources/img/${recipe.mainPicture }" class="rounded-3 img-thumbnail">
+						<img src="/img/${recipe.mainPicture }" class="rounded-3 img-thumbnail">
 					</a>
 					<div class="">
 						<div class="">

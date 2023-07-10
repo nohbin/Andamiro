@@ -59,9 +59,10 @@ img {
 							<td>${review.review }</td>
 							<td><b> ${review.recipegrade }점</b></td>
 							<td>${review.regdate}</td>
-							<td><button class="btn btn-primary" type="button"
-									value="delete"
-									onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.reviewNum}'">삭제</button>
+							<td>
+								<button class="btn btn-primary" type="button" value="delete" onclick="window.location.href='ReviewServlet?command=myreview_delete&num=${review.reviewNum}'">
+									삭제
+								</button>
 								<button type="button" class="btn btn-primary"
 									data-bs-toggle="modal"
 									data-bs-target="#staticBackdrop_${review.recipeId}"
@@ -87,15 +88,11 @@ img {
 														id="staticBackdropLabel_${review.recipeId}">
 														<b>작성자 : [${loginUser.id }] 님</b>
 													</h1>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 													<div class="form-floating w-50 mx-auto mb-2">
-														<select class="form-select"
-															id="floatingSelect_${review.recipeId}"
-															aria-label="Floating label select example"
-															name="recipegrade">
+														<select class="form-select" id="floatingSelect_${review.recipeId}" aria-label="Floating label select example" name="recipegrade">
 															<option selected></option>
 															<option value="1">1</option>
 															<option value="2">2</option>
@@ -105,40 +102,34 @@ img {
 														</select> <label for="floatingSelect_${review.recipeId}">점수</label>
 													</div>
 													<div class="form-floating">
-														<textarea class="form-control" placeholder=""
-															id="floatingTextarea2_${review.recipeId}"
-															style="height: 200px" name="review">${review.review }</textarea>
-														<label for="floatingTextarea2_${review.recipeId}">레시피
-															후기를 입력해주세요</label>
+														<textarea class="form-control" placeholder="" id="floatingTextarea2_${review.recipeId}" style="height: 200px" name="review">${review.review }</textarea>
+														<label for="floatingTextarea2_${review.recipeId}">레시피 후기를 입력해주세요</label>
 													</div>
 													<div class="file-upload col-12">
 														<div class="image-upload-wrap">
 															<div class="drag-text">
-																<input class="file-upload-input" type='file'
-																	onchange="readURL(this);" accept="image/*" /> 후기 <br>사진
-																등록
+																<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
+																후기 <br>사진 등록
 															</div>
 														</div>
 														<div class="file-upload-content">
 															<img class="file-upload-image" />
 															<div class="image-title-wrap">
-																<button type="button" onclick="removeUpload(this)"
-																	class="remove-image">삭제</button>
+																<button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
 															</div>
 														</div>
 													</div>
 												</div>
-												<script class="jsbin"
-													src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+												<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">닫기</button>
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 													<button type="submit" class="btn btn-secondary">작성하기</button>
 												</div>
 											</div>
 										</div>
 									</div>
-								</form></td>
+								</form>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
