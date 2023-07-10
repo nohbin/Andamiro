@@ -24,7 +24,8 @@ public class dietDetailWriteAction implements DietAction {
 		DietDetailDAO dietDetailDao = DietDetailDAO.getInstance();
 		dietDetailDao.insertDetail(dietDetailVo);
 		
-		new dietDetailListAction().excute(request, response);
+		String url = "/AdminServlet?command=dietDetail_list&page=1";
+		request.getRequestDispatcher(url).forward(request, response);	
 	}
 
 }

@@ -35,7 +35,7 @@
 					<td class="fs-5">${diet.diet_menu}</td>
 					<td>
 					<a href="DietServlet?command=diet_view&dietNumber=${diet.dietNumber}">
-					<img src="upload/${diet.diet_picture}" style="width:15rem; height:10rem;">
+					<img src="/img/${diet.diet_picture}" style="width:15rem; height:10rem;">
 					</a>
 					</td>
 				</tr>

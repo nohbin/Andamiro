@@ -17,7 +17,9 @@ public class dietDeleteAction implements DietAction {
 		String dietNumber = request.getParameter("dietNumber");
 		DietDAO dietDao = DietDAO.getInstance();
 		dietDao.deleteDiet(dietNumber);
-		new dietListAction().excute(request, response);
+		
+		String url = "/AdminServlet?command=diet_list&page=1";
+		request.getRequestDispatcher(url).forward(request, response);
 		
 	}
 
