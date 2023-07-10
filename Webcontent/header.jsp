@@ -37,6 +37,11 @@ a {
 				</form>
 
 			</div>
+			<c:if test="${not empty loginUser.subscribe }">
+			<div class="text-end container h5">
+				<a href='<c:url value ="/SubscribeServlet?command=save_recipe_view&subNumber=${loginUser.subscribe }"/>'>저장레시피</a>
+			</div>
+			</c:if>
 		</div>
 		<nav class="py-2  border-bottom" style="background-color: #fac279;">
 			<div class="container d-flex flex-wrap">
@@ -69,11 +74,7 @@ a {
 							<a href='<c:url value="/MemberServlet?command=member_logout"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그아웃</a>
 							<a href='<c:url value="/RecipeServlet?command=recipe_write_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">레시피등록</a>
 							<a href='<c:url value="/MemberServlet?command=member_mypage&memberNumber=${loginUser.memberNumber }"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">마이페이지</a>
-
 						</c:when>
-						
-					 						
-						
 						<c:otherwise>
 							<a href="<c:url value="/MemberServlet?command=member_login_form"/>" class="btn btn-light text-dark me-2" style="background-color: #fac279;">로그인</a>
 							<a href='<c:url value="/MemberServlet?command=member_join_form"/>' class="btn btn-light text-dark me-2" style="background-color: #fac279;">회원가입</a>
