@@ -38,22 +38,6 @@
     }
     
     function checkPay() {    	
-
-<<<<<<< HEAD
-=======
-        if (!isChecked) {
-          alert("결제수단을 선택해주세요.");
-          return;
-        }
-        
-        var subscrbie = '<%=(String)session.getAttribute("loginUser.subscribe")%>';
-        
-        if(subscrbie != null){
-        	alert("이미 구독중인 회원입니다.");
-        	return;
-        }
-        
->>>>>>> branch 'master' of https://github.com/nohbin/Andamiro.git
 		var checkbox = document.querySelector('input[name="termcheck"]');
     	if (!checkbox.checked) {
     	    alert("약관동의를 체크해주세요.");
