@@ -138,7 +138,7 @@ a i {
 								<td>${review.userId }</td>
 								<td>${review.review}</td>  
 								<td>${review.recipegrade }</td>
-								<td><img src="resources/img/${review.img}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
+								<td><img src="/img/${review.img}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
 								
 							</tr>
 						</c:forEach>
@@ -154,8 +154,7 @@ a i {
 					</button>
 				</c:if>
 				<!-- 모달 -->
-			<form action="ReviewServlet">
-				<input type="hidden" name="command" value="review_write">
+			<form action="ReviewServlet?command=review_write" method="post" enctype="multipart/form-data">
             	<input type="hidden" name="memberId" value="${loginUser.id }">
             	<input type="hidden" name="recipeid" value="${recipe.recipeID}">
             	<input type="hidden" name="recipename" value="${recipe.recipeName }">
@@ -168,8 +167,7 @@ a i {
 								<h1 class="modal-title fs-5" id="staticBackdropLabel">
 									<b>작성자 : [${loginUser.id }] 님</b>
 								</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
 								<div class="form-floating w-50 mx-auto mb-2">

@@ -67,14 +67,11 @@ img {
 									data-bs-toggle="modal"
 									data-bs-target="#staticBackdrop_${review.recipeId}"
 									onclick="handleButtonClick(${review.recipeId})">수정</button>
-								<form action="ReviewServlet" method="post">
-									<input type="hidden" name="command" value="myreview_update">
+								<form action="ReviewServlet?command=myreview_update" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="memberId" value="${loginUser.id }">
 									<input type="hidden" name="recipeid" value="${review.recipeId}">
 									<input type="hidden" name = "reviewnum" value="${review.reviewNum }">
-
 									<!--후기 작성 form -->
-
 									<!-- 모달 -->
 									<div class="modal fade" id="staticBackdrop_${review.recipeId}"
 										data-bs-backdrop="static" data-bs-keyboard="false"
@@ -93,13 +90,11 @@ img {
 												<div class="modal-body">
 													<div class="form-floating w-50 mx-auto mb-2">
 														<select class="form-select" id="floatingSelect_${review.recipeId}" aria-label="Floating label select example" name="recipegrade">
-															<option selected></option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-														</select> <label for="floatingSelect_${review.recipeId}">점수</label>
+															<c:forEach begin="0" end="4" varStatus="status">
+																<option value="${status.count}" ${status.count eq review.recipegrade ? 'selected' : ''}>${status.count}</option>
+															</c:forEach>
+														</select> 
+														<label for="floatingSelect_${review.recipeId}">점수</label>
 													</div>
 													<div class="form-floating">
 														<textarea class="form-control" placeholder="" id="floatingTextarea2_${review.recipeId}" style="height: 200px" name="review">${review.review }</textarea>
@@ -108,16 +103,28 @@ img {
 													<div class="file-upload col-12">
 														<div class="image-upload-wrap">
 															<div class="drag-text">
-																<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" /> 
+																<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="img" /> 
 																후기 <br>사진 등록
 															</div>
 														</div>
-														<div class="file-upload-content">
-															<img class="file-upload-image" />
-															<div class="image-title-wrap">
-																<button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
-															</div>
-														</div>
+														<c:choose>
+											                <c:when test="${not empty review.img}">
+											                    <div class="file-upload-content" style="display: block;">
+											                        <img class="file-upload-image" alt="your image" src="/img/${review.img}">
+											                        <div class="image-title-wrap">
+											                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
+											                        </div>
+											                    </div>
+											                </c:when>
+											                <c:otherwise>
+											                <div class="file-upload-content">
+											                        <img class="file-upload-image" alt="your image">
+											                        <div class="image-title-wrap">
+											                            <button type="button" onclick="removeUpload(this)" class="remove-image">삭제</button>
+											                        </div>
+											                    </div>
+											                </c:otherwise>
+										                </c:choose>
 													</div>
 												</div>
 												<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

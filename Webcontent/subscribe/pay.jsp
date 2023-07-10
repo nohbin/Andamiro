@@ -27,9 +27,7 @@
   <script>
     function closePopup(){
       window.close();
-
     }
-    
     
     function pay(){    
     	if(checkPay()) {
@@ -43,9 +41,11 @@
     	    alert("약관동의를 체크해주세요.");
     	    return false;
     	} 
+    	if(${not empty loginUser.subscribe}){
+    		alert("이미 구독중인 회원 입니다.");
+    		return false;
+    	}
     	return true;
-    	
-    	
       }
     
     function requestPay(){

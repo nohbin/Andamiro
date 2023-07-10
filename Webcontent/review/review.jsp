@@ -55,7 +55,7 @@ img {
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
 							<th scope="row"><br> <br>${review.recipeId }</th>
-							<th scope="row"><a href="recipe_Detail.html"><img src="resources/img/${review.img }"></a></th>
+							<th scope="row"><a href="recipe_Detail.html"><img src="/img/${review.img }"></a></th>
 							<td class=""><br> <br> <b>${review.recipeName}</b></td>
 							<td><a href="#"><br> <br>${review.review}</a></td>
 							<td><br> <br> <b>${review.recipegrade} 점</b></td>

@@ -195,4 +195,32 @@ public class ReviewDAO {
 		}
 	}
 
+	public ReviewVO selectOneReviewByReviewNum(int reviewNum) {
+		// TODO Auto-generated method stub
+		String sql = "select * from andamiroreview where reviewnum = ?";
+		ReviewVO reviewVO = null;
+		try(Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql);) 
+		{
+			pstmt.setInt(1, reviewNum);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				if(rs.next()) {
+					reviewVO = new ReviewVO();
+					reviewVO.setReviewNum(rs.getInt("reviewnum"));
+					reviewVO.setRecipeId(rs.getInt("recipeid"));
+					reviewVO.setUserId(rs.getString("id"));
+					reviewVO.setImg((String) rs.getObject("reviewpicture"));
+					reviewVO.setReview(rs.getString("review"));
+					reviewVO.setRecipegrade(rs.getInt("recipegrade"));
+					reviewVO.setRegdate(rs.getTimestamp("regdate"));
+					reviewVO.setRecipeName(rs.getString("recipename"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return reviewVO;
+	}
+
 }
