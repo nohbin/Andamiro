@@ -96,21 +96,21 @@ public class DietDAO {
 	}
 
 
-	public void updateDiet(DietVO dietVo) {
-	    String sql = "update diet set diet_kind=?, diet_menu=?, diet_picture=? where dietNumber = ?";
-
-	    try (Connection conn = DBManager.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
-	    {
-	        pstmt.setString(1, dietVo.getDiet_kind());
-	        pstmt.setString(2, dietVo.getDiet_menu());
-	        pstmt.setString(3, dietVo.getDiet_picture());
-	        pstmt.setInt(4, dietVo.getDietNumber());
-	        pstmt.executeUpdate();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
+//	public void updateDiet(DietVO dietVo) {
+//	    String sql = "update diet set diet_kind=?, diet_menu=?, diet_picture=? where dietNumber = ?";
+//
+//	    try (Connection conn = DBManager.getConnection();
+//	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+//	    {
+//	        pstmt.setString(1, dietVo.getDiet_kind());
+//	        pstmt.setString(2, dietVo.getDiet_menu());
+//	        pstmt.setString(3, dietVo.getDiet_picture());
+//	        pstmt.setInt(4, dietVo.getDietNumber());
+//	        pstmt.executeUpdate();
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//	}
 
 
 //	public DietVO selectRecDiet(String dietNumber) {
@@ -274,6 +274,23 @@ public class DietDAO {
 		
 		return dietList;
 	
+	}
+
+	public void updateDietBydietNum(DietVO dietVo, int dietNumber) {
+	    String sql = "update diet set diet_kind=?, diet_menu=?, diet_picture=? where dietNumber = ?";
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
+	        pstmt.setString(1, dietVo.getDiet_kind());
+	        pstmt.setString(2, dietVo.getDiet_menu());
+	        pstmt.setString(3, dietVo.getDiet_picture());
+	        pstmt.setInt(4, dietVo.getDietNumber());
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		
 	}
 }
 

@@ -35,8 +35,9 @@
 	<div class="container" align="center">
 	   <div style="height: 7rem;"></div>
 		<h1 class="mb-3"> 식단 등록</h1>
-		<form name="frm" method="post" action="DietServlet" > 	
-		<input type="hidden" name="command" value="diet_write"> 
+		<form name="frm" method="post" action="DietServlet?command=diet_write" enctype="multipart/form-data" > 	
+<!-- 		<form name="frm" method="post" action="DietServlet"> 	
+		<input type="hidden" name="command" value="diet_write">  -->
 			<div style="height: 5rem;"></div>
 			<table class="table">
 				<tr>
@@ -45,7 +46,8 @@
 				</tr>
 				<tr>
 					<th>식단이미지</th>
-					<td><input type="file" name="diet_picture"></td>
+					<td><input type="file" name="diet_picture" accept="image/*"></td> 
+					<!-- <td><input type="file" name="diet_picture"></td> -->
 				</tr>
 				<tr>
 					<th>식단메뉴</th>

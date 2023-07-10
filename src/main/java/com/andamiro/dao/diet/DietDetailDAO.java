@@ -811,6 +811,27 @@ public class DietDetailDAO {
 		return dietdetailList;
 	}
 
+	public void updateDietDetailByID(dietDetailVO dietDetailVo, int dietDetailID) {
+		String sql = "update dietDetail set  foodName=?, kcal=?, component=? "
+				+ " where dietDetailID=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dietDetailVo.getFoodName());
+			pstmt.setString(2, dietDetailVo.getKcal());
+			pstmt.setString(3, dietDetailVo.getComponent());
+			pstmt.setInt(4, dietDetailVo.getDietDetailID());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+	}
+
 
 	
 
