@@ -31,7 +31,7 @@
 		transition: transform 0.3s ease;
 	}
 	
-	.dietImg:hover img {   //hover시 이미지 확대 
+	.dietImg:hover img {   
 		transform: scale(1.2);
 	}
 </style>
@@ -71,7 +71,7 @@
 								${diet.diet_menu}													
 							</div>
 							<div class="dietImg">
-								<img src="upload/${diet.diet_picture}">			
+								<img src="/img/${diet.diet_picture}">			
 							</div>
 						</div>
 					</div>
