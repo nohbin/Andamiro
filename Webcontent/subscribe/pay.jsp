@@ -101,41 +101,6 @@
 	    </div>
 	  </div>  
 	  <div style="height: 3rem;"></div>
-	  <!-- <div class="container">
-	    <div class="container mb-2">
-	      <div class="fs-4 text-center rounded-2 fw-bold" style="background-color: #f7dd4ae1; width: 7rem;">
-	        결제수단
-	      </div>
-	    </div>
-	  </div>  
-	  <div class="container text-center">
-	    <div class="row border border-warning rounded-3 my-3 py-2">
-	      <div class="col">
-	        <img src="../resources/img/페이코2.png" class="img-fluid4">
-	          <label>
-	          <input type="radio" id="payway" name="payway" value="pay1">
-	          </label>
-	      </div>
-	      <div class="col">
-	        <img src="../resources/img/npay.png"  class="img-fluid4">
-	          <label>
-	          <input type="radio" id="payway" name="payway" value="pay2">
-	          </label>
-	      </div>
-	      <div class="col">
-	        <img src="../resources/img/토스2.png" class="img-fluid4">
-	          <label>
-	          <input type="radio" id="payway" name="payway" value="pay3">
-	          </label>
-	      </div>
-	      <div class="col">
-	        <img src="../resources/img/카카오페이2.png" class="img-fluid4">
-	          <label>
-	          <input type="radio" id="payway" name="payway" value="pay4">
-	          </label>
-	      </div>
-	    </div>
-	  </div> -->
 	  <div class="container">
 	    <div class="mb-2 fs-4">
 	      약관동의

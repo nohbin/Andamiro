@@ -54,7 +54,7 @@ a {
 					</li>
 					<li class="nav-item">
 						<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="nav-link link-dark px-2">식단</a>
-					</li>
+					</li>													
 					<li class="nav-item">
 						<a href="<c:url value="/EventServlet?command=EventMainViewForm"/>" class="nav-link link-dark px-2">이벤트</a>
 					</li>

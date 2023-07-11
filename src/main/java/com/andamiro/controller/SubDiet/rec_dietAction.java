@@ -16,11 +16,13 @@ import com.andamiro.dao.diet.DietDAO;
 import com.andamiro.dao.diet.DietDetailDAO;
 import com.andamiro.dto.diet.DietVO;
 import com.andamiro.dto.diet.dietDetailVO;
+import com.andamiro.dto.member.MemberVO;
+import com.andamiro.dto.subscribeMem.SubscribeMemberVO;
 
 public class rec_dietAction implements SubDietAction {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {	
 		String url = "/diet/recdiet.jsp";
 		DietDAO dietDao = DietDAO.getInstance();
 		DietDetailDAO dietDetailDao = DietDetailDAO.getInstance();

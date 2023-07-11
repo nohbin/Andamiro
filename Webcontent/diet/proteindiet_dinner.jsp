@@ -20,6 +20,18 @@
             color: black;
             text-decoration: none;
         }
+	.dietImg {
+		overflow: hidden;
+	}
+	
+	.dietImg img {
+		width: 25rem; height: 20rem;	
+		transition: transform 0.3s ease;
+	}
+	
+	.dietImg:hover img {   
+		transform: scale(1.2);  
+	}        
   </style>
 </head>
 <body>
@@ -56,8 +68,9 @@
 							<div class="fs-4 fw-bold mb-2" style="color: #e18409;">
 								${diet.diet_menu}													
 							</div>
-							<img src="upload/${diet.diet_picture}" style="width: 25rem; height: 20rem;">
-							
+							<div class="dietImg">
+								<img src="/img/${diet.diet_picture}">
+							</div>
 						</div>
 					</div>
 	 			  </c:forEach> 
