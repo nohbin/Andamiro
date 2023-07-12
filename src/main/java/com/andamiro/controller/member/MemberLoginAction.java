@@ -30,11 +30,10 @@ public class MemberLoginAction implements MemberAction {
 		    HttpSession session = request.getSession();
 		    session.removeAttribute("id");
 		    session.setAttribute("loginUser", memberVO);
-		    url = "/main.jsp";
+		    url = "index.jsp";
 		} else {
 		    url = "member/loginfail.jsp";
 		}
-		System.out.println("??");
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

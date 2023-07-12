@@ -29,7 +29,6 @@ public class ReviewActionFactory {
 			action = new ReviewUpdateAction();
 		}else if (command.equals("review_write")) {
 			action = new ReviewWriteAction();
-
 		}
 		
 		return action;
