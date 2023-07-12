@@ -113,7 +113,7 @@ public class MemberDAO {
 	            pstmt.setString(1, memberVO.getPwd());
 	            pstmt.setString(2, memberVO.getPhone());
 	            pstmt.setInt(3, memberNumber);
-	        }
+	        }	
 
 	        pstmt.executeUpdate();
 
@@ -126,7 +126,7 @@ public class MemberDAO {
 	public List<MemberVO> selectAllMember() {
 	    List<MemberVO> memberList = new ArrayList<>();
 
-	    String sql = "SELECT * FROM andamiromember ORDER BY memberNumber";
+	    String sql = "select /*+ index_asc(andamiromember membernumber) */ * from andamiromember where membernumber > 0";
 
 	    try (Connection conn = DBManager.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql);

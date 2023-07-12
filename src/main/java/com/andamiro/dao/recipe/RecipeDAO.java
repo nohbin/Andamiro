@@ -161,8 +161,10 @@ public class RecipeDAO {
 		// TODO Auto-generated method stub
 
 		List<RecipeVO> list = new ArrayList<>();
-
-		String sql = "select * from andamirorecipe order by RECIPEREGDATE desc";
+		
+		
+		// SQL INDEX 추가
+		String sql = "select  /*+ index(andamirorecipe index_recipeid_desc) */ * from andamirorecipe";
 
 		try (Connection conn = DBManager.getConnection(); 
 			Statement stmt = conn.createStatement();) 
@@ -371,7 +373,7 @@ public class RecipeDAO {
 
 	public List<RecipeVO> selectAllRecipeByMemberNumber(int memberNumber) {
 		List<RecipeVO> list = new ArrayList<>();
-		String sql = "select * from andamirorecipe where membernumber = ? order by RECIPEREGDATE desc";
+		String sql = "select /*+ index(andamirorecipe index_recipeid_desc) */ * from andamirorecipe where membernumber = ?";
 
 		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) 
 		{
@@ -546,13 +548,14 @@ public class RecipeDAO {
 	public List<RecipeVO> selectRecipeByPage(int start, int end) {
 		List<RecipeVO> lists = new ArrayList<>();
 
-		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY recipeid) NUM, A.* FROM andamirorecipe A ORDER BY recipeid) WHERE NUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY recipeid) NUM, anda.* FROM andamirorecipe anda ORDER BY recipeid) WHERE NUM BETWEEN ? AND ?";
 
-		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) 
+		try (Connection conn = DBManager.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql);) 
 		{
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
-			try (ResultSet rs = pstmt.executeQuery()) 
+			try (ResultSet rs = pstmt.executeQuery();) 
 			{
 				while (rs.next()) {
 					RecipeVO recipeVO = new RecipeVO();
@@ -582,10 +585,11 @@ public class RecipeDAO {
 		String sql = "SELECT * FROM andamirorecipe WHERE recipeid IN (SELECT recipeid FROM submemberrecipe WHERE subnumber = ?)";
 		List<RecipeVO> list = new ArrayList<>();
 
-		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) 
+		try (Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);) 
 		{
 			pstmt.setInt(1, subNumber);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					RecipeVO recipeVO = new RecipeVO();
 					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
