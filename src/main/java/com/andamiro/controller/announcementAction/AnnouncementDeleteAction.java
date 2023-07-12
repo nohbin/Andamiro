@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.controller.action.AnnouncementAction;
+import com.andamiro.dao.Announcement.AnnouncementDAO;
 
-public class AnnouncementWriteFormAction implements AnnouncementAction {
+public class AnnouncementDeleteAction implements AnnouncementAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String url = "/announcement/announcemenwrite.jsp";
+		String annNum = request.getParameter("annNum");
+		AnnouncementDAO annDAO = AnnouncementDAO.getInstance();
+		annDAO.deleteAnnouncement(annNum);
+		String url = "/AnnouncementServlet?command=announcement_list";
 		request.getRequestDispatcher(url).forward(request, response);
-
 	}
 
 }

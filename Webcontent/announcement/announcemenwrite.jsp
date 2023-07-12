@@ -53,9 +53,10 @@
         <c:if test="${empty list.id}">
         </c:if>
       </div>
+      
       <div class="d-grid gap-2 col-6 mx-auto">
         <button class="btn btn-warning" type="submit">등록</button>
-        <button class="btn btn-warning" type="button">목록</button>
+        <button class="btn btn-warning" type="button" onclick="window.location.href='AnnouncementServlet?command=announcement_list'">목록</button>
       </div>
     </div>
   </form>

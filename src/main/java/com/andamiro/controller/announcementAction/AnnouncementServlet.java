@@ -34,7 +34,7 @@ public class AnnouncementServlet extends HttpServlet {
 		AnnouncementActionFactory annActionFactory = AnnouncementActionFactory.getInstance();
 		AnnouncementAction action = annActionFactory.getAction(command);
 		if(action !=null ) {
-			action.excute(request, response);
+			action.execute(request, response);
 		}
 	}
 

@@ -67,4 +67,76 @@ public class AnnouncementDAO {
 			DBManager.close(conn, pstmt);
 		}
 	}
-}
+
+	public void redcountView(int annNum) {
+		String sql = "update announcement set viewCount=viewCount+1 where annNum=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, annNum);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public AnnouncementVO selectOneAnnouncementNum(int annNum) {
+		String sql = "SELECT * FROM ANNOUNCEMENT WHERE annNum = ?";
+		AnnouncementVO annVO = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, annNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				annVO = new AnnouncementVO();
+				annVO.setAnnNum(rs.getInt("annNum"));
+				annVO.setAnnTitle(rs.getString("annTitle"));
+				annVO.setAnnouncement(rs.getString("announcement"));
+				annVO.setId(rs.getString("id"));
+				annVO.setViewCount(rs.getInt("viewCount"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return annVO;
+	}
+	public void updateAnnouncement(AnnouncementVO annVO, int annNum) {
+	    String sql = "UPDATE announcement SET announcement = ?, id = ?, annTitle = ? WHERE annNum = ?";
+	    
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);) {
+	        pstmt.setString(1, annVO.getAnnouncement());
+	        pstmt.setString(2, annVO.getId());
+	        pstmt.setString(3, annVO.getAnnTitle());
+	        pstmt.setInt(4, annVO.getAnnNum());
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public void deleteAnnouncement(String annNum) {
+		String sql = "delete announcement where annNum=?";
+		
+		try (Connection conn = DBManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, annNum);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	}
+	
+

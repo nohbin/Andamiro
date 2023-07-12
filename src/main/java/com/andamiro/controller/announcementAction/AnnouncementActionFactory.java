@@ -17,6 +17,14 @@ public class AnnouncementActionFactory {
 			action = new AnnouncementWriteFormAction();
 		}else if(command.equals("announcement_write")) {
 			action = new AnnouncementWriteAction();
+		}else if(command.equals("announcement_detail")) {
+			action = new AnnouncementDetailAction();
+		}else if(command.equals("announcement_update_form")) {
+			action = new AnnouncementUpdateFormAction();
+		}else if(command.equals("announcement_update")) {
+			action = new AnnouncementUpdateAction();
+		}else if(command.equals("announcement_delete")) {
+			action = new AnnouncementDeleteAction();
 		}
 		
 		

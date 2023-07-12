@@ -17,7 +17,7 @@ import com.andamiro.dto.member.MemberVO;
 public class AnnouncementListAction implements AnnouncementAction {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String url ="/announcement/announcementlist.jsp";
 		AnnouncementDAO annDao = AnnouncementDAO.getInstance();
 //		HttpSession session = request.getSession();

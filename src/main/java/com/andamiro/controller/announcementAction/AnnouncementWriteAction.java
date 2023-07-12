@@ -13,7 +13,7 @@ import com.andamiro.dto.Announcement.AnnouncementVO;
 public class AnnouncementWriteAction implements AnnouncementAction {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String annTitle = request.getParameter("annTitle");
 		String id = request.getParameter("id");
 		

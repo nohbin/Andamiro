@@ -62,7 +62,7 @@ label[for=name] button {
 						<c:forEach var="list" items="${annList}">
 							<tr>
 								<td>${list.annNum}</td>
-								<td>${list.annTitle}</td>
+								<td><a href="AnnouncementServlet?command=announcement_detail&annNum=${list.annNum }">${list.annTitle}</a></td>
 								<td>${list.id}</td>
 								<td>${list.viewCount}</td>
 								<td>${list.joindate}</td>
