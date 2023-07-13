@@ -14,7 +14,7 @@ import com.andamiro.dto.event.EventVO;
 public class EventNomalViewForm implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response)
+    public void excute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String url = "/event/Event_nomal.jsp";

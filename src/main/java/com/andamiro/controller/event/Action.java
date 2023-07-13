@@ -5,6 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 public interface Action {
- public void execute(HttpServletRequest request, HttpServletResponse response)
+ public void excute(HttpServletRequest request, HttpServletResponse response)
  throws ServletException, IOException;
 }

@@ -44,7 +44,7 @@ label[for=name] button {
         <img src="resources/img/${gang.poster}" width="60%" height="auto" role="img" aria-label="베너" />
         <hr />
 
-        <button type="button" class="btn btn-warning btn-lg-3">참여하기</button>
+       <button type="button" class="btn btn-warning btn-lg-3" onclick="location.href='EventServlet?command=contest_recipewrite'">참여하기</button>
         <button type="button" class="btn btn-warning btn-lg-3">공유하기</button>
     </div>
 </div>
@@ -55,7 +55,7 @@ label[for=name] button {
 	<br>
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<a href="#">
+			<a href="EventServlet?command=contest_moreview">
 				<button type="button" class="btn btn-light   style=" color:
 					black; border-radius: 1px; text-align:start; font-weight: 200;">
 					<b style="font-size: 18px;">다른 참여자 레시피 보러가기!!</b>

@@ -14,7 +14,7 @@ import com.andamiro.dto.event.EventVO;
 public class EventListAction implements Action{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/admin/eventList.jsp";
 		EventDAO eventDAO=EventDAO.getInstance();
 		List<EventVO> allList = eventDAO.allList();

@@ -11,13 +11,13 @@ import com.andamiro.dao.event.EventDAO;
 public class EventDeleteAction implements Action {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int eventno = Integer.parseInt(request.getParameter("eventno"));
 		
 		EventDAO eventDAO=EventDAO.getInstance();
 		eventDAO.deleteEvent(eventno);
 		
-		new EventListAction().execute(request,response);
+		new EventListAction().excute(request,response);
 		
 		
 		

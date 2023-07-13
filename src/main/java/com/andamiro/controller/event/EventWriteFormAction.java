@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EventWriteFormAction implements Action{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/admin/eventWrite.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

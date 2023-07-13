@@ -16,6 +16,11 @@ public class RecipeActionFactory {
 			action = new RecipeWriteForm();
 		}else if(command.equals("recipe_write")) {
 			action = new RecipeWriteAction();
+		}else if(command.equals("contest_recipewrite_action")) {
+			action= new Recipe_ContestWriteAction();
+		}else if(command.equals("contest_recipeview")) {
+			action= new Recipe_ContestWriteAction();
+		
 		}else if(command.equals("recipe_list")) {
 			action = new RecipeListAction();
 		}else if(command.equals("recipe_detail")) {

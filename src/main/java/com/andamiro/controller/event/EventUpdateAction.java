@@ -12,7 +12,7 @@ import com.andamiro.dto.event.EventVO;
 public class EventUpdateAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int eventno = Integer.parseInt(request.getParameter("eventno"));
         String eventkind = request.getParameter("eventkind");
         String term = request.getParameter("eventTerm");
@@ -35,6 +35,6 @@ public class EventUpdateAction implements Action {
         // For example, you can redirect to the event list page
 
         // 이벤트 정보를 수정한 후에 수행할 다른 동작을 여기에 추가할 수 있습니다.
-        new EventListAction().execute(request, response);
+        new EventListAction().excute(request, response);
     }
 }

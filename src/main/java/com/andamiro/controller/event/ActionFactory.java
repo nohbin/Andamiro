@@ -1,5 +1,10 @@
 package com.andamiro.controller.event;
 
+
+import com.andamiro.controller.recipe.Recipe_ContestMoreView;
+import com.andamiro.controller.recipe.Recipe_ContestWriteAction;
+import com.andamiro.controller.recipe.Recipe_ContestWriteForm;
+
 public class ActionFactory {
 	private static ActionFactory instance = new ActionFactory();
 
@@ -41,6 +46,13 @@ public class ActionFactory {
 			action = new EventUpdateAction();
 		} else if (command.equals("event_delete")) {
 			action = new EventDeleteAction();
+		} else if (command.equals("contest_recipewrite")) {
+			action = new Recipe_ContestWriteForm();
+		}else if(command.equals("contest_recipewrite_action")) {
+			action= new Recipe_ContestWriteAction();
+		
+		}else if(command.equals("contest_moreview")) {
+			action = new Recipe_ContestMoreView();
 		}
 
 		return action;

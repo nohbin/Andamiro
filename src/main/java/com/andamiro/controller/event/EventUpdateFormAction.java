@@ -13,7 +13,7 @@ import com.andamiro.dto.event.EventVO;
 public class EventUpdateFormAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "/admin/eventUpdate.jsp";
         int eventno = Integer.parseInt(request.getParameter("eventno"));
         EventDAO eventdao = EventDAO.getInstance();

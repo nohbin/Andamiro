@@ -23,7 +23,7 @@ public class EventServlet extends HttpServlet {
 		Action action = af.getAction(command);
 
 		if (action != null) {
-			action.execute(request, response);
+			action.excute(request, response);
 		}
 	}
 
