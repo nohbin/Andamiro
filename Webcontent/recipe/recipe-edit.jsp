@@ -247,6 +247,16 @@ li{
 				            </div>
 				        </c:otherwise>
 				    </c:choose>
+				    	<%-- 3번째 input 태그마다 줄 바꾸기 --%>
+					    <c:if test="${(i + 1) % 3 == 0}">
+					        <div class="w-100"></div>
+					    	<div class="form-floating col-12 col-md-2 my-3 align-self-center ingre-input">
+				                <input type="hidden" class="form-control" id="floatingInput" >
+				            </div> 
+				            <div class="form-floating col-12 col-md-2 my-3 align-self-center ingre-input">
+				                <input type="hidden" class="form-control" id="floatingInput" >
+				            </div>
+					    </c:if>
 					</c:forEach>
 				</div>
 
