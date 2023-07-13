@@ -41,10 +41,10 @@ public class SubJoinAction implements SubscribeAction {
 		
 		
 		//구독 종료일이 현재날짜면 구독 해지
-		if (sub_end.equals(dateFormat.format(currentTime))) {
-			sDao.SubFinish(subVO.getSubNumber());
-	    }
-		
+//		if (sub_end.equals(dateFormat.format(currentTime))) {
+//			sDao.SubFinish(subVO.getSubNumber());
+//	    }
+//		
 		String url = "subscribe/subscribeSuccess.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 			

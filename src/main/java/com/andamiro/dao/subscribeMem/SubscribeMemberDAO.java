@@ -182,6 +182,32 @@ public class SubscribeMemberDAO {
 	    return memberList;
 	}
 
+
+	public SubscribeMemberVO selectOneById(String userid) {
+		String sql = "select * from subscribemember where userId = ?";
+		SubscribeMemberVO subscribememberVo = null;
+		
+		try(Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql))
+		{
+			pstmt.setString(1, userid);
+			try(ResultSet rs = pstmt.executeQuery())
+			{
+				if(rs.next()) {
+					subscribememberVo = new SubscribeMemberVO();
+					subscribememberVo.setMemberNumber(rs.getInt("memberNumber"));
+					subscribememberVo.setSubNumber(rs.getInt("subNumber"));
+					subscribememberVo.setSub_start(rs.getString("sub_start"));
+					subscribememberVo.setSub_end(rs.getString("sub_end"));
+					
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return subscribememberVo;
+	}
+
 	
 }
 
