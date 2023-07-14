@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +25,17 @@ public class RecipeDetailAction implements RecipeAction {
 		// TODO Auto-generated method stub
 		int recipID = Integer.parseInt(request.getParameter("recipID"));
 		RecipeDAO recipDAO = RecipeDAO.getInstance();
+		Cookie[] cookies = request.getCookies();
+		int visit = 0;
+		
+		for(Cookie cookie : cookies) {
+			System.out.println(cookie.getName());
+			System.out.println(cookie.getValue());
+		}
+		
+		// 레시피 조회수 증가
 		recipDAO.updateViewCount(recipID);
+		
 		RecipeVO recipVO = recipDAO.selectOneRecipeByID(recipID);
 		RecipeIngreVO recipeIngreVO = recipVO.getRecipeDetailVO().getRecipeingreVO();
 

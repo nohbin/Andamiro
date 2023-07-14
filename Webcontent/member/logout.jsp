@@ -5,5 +5,5 @@
 %>
 <script type="text/javascript">
     alert("<%= logoutMessage %>");
-    location.href = "/Andamiro";
+    location.href = "/";
 </script>

@@ -49,11 +49,21 @@
       }
     
     function requestPay(){
-    	IMP.init('imp17333063');
-    	var memberNumber = ${loginUser.memberNumber};
-    	IMP.request_pay({
-    		pg : "html5_inicis", 
-    	    pay_method : "card",
+    	
+    	//카드 결제 api
+//     	IMP.init('imp17333063');
+//     	var memberNumber = ${loginUser.memberNumber};
+//     	IMP.request_pay({
+//     		pg : "html5_inicis", 
+//     	    pay_method : "card",
+
+		// 카카오 결제 api
+   	    const userCode = "imp38388127";
+		IMP.init(userCode);
+       	var memberNumber = ${loginUser.memberNumber};
+       	IMP.request_pay({
+       		pg: "kakao",
+       	    pay_method: "kakaopay",
     	    merchant_uid: "order_no"+memberNumber,
     	    name : '안다미로 구독 서비스',
     	    amount : 10,
