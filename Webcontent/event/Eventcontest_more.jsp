@@ -76,6 +76,7 @@ a {
 
 	<div class="container text-center border mt-3 rounded-5">
 		<input type="hidden" name = "recipeID" value="${recipe.recipeID }">
+		<input type="hidden" name = "recipeCompetition" value="${competition} ">
 		<div class="row mt-3 row-cols-3">
 			<c:forEach var="recipe" items="${recipeList }">
 				<div class="col-12 col-md-4 mt-3 mb-3">

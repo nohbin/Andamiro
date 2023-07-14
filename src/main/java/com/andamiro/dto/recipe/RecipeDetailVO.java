@@ -1,6 +1,6 @@
 package com.andamiro.dto.recipe;
 
-
+import com.andamiro.dto.event.EventVO;
 
 public class RecipeDetailVO {
 	private int recipeDetailID;
@@ -88,6 +88,10 @@ public class RecipeDetailVO {
 	}
 	public void setRecipeforlevel(String recipeforlevel) {
 		this.recipeforlevel = recipeforlevel;
+	}
+	public void setEventVO(EventVO eventVO) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

@@ -24,7 +24,7 @@ CREATE TABLE andamiroRecipe (
 	recipetag2	        VARCHAR(255)	NULL,
 	recipetag3	        VARCHAR(255)	NULL,
 	recipeView	        NUMBER	        default 0,
-	recipeCompetition   NUMBER		    NULL,
+	recipeCompetition   VARCHAR(255)    NULL,
     recipeDetailID      NUMBER          NOT NULL,
     recipeRegDate       date            default sysdate,
 	reviewcount	NUMBER

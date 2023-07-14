@@ -36,6 +36,7 @@ li{
             <form action="RecipeServlet" >
             	<input type="hidden" name="command" value="contest_recipewrite_action">
             	<input type="hidden" name="userid" value="${loginUser.id }">
+            	<input type="hidden" name="eventno" value="${eventno}">
                 <div class="row my-3">
                     <!-- 요리 제목-->
                     <div class="col-12 col-md-4 align-self-center my-3" style="font-size: 1.5rem;">
