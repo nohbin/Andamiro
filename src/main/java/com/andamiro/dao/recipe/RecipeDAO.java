@@ -179,7 +179,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -221,7 +221,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -354,7 +354,7 @@ public class RecipeDAO {
 	                recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 	                recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 	                recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-	                recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+	                recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 	                recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 	                recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 	                recipeVO.setUserId(rs.getString("USERID"));
@@ -388,7 +388,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -565,7 +565,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -597,7 +597,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -656,7 +656,7 @@ public class RecipeDAO {
 					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
 					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
 					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
+					recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
 					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
 					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
 					recipeVO.setUserId(rs.getString("USERID"));
@@ -682,7 +682,7 @@ public class RecipeDAO {
 				pstmt.setString(5, recipeVO.getRecipetag2());
 				pstmt.setString(6, recipeVO.getRecipetag3());
 				pstmt.setString(7, recipeVO.getUserId());
-				pstmt.setString(8, recipeVO.getRecipeCompetition());
+				pstmt.setInt(8, recipeVO.getRecipeCompetition());
 				pstmt.executeUpdate();
 			}
 
@@ -799,40 +799,43 @@ public class RecipeDAO {
 			e.printStackTrace();
 		}
 	}
-	public List<RecipeVO> selectRecipeByCompetition() {
-		// TODO Auto-generated method stub
+	public List<RecipeVO> selectRecipeByCompetition(int recipeCompetition) {
+	    List<RecipeVO> list = new ArrayList<>();
 
-		List<RecipeVO> list = new ArrayList<>();
+	    String sql = "SELECT * FROM andamirorecipe WHERE recipecompetition = ? ORDER BY RECIPEREGDATE DESC";
 
-		String sql = "select * from andamirorecipe where recipecommpetition=? order by RECIPEREGDATE desc";
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-		try (Connection conn = DBManager.getConnection(); 
-			Statement stmt = conn.createStatement();) 
-		{
-			try (ResultSet rs = stmt.executeQuery(sql);) {
-				while (rs.next()) {
-					RecipeVO recipeVO = new RecipeVO();
-					recipeVO.setRecipeID(rs.getInt("RECIPEID"));
-					recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
-					recipeVO.setRecipeName(rs.getString("RECIPENAME"));
-					recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
-					recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
-					recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
-					recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
-					recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
-					recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
-					recipeVO.setRecipeCompetition(rs.getString("RECIPECOMPETITION"));
-					recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
-					recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
-					recipeVO.setUserId(rs.getString("USERID"));
-					list.add(recipeVO);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
+	        stmt.setInt(1, recipeCompetition);
 
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            while (rs.next()) {
+	                RecipeVO recipeVO = new RecipeVO();
+	                recipeVO.setRecipeID(rs.getInt("RECIPEID"));
+	                recipeVO.setMemberNumber(rs.getInt("MEMBERNUMBER"));
+	                recipeVO.setRecipeName(rs.getString("RECIPENAME"));
+	                recipeVO.setMainPicture(rs.getString("MAINPICTURE"));
+	                recipeVO.setRecipeGrade(rs.getString("RECIPEGRADE"));
+	                recipeVO.setRecipetag1(rs.getString("RECIPETAG1"));
+	                recipeVO.setRecipetag2(rs.getString("RECIPETAG2"));
+	                recipeVO.setRecipetag3(rs.getString("RECIPETAG3"));
+	                recipeVO.setRecipeView(rs.getInt("RECIPEVIEW"));
+	                recipeVO.setRecipeCompetition(rs.getInt("RECIPECOMPETITION"));
+	                recipeVO.setRecipeDetailID(rs.getInt("RECIPEDETAILID"));
+	                recipeVO.setRecipeRegDate(rs.getTimestamp("RECIPEREGDATE"));
+	                recipeVO.setUserId(rs.getString("USERID"));
+	              
+	                list.add(recipeVO);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
 	}
 
-	}
+}
+
+	

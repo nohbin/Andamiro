@@ -1,7 +1,6 @@
 package com.andamiro.controller.recipe;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,19 +20,20 @@ public class Recipe_ContestWriteAction implements RecipeAction {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		MemberVO userid = (MemberVO) session.getAttribute("loginUser");
-		RecipeVO recipeVO = new RecipeVO();
-		recipeVO.setMemberNumber(userid.getMemberNumber());
-		recipeVO.setRecipeName(request.getParameter("name"));
-		recipeVO.setMainPicture(request.getParameter("mainpic"));
-		recipeVO.setRecipetag1(request.getParameter("tag1"));
-		recipeVO.setRecipetag2(request.getParameter("tag2"));
-		recipeVO.setRecipetag3(request.getParameter("tag3"));
-		recipeVO.setUserId(request.getParameter("userid"));
-		 String recipeCompetition = UUID.randomUUID().toString();
-	    recipeVO.setRecipeCompetition(recipeCompetition);
+	    HttpSession session = request.getSession();
+	    MemberVO userid = (MemberVO) session.getAttribute("loginUser");
+	  
+	    
+	    RecipeVO recipeVO = new RecipeVO();
+	    recipeVO.setMemberNumber(userid.getMemberNumber());
+	    recipeVO.setRecipeName(request.getParameter("name"));
+	    recipeVO.setMainPicture(request.getParameter("mainpic"));
+	    recipeVO.setRecipetag1(request.getParameter("tag1"));
+	    recipeVO.setRecipetag2(request.getParameter("tag2"));
+	    recipeVO.setRecipetag3(request.getParameter("tag3"));
+	    recipeVO.setUserId(request.getParameter("userid"));
+	    recipeVO.setRecipeCompetition(Integer.parseInt(request.getParameter("eventno")));
+	
 		RecipeDetailVO recipDetailVO = new RecipeDetailVO();
 		recipDetailVO.setRecipeHow(Integer.parseInt(request.getParameter("how")));
 		recipDetailVO.setRecipeKind(Integer.parseInt(request.getParameter("kind")));

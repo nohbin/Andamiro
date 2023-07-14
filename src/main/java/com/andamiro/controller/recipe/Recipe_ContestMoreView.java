@@ -29,8 +29,9 @@ public class Recipe_ContestMoreView implements RecipeAction {
 			categoryNum = Integer.parseInt(request.getParameter("categoryNum"));
 			recipeList = recipeDAO.selectAllRecipeByCategory(category , categoryNum );
 		}else {
-			recipeList = recipeDAO.selectRecipeByCompetition();
+			recipeList = recipeDAO.selectAllRecipe();
 		}
+		
 		
 		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
 		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
@@ -46,3 +47,5 @@ public class Recipe_ContestMoreView implements RecipeAction {
 
 	}
 }
+
+

@@ -2,6 +2,8 @@ package com.andamiro.dto.recipe;
 
 import java.sql.Timestamp;
 
+
+
 public class RecipeVO {
 
 	private int recipeID;
@@ -14,11 +16,12 @@ public class RecipeVO {
 	private String recipetag2;
 	private String recipetag3;
 	private int recipeView;
-	private String recipeCompetition;
+	private int recipeCompetition;
 	private int recipeDetailID;
 	private Timestamp recipeRegDate;
 	private RecipeDetailVO recipeDetailVO;
 	private int reviewCount;
+	private int eventno;
 	public int getRecipeID() {
 		return recipeID;
 	}
@@ -79,10 +82,10 @@ public class RecipeVO {
 	public void setRecipeView(int recipeView) {
 		this.recipeView = recipeView;
 	}
-	public String getRecipeCompetition() {
+	public int getRecipeCompetition() {
 		return recipeCompetition;
 	}
-	public void setRecipeCompetition(String recipeCompetition) {
+	public void setRecipeCompetition(int recipeCompetition) {
 		this.recipeCompetition = recipeCompetition;
 	}
 	public int getRecipeDetailID() {
@@ -109,16 +112,12 @@ public class RecipeVO {
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
 	}
-	@Override
-	public String toString() {
-		return "RecipeVO [recipeID=" + recipeID + ", memberNumber=" + memberNumber + ", userId=" + userId
-				+ ", recipeName=" + recipeName + ", mainPicture=" + mainPicture + ", recipeGrade=" + recipeGrade
-				+ ", recipetag1=" + recipetag1 + ", recipetag2=" + recipetag2 + ", recipetag3=" + recipetag3
-				+ ", recipeView=" + recipeView + ", recipeCompetition=" + recipeCompetition + ", recipeDetailID="
-				+ recipeDetailID + ", recipeRegDate=" + recipeRegDate + ", recipeDetailVO=" + recipeDetailVO
-				+ ", reviewCount=" + reviewCount + "]";
+	public int getEventno() {
+		return eventno;
+	}
+	public void setEventno(int eventno) {
+		this.eventno = eventno;
 	}
 	
-
-}
-
+		
+	}

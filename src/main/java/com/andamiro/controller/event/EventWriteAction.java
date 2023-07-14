@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.andamiro.dao.event.EventDAO;
 import com.andamiro.dto.event.EventVO;
+import com.andamiro.dto.recipe.RecipeVO;
 
 public class EventWriteAction implements Action {
 
@@ -28,13 +29,14 @@ public class EventWriteAction implements Action {
         eventVO.setImgsum(imgsum);
         eventVO.setPoster(poster);
 
+        RecipeVO recipeVO = new RecipeVO();
+        recipeVO.setRecipeCompetition(eventno);
+        
+     
+
         EventDAO eventDAO = EventDAO.getInstance();
         eventDAO.insertEvent(eventVO);
-
-        // Perform any additional actions after inserting event information here
-        // For example, you can redirect to the event list page
-
-        // 이벤트 정보를 추가한 후에 수행할 다른 동작을 여기에 추가할 수 있습니다.
+      
         new EventListAction().excute(request, response);
     }
 }
