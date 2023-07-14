@@ -30,11 +30,6 @@ public class MemberLogoutAction implements MemberAction {
 		
 		request.setAttribute("logoutMessage", logoutMessage);
 		
-		
-		
-		
-			
-
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 

@@ -60,7 +60,7 @@ a {
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<li class="page-item">
-					<a class="page-link" href="<c:url value="/AdminServlet?command=recipe_list_view&page=${currentPage - 1 }"/>"
+					<a class="page-link ${currentPage == 1 ? 'disabled' : '' }" href="<c:url value="/AdminServlet?command=recipe_list_view&page=${currentPage - 1 }"/>"
 						aria-label="이전" tabindex="-1"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 					<c:forEach begin="1" end="${totalPages }" varStatus="status">
@@ -69,7 +69,7 @@ a {
 						</li>
 					</c:forEach>
 					<li class="page-item">
-					<a class="page-link" href="<c:url value="/AdminServlet?command=recipe_list_view&page=${currentPage + 1 }"/>"
+					<a class="page-link ${currentPage == totalPages ? 'disabled' : '' }" href="<c:url value="/AdminServlet?command=recipe_list_view&page=${currentPage + 1 }"/>"
 						aria-label="다음"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</ul>
