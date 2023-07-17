@@ -23,7 +23,6 @@ public class MemberLoginAction implements MemberAction {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		//
 		String sub_start = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		LocalDateTime startDateTime = LocalDateTime.parse(sub_start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -32,7 +31,6 @@ public class MemberLoginAction implements MemberAction {
 		SubscribeMemberDAO subscribememberDao = SubscribeMemberDAO.getInstance();
 //		SubscribeMemberVO subscribememberVo = new  SubscribeMemberVO();
 				
-		//		
 		String userid = request.getParameter("userid");
 		String rawpwd = request.getParameter("pwd");
 		String pwd = SHA256.encodeSha256(rawpwd);
@@ -56,8 +54,6 @@ public class MemberLoginAction implements MemberAction {
 		} else {
 		    url = "member/loginfail.jsp";
 		}
-		
-		System.out.println("??");
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

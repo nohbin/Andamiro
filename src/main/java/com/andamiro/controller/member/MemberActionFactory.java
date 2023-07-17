@@ -34,6 +34,10 @@ public class MemberActionFactory {
 			action = new MemeberMypageEditAction();
 		}else if(command.equals("member_edit")) {
 			action = new MemberInfoEditAction();
+		}else if(command.equals("member_find")) {
+			action = new MemberFindForm();
+		}else if(command.equals("memeber_id_find_action")) {
+			action = new MemberFindIdAction();
 		}
 		return action;
 	}
