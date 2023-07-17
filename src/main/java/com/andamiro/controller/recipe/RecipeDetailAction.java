@@ -2,12 +2,15 @@ package com.andamiro.controller.recipe;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.andamiro.controller.action.RecipeAction;
 import com.andamiro.dao.recipe.RecipeDAO;
@@ -25,16 +28,46 @@ public class RecipeDetailAction implements RecipeAction {
 		// TODO Auto-generated method stub
 		int recipID = Integer.parseInt(request.getParameter("recipID"));
 		RecipeDAO recipDAO = RecipeDAO.getInstance();
-		Cookie[] cookies = request.getCookies();
-		int visit = 0;
+//		Cookie[] cookies = request.getCookies();
+//		Cookie viewCookie = null;
+//		
+//		if(cookies != null) {
+//			for(int i = 0; i < cookies.length; i++) {
+//				if(cookies[i].getName().equals("visited")) {
+//					viewCookie = cookies[i];
+//					System.out.println(cookies[i].getName());
+//				}
+//			}
+//		}
+//		
+//		if(viewCookie == null) {
+//			Cookie newCookie = new Cookie("visited", "OK");
+//			response.addCookie(newCookie);
+//			recipDAO.updateViewCount(recipID);
+//		}
 		
-		for(Cookie cookie : cookies) {
-			System.out.println(cookie.getName());
-			System.out.println(cookie.getValue());
+		HttpSession session = request.getSession();
+		Integer viewCount = (Integer) session.getAttribute("viewCount");
+		Set <Integer> visitedRecipes = (Set<Integer>)session.getAttribute("visitedRecipes");
+
+		if (viewCount == null) {
+		    viewCount = 1;
+		} else {
+		    viewCount++;
 		}
-		
-		// 레시피 조회수 증가
-		recipDAO.updateViewCount(recipID);
+
+		session.setAttribute("viewCount", viewCount);
+
+		if (visitedRecipes == null) {
+		    visitedRecipes = new HashSet<>();
+		}
+
+		if (!visitedRecipes.contains(recipID)) {
+		    visitedRecipes.add(recipID);
+		    session.setAttribute("visitedRecipes", visitedRecipes);
+		    recipDAO.updateViewCount(recipID);
+		}
+
 		
 		RecipeVO recipVO = recipDAO.selectOneRecipeByID(recipID);
 		RecipeIngreVO recipeIngreVO = recipVO.getRecipeDetailVO().getRecipeingreVO();
