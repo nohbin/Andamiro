@@ -33,10 +33,9 @@ li{
                     요리 등록
                 </div>
             </div>
-            <form action="RecipeServlet" >
-            	<input type="hidden" name="command" value="contest_recipewrite_action">
+            <form action="RecipeServlet?command=contest_recipewrite_action" method="post" enctype="multipart/form-data">
             	<input type="hidden" name="userid" value="${loginUser.id }">
-            	<input type="hidden" name="eventno" value="${eventno}">
+            	<input type="hidden" name="eventno"value="${eventno}">
                 <div class="row my-3">
                     <!-- 요리 제목-->
                     <div class="col-12 col-md-4 align-self-center my-3" style="font-size: 1.5rem;">

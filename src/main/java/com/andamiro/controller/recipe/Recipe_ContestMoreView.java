@@ -36,8 +36,7 @@ public class Recipe_ContestMoreView implements RecipeAction {
 		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
 		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
 		List<RecipeMainIngreVO> recipeMainIngreList = recipeDAO.selectAllRecipeMainIngre();
-		
-		
+	
 		request.setAttribute("recipeKindList", recipeKindList);
 		request.setAttribute("recipeHowList", recipeHowList);
 		request.setAttribute("recipeMainIngreList", recipeMainIngreList);

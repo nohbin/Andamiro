@@ -24,8 +24,10 @@ public class Recipe_ContestWriteForm implements RecipeAction {
 		List<RecipeKindVO> recipeKindList = recipeDAO.selectAllRecipeKind();
 		List<RecipeHowVO> recipeHowList = recipeDAO.selectAllRecipeHow();
 		List<RecipeMainIngreVO> recipeMainIngreList = recipeDAO.selectAllRecipeMainIngre();
+	    int eventno = Integer.parseInt(request.getParameter("eventno"));
+
 		
-		
+	    request.setAttribute("eventno", eventno);
 		request.setAttribute("recipeKindList", recipeKindList);
 		request.setAttribute("recipeHowList", recipeHowList);
 		request.setAttribute("recipeMainIngreList", recipeMainIngreList);

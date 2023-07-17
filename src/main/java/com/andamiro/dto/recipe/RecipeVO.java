@@ -112,12 +112,7 @@ public class RecipeVO {
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
 	}
-	public int getEventno() {
-		return eventno;
-	}
-	public void setEventno(int eventno) {
-		this.eventno = eventno;
-	}
+
 	
 		
 	}

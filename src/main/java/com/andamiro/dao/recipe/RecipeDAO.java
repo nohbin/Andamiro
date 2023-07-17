@@ -29,8 +29,8 @@ public class RecipeDAO {
 
 	public void registRecipe(RecipeVO recipeVO) {
 		try (Connection conn = DBManager.getConnection();) {
-			String insertRecipe = "INSERT INTO ANDAMIRORECIPE (recipeId, memberNumber, recipeName, mainPicture, recipetag1, recipetag2, recipetag3, USERID, recipedetailid) "
-					+ "VALUES (RECIPEID_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, RECIPEID_SEQ.currval)";
+			String insertRecipe = "INSERT INTO ANDAMIRORECIPE (recipeId, memberNumber, recipeName, mainPicture, recipetag1, recipetag2, recipetag3, USERID, recipedetailid,recipecompetition) "
+					+ "VALUES (RECIPEID_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, RECIPEID_SEQ.currval,?)";
 			try (PreparedStatement pstmt = conn.prepareStatement(insertRecipe);) 
 			{
 				pstmt.setInt(1, recipeVO.getMemberNumber());
@@ -40,6 +40,7 @@ public class RecipeDAO {
 				pstmt.setString(5, recipeVO.getRecipetag2());
 				pstmt.setString(6, recipeVO.getRecipetag3());
 				pstmt.setString(7, recipeVO.getUserId());
+				pstmt.setInt(8, recipeVO.getRecipeCompetition());
 				pstmt.executeUpdate();
 			}
 
