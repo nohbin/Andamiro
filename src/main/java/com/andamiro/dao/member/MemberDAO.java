@@ -215,5 +215,37 @@ public class MemberDAO {
 
 	    return memberList;
 	}
+	public MemberVO selectOneMemeberbyNameAndEmail(String name, String email) {
+		// TODO Auto-generated method stub
+		MemberVO memberVO = null;
+		
+		String sql = "SELECT * FROM andamiromember WHERE name = ? AND email = ?";
+		
+		try(Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);)
+		{
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if (rs.next()) {
+	                memberVO = new MemberVO();
+	                memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	                memberVO.setId(rs.getString("id"));
+	                memberVO.setPwd(rs.getString("pwd"));
+	                memberVO.setName(rs.getString("name"));
+	                memberVO.setPhone(rs.getString("phone"));
+	                memberVO.setEmail(rs.getString("email"));
+	                memberVO.setJoinDate(rs.getString("joindate"));
+	                memberVO.setSubscribe(rs.getString("subscribe"));
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return memberVO;
+	}
+	
+	
 
 }
