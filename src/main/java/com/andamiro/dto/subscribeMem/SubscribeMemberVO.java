@@ -6,6 +6,14 @@ public class SubscribeMemberVO {
 	private int subNumber;
 	private int memberNumber;
 	private String userId;
+	private int status;
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	
 	public String getUserId() {
 		return userId;

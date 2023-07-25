@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.andamiro.dto.subscribeMem.SubscribeMemberVO;
@@ -20,8 +22,8 @@ public class SubscribeMemberDAO {
 	
 	
 	public void insertSubMem(SubscribeMemberVO subVO) {
-	    String insertSql = "INSERT INTO subscribemember (subNumber, memberNumber, sub_start, sub_end, userId) "
-	            + "VALUES (subNum_seq.nextval, ?, ?, ?, ?)";
+	    String insertSql = "INSERT INTO subscribemember (subNumber, memberNumber, sub_start, sub_end, userId, status) "
+	            + "VALUES (subNum_seq.nextval, ?, ?, ?, ?, 1)";
 	    String selectSql = "SELECT subNum_seq.currval FROM dual";
 	    String updateSql = "UPDATE andamiromember SET subscribe = ? WHERE membernumber = ?";
 	    
@@ -120,21 +122,65 @@ public class SubscribeMemberDAO {
 
 	
 	//구독 기간만료시 구독해지하는 메소드
-	public void SubFinish(int subNumber) {
-	    String sql = "DELETE FROM subscribemember WHERE subNumber = ?";
-	    
-	    try (Connection conn = DBManager.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//	public void SubFinish(int subNumber) {
+//	    String sql = "DELETE FROM subscribemember WHERE subNumber = ?";
+//	    
+//	    try (Connection conn = DBManager.getConnection();
+//	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//	        pstmt.setInt(1, subNumber);
+//	        pstmt.executeUpdate();
+//
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//	}
 
-	        pstmt.setInt(1, subNumber);
-	        pstmt.executeUpdate();
+	
+	//로그인시 구독 체크 
+	public void SubCheck(Integer subNumber) {
+		String sql = "update subscribemember set status = ? where subNumber = ? ";
+		try (Connection conn = DBManager.getConnection();
+		         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		        
+          
+                boolean isExpired = isSubscribeExpired(subNumber);
+                pstmt.setInt(1, isExpired ? 0 : 1); // 구독 날짜가 지났을 때(true) status: 0, 안지났으면(false) status: 1
+		        pstmt.setInt(2, subNumber);
+		        pstmt.executeUpdate();
+		        
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		
 	}
-
-
+	
+	private boolean isSubscribeExpired(Integer subNumber) {  //subCheck 내부에서만 사용되므로 private
+		String sql = "select sub_end from subscribemember where subNumber = ?";
+		try(Connection conn = DBManager.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, subNumber);
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					Date subEnd = rs.getDate("sub_end");  
+					Date currentDate = new Date();
+					
+					if(currentDate.after(subEnd)) {           //구독 종료 날짜와 현재 날짜를 비교하여 구독 종료일이 현재 날짜보다 지났으면 true 반환 
+						return true;   
+					}
+				} 
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;    //구독 날짜가 지나지 않았으면 false 반환. 
+	}
+	
 	public void saveRecipeForSubmember(int subNumber, int recipeId) {
 	    String sql = "INSERT INTO SUBMEMBERRECIPE (recipeId, subNumber) VALUES (?, ?)";
 
@@ -207,6 +253,9 @@ public class SubscribeMemberDAO {
 		}
 		return subscribememberVo;
 	}
+
+
+
 
 	
 }

@@ -28,7 +28,8 @@ public class dietWriteAction implements DietAction {
 //		dDao.insertDiet(dietVo);
 //		
 //		new dietListAction().excute(request, response);
-//		
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		String realFolder = "C:\\upload\\img\\anadamiro";
 		String encType = "UTF-8";

@@ -30,7 +30,7 @@ public class MemberLoginAction implements MemberAction {
 		LocalDateTime endDateTime = startDateTime.plusDays(30);
 		String sub_end = endDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		SubscribeMemberDAO subscribememberDao = SubscribeMemberDAO.getInstance();
-//		SubscribeMemberVO subscribememberVo = new  SubscribeMemberVO();
+		
 				
 		//		
 		String userid = request.getParameter("userid");
@@ -43,14 +43,18 @@ public class MemberLoginAction implements MemberAction {
 		    url = "member/loginfail.jsp";
 		} else if (memberVO.getId().equals(userid) && memberVO.getPwd().equals(pwd)) {
 		    HttpSession session = request.getSession();
+		    url = "index.jsp";
+		    //로그인 성공시 해당 회원의 구독 체크
+		    SubscribeMemberVO subscribememberVo = subscribememberDao.selectOneById(userid);
+		    if (subscribememberVo != null) {   
+		        if (subscribememberVo.getSub_end().equals(currentDate)) { //구독 날짜가 지났을때
+		            subscribememberDao.SubCheck(subscribememberVo.getSubNumber());
+		        } else {
+		        	subscribememberDao.SubCheck(subscribememberVo.getSubNumber());
+		        }  
+		    }
 		    session.removeAttribute("id");
 		    session.setAttribute("loginUser", memberVO);
-		    url = "index.jsp";
-		    //로그인 성공시 해당 회원의 구독 정보 조회. 
-		    SubscribeMemberVO subscribememberVo = subscribememberDao.selectOneById(userid);
-		    if(subscribememberVo != null && subscribememberVo.getSub_end().equals(currentDate)) {
-		    	subscribememberDao.SubFinish(subscribememberVo.getSubNumber());
-		    } 
 		    
 		    
 		} else {
