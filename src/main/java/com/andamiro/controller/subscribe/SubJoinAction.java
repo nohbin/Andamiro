@@ -22,6 +22,7 @@ public class SubJoinAction implements SubscribeAction {
 		HttpSession session =request.getSession();
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
+		int status = 1;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date currentTime = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -34,17 +35,18 @@ public class SubJoinAction implements SubscribeAction {
 		subVO.setMemberNumber(loginUser.getMemberNumber());
 		subVO.setSub_start(sub_start);
 		subVO.setSub_end(sub_end);
-//		subVO.setSubNumber(Subscriber.getSubNumber());
 		subVO.setUserId(request.getParameter("userid"));
+		subVO.setStatus(status);
 		SubscribeMemberDAO sDao = SubscribeMemberDAO.getInstance();
 		sDao.insertSubMem(subVO);
+	
 		
 		
 		//구독 종료일이 현재날짜면 구독 해지
 //		if (sub_end.equals(dateFormat.format(currentTime))) {
 //			sDao.SubFinish(subVO.getSubNumber());
 //	    }
-//		
+		
 		String url = "subscribe/subscribeSuccess.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 			

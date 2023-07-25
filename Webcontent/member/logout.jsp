@@ -5,5 +5,5 @@
 %>
 <script type="text/javascript">
     alert("<%= logoutMessage %>");
-    location.href = "/";
+    location.href = "index.jsp";
 </script>
