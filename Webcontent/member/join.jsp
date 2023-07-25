@@ -96,9 +96,8 @@ label[for=name] button {
 
 					<hr class="mb-4">
 					<div class="custom-control custom-checkbox text-center">
-						<input type="checkbox" class="custom-control-input" id="aggrement"
-							required> <label class="custom-control-label"
-							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label><br>
+						<input type="checkbox" class="custom-control-input" id="aggrement" required> 
+						<label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label><br>
 						<button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="return validateForm()">가입 완료</button>
 					</div>
 					<div class="mb-5"></div>
