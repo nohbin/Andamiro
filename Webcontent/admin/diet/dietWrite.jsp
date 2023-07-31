@@ -55,7 +55,7 @@
 				</tr>
 			</table>
 			<br>
-			<br> <input type="submit" value="등록" onclick="function  dietWriteCheck()">
+			<br> <input type="submit" value="등록" onclick="return  dietWriteCheck()">
 			 	 <input type="reset"  value="다시 작성">
 			 	 <input type="button" value="목록" onclick="location.href='AdminServlet?command=diet_list&page=1'">
 		</form>

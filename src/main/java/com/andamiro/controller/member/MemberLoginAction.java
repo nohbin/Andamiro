@@ -44,12 +44,10 @@ public class MemberLoginAction implements MemberAction {
 		    url = "index.jsp";
 		    //로그인 성공시 해당 회원의 구독 체크
 		    SubscribeMemberVO subscribememberVo = subscribememberDao.selectOneById(userid);
-		    if (subscribememberVo != null) {   
-		        if (subscribememberVo.getSub_end().equals(currentDate)) { //구독 날짜가 지났을때
+		    if (subscribememberVo != null) {   // 구독 정보가 존재하는 경우
+		        if (subscribememberVo.getSub_end().equals(currentDate)) { // 구독 날짜가 지났을 때
 		            subscribememberDao.SubCheck(subscribememberVo.getSubNumber());
-		        } else {
-		        	subscribememberDao.SubCheck(subscribememberVo.getSubNumber());
-		        }  
+		        }
 		    }
 		    session.removeAttribute("id");
 		    session.setAttribute("loginUser", memberVO);
