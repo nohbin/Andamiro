@@ -35,7 +35,7 @@ label[for=name] button {
                 <a class="nav-link" aria-current="page" href="<c:url value="MemberServlet?command=member_findid"/>" style="text-decoration: none;  color: inherit">아이디 찾기</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="<c:url value="MemberServlet?command=member_findpwd"/>" style="text-decoration: none; color: inherit">비밀번호 찾기</a>
+                <a class="nav-link" href="<c:url value="MemberServlet?command=member_update_pwd"/>" style="text-decoration: none; color: inherit">비밀번호 찾기</a>
             </li>
         </ul>
     </div>
@@ -43,25 +43,25 @@ label[for=name] button {
     <div class="container mt-5">
 		<div class="input-form-backgroud row mx-auto" style="width: 300px;">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-3 text-center">비밀번호 찾기</h4>
+				<h4 class="mb-3 text-center">비밀번호 변경</h4>
 				<form class="validation-form" action="MemberServlet" method="post" novalidate accept-charset="utf-8" >
-				<input type="hidden" name="command" value="memeber_pwd_find_action">
+				<input type="hidden" name="command" value="memeber_update_pwd">
+				<input type="hidden" name="id" value="${id }">
 					<div class="row">
 						<div class="col-12 mb-3">
-							<label for="name">아이디(*)</label> 
-							<input type="text" class="form-control" id="id" name = "id" placeholder="" value="${id }" required>
-							<div class="invalid-feedback">아이디를 입력해주세요.</div>
+							<label for="name">비밀번호(*)</label> 
+							<input type="password" class="form-control" id="password" name="pwd" placeholder="" value="" required>
+							<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 						</div>
 						<div class="col-12 mb-3">
-							<label for="name">이메일(*)</label> 
-							<input type="email" class="form-control" id="email" name="email" placeholder="" placeholder="you@example.com" value="" required>
-							<div class="invalid-feedback">이메일을 입력해주세요.</div>
+							<label for="name">비밀번호 확인(*)</label> 
+							<input type="password" class="form-control" id="passwordconfirm" placeholder="" value="" required>
+							<div class="invalid-feedback">비밀번호 확인 을 입력해주세요.</div>
 						</div>
 					</div>
-					<b style="color: red">${result}</b>
 					<hr class="mb-4">
 					<div class="custom-control custom-checkbox text-center">
-						<button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="return validateForm()">비밀번호 찾기</button>
+						<button class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" type="submit" onclick="return validateForm()">비밀번호 변경</button>
 					</div>
 					<div class="mb-5"></div>
 				</form>

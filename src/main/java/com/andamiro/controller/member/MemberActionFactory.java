@@ -34,11 +34,18 @@ public class MemberActionFactory {
 			action = new MemeberMypageEditAction();
 		}else if(command.equals("member_edit")) {
 			action = new MemberInfoEditAction();
-		}else if(command.equals("member_find")) {
+		}else if(command.equals("member_findid")) {
 			action = new MemberFindForm();
 		}else if(command.equals("memeber_id_find_action")) {
 			action = new MemberFindIdAction();
+		}else if(command.equals("member_findpwd")){
+			action = new MemberFindPwdForm();
+		}else if(command.equals("memeber_pwd_find_action")) {
+			action = new MemberFindPwdAction();
+		}else if(command.equals("memeber_update_pwd")) {
+			action = new MemberUpdatePwdAction();
 		}
+				
 		return action;
 	}
 }

@@ -40,7 +40,7 @@ li {
 				<label for="floatingPassword">비밀번호</label>
 			</div>
 			<div class="form-floating my-3">
-				<a href="MemberServlet?command=member_find">아이디 / 비밀번호 찾기</a>
+				<a href="MemberServlet?command=member_findid">아이디 / 비밀번호 찾기</a>
 			</div>
 			<button class="w-100 btn btn-lg" type="submit" onclick="return loginCheck()" style="background-color: #fac279;">
 				로그인

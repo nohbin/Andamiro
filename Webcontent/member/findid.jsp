@@ -32,10 +32,10 @@ label[for=name] button {
 	<div class="container my-5">
         <ul class="nav nav-tabs">
             <li class="nav-item mynav-item">
-                <a class="nav-link" aria-current="page" href="<c:url value="MemberServlet?command=member_find"/>" style="text-decoration: none;  color: inherit">아이디 찾기</a>
+                <a class="nav-link" aria-current="page" href="<c:url value="MemberServlet?command=member_findid"/>" style="text-decoration: none;  color: inherit">아이디 찾기</a>
             </li>
             <li class="nav-item  mynav-item">
-                <a class="nav-link" href="<c:url value="/AdminServlet?command=submem_list&page=1"/>" style="text-decoration: none; color: inherit">비밀번호 찾기</a>
+                <a class="nav-link" href="<c:url value="MemberServlet?command=member_findpwd"/>" style="text-decoration: none; color: inherit">비밀번호 찾기</a>
             </li>
         </ul>
     </div>
