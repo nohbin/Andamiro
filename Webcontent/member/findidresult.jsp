@@ -46,7 +46,7 @@ label[for=name] button {
 					<b class="h5"> 회원님의 아이디 : [${id }] </b>
 					<div class="custom-control custom-checkbox text-center my-5">
 						<a class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" href="<c:url value = 'MemberServlet?command=member_login_form&id=${id }'/>">로그인</a>
-						<a class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" >비밀번호 찾기</a>
+						<a class="btn btn-lg btn-block mt-3" style="background-color: #fac279;" href="<c:url value = 'MemberServlet?command=member_findpwd&id=${id }'/>">비밀번호 찾기</a>
 					</div>
 				</div>
 			</div>
