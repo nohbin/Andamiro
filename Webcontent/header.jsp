@@ -61,6 +61,9 @@ a {
 					<li class="nav-item">
 						<a href='<c:url value="/subscribe/subscribe.jsp"/>'					
 					 class="nav-link link-dark px-2">구독</a>
+					  <li class="nav-item">
+						<a href="<c:url value="/AnnouncementServlet?command=announcement_list"/>" class="nav-link link-dark px-2">게시판</a>
+					</li>
 				</ul>
 				<div class="text-end">
 					<c:choose>
