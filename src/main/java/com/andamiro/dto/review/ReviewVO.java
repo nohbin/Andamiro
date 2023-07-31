@@ -2,39 +2,37 @@ package com.andamiro.dto.review;
 
 import java.sql.Timestamp;
 
+import com.andamiro.dto.member.MemberVO;
+
 public class ReviewVO {
 	private int recipeId;
-	private String userId;
+	private int memberNumber;
 	private String review;
 	private int recipegrade;
 	private Timestamp regdate;
-	private String img;
+	private String reviewPicture;
 	private String recipeName;
 	private int reviewNum;
+	private MemberVO memberVO;
 	
-	public int getReviewNum() {
-		return reviewNum;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
-	public void setReviewNum(int reviewNum) {
-		this.reviewNum = reviewNum;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
-	public String getRecipeName() {
-		return recipeName;
-	}
-	public void setRecipeName(String recipeName) {
-		this.recipeName = recipeName;
-	}
+	
 	public int getRecipeId() {
 		return recipeId;
 	}
 	public void setRecipeId(int recipeId) {
 		this.recipeId = recipeId;
 	}
-	public String getUserId() {
-		return userId;
+	public int getMemberNumber() {
+		return memberNumber;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
 	}
 	public String getReview() {
 		return review;
@@ -54,12 +52,28 @@ public class ReviewVO {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-	public String getImg() {
-		return img;
+	
+	public String getReviewPicture() {
+		return reviewPicture;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setReviewPicture(String reviewPicture) {
+		this.reviewPicture = reviewPicture;
 	}
+	public String getRecipeName() {
+		return recipeName;
+	}
+	public void setRecipeName(String recipeName) {
+		this.recipeName = recipeName;
+	}
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+	
+	
+	
 	
 	
 	

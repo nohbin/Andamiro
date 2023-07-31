@@ -135,10 +135,10 @@ a i {
 						
 						<c:forEach var="review" items="${reviewList }">
 							<tr class="record text-center">
-								<td>${review.userId }</td>
+								<td>${review.memberVO.id }</td>
 								<td>${review.review}</td>  
 								<td>${review.recipegrade }</td>
-								<td><img src="/img/${review.img}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
+								<td><img src="/img/${review.reviewPicture}" class="rounded-3 img-thumbnail" style=" width: 5rem;"></td>
 								
 							</tr>
 						</c:forEach>
@@ -155,7 +155,7 @@ a i {
 				</c:if>
 				<!-- 모달 -->
 			<form action="ReviewServlet?command=review_write" method="post" enctype="multipart/form-data">
-            	<input type="hidden" name="memberId" value="${loginUser.id }">
+            	<input type="hidden" name="memberNumber" value="${loginUser.memberNumber }">
             	<input type="hidden" name="recipeid" value="${recipe.recipeID}">
             	<input type="hidden" name="recipename" value="${recipe.recipeName }">
 				<div class="modal fade" id="staticBackdrop"

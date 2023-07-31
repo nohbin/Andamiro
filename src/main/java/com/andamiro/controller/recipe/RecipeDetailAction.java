@@ -28,6 +28,7 @@ public class RecipeDetailAction implements RecipeAction {
 		// TODO Auto-generated method stub
 		int recipID = Integer.parseInt(request.getParameter("recipID"));
 		RecipeDAO recipDAO = RecipeDAO.getInstance();
+		
 //		Cookie[] cookies = request.getCookies();
 //		Cookie viewCookie = null;
 //		

@@ -39,7 +39,7 @@ public class SubJoinAction implements SubscribeAction {
 		subVO.setStatus(status);
 		SubscribeMemberDAO sDao = SubscribeMemberDAO.getInstance();
 		sDao.insertSubMem(subVO);
-	
+		
 		
 		String url = "subscribe/subscribeSuccess.jsp";
 		request.getRequestDispatcher(url).forward(request, response);

@@ -24,20 +24,23 @@ public class ReviewWriteAction implements ReviewAction {
 		int maxSize = 5 * 1024 * 1024;
 		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 		
-		String memberId = multi.getParameter("memberId");
+		int memberNumber = Integer.parseInt(multi.getParameter("memberNumber"));
 		int recipeId = Integer.parseInt(multi.getParameter("recipeid"));
+		String recipename = multi.getParameter("recipename");
+		System.out.println("recipeID : " + recipeId);
 		
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setUserId(memberId);
+		reviewVO.setMemberNumber(memberNumber);
 		reviewVO.setRecipeId(recipeId);
 		reviewVO.setReview(multi.getParameter("reviewtext"));
 		reviewVO.setRecipegrade(Integer.parseInt(multi.getParameter("grade")));
-		reviewVO.setImg(multi.getFilesystemName("reviewImage"));
-		String recipename = multi.getParameter("recipename");
+		reviewVO.setReviewPicture(multi.getFilesystemName("reviewImage"));
+		reviewVO.setRecipeName(recipename);
 		
-		reviewDAO.insertReview(memberId , recipeId , reviewVO , recipename);
+		
+		reviewDAO.insertReview(reviewVO);
 		
 		RecipeDAO recipeDAO = RecipeDAO.getInstance();
 		recipeDAO.updateRecipeGradeByRecipeId(recipeId);

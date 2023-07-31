@@ -49,7 +49,7 @@ public class MemberLoginAction implements MemberAction {
 		            subscribememberDao.SubCheck(subscribememberVo.getSubNumber());
 		        }
 		    }
-		    session.removeAttribute("id");
+		    session.removeAttribute("loginUser");
 		    session.setAttribute("loginUser", memberVO);
 		    
 		    

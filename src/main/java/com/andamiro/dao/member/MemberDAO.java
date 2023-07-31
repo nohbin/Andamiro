@@ -69,6 +69,37 @@ public class MemberDAO {
 	    }
 	    return memberVO;
 	}
+	
+	public MemberVO selectOneMemberByMemberNumber(int memberNumber) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM andamiromember WHERE membernumber = ?";
+	    MemberVO memberVO = null;
+
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    {
+	        pstmt.setInt(1, memberNumber);
+	        try (ResultSet rs = pstmt.executeQuery()) 
+	        {
+	            if (rs.next()) {
+	                memberVO = new MemberVO();
+	                memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	                memberVO.setId(rs.getString("id"));
+	                memberVO.setPwd(rs.getString("pwd"));
+	                memberVO.setName(rs.getString("name"));
+	                memberVO.setPhone(rs.getString("phone"));
+	                memberVO.setEmail(rs.getString("email"));
+	                memberVO.setJoinDate(rs.getString("joindate"));
+	                memberVO.setSubscribe(rs.getString("subscribe"));
+	                memberVO.setAdminCode(rs.getString("adminCode"));
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return memberVO;
+	}
 
 
 	public int MemberIdCheckById(String id) {
@@ -288,4 +319,5 @@ public class MemberDAO {
 	        e.printStackTrace();
 	    }
 	}
+	
 }

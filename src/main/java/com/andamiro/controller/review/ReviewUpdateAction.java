@@ -30,12 +30,12 @@ public class ReviewUpdateAction implements ReviewAction {
 		ReviewDAO rDao = ReviewDAO.getInstance();
 		ReviewVO rVo = rDao.selectOneReviewByReviewNum(reviewNum);
 		
-		String originalImg = rVo.getImg();
+		String originalImg = rVo.getReviewPicture();
 		String updateImg = multi.getFilesystemName("img");
 		if(updateImg == null || updateImg.isEmpty()) {
-			rVo.setImg(originalImg);
+			rVo.setReviewPicture(originalImg);
 		}else {
-			rVo.setImg(updateImg);
+			rVo.setReviewPicture(updateImg);
 		}
 		
 		rVo.setReviewNum(reviewNum);
