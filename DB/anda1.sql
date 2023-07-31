@@ -136,3 +136,7 @@ CREATE TABLE subMemberRecipe (
 	recipeID	number		NOT NULL ,
 	subNumber	number		NOT NULL 
 );
+
+
+
+ALTER TABLE subscribemember ADD status NUMBER;
