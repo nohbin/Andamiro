@@ -11,7 +11,29 @@
 <link rel="stylesheet" href="../../resources/css/join.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<script type="text/javascript" src="script/board.js"></script>
+<!-- <script type="text/javascript" src="script/board.js"></script> -->
+<script>
+function DetailCheck() {
+	if (document.frm.dietNumber.value.length == 0) {
+		alert("식단번호를 입력하세요.");
+		return false;
+	}
+	if (document.frm.foodName.value.length == 0) {
+		alert("음식명을 입력하세요.");
+		return false;
+	}
+	if (document.frm.kcal.value.length == 0) {
+		alert("칼로리를 입력하세요.");
+		return false;
+	}
+	if (document.frm.component.value == 0) {
+		alert("영양성분을 첨부하세요.");
+		return false;
+	}
+	alert("식단상세가 등록되었습니다.");
+	return true;
+}
+</script>
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
@@ -36,11 +58,11 @@
 				</tr>
 				<tr>
 					<th>영양성분</th>
-					<td><input type="text" name="component"></td>
+					<td><input type="text" name="component" size="80"></td>
 				</tr>
 			</table>
 			<br>
-			<br> <input type="submit" value="등록" onclick="return dietCheck()">
+			<br> <input type="submit" value="등록" onclick="return DetailCheck()">
 			 	 <input type="reset"  value="다시 작성">
 			 	 <input type="button" value="목록" onclick="location.href='AdminServlet?command=dietDetail_list&page=1'">
 		</form>
