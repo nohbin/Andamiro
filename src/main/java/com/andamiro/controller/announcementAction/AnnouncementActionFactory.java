@@ -25,6 +25,8 @@ public class AnnouncementActionFactory {
 			action = new AnnouncementUpdateAction();
 		}else if(command.equals("announcement_delete")) {
 			action = new AnnouncementDeleteAction();
+		}else if(command.equals("announcement_search")) {
+			action = new AnnouncementSearchAction();
 		}
 		
 		

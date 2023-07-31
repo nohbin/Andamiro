@@ -70,7 +70,8 @@ img {
 									<input type="hidden" name="command" value="myreview_update">
 									<input type="hidden" name="memberId" value="${loginUser.id }">
 									<input type="hidden" name="recipeid" value="${review.recipeId}">
-									<input type="hidden" name = "reviewnum" value="${review.reviewNum }">
+									<input type="hidden" name="reviewnum"
+										value="${review.reviewNum }">
 
 									<!--후기 작성 form -->
 

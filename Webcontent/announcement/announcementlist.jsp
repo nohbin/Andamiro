@@ -73,10 +73,56 @@ label[for=name] button {
 			</tbody>
 			
 		</table>
+
 		<button class="btn btn-primary" type="button" value="delete"
 										onclick="window.location.href='AnnouncementServlet?command=announcement_write_form'">등록</button>
-	</div>
-	<jsp:include page="../footer.jsp"></jsp:include>
+ <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <c:if test="${pagingUtil.getStartPage() > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="AnnouncementServlet?command=announcement_list&nowPage=${pagingUtil.getStartPage() - 1}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:forEach var="pageNum" begin="${pagingUtil.getStartPage()}" end="${pagingUtil.getEndPage()}">
+                    <c:choose>
+                        <c:when test="${pageNum == pagingUtil.getNowPage()}">
+                            <li class="page-item active">
+                                <span class="page-link">${pageNum}</span>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="AnnouncementServlet?command=announcement_list&nowPage=${pageNum}">${pageNum}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:if test="${pagingUtil.getEndPage() < pagingUtil.getLastPage()}">
+                    <li class="page-item">
+                        <a class="page-link" href="AnnouncementServlet?command=announcement_list&nowPage=${pagingUtil.getEndPage() + 1}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+        <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex"  action="AnnouncementServlet" method="get"  >
+    <input type="hidden"  name="command"  value="announcement_search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="annTitle" >
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+    </div>
 </body>
 
 </html>
+	

@@ -74,5 +74,5 @@ img {
 			});
 		});
 	</script>
-</body>
+
 </html>

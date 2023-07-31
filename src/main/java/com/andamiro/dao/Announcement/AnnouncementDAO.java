@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,36 +20,40 @@ public class AnnouncementDAO {
 		return instance;
 	}
 
-	public List<AnnouncementVO> selectAllList() {
-		String sql = "SELECT A.ID , N.*\r\n"
-				+ "FROM ANDAMIROMEMBER A\r\n"
-				+ "INNER JOIN ANNOUNCEMENT N ON A.ID =  N.ID";
-		List<AnnouncementVO> annList = new ArrayList<AnnouncementVO>();
+	public List<AnnouncementVO> selectAnnouncementList(int start, int end) {
+	    String sql = "SELECT * FROM (SELECT ROWNUM AS rn, A.* FROM (SELECT A.ID, N.annNum, N.annTitle, N.viewCount, N.joindate " +
+                "FROM ANDAMIROMEMBER A INNER JOIN ANNOUNCEMENT N ON A.ID = N.ID " +
+                "ORDER BY N.annNum DESC) A WHERE ROWNUM <= ?) WHERE rn >= ?";
 
-		try (Connection conn = DBManager.getConnection(); Statement stmt = conn.createStatement();) 
+	    List<AnnouncementVO> annList = new ArrayList<AnnouncementVO>();
 
-			{
-				try (ResultSet rs = stmt.executeQuery(sql);) {
-					while (rs.next()) {
-						AnnouncementVO annVO = new AnnouncementVO();
-							annVO.setAnnNum(rs.getInt("annNum"));
-							annVO.setAnnTitle(rs.getString("annTitle"));
-							annVO.setViewCount(rs.getInt("viewCount"));
-							annVO.setJoindate(rs.getTimestamp("joindate"));
-							annVO.setId(rs.getString("id"));
-							annList.add(annVO);
-					}
-				}
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		return annList;
+	    	pstmt.setInt(1, end-1);
+	        pstmt.setInt(2, start);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                AnnouncementVO annVO = new AnnouncementVO();
+	                annVO.setAnnNum(rs.getInt("annNum"));
+	                annVO.setAnnTitle(rs.getString("annTitle"));
+	                annVO.setViewCount(rs.getInt("viewCount"));
+	                annVO.setJoindate(rs.getTimestamp("joindate"));
+	                annVO.setId(rs.getString("id"));
+	                annList.add(annVO);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return annList;
 	}
+
+
 	public void insertAnnouncement(AnnouncementVO annVO) {
-		String sql = "INSERT INTO announcement (annNum, joindate, annTitle, id, announcement) VALUES (ann_no_seq.NEXTVAL, sysdate, ?, ?, ?)";
+		String sql = "INSERT INTO announcement (annNum, joindate, annTitle, id, announcement, viewCount) VALUES (ann_no_seq.NEXTVAL, sysdate, ?, ?, ?, 0)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -137,6 +140,64 @@ public class AnnouncementDAO {
 			e.printStackTrace();
 		}
 	}
+
+	 public int getAnnouncementCount() {
+	        int count = 0;
+
+	        Connection conn = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            conn = DBManager.getConnection();
+	            String query = "SELECT COUNT(*) FROM announcement";
+	            pstmt = conn.prepareStatement(query);
+	            rs = pstmt.executeQuery();
+
+	            if (rs.next()) {
+	                count = rs.getInt(1);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	           DBManager.close(conn, pstmt, rs);
+	        }
+
+	        return count;
+	    }
+	 public List<AnnouncementVO> AnnouncementSearch(String annTitle) {
+		 String sql = "SELECT * FROM ANNOUNCEMENT WHERE annTitle LIKE ? ";
+		 List<AnnouncementVO> annList = new ArrayList<AnnouncementVO>();
+		 
+		 Connection conn = null;
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 
+		 try {
+			conn = DBManager.getConnection();
+			 pstmt = conn.prepareStatement(sql);
+			 pstmt.setString(1, "%" + annTitle + "%" );
+			 System.out.println("Executing SQL query: " + pstmt.toString());
+			 rs = pstmt.executeQuery();
+			 
+			 while(rs.next()) {
+			 AnnouncementVO annVO = new  AnnouncementVO();
+			 annVO.setAnnTitle(rs.getString("annTitle"));
+			 annVO.setId(rs.getString("id"));
+			 annVO.setAnnNum(rs.getInt("annNum"));
+			 annVO.setAnnouncement(rs.getString("announcement"));
+			 annVO.setViewCount(rs.getInt("viewCount"));
+			 annVO.setJoindate(rs.getTimestamp("joindate"));
+			 annList.add(annVO);
+			 }
+			 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 System.out.println("Number of rows retrieved: " + annList.size());
+		 return annList;
+	 }
 	}
 	
 

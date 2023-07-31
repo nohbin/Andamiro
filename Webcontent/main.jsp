@@ -35,124 +35,28 @@ a {
 	position: relative;
 }
 
-.slider1 {
-	width: 80%;
-	height: 480px;
-	position: relative;
-	margin: 0 auto;
-	overflow: hidden;
-	object-fit: fill;
-	text-align: center;
-	margin-top: 15px;
-	border: 2px solid gray;
-}
-
-.slider1 input[type=radio] {
-	display: none;
-}
-
-ul.imgs1 {
-	padding: 0;
-	margin: 0;
-	width: 100%;
-}
-
-ul.imgs1 li {
-	position: absolute;
-	left: 640px;
-	width: 100%;
-	transition-delay: 0.1s;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-a {
-	text-decoration: none;
-	color: #fac279;
-}
-
-.bullets2 {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 20px;
-	z-index: 2;
-}
-
-.bullets2 label {
-	display: inline-block;
-	border-radius: 50%;
-	background-color: rgba(0, 0, 0, 0.55);
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
-}
-
-.slider1 input[type=radio]:nth-child(1):checked ~.bullets1>label:nth-child(1)
-	{
-	background-color: #d63939;
-}
-
-.slider1 input[type=radio]:nth-child(2):checked ~.bullets1>label:nth-child(2)
-	{
-	background-color: red;
-}
-
-.slider1 input[type=radio]:nth-child(3):checked ~.bullets1>label:nth-child(3)
-	{
-	background-color: red;
-}
-
-.slider1 input[type=radio]:nth-child(4):checked ~.bullets1>label:nth-child(4)
-	{
-	background-color: #fff;
-}
-
-.slider1 input[type=radio]:nth-child(1):checked ~ul.imgs1>li:nth-child(1)
-	{
-	left: 0;
-	transition: 0.5s;
-	z-index: 1;
-}
-
-.slider1 input[type=radio]:nth-child(2):checked ~ul.imgs1>li:nth-child(2)
-	{
-	left: 0;
-	transition: 0.5s;
-	z-index: 1;
-}
-
-.slider1 input[type=radio]:nth-child(3):checked ~ul.imgs1>li:nth-child(3)
-	{
-	left: 0;
-	transition: 0.5s;
-	z-index: 1;
-}
-
-.slider1 input[type=radio]:nth-child(4):checked ~ul.imgs1>li:nth-child(4)
-	{
-	left: 0;
-	transition: 0.5s;
-	z-index: 1;
-}
-
-.slider1 .imgs1>li img {
-	width: 100%;
-	position: relative;
-}
-
 .text-img {
 	position: absolute;
-	top: -680px;
-	left: 50%;
+	top: 50%;
+	left: 51%;
 	transform: translate(-50%, -50%);
 	text-align: center;
+	color: black;
+	z-index: 1;
 }
 
 .image-container {
 	position: relative;
 	display: inline-block;
+}
+
+.carousel-item img {
+	object-fit: cover;
+	width: 100%
+}
+
+.carousel-item {
+	min-height: 530px;
 }
 </style>
 </head>
@@ -161,17 +65,28 @@ a {
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<main>
-		<div
-			class="slider1 container rounded-5 main_content text-center mt-5 border-2 border-top border">
-			<input type="radio" name="slide1" id="slide7" checked> <input
-				type="radio" name="slide1" id="slide8"> <input type="radio"
-				name="slide1" id="slide9">
-			<ul id="imgholder1" class="imgs1">
-				<li><img src="./resources/img/mainbackground.png"
-					height="530px"></li>
-				<li><img src="./resources/img/summer.jpg" height="max">
-					<div class="image-container">
-						<img src="./resources/img/summer.jpg" height="530px">
+		<div id="carouselExampleIndicators"
+			class="carousel slide mt-5 container rounded-5 border-3 border-top border "
+			data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="d-block w-100 rounded-5  "
+						src="./resources/img/mainbackground.png" height="530px">
+				</div>
+				<div class="carousel-item">
+					<div class="image-container"
+						style="height: 530px; position: relative;">
+						<img class="d-block rounded-5" src="./resources/img/summer.jpg"
+							style="object-fit: cover; width: 1290px; height: 530px; position: relative; top: 0; left: 0;">
 						<div class="text-img">
 							<h1 class="display-3 fw-bold">2023 3분기 공모전</h1>
 							<h3 class="fw-normal text-muted mb-3">
@@ -188,19 +103,25 @@ a {
                         </svg>
 								</a>
 							</div>
-
-
 						</div>
-					</div></li>
-
-				<li><img src="./resources/img/maingudok.png" height="max"></li>
-			</ul>
-			<div class="bullets2">
-				<label for="slide7">&nbsp;</label> <label for="slide8">&nbsp;</label>
-				<label for="slide9">&nbsp;</label>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100 rounded-5 "
+						src="./resources/img/maingudok.png" height="530px">
+				</div>
 			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
-
 
 		<div
 			class="container rounded-5 main_content text-center mt-5 border-2 border-top border">
@@ -246,15 +167,18 @@ a {
 									</p>
 									<div class="rankingimg">
 										<input type="hidden" name="recipeID" value="${best.recipeID}">
-										<a href="RecipeServlet?command=recipe_detail&recipID=${best.recipeID }"><img
-											src="resources/img/${best.mainPicture }" width="200" height="150"></a>
+										<a
+											href="RecipeServlet?command=recipe_detail&recipID=${best.recipeID }"><img
+											src="resources/img/${best.mainPicture }" width="200"
+											height="150"></a>
 									</div>
 
 									<div class="rankingtitle mt-3">
 										<b>제목 : ${best.recipeName }</b>
 									</div>
 									<div class="membericon">
-										유저 ID : ${best.userid}  <a href="RecipeServlet?command=recipe_list"><span
+										유저 ID : ${best.userid} <a
+											href="RecipeServlet?command=recipe_list"><span
 											class="me-2 badge rounded-pill text-bg-warning">더보기</span></a>
 									</div>
 									<div class="rivew">
@@ -277,7 +201,8 @@ a {
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-3 mb-2 mt-2 d-flex">
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/morning.jpg" class="card-img-top" alt="...">
+						<img src="./resources/img/morning.jpg" class="card-img-top"
+							alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 아침식단</h5>
 						</div>
@@ -286,15 +211,16 @@ a {
 							<li class="list-group-item">AM : 7~9시 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link">
-								<b>아침식단 보러가기</b>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>'
+								class="card-link"> <b>아침식단 보러가기</b>
 							</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 mb-2 mt-2 d-flex ">
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/lunch.jpg" class="card-img-top" alt="...">
+						<img src="./resources/img/lunch.jpg" class="card-img-top"
+							alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 점심식단</h5>
 						</div>
@@ -303,13 +229,15 @@ a {
 							<li class="list-group-item">PM : 12~2시 사이권장</li>
 						</ul>
 						<div class="card-body">
-							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link"><b>점심식단 보러가기</b></a>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>'
+								class="card-link"><b>점심식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 mb-2 mt-2 d-flex justify-content-center">
 					<div class="card" style="width: 18rem;">
-						<img src="./resources/img/diner.jpg" class="card-img-top" alt="...">
+						<img src="./resources/img/diner.jpg" class="card-img-top"
+							alt="...">
 						<div class="card-body">
 							<h5 class="card-title">오늘의 저녁식단</h5>
 							<p class="card-text"></p>
@@ -319,7 +247,8 @@ a {
 							<li class="list-group-item">PM : 6 ~ 8시 사이 권장</li>
 						</ul>
 						<div class="card-body">
-							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>' class="card-link"><b>저녁식단 보러가기</b></a>
+							<a href='<c:url value="/SubDietServlet?command=rec_diet"/>'
+								class="card-link"><b>저녁식단 보러가기</b></a>
 						</div>
 					</div>
 				</div>
