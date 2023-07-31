@@ -245,7 +245,47 @@ public class MemberDAO {
 		}
 		return memberVO;
 	}
-	
-	
+	public MemberVO selectOneMemberByIdAndEmail(String id, String email) {
+		// TODO Auto-generated method stub
+		MemberVO memberVO = null;
+		
+		String sql = "SELECT * FROM andamiromember WHERE id = ? AND email = ?";
+		
+		try(Connection conn = DBManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);)
+		{
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if (rs.next()) {
+	                memberVO = new MemberVO();
+	                memberVO.setMemberNumber(rs.getInt("memberNumber"));
+	                memberVO.setId(rs.getString("id"));
+	                memberVO.setPwd(rs.getString("pwd"));
+	                memberVO.setName(rs.getString("name"));
+	                memberVO.setPhone(rs.getString("phone"));
+	                memberVO.setEmail(rs.getString("email"));
+	                memberVO.setJoinDate(rs.getString("joindate"));
+	                memberVO.setSubscribe(rs.getString("subscribe"));
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return memberVO;
+	}
+	public void updateMemberPassword(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		 String sql = "UPDATE andamiromember SET PWD = ? WHERE id = ?";
 
+	    try (Connection conn = DBManager.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) 
+	    { 	pstmt.setString(1, memberVO.getPwd());
+            pstmt.setString(2, memberVO.getId());
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 }
